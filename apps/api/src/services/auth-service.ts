@@ -1,12 +1,11 @@
-import type { LoginResponseType } from "@repo/types/index.js";
+import type { LoginResponseType } from "@repo/types/auth";
+import type { LoginUserDTO } from "@repo/zod-schemas/shared/auth-schema";
 
 import bcrypt from "bcrypt";
 import config from "config/config.js";
 import { Prisma } from "generated/prisma/index.js";
 import { omit } from "lodash-es";
 import { z } from "zod/v4";
-
-import type { LoginUserDTO } from "~/schemas/auth-schema.js";
 
 import { prisma } from "~/prisma/prisma.js";
 import { AppError } from "~/utils/appError.js";

@@ -1,12 +1,15 @@
-import cookieParser from "cookie-parser"; 
+import cookieParser from "cookie-parser";
 import express, { Application, Request, Response } from "express";
 import "dotenv/config";
 
+import corsMiddleware from "./middleware/cors.js";
 import { errorHandler } from "./middleware/error-middleware.js";
 import { router as authRoute } from "./routes/auth-route.js";
+import { router as projectRoute } from "./routes/project-route.js";
 
 const app: Application = express();
 
+app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -16,6 +19,7 @@ app.get("/ping", (req: Request, res: Response) => {
 
 // Route
 app.use("/api/auth", authRoute);
+app.use("/api/projects", projectRoute);
 
 // Global error
 app.use(errorHandler);

@@ -1,11 +1,12 @@
-// import type { LoginResponseType } from "@repo/types/index.js";
 import type { CookieOptions, NextFunction, Request, Response } from "express";
 
+import {
+  LoginResponseSchema,
+  LoginUserDTO,
+  RegisterUserDTO,
+} from "@repo/zod-schemas/shared/auth-schema";
 import config from "config/config.js";
 import { Prisma } from "generated/prisma/index.js";
-import { z } from "zod/v4";
-
-import type { LoginUserDTO, RegisterUserDTO } from "~/schemas/auth-schema.js";
 
 import { findUniqueUser, loginUser, registerUser } from "~/services/auth-service.js";
 import { AppError } from "~/utils/appError.js";
@@ -51,6 +52,10 @@ const loginHandler = async (
     // Set accesss token and refresh token to cookie
     res.cookie("access_token", accessToken, {
       ...accessTokenCookieOptions,
+    });
+    res.cookie("logged_in", true, {
+      ...accessTokenCookieOptions,
+      httpOnly: false,
     });
     res.cookie("refresh_token", refreshToken, {
       ...refreshTokenCookieOptions,
@@ -171,12 +176,6 @@ const refreshHandler = async (req: Request, res: Response) => {
   if (!session) {
     throw new AppError(401, "Session or token expired");
   }
-
-  const LoginResponseSchema = z.object({
-    email: z.email(),
-    id: z.string(),
-    name: z.string(),
-  });
 
   // Parse session data json
   const sessionParse = LoginResponseSchema.parse(JSON.parse(session));

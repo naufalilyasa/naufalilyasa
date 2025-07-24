@@ -1,4 +1,4 @@
-import type { LoginResponseType } from "@repo/types/index.ts";
+import type { LoginResponseType } from "@repo/types/auth";
 import type { NextFunction, Request, Response } from "express";
 
 import config from "config/config.js";

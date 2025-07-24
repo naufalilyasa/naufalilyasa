@@ -1,3 +1,4 @@
+import { loginUserSchema, registerUserSchema } from "@repo/zod-schemas/shared/auth-schema";
 import { Router } from "express";
 
 import {
@@ -9,9 +10,9 @@ import {
 } from "~/controllers/auth-controller.js";
 import { deserizalizeUser, requireUser } from "~/middleware/authenticated-middleware.js";
 import { validateBody } from "~/middleware/validate-body-middleware.js";
-import { loginUserSchema, registerUserSchema } from "~/schemas/auth-schema.js";
 
-const router = Router();
+
+const router: Router = Router();
 
 router.post("/login", validateBody(loginUserSchema), loginHandler);
 router.post("/register", validateBody(registerUserSchema), registerHandler);
