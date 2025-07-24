@@ -1,5 +1,5 @@
-export type LoginRequestType = {
+export type LoginResponseType = {
   id: string;
   username: string;
-  password: string;
+  name: string;
 };
