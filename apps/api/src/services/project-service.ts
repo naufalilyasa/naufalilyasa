@@ -1,4 +1,4 @@
-import { CreateProjectDTO } from "@repo/zod-schemas/src/project-schema";
+import { CreateProjectBackendDTO } from "@repo/zod-schemas";
 
 import { prisma } from "~/prisma/prisma.js";
 
@@ -21,7 +21,7 @@ export const getProjectById = async (id: string) => {
   });
 };
 
-export const createProject = async (payload: CreateProjectDTO, userId: string) => {
+export const createProject = async (payload: CreateProjectBackendDTO, userId: string) => {
   const { description, endDate, projectImages, projectName, startDate, techStack, url } =
     payload;
 

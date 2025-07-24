@@ -1,4 +1,10 @@
-import { createProjectBackendSchema, paramsProjectSchema } from "@repo/zod-schemas";
+import {
+  baseProjectSchema,
+  CreateProjectBackendDTO,
+  paramsProjectSchema,
+  ProjectImagesDTO,
+  projectImagesSchema,
+} from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "generated/prisma/index.js";
 
@@ -20,8 +26,7 @@ export const getAllProjectsHandler = async (
     const projects = await getAllProjects();
 
     if (!projects) {
-      next(new AppError(403, "Failed to get projects"));
-      return;
+      return next(new AppError(403, "Failed to get projects"));
     }
 
     res.status(200).json({
@@ -33,13 +38,14 @@ export const getAllProjectsHandler = async (
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
-        return new AppError(409, "Duplicate entry");
+        return next(new AppError(409, "Duplicate entry"));
       }
+      return next(new AppError(400, error.message));
     }
     if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      return new AppError(500, error.message);
+      return next(new AppError(500, error.message));
     }
-    next(error);
+    return next(error);
   }
 };
 
@@ -64,9 +70,9 @@ export const getProjectByIdHandler = async (
     return;
   } catch (error) {
     if (Prisma.PrismaClientUnknownRequestError) {
-      next(new AppError(500, "Server internal error"));
+      return next(new AppError(500, "Server internal error"));
     }
-    next(error);
+    return next(error);
   }
 };
 
@@ -78,57 +84,58 @@ export const createProjectHandler = async (
   const parsedParams = paramsProjectSchema.safeParse(req.params);
 
   if (!parsedParams.success) {
-    throw new AppError(400, parsedParams.error.message);
+    return next(new AppError(400, parsedParams.error.message));
   }
 
   if (!parsedParams.data?.id) {
-    throw new AppError(400, "Payload request not found");
+    return next(new AppError(400, "Payload request not found"));
   }
 
   const files = req.files as Express.Multer.File[];
 
-  const payload = {
+  let payload: CreateProjectBackendDTO = {
     ...req.body,
-    projectImages: files?.map((file) => ({
-      caption: req.body.projectImages.caption,
-      file,
-    })),
     techStack: JSON.parse(req.body.techStack),
   };
 
-  const parsed = createProjectBackendSchema.safeParse(payload);
+  const parsedWithoutImages = baseProjectSchema.safeParse(payload);
 
-  if (!parsed.success) {
-    const formattedErrors = parsed.error.issues.map((issue) => ({
+  if (!parsedWithoutImages.success) {
+    const formattedErrors = parsedWithoutImages.error.issues.map((issue) => ({
       field: issue.path.join("."),
       message: issue.message,
     }));
-    throw new AppError(400, "Validation failed", formattedErrors);
+    return next(new AppError(400, "Validation failed", formattedErrors));
   }
 
-  if (!parsed.data) {
-    throw new AppError(400, "Payload request not found");
+  if (!parsedWithoutImages.data) {
+    return next(new AppError(400, "Payload request not found"));
   }
-
-  if (!parsed.data.projectImages) {
-    throw new AppError(400, "Payload request not found");
-  }
-
-  const uploads = await uploadImages(
-    parsed.data.projectImages.map((file) => file.buffer),
-  );
 
   try {
-    await createProject(parsed.data, parsedParams.data?.id);
+    const uploads = await uploadImages(files);
+    const parsedWithImages = projectImagesSchema.parse({
+      projectImages: uploads.map((upload, index) => ({
+        caption: (req.body as ProjectImagesDTO)?.[index]?.caption ?? `Image ${index + 1}`,
+        url: upload.secure_url,
+      })),
+    });
+
+    payload = {
+      ...parsedWithoutImages.data,
+      ...parsedWithImages,
+    };
+
+    await createProject(payload, parsedParams.data?.id);
+
+    res.status(200).json({
+      message: "Success create project",
+      status: "success",
+    });
+    return;
   } catch (error) {
     next(error);
   }
-
-  res.status(200).json({
-    message: "Success create project",
-    status: "success",
-  });
-  return;
 };
 
 export const editProjectHandler = async (

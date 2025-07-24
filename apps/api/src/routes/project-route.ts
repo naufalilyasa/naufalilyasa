@@ -10,12 +10,18 @@ import {
 } from "~/controllers/project-controller.js";
 import { upload } from "~/middleware/multer.js";
 import { validateParams } from "~/middleware/validate-params-middleware.js";
+import { handleMulterError } from "~/utils/multerError.js";
 
 const router: Router = Router();
 
 router.get("/projects", getAllProjectsHandler);
 router.get("/projects/:id", validateParams(paramsProjectSchema), getProjectByIdHandler);
-router.post("/projects", upload.array("images", 20), createProjectHandler);
+router.post(
+  "/projects",
+  upload.array("images", 20),
+  handleMulterError,
+  createProjectHandler,
+);
 router.patch("/projects/:id", validateParams(paramsProjectSchema), editProjectHandler);
 router.delete("/projects/:id", validateParams(paramsProjectSchema), deleteProjectHandler);
 

@@ -1,4 +1,8 @@
-import { LoginResponseDTO, LoginUserDTO } from "@repo/zod-schemas";
+import type {
+  LoginResponseDTO,
+  LoginUserDTO,
+} from "@repo/zod-schemas/shared/auth-schema";
+
 import bcrypt from "bcrypt";
 import config from "config/config.js";
 import { Prisma } from "generated/prisma/index.js";
