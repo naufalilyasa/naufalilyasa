@@ -1,19 +1,25 @@
 {
   "name": "@repo/zod-schemas",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
   "exports": {
-    "./src/auth-schema": "./src/auth-schema.ts"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./shared/auth-schema": {
+      "import": "./dist/shared/auth-schema.js",
+      "types": "./dist/shared/auth-schema.d.ts"
+    }
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.11.0",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
   "dependencies": {
     "zod": "^4.0.5"
   },
   "devDependencies": {
+    "@types/node": "^24.1.0",
     "typescript": "^5.8.3"
   }
 }

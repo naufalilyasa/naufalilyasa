@@ -1,26 +1,32 @@
-import z4 from "zod/v4";
+import { z } from "zod";
 
-export const loginUserSchema = z4.object({
-  password: z4
+export const loginUserSchema = z.object({
+  password: z
     .string({ error: "Password is required" })
     .min(8, { message: "Password must be at least 8 characters" })
     .max(32, { message: "Password must not exceed 32 characters" }),
-  username: z4
+  username: z
     .string({ error: "Username is required" })
     .min(5, { message: "Username must be at least 5 characters" })
     .max(32, { message: "Username must not exceed 32 characters" }),
 });
 
-export const registerUserSchema = z4
+export const LoginResponseSchema = z.object({
+  username: z.string(),
+  id: z.string(),
+  name: z.string(),
+});
+
+export const registerUserSchema = z
   .object({
-    name: z4.string({ error: "Name is required" }).min(1, {
+    name: z.string({ error: "Name is required" }).min(1, {
       message: "Name cannot be empty",
     }),
-    password: z4
+    password: z
       .string({ error: "Password is required" })
       .min(8, { message: "Password must be at least 8 characters" })
       .max(32, { message: "Password must not exceed 32 characters" }),
-    passwordConfirm: z4
+    passwordConfirm: z
       .string({ error: "Password confirmation is required" })
       .min(8, {
         message: "Password confirmation must be at least 8 characters",
@@ -28,7 +34,7 @@ export const registerUserSchema = z4
       .max(32, {
         message: "Password confirmation must not exceed 32 characters",
       }),
-    username: z4
+    username: z
       .string({ error: "Username is required" })
       .min(5, { message: "Username must be at least 5 characters" })
       .max(32, { message: "Username must not exceed 32 characters" }),
@@ -38,5 +44,6 @@ export const registerUserSchema = z4
     path: ["passwordConfirm"],
   });
 
-export type LoginUserDTO = z4.infer<typeof loginUserSchema>;
-export type RegisterUserDTO = z4.infer<typeof registerUserSchema>;
+export type LoginUserDTO = z.infer<typeof loginUserSchema>;
+export type LoginResponseDTO = z.infer<typeof LoginResponseSchema>;
+export type RegisterUserDTO = z.infer<typeof registerUserSchema>;

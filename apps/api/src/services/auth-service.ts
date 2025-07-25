@@ -1,5 +1,4 @@
-import type { LoginResponseType } from "@repo/types/index.js";
-
+import { LoginResponseDTO } from "@repo/zod-schemas";
 import bcrypt from "bcrypt";
 import config from "config/config.js";
 import { Prisma } from "generated/prisma/index.js";
@@ -15,7 +14,7 @@ import { signJwt } from "~/utils/jwt.js";
 
 export const loginUser = async (
   payload: LoginUserDTO,
-): Promise<{ accessToken: string; refreshToken: string; user: LoginResponseType }> => {
+): Promise<{ accessToken: string; refreshToken: string; user: LoginResponseDTO }> => {
   const { password, username } = payload;
 
   // Querying to get user input detail data
