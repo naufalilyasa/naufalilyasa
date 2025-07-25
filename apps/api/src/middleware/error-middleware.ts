@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-unused-vars */
 import type { NextFunction, Request, Response } from "express";
 
 import { AppError } from "~/utils/appError.js";
@@ -7,7 +7,7 @@ export const errorHandler = (
   err: AppError,
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   const statusCode = err.statusCode || 500;
   const status = err.status || "error";

@@ -12,7 +12,7 @@ export const loginUserSchema = z.object({
 });
 
 export const LoginResponseSchema = z.object({
-  email: z.email(),
+  username: z.string(),
   id: z.string(),
   name: z.string(),
 });
@@ -45,4 +45,5 @@ export const registerUserSchema = z
   });
 
 export type LoginUserDTO = z.infer<typeof loginUserSchema>;
+export type LoginResponseDTO = z.infer<typeof LoginResponseSchema>;
 export type RegisterUserDTO = z.infer<typeof registerUserSchema>;

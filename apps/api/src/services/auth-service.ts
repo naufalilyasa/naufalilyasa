@@ -14,7 +14,7 @@ import { signJwt } from "~/utils/jwt.js";
 
 export const loginUser = async (
   payload: LoginUserDTO,
-): Promise<{ accessToken: string; refreshToken: string; user: LoginResponseType }> => {
+): Promise<{ accessToken: string; refreshToken: string; user: LoginResponseDTO }> => {
   const { password, username } = payload;
 
   // Querying to get user input detail data

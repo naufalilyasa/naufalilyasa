@@ -35,14 +35,12 @@
 ```json
 {
   "status": "success",
-  "status_code": 200,
+  "statusCode": 200,
+  "message": "Login successful",
   "data": {
-    "message": "Login successful",
-    "user": {
-      "id": "uuid",
-      "name": "John Doe",
-      "username": "usernametest"
-    }
+    "id": "uuid",
+    "name": "John Doe",
+    "username": "usernametest"
   }
 }
 ```
@@ -59,7 +57,7 @@ Set-Cookie: refreshToken=REFRESH_TOKEN_HERE; HttpOnly; Secure; SameSite=Strict; 
 ```json
 {
   "status": "fail",
-  "status_code": 401,
+  "statusCode": 401,
   "data": {
     "message": "Invalid username or password"
   }
@@ -89,13 +87,11 @@ Set-Cookie: refreshToken=REFRESH_TOKEN_HERE; HttpOnly; Secure; SameSite=Strict; 
 {
   "status": "success",
   "statusCode": 201,
+  "message": "User registered successfully",
   "data": {
-    "message": "User registered successfully",
-    "user": {
-      "id": "uuid",
-      "name": "John Doe",
-      "username": "usernameexample"
-    }
+    "id": "uuid",
+    "name": "John Doe",
+    "username": "usernameexample"
   }
 }
 ```
@@ -124,9 +120,7 @@ Set-Cookie: refreshToken=REFRESH_TOKEN_HERE; HttpOnly; Secure; SameSite=Strict; 
 {
   "status": "success",
   "statusCode": 200,
-  "data": {
-    "message": "Logged out successfully"
-  }
+  "message": "Logged out successfully"
 }
 ```
 
@@ -149,9 +143,7 @@ Set-Cookie: refreshToken=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict;
 {
   "status": "success",
   "statusCode": 200,
-  "data": {
-    "message": "Access token refreshed"
-  }
+  "message": "Access token refreshed"
 }
 ```
 

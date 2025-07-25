@@ -1,18 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { redirect } from "@tanstack/react-router";
-import api from "../lib/axios";
 import { isAxiosError } from "axios";
+import { meFn } from "../api/auth";
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: async ({ location }) => {
     try {
-      const me = await api.get<{
-        status: string;
-        statusCode: number;
-        data: { id: string; name: string; username: string };
-      }>("/auth/me");
+      const me = await meFn();
 
-      if (me.data.status === "success") {
+      if (me.status === "success") {
         return;
       } else {
         throw redirect({

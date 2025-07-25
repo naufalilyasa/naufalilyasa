@@ -63,9 +63,9 @@ const loginHandler = async (
 
     res.status(200).json({
       data: {
-        message: "Login successful",
         user,
       },
+      message: "Login successful",
       status: "success",
       statusCode: 200,
     });
@@ -89,13 +89,11 @@ const registerHandler = async (req: Request, res: Response, next: NextFunction) 
 
     res.status(200).json({
       data: {
-        message: "User registered successfully",
-        user: {
-          id: result.id,
-          name: result.name,
-          username: result.username,
-        },
+        id: result.id,
+        name: result.name,
+        username: result.username,
       },
+      message: "User registered successfully",
       status: "success",
       statusCode: 200,
     });
@@ -139,9 +137,7 @@ const logoutHandler = async (req: Request, res: Response, next: NextFunction) =>
   });
 
   res.status(200).json({
-    data: {
-      message: "Logged out successfully",
-    },
+    message: "Logged out successfully",
     status: "success",
     statusCode: 200,
   });
@@ -202,9 +198,7 @@ const refreshHandler = async (req: Request, res: Response) => {
   res.cookie("access_token", accessToken, accessTokenCookieOptions);
 
   res.status(200).json({
-    data: {
-      message: "Access token refreshed",
-    },
+    message: "Access token refreshed",
     status: "success",
     statusCode: 200,
   });

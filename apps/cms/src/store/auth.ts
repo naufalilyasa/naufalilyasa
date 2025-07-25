@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { type LoginResponseType } from "@repo/types/auth";
+import { LoginResponseDTO } from "@repo/zod-schemas/shared/auth-schema";
 
 type AuthUserStoreType = {
-  authUser: LoginResponseType;
-  setAuthUser: (user: LoginResponseType) => void;
+  authUser: LoginResponseDTO;
+  setAuthUser: (user: LoginResponseDTO) => void;
   isAuthenticate: boolean;
 };
 
@@ -12,7 +12,7 @@ export const useAuth = create<AuthUserStoreType>((set) => ({
     id: "",
     name: "",
     username: "",
-  } as LoginResponseType,
+  } as LoginResponseDTO,
   setAuthUser: (user) => {
     set({ authUser: user, isAuthenticate: true });
   },
