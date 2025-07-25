@@ -88,22 +88,8 @@ export interface FileRouteTypes {
     | '/projects'
     | '/projects/$id/edit'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/login'
-    | '/register'
-    | '/'
-    | '/projects/create'
-    | '/projects'
-    | '/projects/$id/edit'
-  id:
-    | '__root__'
-    | '/_auth'
-    | '/login'
-    | '/register'
-    | '/_auth/'
-    | '/_auth/projects/create'
-    | '/_auth/projects/'
-    | '/_auth/projects/$id/edit'
+  to: never
+  id: '__root__'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
