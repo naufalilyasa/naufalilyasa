@@ -1,9 +1,8 @@
-// import type { LoginResponseType } from "@repo/types/index.js";
 import type { CookieOptions, NextFunction, Request, Response } from "express";
 
+import { LoginResponseSchema } from "@repo/zod-schemas";
 import config from "config/config.js";
 import { Prisma } from "generated/prisma/index.js";
-import { z } from "zod/v4";
 
 import type { LoginUserDTO, RegisterUserDTO } from "~/schemas/auth-schema.js";
 
@@ -58,9 +57,9 @@ const loginHandler = async (
 
     res.status(200).json({
       data: {
-        message: "Login successful",
         user,
       },
+      message: "Login successful",
       status: "success",
       statusCode: 200,
     });
@@ -84,13 +83,11 @@ const registerHandler = async (req: Request, res: Response, next: NextFunction) 
 
     res.status(200).json({
       data: {
-        message: "User registered successfully",
-        user: {
-          id: result.id,
-          name: result.name,
-          username: result.username,
-        },
+        id: result.id,
+        name: result.name,
+        username: result.username,
       },
+      message: "User registered successfully",
       status: "success",
       statusCode: 200,
     });
@@ -134,9 +131,7 @@ const logoutHandler = async (req: Request, res: Response, next: NextFunction) =>
   });
 
   res.status(200).json({
-    data: {
-      message: "Logged out successfully",
-    },
+    message: "Logged out successfully",
     status: "success",
     statusCode: 200,
   });
@@ -172,12 +167,6 @@ const refreshHandler = async (req: Request, res: Response) => {
     throw new AppError(401, "Session or token expired");
   }
 
-  const LoginResponseSchema = z.object({
-    email: z.email(),
-    id: z.string(),
-    name: z.string(),
-  });
-
   // Parse session data json
   const sessionParse = LoginResponseSchema.parse(JSON.parse(session));
 
@@ -203,9 +192,7 @@ const refreshHandler = async (req: Request, res: Response) => {
   res.cookie("access_token", accessToken, accessTokenCookieOptions);
 
   res.status(200).json({
-    data: {
-      message: "Access token refreshed",
-    },
+    message: "Access token refreshed",
     status: "success",
     statusCode: 200,
   });

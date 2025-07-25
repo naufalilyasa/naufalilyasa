@@ -18,7 +18,7 @@ import {
 } from "@repo/ui/components/form";
 import useLogin from "../../hooks/useLogin";
 import { useEffect, useLayoutEffect } from "react";
-import { useRouter, useSearch } from "@tanstack/react-router";
+import { Link, useRouter, useSearch } from "@tanstack/react-router";
 import { useAuth } from "../../store/auth";
 
 export function LoginForm({
@@ -71,14 +71,14 @@ export function LoginForm({
                 <div className="flex size-8 items-center justify-center rounded-md">
                   <GalleryVerticalEnd className="size-6" />
                 </div>
-                <span className="sr-only">Acme Inc.</span>
+                <span className="sr-only">Admin Panel</span>
               </a>
-              <h1 className="text-xl font-bold">Welcome to Acme Inc.</h1>
+              <h1 className="text-xl font-bold">Login</h1>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
-                  Sign up
-                </a>
+                <Link to="/register" className="underline underline-offset-4">
+                  Register
+                </Link>
               </div>
               <div>
                 <p className="text-9xl">{error?.message}</p>

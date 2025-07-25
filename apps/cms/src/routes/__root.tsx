@@ -7,6 +7,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@repo/ui/styles/globals.css";
 import Spinner from "../components/Spinner";
+import { Toaster } from "sonner";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ export const Route = createRootRoute({
         <div>
           <RouterSpinner />
         </div>
+        <Toaster position="bottom-right" />
         <Outlet />
       </QueryClientProvider>
       <TanStackRouterDevtools />
