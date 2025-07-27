@@ -1,5 +1,5 @@
 import { createFileRoute, Navigate, useNavigate } from "@tanstack/react-router";
-import { LoginForm } from "../components/login/LoginForm";
+import { LoginForm } from "../components/auth/LoginForm";
 import z from "zod";
 import { useAuth } from "../store/auth";
 import { useEffect } from "react";
