@@ -20,6 +20,7 @@ import useLogin from "../../hooks/useLogin";
 import { useEffect, useLayoutEffect } from "react";
 import { Link, useRouter, useSearch } from "@tanstack/react-router";
 import { useAuth } from "../../store/auth";
+import ErrorDisplay from "../ErrorDisplay";
 
 export function LoginForm({
   className,
@@ -43,7 +44,7 @@ export function LoginForm({
     if (!data) return;
 
     if (isSuccess) {
-      setAuthUser(data);
+      setAuthUser(data.data);
     }
   }, [data, isSuccess, setAuthUser]);
 
@@ -80,10 +81,8 @@ export function LoginForm({
                   Register
                 </Link>
               </div>
-              <div>
-                <p className="text-9xl">{error?.message}</p>
-              </div>
             </div>
+            <ErrorDisplay error={error} />
             <div className="flex flex-col gap-6">
               <FormField
                 control={form.control}
