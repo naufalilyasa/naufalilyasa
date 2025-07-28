@@ -19,6 +19,8 @@ import {
   registerUserSchema,
 } from "@repo/zod-schemas/shared/auth-schema";
 import useRegister from "../../hooks/useRegister";
+import { PulseLoader } from "react-spinners";
+import ErrorDisplay from "../ErrorDisplay";
 
 function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
   const router = useRouter();
@@ -39,8 +41,6 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
     if (!data) return;
 
     if (isSuccess) {
-      console.log("hit");
-
       navigate({ to: "/login" });
     }
   }, [data, isSuccess, navigate]);
@@ -73,9 +73,7 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
                 </Link>
               </div>
             </div>
-            <div className="flex justify-start">
-              <p className="text-md text-red-500">{error?.message}</p>
-            </div>
+            <ErrorDisplay error={error} />
             <div className="flex flex-col gap-6">
               <FormField
                 control={form.control}
@@ -164,7 +162,11 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
                 )}
               />
               <Button type="submit" className="w-full" disabled={isPending}>
-                Register
+                {isPending ? (
+                  <PulseLoader size={10} color="#ffffff" />
+                ) : (
+                  "Register"
+                )}
               </Button>
             </div>
           </div>

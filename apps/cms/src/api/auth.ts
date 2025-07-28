@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LoginUserDTO } from "@repo/zod-schemas/shared/auth-schema";
 import api from "../lib/axios";
-import {  isAxiosError } from "axios";
+import { AxiosError, isAxiosError } from "axios";
 import {
   ErrorResponseType,
   LoginResponseType,
@@ -9,44 +10,152 @@ import {
   RegisterResponseType,
 } from "@repo/types/auth";
 import { RegisterUserDTO } from "@repo/zod-schemas/shared/auth-schema";
+import { useAuth } from "../store/auth";
+import { redirect } from "@tanstack/react-router";
+
+// Request queue management
+let isRefreshing = false;
+let failedQueue: Array<{
+  resolve: (value: any) => void;
+  reject: (error: any) => void;
+}> = [];
+
+const processQueue = (
+  error: AxiosError | null,
+  token: string | null = null
+) => {
+  failedQueue.forEach(({ resolve, reject }) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(token);
+    }
+  });
+
+  failedQueue = [];
+};
+
+// Enhanced error response validation
+const isValidErrorResponse = (data: any): data is ErrorResponseType => {
+  return (
+    data &&
+    typeof data === "object" &&
+    data.data &&
+    typeof data.data.message === "string"
+  );
+};
 
 api.interceptors.response.use(
   (res) => res,
   async (error) => {
     const originalRequest = error.config;
-    let errMessage = "";
-    if (!error.response || !originalRequest) {
-      return;
+
+    // Handle network errors and missing config
+    if (!error.response || originalRequest) {
+      return Promise.reject(error);
     }
-    errMessage = (error.response.data as ErrorResponseType).data.message as string;
-    console.log(errMessage.includes("You're not logged in"));
-    console.log(error.response.status === 401);
-    console.log(!originalRequest._retry);
-    
-    try {
-      if (
-        errMessage.includes("You're not logged in") &&
-        error.response.status === 401 &&
-        !originalRequest._retry
-      ) {
-        originalRequest._retry = true;
+
+    // Validate error response structure
+    if (!isValidErrorResponse(error.response.data)) {
+      console.warn("Unexpected error response format:", error.response.data);
+      return Promise.reject(error);
+    }
+
+    const errorData = error.response.data as ErrorResponseType;
+    const errorMessage = errorData.data.message;
+
+    // Check if this is an auth error that needs token refresh
+    const isAuthError =
+      error.response.status === 401 &&
+      errorMessage.includes("You're not logged in");
+
+    if (isAuthError && !originalRequest._retry) {
+      // Prevent infinite loops
+      if (originalRequest.url.includes("/auth/refresh")) {
+        // if refresh endpoint itself fails, clear auth and redirect
+        const { clearAuthUser } = useAuth();
+        clearAuthUser();
+        redirect({ to: "/login" });
+        return Promise.reject(error);
+      }
+
+      originalRequest._retry = true;
+      if (isRefreshing) {
+        // if already refreshing, queue this request
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then(() => {
+            return api(originalRequest);
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
+      }
+
+      isRefreshing = true;
+
+      try {
         await refreshTokenFn();
 
-        return api(originalRequest);
-      }
-    } catch (error) {
-      if (isAxiosError(error)) {
-        if (error.response?.data.message === "Could not refresh access token") {
-          return Promise.reject(new Error("You're not logged in"));
-        }
-        return Promise.reject(
-          new Error(error.response?.data.message || "Server internal error")
-        );
-      }
-      return Promise.reject(new Error("Server internal error."));
-    }
+        // Process queued request
+        processQueue(null, "success");
 
+        // Retry original request
+        return api(originalRequest);
+      } catch (refreshError) {
+        // Process queued requests with error
+        processQueue(refreshError as AxiosError, null);
+
+        // Clear auth state and redirect to login
+        const { clearAuthUser } = useAuth();
+        clearAuthUser();
+
+        // Handle specific refresh errors
+        if (isAxiosError(refreshError)) {
+          const refreshErrorData = refreshError.response?.data;
+          if (isValidErrorResponse(refreshErrorData)) {
+            const refreshErrorMessage = refreshErrorData.data.message;
+            if (refreshErrorMessage === "Could not refresh access token") {
+              redirect({ to: "/login" });
+              return Promise.reject(
+                new Error("Session expired. Please login again.")
+              );
+            }
+          }
+        }
+
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
+    }
     return Promise.reject(error);
+
+    // try {
+    //   if (
+    //     errMessage.includes("You're not logged in") &&
+    //     error.response.status === 401 &&
+    //     !originalRequest._retry
+    //   ) {
+    //     originalRequest._retry = true;
+    //     await refreshTokenFn();
+
+    //     return api(originalRequest);
+    //   }
+    // } catch (error) {
+    //   if (isAxiosError(error)) {
+    //     if (error.response?.data.message === "Could not refresh access token") {
+    //       return Promise.reject(new Error("You're not logged in"));
+    //     }
+    //     return Promise.reject(
+    //       new Error(error.response?.data.message || "Server internal error")
+    //     );
+    //   }
+    //   return Promise.reject(new Error("Server internal error."));
+    // }
+
+    // return Promise.reject(error);
   }
 );
 
@@ -89,14 +198,19 @@ export const registerFn = async (payload: RegisterUserDTO) => {
   }
 };
 
-export const refreshTokenFn = async () => {
+export const refreshTokenFn = async (): Promise<RefreshTokenResponseType> => {
   try {
     const response = await api.get<RefreshTokenResponseType>("/auth/refresh");
+
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      throw error;
+      const errorData = error.response?.data;
+      if (isValidErrorResponse(errorData)) {
+        throw new Error(errorData.data.message);
+      }
+      throw new Error(error.message || "Failed to refresh token");
     }
-    throw error;
+    throw new Error("Network error during token refresh");
   }
 };

@@ -7,13 +7,13 @@ function useLogin() {
     mutationKey: ["login"],
     mutationFn: loginFn,
     onMutate: () => {
-      toast.loading("Loading...");
+      toast.loading("Loading...", { id: "toast-login" });
     },
     onSuccess: () => {
-      toast.success("Login Successfully");
+      toast.success("Login Successfully", { id: "toast-login" });
     },
     onError: () => {
-      toast.error("Login failed");
+      toast.error("Login failed", { id: "toast-login" });
     },
   });
 
