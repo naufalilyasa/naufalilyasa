@@ -9,14 +9,14 @@ import {
   registerHandler,
 } from "~/controllers/auth-controller.js";
 import { deserizalizeUser, requireUser } from "~/middleware/authenticated-middleware.js";
-import { validateBody } from "~/middleware/validate-body-middleware.js";
+import { authLimiter } from "~/middleware/rate-limit-middleware.js";
 
 const router: Router = Router();
 
-router.post("/login", validateBody(loginUserSchema), loginHandler);
-router.post("/register", validateBody(registerUserSchema), registerHandler);
-router.post("/logout", deserizalizeUser, requireUser, logoutHandler);
-router.get("/refresh", refreshHandler);
+router.post("/login", authLimiter, loginHandler);
+router.post("/register", authLimiter, registerHandler);
+router.post("/logout", authLimiter, deserizalizeUser, requireUser, logoutHandler);
+router.get("/refresh", authLimiter, refreshHandler);
 router.get("/me", deserizalizeUser, requireUser, getMeHandler);
 
 export { router };
