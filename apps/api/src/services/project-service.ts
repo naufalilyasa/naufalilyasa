@@ -16,7 +16,7 @@ export const getProjectById = async (id: string) => {
       projectImages: true,
     },
     where: {
-      id: String(id),
+      id,
     },
   });
 };
@@ -28,17 +28,15 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
   return await prisma.project.create({
     data: {
       description: description,
-      endDate: endDate ? new Date(endDate) : null,
-      projectImages: projectImages
-        ? {
-            create: projectImages.map((image) => ({
-              caption: image.caption,
-              url: image.url,
-            })),
-          }
-        : undefined,
+      endDate: endDate,
+      projectImages: {
+        create: projectImages?.map((image) => ({
+          caption: image.caption,
+          url: image.url,
+        })),
+      },
       projectName: projectName,
-      startDate: new Date(startDate),
+      startDate: startDate,
       techStack: techStack,
       url: url,
       userId: userId,

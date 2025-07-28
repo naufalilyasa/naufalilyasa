@@ -59,7 +59,9 @@ export const getProjectByIdHandler = async (
   }
 
   try {
-    const project = getProjectById(String(id));
+    const project = await getProjectById(String(id));
+
+    console.log(project);
 
     res.status(200).json({
       data: project,
@@ -115,16 +117,28 @@ export const createProjectHandler = async (
 
   try {
     const uploads = await uploadImages(files);
-    const parsedWithImages = projectImagesSchema.parse({
-      projectImages: uploads.map((upload, index) => ({
+    const parsedWithImages = projectImagesSchema.safeParse(
+      uploads.map((upload, index) => ({
         caption: (req.body as ProjectImagesDTO)?.[index]?.caption ?? `Image ${index + 1}`,
         url: upload.secure_url,
       })),
-    });
+    );
+
+    if (!parsedWithImages.success) {
+      const formattedErrors = parsedWithImages.error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+      return next(new AppError(400, "Validation failed", formattedErrors));
+    }
+
+    if (!parsedWithImages.data) {
+      return next(new AppError(400, "Payload request not found"));
+    }
 
     payload = {
       ...parsedWithoutImages.data,
-      ...parsedWithImages,
+      projectImages: [...parsedWithImages.data],
     };
 
     await createProject(payload, user.id);
@@ -132,6 +146,7 @@ export const createProjectHandler = async (
     res.status(200).json({
       message: "Success create project",
       status: "success",
+      statusCode: 200,
     });
     return;
   } catch (error) {

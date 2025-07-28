@@ -17,9 +17,21 @@ export const baseProjectSchema = z.object({
     })
     .min(1, { error: "Description cannot be empty" }),
 
-  startDate: z.date({ error: "Start date must be a valid date" }),
+  // startDate: z.date({ error: "Start date must be a valid date" }),
 
-  endDate: z.date({ error: "End date must be a valid date" }).optional(),
+  // endDate: z.date({ error: "End date must be a valid date" }).optional(),
+  startDate: z.string({ error: "Start date must be a valid date" })
+    .transform((str) => new Date(str))
+    .refine((date) => !isNaN(date.getTime()), {
+      message: "Start date must be a valid date",
+    }),
+
+  endDate: z.string({ error: "End date must be a valid date" })
+    .optional()
+    .transform((str) => str ? new Date(str) : null)
+    .refine((date) => date === null || !isNaN(date.getTime()), {
+      message: "End date must be a valid date",
+    }),
 
   url: z.url({ error: "Project URL must be a valid URL" }).optional(),
 
