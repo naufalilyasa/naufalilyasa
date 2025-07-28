@@ -8,7 +8,7 @@ import { AppError } from "~/utils/appError.js";
 import redisClient from "~/utils/connectRedis.js";
 import { verifyJwt } from "~/utils/jwt.js";
 
-const deserizalizeUser = async (req: Request, res: Response, next: NextFunction) => {
+const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const accessToken = req.cookies.access_token as string;
     const message = "You're not logged in";
@@ -81,4 +81,4 @@ const requireUser = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { deserizalizeUser, requireUser };
+export { deserializeUser, requireUser };

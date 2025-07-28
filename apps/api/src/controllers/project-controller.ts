@@ -1,7 +1,6 @@
 import {
   baseProjectSchema,
   CreateProjectBackendDTO,
-  paramsProjectSchema,
   ProjectImagesDTO,
   projectImagesSchema,
 } from "@repo/zod-schemas";
@@ -81,14 +80,16 @@ export const createProjectHandler = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const parsedParams = paramsProjectSchema.safeParse(req.params);
+  const user = res.locals.user as null | {
+    createdAt: Date;
+    id: string;
+    name: string;
+    updatedAt: Date;
+    username: string;
+  };
 
-  if (!parsedParams.success) {
-    return next(new AppError(400, parsedParams.error.message));
-  }
-
-  if (!parsedParams.data?.id) {
-    return next(new AppError(400, "Payload request not found"));
+  if (!user) {
+    return next(new AppError(401, "You're not logged in"));
   }
 
   const files = req.files as Express.Multer.File[];
@@ -126,7 +127,7 @@ export const createProjectHandler = async (
       ...parsedWithImages,
     };
 
-    await createProject(payload, parsedParams.data?.id);
+    await createProject(payload, user.id);
 
     res.status(200).json({
       message: "Success create project",
