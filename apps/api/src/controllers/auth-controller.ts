@@ -56,10 +56,6 @@ const loginHandler = async (
     res.cookie("access_token", accessToken, {
       ...accessTokenCookieOptions,
     });
-    res.cookie("logged_in", true, {
-      ...accessTokenCookieOptions,
-      httpOnly: false,
-    });
     res.cookie("refresh_token", refreshToken, {
       ...refreshTokenCookieOptions,
     });

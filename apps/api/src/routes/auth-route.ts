@@ -1,4 +1,3 @@
-import { loginUserSchema, registerUserSchema } from "@repo/zod-schemas/shared/auth-schema";
 import { Router } from "express";
 
 import {
