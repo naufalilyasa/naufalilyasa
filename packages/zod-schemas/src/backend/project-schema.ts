@@ -16,4 +16,5 @@ export const createProjectWithImages = baseProjectSchema.extend({
 });
 
 export type CreateProjectBackendDTO = z.infer<typeof createProjectWithImages>;
+export type EditProjectBackendDTO = z.infer<typeof createProjectWithImages>;
 export type ProjectImagesDTO = z.infer<typeof projectImagesSchema>;

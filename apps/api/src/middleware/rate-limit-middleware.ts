@@ -24,3 +24,15 @@ export const authLimiter = rateLimit({
   skipSuccessfulRequests: true, // Don't count successful requests
   windowMs: 15 * 60 * 1000, // 15 minutes,
 });
+
+// Strict rate limiting for auth endpoints
+export const projectLimiter = rateLimit({
+  limit: 5, // limit each IP to 5 auth request per windowMs,
+  message: {
+    message: "Too many request attempts, please try again later",
+    status: "error",
+    statusCode: 429,
+  },
+  skipSuccessfulRequests: true, // Don't count successful requests
+  windowMs: 15 * 60 * 1000, // 15 minutes,
+});

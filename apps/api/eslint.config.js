@@ -19,4 +19,10 @@ export default tseslint.config(
     },
   },
   perfectionist.configs["recommended-natural"],
+  {
+    rules: {
+      // Disable sort-objects rule
+      "perfectionist/sort-objects": "off",
+    },
+  },
 );
