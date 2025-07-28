@@ -17,15 +17,10 @@ const router: Router = Router();
 
 router.use(deserializeUser, requireUser);
 
-router.get("/projects", getAllProjectsHandler);
-router.get("/projects/:id", validateParams(paramsProjectSchema), getProjectByIdHandler);
-router.post(
-  "/projects",
-  upload.array("images", 20),
-  handleMulterError,
-  createProjectHandler,
-);
-router.patch("/projects/:id", validateParams(paramsProjectSchema), editProjectHandler);
-router.delete("/projects/:id", validateParams(paramsProjectSchema), deleteProjectHandler);
+router.get("/", getAllProjectsHandler);
+router.get("/:id", validateParams(paramsProjectSchema), getProjectByIdHandler);
+router.post("/", upload.array("images", 20), handleMulterError, createProjectHandler);
+router.patch("/:id", validateParams(paramsProjectSchema), editProjectHandler);
+router.delete("/:id", validateParams(paramsProjectSchema), deleteProjectHandler);
 
 export { router };
