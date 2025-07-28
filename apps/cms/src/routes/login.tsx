@@ -29,4 +29,4 @@ function LoginComponent() {
       </div>
     </div>
   );
-}
+

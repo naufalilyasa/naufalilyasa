@@ -7,6 +7,7 @@ import corsMiddleware from "./middleware/cors-middleware.js";
 import { errorHandler } from "./middleware/error-middleware.js";
 import { generalLimit } from "./middleware/rate-limit-middleware.js";
 import { router as authRoute } from "./routes/auth-route.js";
+import { router as projectRoute } from "./routes/project-route.js";
 
 const app: Application = express();
 
@@ -25,6 +26,7 @@ app.get("/ping", (req: Request, res: Response) => {
 
 // Route
 app.use("/api/auth", authRoute);
+app.use("/api/projects", projectRoute);
 
 // Global error
 app.use(errorHandler);
