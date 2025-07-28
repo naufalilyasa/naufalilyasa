@@ -14,8 +14,8 @@ const router: Router = Router();
 
 router.post("/login", authLimiter, loginHandler);
 router.post("/register", authLimiter, registerHandler);
-router.post("/logout", authLimiter, deserizalizeUser, requireUser, logoutHandler);
-router.get("/refresh", authLimiter, refreshHandler);
+router.post("/logout", deserizalizeUser, requireUser, logoutHandler);
+router.get("/refresh", refreshHandler);
 router.get("/me", deserizalizeUser, requireUser, getMeHandler);
 
 export { router };

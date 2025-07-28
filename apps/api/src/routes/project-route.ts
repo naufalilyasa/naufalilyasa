@@ -1,4 +1,4 @@
-import { paramsProjectSchema } from "@repo/zod-schemas/shared/project-schema";
+import { paramsProjectSchema } from "@repo/zod-schemas";
 import { Router } from "express";
 
 import {

@@ -1,4 +1,4 @@
-import { baseProjectSchema } from "src/shared/project-schema.js";
+import { baseProjectSchema } from "../shared/project-schema.js";
 import z4 from "zod/v4";
 
 export const createProjectFormSchema = baseProjectSchema.extend({

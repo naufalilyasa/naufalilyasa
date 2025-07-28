@@ -1,4 +1,5 @@
-import { baseProjectSchema } from "src/shared/project-schema.js";
+import { baseProjectSchema } from "../shared/project-schema.js";
+
 import z from "zod";
 
 export const projectImagesSchema = z

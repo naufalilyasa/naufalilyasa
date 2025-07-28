@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
   "exports": {
-    "./auth": "./src/auth-type.ts"
+    "./auth": {
+      "import": "./dist/auth-type.js",
+      "types": "./dist/auth-type.d.ts"
+    }
   },
   "keywords": [],
   "author": "",
