@@ -17,15 +17,15 @@ const router: Router = Router();
 router.use(deserializeUser, requireUser);
 
 router.get("/", getAllProjectsHandler);
-router.get("/:id", getProjectByIdHandler);
+router.get("/:projectId", getProjectByIdHandler);
 router.post(
   "/",
-  projectLimiter,
-  upload.array("images", 20),
+  // projectLimiter,
+  upload.single("thumbnail"),
   handleMulterError,
   createProjectHandler,
 );
-router.patch("/:id", projectLimiter, upload.array("images", 20), editProjectHandler);
-router.delete("/:id", deleteProjectHandler);
+router.put("/:projectId", projectLimiter, upload.single("thumbnail"), editProjectHandler);
+router.delete("/:projectId", deleteProjectHandler);
 
 export { router };
