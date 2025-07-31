@@ -1,6 +1,6 @@
-import type { LoginResponseType } from "@repo/types/index.ts";
 import type { NextFunction, Request, Response } from "express";
 
+import { LoginResponseSchema } from "@repo/zod-schemas";
 import config from "config/config.js";
 
 import { findUniqueUser } from "~/services/auth-service.js";
@@ -8,12 +8,13 @@ import { AppError } from "~/utils/appError.js";
 import redisClient from "~/utils/connectRedis.js";
 import { verifyJwt } from "~/utils/jwt.js";
 
-const deserizalizeUser = async (req: Request, res: Response, next: NextFunction) => {
+const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const accessToken = req.cookies.access_token as string;
+    const message = "You're not logged in";
 
     if (!accessToken) {
-      next(new AppError(401, "You're not logged in"));
+      next(new AppError(401, message));
       return;
     }
 
@@ -25,18 +26,18 @@ const deserizalizeUser = async (req: Request, res: Response, next: NextFunction)
     const decoded = verifyJwt(accessToken, config.accessTokenPublicKey);
 
     if (!decoded?.sub) {
-      next(new AppError(401, "You're not logged in"));
+      next(new AppError(401, message));
       return;
     }
 
     const session = await redisClient.get(decoded.sub as string);
 
     if (!session) {
-      next(new AppError(401, "You're not logged in"));
+      next(new AppError(401, message));
       return;
     }
 
-    const sessionParse = JSON.parse(session) as LoginResponseType;
+    const sessionParse = LoginResponseSchema.parse(JSON.parse(session));
 
     const user: null | {
       createdAt: Date;
@@ -47,7 +48,7 @@ const deserizalizeUser = async (req: Request, res: Response, next: NextFunction)
     } = await findUniqueUser(sessionParse, { password: true });
 
     if (!user) {
-      next(new AppError(401, "You're not logged in"));
+      next(new AppError(401, message));
       return;
     }
 
@@ -73,10 +74,11 @@ const requireUser = (req: Request, res: Response, next: NextFunction) => {
       new AppError(401, "Session has expired or user doesn't exist");
       return;
     }
+
     next();
   } catch (error) {
     next(error);
   }
 };
 
-export { deserizalizeUser, requireUser };
+export { deserializeUser, requireUser };

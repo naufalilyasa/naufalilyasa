@@ -7,16 +7,15 @@ import {
   refreshHandler,
   registerHandler,
 } from "~/controllers/auth-controller.js";
-import { deserizalizeUser, requireUser } from "~/middleware/authenticated-middleware.js";
-import { validateBody } from "~/middleware/validate-body-middleware.js";
-import { loginUserSchema, registerUserSchema } from "~/schemas/auth-schema.js";
+import { deserializeUser, requireUser } from "~/middleware/authenticated-middleware.js";
+import { authLimiter } from "~/middleware/rate-limit-middleware.js";
 
-const router = Router();
+const router: Router = Router();
 
-router.post("/login", validateBody(loginUserSchema), loginHandler);
-router.post("/register", validateBody(registerUserSchema), registerHandler);
-router.post("/logout", deserizalizeUser, requireUser, logoutHandler);
-router.post("/refresh", refreshHandler);
-router.get("/me", deserizalizeUser, requireUser, getMeHandler);
+router.post("/login", authLimiter, loginHandler);
+router.post("/register", authLimiter, registerHandler);
+router.post("/logout", deserializeUser, requireUser, logoutHandler);
+router.get("/refresh", refreshHandler);
+router.get("/me", deserializeUser, requireUser, getMeHandler);
 
 export { router };

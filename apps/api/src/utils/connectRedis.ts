@@ -1,9 +1,9 @@
 import config from "config/config.js";
-import { createClient } from "redis";
+import { createClient, RedisClientType } from "redis";
 
 const redisUrl = config.redisUrl;
 
-const redisClient = createClient({
+const redisClient: RedisClientType = createClient({
   socket: {
     reconnectStrategy: 5000,
   },
