@@ -3,10 +3,14 @@ export class AppError extends Error {
   status: string;
   statusCode: number;
 
-  constructor(statusCode: number, message: string, errors?: { field: string; message: string }[]) {
+  constructor(
+    statusCode: number,
+    message: string,
+    errors?: { field: string; message: string }[],
+  ) {
     super(message);
     this.statusCode = statusCode;
-    this.status = String(statusCode).startsWith("4") ? "fail" : "error";
+    this.status = String(statusCode).startsWith("4") ? "failed" : "error";
     this.errors = errors;
 
     Error.captureStackTrace(this, this.constructor);

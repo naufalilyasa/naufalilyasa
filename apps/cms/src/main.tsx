@@ -1,6 +1,10 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { ErrorComponent, RouterProvider, createRouter } from "@tanstack/react-router";
+import {
+  ErrorComponent,
+  RouterProvider,
+  createRouter,
+} from "@tanstack/react-router";
 import { auth } from "./utils/auth";
 
 // Import the generated route tree
