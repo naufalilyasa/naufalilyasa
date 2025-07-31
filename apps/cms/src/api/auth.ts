@@ -5,6 +5,7 @@ import { AxiosError, isAxiosError } from "axios";
 import {
   ErrorResponseType,
   LoginResponseType,
+  LogoutResponseType,
   MeResponseType,
   RefreshTokenResponseType,
   RegisterResponseType,
@@ -188,5 +189,18 @@ export const refreshTokenFn = async (): Promise<RefreshTokenResponseType> => {
       throw new Error(error.message || "Failed to refresh token");
     }
     throw new Error("Network error during token refresh");
+  }
+};
+
+export const logoutFn = async (): Promise<LogoutResponseType> => {
+  try {
+    const response = await api.post<LogoutResponseType>("/auth/logout");
+
+    return response.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || "Failed to logout");
+    }
+    throw new Error("Network error during logout");
   }
 };

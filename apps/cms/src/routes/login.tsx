@@ -17,14 +17,15 @@ export const Route = createFileRoute("/login")({
 });
 
 function LoginComponent() {
-  const { authUser } = useAuth();
+  const { authUser, clearAuthUser } = useAuth();
   const navigate = useNavigate();
   const search = useSearch({ from: "/login" });
 
   useEffect(() => {
     if (!authUser) return;
+    clearAuthUser();
     navigate({ to: search.redirect ?? "/" });
-  }, [authUser, navigate, search]);
+  }, [authUser, navigate, search, clearAuthUser]);
 
   return authUser ? (
     <Navigate to="/" />

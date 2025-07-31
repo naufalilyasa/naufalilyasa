@@ -41,3 +41,9 @@ export type ErrorResponseType = {
   status: string;
   statusCode: number;
 };
+
+export type LogoutResponseType = {
+  message: string;
+  status: string;
+  statusCode: number;
+};
