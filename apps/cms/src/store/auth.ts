@@ -18,7 +18,7 @@ export const useAuth = create<AuthUserStoreType>()(
         set({ authUser: user, isAuthenticate: true });
       },
       clearAuthUser: () => {
-        set({ authUser: undefined, isAuthenticate: false });
+        set({ authUser: null, isAuthenticate: false });
       },
     }),
     {

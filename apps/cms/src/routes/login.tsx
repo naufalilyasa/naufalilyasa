@@ -1,4 +1,9 @@
-import { createFileRoute, Navigate, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Navigate,
+  useNavigate,
+  useSearch,
+} from "@tanstack/react-router";
 import { LoginForm } from "../components/auth/LoginForm";
 import z from "zod";
 import { useAuth } from "../store/auth";
@@ -14,13 +19,14 @@ export const Route = createFileRoute("/login")({
 function LoginComponent() {
   const { authUser } = useAuth();
   const navigate = useNavigate();
+  const search = useSearch({ from: "/login" });
 
   useEffect(() => {
     if (!authUser) return;
-    navigate({ to: "/" });
-  }, [authUser, navigate]);
+    navigate({ to: search.redirect ?? "/" });
+  }, [authUser, navigate, search]);
 
-  return authUser.id ? (
+  return authUser ? (
     <Navigate to="/" />
   ) : (
     <div className="bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
@@ -29,4 +35,4 @@ function LoginComponent() {
       </div>
     </div>
   );
-
+}

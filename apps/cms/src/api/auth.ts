@@ -51,7 +51,7 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     // Handle network errors and missing config
-    if (!error.response || originalRequest) {
+    if (!error.response || !originalRequest) {
       return Promise.reject(error);
     }
 
@@ -97,6 +97,7 @@ api.interceptors.response.use(
 
       try {
         await refreshTokenFn();
+        // console.log("hit");
 
         // Process queued request
         processQueue(null, "success");
@@ -131,31 +132,6 @@ api.interceptors.response.use(
       }
     }
     return Promise.reject(error);
-
-    // try {
-    //   if (
-    //     errMessage.includes("You're not logged in") &&
-    //     error.response.status === 401 &&
-    //     !originalRequest._retry
-    //   ) {
-    //     originalRequest._retry = true;
-    //     await refreshTokenFn();
-
-    //     return api(originalRequest);
-    //   }
-    // } catch (error) {
-    //   if (isAxiosError(error)) {
-    //     if (error.response?.data.message === "Could not refresh access token") {
-    //       return Promise.reject(new Error("You're not logged in"));
-    //     }
-    //     return Promise.reject(
-    //       new Error(error.response?.data.message || "Server internal error")
-    //     );
-    //   }
-    //   return Promise.reject(new Error("Server internal error."));
-    // }
-
-    // return Promise.reject(error);
   }
 );
 
@@ -192,7 +168,7 @@ export const registerFn = async (payload: RegisterUserDTO) => {
     return response.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      throw error;
+      throw error.response?.data.data;
     }
     throw error;
   }
