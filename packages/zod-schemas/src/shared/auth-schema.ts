@@ -37,7 +37,8 @@ export const registerUserSchema = z
     username: z
       .string({ error: "Username is required" })
       .min(5, { message: "Username must be at least 5 characters" })
-      .max(32, { message: "Username must not exceed 32 characters" }),
+      .max(32, { message: "Username must not exceed 32 characters" })
+      .toLowerCase(),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: "Passwords do not match",
