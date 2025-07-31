@@ -2,7 +2,7 @@ import {
   baseProjectSchema,
   CreateProjectBackendDTO,
   paramsProjectSchema,
-  projectImagesSchema,
+  projectBackendSchema,
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "generated/prisma/index.js";
@@ -15,8 +15,9 @@ import {
   getProjectById,
   updateProject,
 } from "~/services/project-service.js";
-import { uploadImages } from "~/services/upload-services.js";
+import { uploadSingleImage } from "~/services/upload-services.js";
 import { AppError } from "~/utils/appError.js";
+import { deleteSingleImage } from "~/utils/deleteImage.js";
 
 export const getAllProjectsHandler = async (
   req: Request,
@@ -43,9 +44,10 @@ export const getAllProjectsHandler = async (
     }
 
     res.status(200).json({
-      data: projects,
-      message: "Successfully get all projects",
+      statusCode: 200,
       status: "success",
+      message: "Successfully get all projects",
+      data: projects,
     });
     return;
   } catch (error) {
@@ -79,19 +81,16 @@ export const getProjectByIdHandler = async (
     return next(new AppError(401, "You're not logged in"));
   }
 
-  const id = req.params.id;
-
-  if (!id) {
-    next(new AppError(400, "Missing required parameter: 'id'"));
-  }
+  const parsedParams = paramsProjectSchema.parse(req.params);
 
   try {
-    const project = await getProjectById(String(id), user.id);
+    const project = await getProjectById(parsedParams.projectId, user.id);
 
     res.status(200).json({
-      data: project,
-      message: "Succesfully get project by id",
+      statusCode: 200,
       status: "success",
+      message: "Succesfully get project by id",
+      data: project,
     });
     return;
   } catch (error) {
@@ -107,46 +106,49 @@ export const createProjectHandler = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const user = res.locals.user as null | {
-    createdAt: Date;
-    id: string;
-    name: string;
-    updatedAt: Date;
-    username: string;
-  };
-
-  if (!user) {
-    return next(new AppError(401, "You're not logged in"));
-  }
-
   try {
-    const files = req.files as Express.Multer.File[];
+    const user = res.locals.user as null | {
+      createdAt: Date;
+      id: string;
+      name: string;
+      updatedAt: Date;
+      username: string;
+    };
+
+    if (!user) {
+      return next(new AppError(401, "You're not logged in"));
+    }
+
+    const file: Express.Multer.File | undefined = req.file;
 
     // Parse base payload
-    const basePayload = {
-      ...req.body,
-      techStack: JSON.parse(req.body.techStack),
-    };
-    const parsedBase = baseProjectSchema.parse(basePayload);
+    const parsedBase = baseProjectSchema.parse(req.body);
 
-    // Upload and validate images
-    const uploads = await uploadImages(files);
-    const imagePayload = uploads.map((upload, index) => ({
-      caption: (req.body as any)?.[index]?.caption ?? `Image ${index + 1}`,
-      url: upload.secure_url,
-    }));
-    const parsedImages = projectImagesSchema.parse(imagePayload);
+    // Upload and validate images url
+    let thumbnail: undefined | { public_id: string; secure_url: string } = undefined;
+
+    if (file) {
+      const uploadResponse = await uploadSingleImage(file, "naufalilyasa/projects");
+      thumbnail = uploadResponse;
+    }
 
     // Final payload
     const payload: CreateProjectBackendDTO = {
       ...parsedBase,
-      projectImages: parsedImages,
+      thumbnail: thumbnail
+        ? {
+            url: thumbnail.secure_url,
+            publicId: thumbnail!.public_id,
+          }
+        : undefined,
     };
 
-    await createProject(payload, user.id);
+    const parsedPayload = projectBackendSchema.parse(payload);
 
-    res.status(200).json({
-      statusCode: 200,
+    await createProject(parsedPayload, user.id);
+
+    res.status(201).json({
+      statusCode: 201,
       status: "success",
       message: "Successfully created project",
     });
@@ -184,30 +186,54 @@ export const editProjectHandler = async (
     const parsedParams = paramsProjectSchema.parse(req.params);
 
     // Parse base payload
-    const basePayload = {
-      ...req.body,
-      techStack: JSON.parse(req.body.techStack),
-    };
-    const parsedBase = baseProjectSchema.parse(basePayload);
+    const file: Express.Multer.File | undefined = req.file;
 
-    const files = req.files as Express.Multer.File[];
+    // Parse base payload
+    const parsedBase = baseProjectSchema.parse(req.body);
 
-    // Upload and validate images
-    const uploads = await uploadImages(files);
-    const imagePayload = uploads.map((upload, index) => ({
-      caption: (req.body as any)?.[index]?.caption ?? `Image ${index + 1}`,
-      url: upload.secure_url,
-    }));
+    // Upload image
+    let thumbnail: undefined | { public_id: string; secure_url: string } = undefined;
 
-    const parsedImages = projectImagesSchema.parse(imagePayload);
+    if (file) {
+      const uploadResponse = await uploadSingleImage(file, "naufalilyasa/projects");
+
+      thumbnail = uploadResponse;
+    }
 
     // Final payload
     const payload: CreateProjectBackendDTO = {
       ...parsedBase,
-      projectImages: parsedImages,
+      thumbnail: thumbnail
+        ? {
+            url: thumbnail.secure_url,
+            publicId: thumbnail.public_id,
+          }
+        : undefined,
     };
 
-    await updateProject(parsedParams.id, payload, user.id);
+    const parsedPayload = projectBackendSchema.parse(payload);
+
+    // Delete existing thumbnail on cloudinary before update
+    const existingThumbnail = await prisma.project.findFirst({
+      where: {
+        id: parsedParams.projectId,
+      },
+      select: {
+        thumbnail: {
+          select: {
+            publicId: true,
+          },
+        },
+      },
+    });
+
+    if (existingThumbnail) {
+      if (existingThumbnail.thumbnail) {
+        await deleteSingleImage(existingThumbnail.thumbnail.publicId);
+      }
+    }
+
+    await updateProject(parsedParams.projectId, parsedPayload, user.id);
 
     res.status(200).json({
       statusCode: 200,
@@ -250,7 +276,7 @@ export const deleteProjectHandler = async (
 
     await prisma.project.delete({
       where: {
-        id: parsedParams.id,
+        id: parsedParams.projectId,
       },
     });
 

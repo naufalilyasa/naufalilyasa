@@ -4,88 +4,148 @@ import { prisma } from "~/prisma/prisma.js";
 
 export const getAllProjects = async (userId: string) => {
   return await prisma.project.findMany({
-    orderBy: { endDate: "asc" },
-    skip: 0,
-    take: 10,
     where: {
       userId,
+    },
+    skip: 0,
+    take: 10,
+    orderBy: { createdAt: "desc" },
+    include: {
+      projectDetail: true,
+      technologies: {
+        include: {
+          technology: true,
+        },
+      },
     },
   });
 };
 
 export const getProjectById = async (id: string, userId: string) => {
   return await prisma.project.findFirstOrThrow({
-    include: {
-      projectImages: true,
-    },
     where: {
       id,
       AND: {
         userId,
       },
+    },
+    include: {
+      technologies: {
+        include: {
+          technology: true,
+        },
+      },
+      projectDetail: true,
     },
   });
 };
 
 export const createProject = async (payload: CreateProjectBackendDTO, userId: string) => {
-  const { description, endDate, projectImages, projectName, startDate, techStack, url } =
-    payload;
+  const {
+    description,
+    title,
+    startDate,
+    endDate,
+    githubUrl,
+    thumbnail,
+    liveUrl,
+    featured,
+    category,
+    technologies,
+    projectDetail,
+  } = payload;
 
   return await prisma.project.create({
     data: {
-      description: description,
-      endDate: endDate,
-      projectImages: {
-        create: projectImages?.map((image) => ({
-          caption: image.caption,
-          url: image.url,
+      userId,
+      description,
+      title,
+      startDate: new Date(startDate),
+      endDate: endDate ? new Date(endDate) : null,
+      githubUrl,
+      thumbnail: thumbnail
+        ? {
+            create: {
+              url: thumbnail.url,
+              publicId: thumbnail.publicId,
+            },
+          }
+        : undefined,
+      liveUrl,
+      featured,
+      category,
+      technologies: {
+        create: technologies.map((techId: string) => ({
+          technology: { connect: { id: techId } },
         })),
       },
-      projectName: projectName,
-      startDate: startDate,
-      techStack: techStack,
-      url: url,
-      userId: userId,
+      projectDetail: projectDetail
+        ? {
+            create: {
+              content: projectDetail,
+            },
+          }
+        : undefined,
     },
     include: {
-      projectImages: true,
+      technologies: { include: { technology: true } },
+      projectDetail: true,
     },
   });
 };
 
 export const updateProject = async (
-  id: string,
+  projectId: string,
   payload: EditProjectBackendDTO,
   userId: string,
 ) => {
-  const { description, endDate, projectImages, projectName, startDate, techStack, url } =
-    payload;
+  const { technologies, thumbnail, projectDetail } = payload;
 
   return await prisma.project.update({
     where: {
-      id,
+      id: projectId,
       AND: {
         userId,
       },
     },
     data: {
-      description: description,
-      endDate: endDate,
-      projectImages: {
-        deleteMany: {},
-        create: projectImages?.map((image) => ({
-          caption: image.caption,
-          url: image.url,
-        })),
-      },
-      projectName: projectName,
-      startDate: startDate,
-      techStack: techStack,
-      url: url,
-      userId: userId,
+      ...payload,
+      thumbnail: thumbnail
+        ? {
+            upsert: {
+              create: {
+                url: thumbnail.url,
+                publicId: thumbnail.publicId,
+              },
+              update: {
+                url: thumbnail.url,
+                publicId: thumbnail.publicId,
+              },
+            },
+          }
+        : undefined,
+      // replace technologies
+      technologies: technologies
+        ? {
+            deleteMany: {},
+            create: technologies.map((techId) => ({
+              technology: { connect: { id: techId } },
+            })),
+          }
+        : undefined,
+
+      // replace projectDetail
+      projectDetail: projectDetail
+        ? {
+            deleteMany: {},
+            create: { content: projectDetail },
+          }
+        : undefined,
     },
     include: {
-      projectImages: true,
+      technologies: { include: { technology: true } },
+      projectDetail: true,
+      thumbnail: true,
     },
   });
 };

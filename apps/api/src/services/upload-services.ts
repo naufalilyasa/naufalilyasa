@@ -1,4 +1,5 @@
-import { UploadApiResponse } from "cloudinary";
+import { UploadApiResponse, UploadStream } from "cloudinary";
+import { Readable } from "stream";
 
 import cloudinary from "~/utils/cloudinary.js";
 
@@ -23,4 +24,21 @@ export const uploadImages = async (
     }),
   );
   return uploads;
+};
+
+export const uploadSingleImage = (
+  file: Express.Multer.File,
+  folder: string,
+): Promise<{ public_id: string; secure_url: string }> => {
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.uploader.upload_stream({ folder }, (err, result) => {
+      if (err || !result) return reject(err);
+      resolve({
+        secure_url: result.secure_url,
+        public_id: result.public_id,
+      });
+    });
+
+    Readable.from(file.buffer).pipe(uploadStream);
+  });
 };
