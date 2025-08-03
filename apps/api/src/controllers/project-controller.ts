@@ -6,7 +6,9 @@ import {
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "generated/prisma/index.js";
+import { isArray } from "lodash-es";
 import { ZodError } from "zod";
+import { upload } from "~/middleware/multer.js";
 
 import { prisma } from "~/prisma/prisma.js";
 import {
@@ -119,7 +121,7 @@ export const createProjectHandler = async (
       return next(new AppError(401, "You're not logged in"));
     }
 
-    const file: Express.Multer.File | undefined = req.file;
+    const file = req.file as Express.Multer.File | undefined;
 
     // Parse base payload
     const parsedBase = baseProjectSchema.parse(req.body);
@@ -135,6 +137,8 @@ export const createProjectHandler = async (
     // Final payload
     const payload: CreateProjectBackendDTO = {
       ...parsedBase,
+      ...req.body,
+      projectDetail: req.body.projectDetail,
       thumbnail: thumbnail
         ? {
             url: thumbnail.secure_url,
@@ -203,6 +207,8 @@ export const editProjectHandler = async (
     // Final payload
     const payload: CreateProjectBackendDTO = {
       ...parsedBase,
+      ...req.body,
+      projectDetail: req.body.projectDetail,
       thumbnail: thumbnail
         ? {
             url: thumbnail.secure_url,
@@ -293,6 +299,12 @@ export const deleteProjectHandler = async (
         message: issue.message,
       }));
       return next(new AppError(400, "Validation failed", formattedErrors));
+    }
+    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
+      console.error(error);
+    }
+    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
+      console.error(error);
     }
     return next(error);
   }

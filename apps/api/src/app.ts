@@ -8,6 +8,7 @@ import { errorHandler } from "./middleware/error-middleware.js";
 import { generalLimit } from "./middleware/rate-limit-middleware.js";
 import { router as authRoute } from "./routes/auth-route.js";
 import { router as projectRoute } from "./routes/project-route.js";
+import { router as technologiesRoute } from "./routes/technology-route.js";
 
 const app: Application = express();
 
@@ -27,6 +28,7 @@ app.get("/ping", (req: Request, res: Response) => {
 // Route
 app.use("/api/auth", authRoute);
 app.use("/api/projects", projectRoute);
+app.use("/api/technologies", technologiesRoute);
 
 // Global error
 app.use(errorHandler);

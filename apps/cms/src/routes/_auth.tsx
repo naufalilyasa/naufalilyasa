@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import {
   SidebarInset,
   SidebarProvider,
@@ -15,10 +15,6 @@ import {
 import { Separator } from "@repo/ui/components/separator";
 import { AppSidebar } from "../components/dashboard/AppSidebar";
 import { useState } from "react";
-import { ActivityChart } from "../components/dashboard/ActivityChart";
-import { RecentProjects } from "../components/dashboard/RecentProjects";
-import { StatsCards } from "../components/dashboard/StatsCard";
-import { SkillsSection } from "../components/dashboard/SkillsSection";
 import { redirect } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { meFn } from "../api/auth";
@@ -64,7 +60,6 @@ export type PageType =
 
 function PortfolioDashboardLayout() {
   const [currentPage, setCurrentPage] = useState<PageType>("dashboard");
-  const location = useLocation();
 
   const getPageTitle = () => {
     switch (currentPage) {

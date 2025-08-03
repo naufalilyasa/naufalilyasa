@@ -10,6 +10,10 @@
     "./auth": {
       "import": "./dist/auth-type.js",
       "types": "./dist/auth-type.d.ts"
+    },
+    "./project": {
+      "import": "./dist/project-type.js",
+      "types": "./dist/project-type.d.ts"
     }
   },
   "keywords": [],

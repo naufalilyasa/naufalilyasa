@@ -1,4 +1,5 @@
 import { CreateProjectBackendDTO, EditProjectBackendDTO } from "@repo/zod-schemas";
+import { Prisma } from "generated/prisma/index.js";
 
 import { prisma } from "~/prisma/prisma.js";
 
@@ -7,8 +8,8 @@ export const getAllProjects = async (userId: string) => {
     where: {
       userId,
     },
-    skip: 0,
-    take: 10,
+    // skip: 0,
+    // take: 10,
     orderBy: { createdAt: "desc" },
     include: {
       projectDetail: true,
@@ -17,6 +18,7 @@ export const getAllProjects = async (userId: string) => {
           technology: true,
         },
       },
+      thumbnail: true,
     },
   });
 };
@@ -36,6 +38,7 @@ export const getProjectById = async (id: string, userId: string) => {
         },
       },
       projectDetail: true,
+      thumbnail: true,
     },
   });
 };
@@ -82,7 +85,7 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
       projectDetail: projectDetail
         ? {
             create: {
-              content: projectDetail,
+              content: projectDetail as Prisma.InputJsonValue,
             },
           }
         : undefined,
@@ -90,6 +93,7 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
     include: {
       technologies: { include: { technology: true } },
       projectDetail: true,
+      thumbnail: true,
     },
   });
 };
@@ -138,7 +142,7 @@ export const updateProject = async (
       projectDetail: projectDetail
         ? {
             deleteMany: {},
-            create: { content: projectDetail },
+            create: { content: projectDetail as Prisma.InputJsonValue },
           }
         : undefined,
     },

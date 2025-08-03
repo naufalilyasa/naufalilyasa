@@ -47,3 +47,9 @@ export type LogoutResponseType = {
   status: string;
   statusCode: number;
 };
+
+export type UserType = {
+  id: string;
+  name: string;
+  username: string;
+}

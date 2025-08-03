@@ -15,6 +15,10 @@ export default defineConfig({
   resolve: {
     alias: {
       "@repo/ui": path.resolve(__dirname, "../../packages/ui/src"),
+      "@repo/zod-schemas": path.resolve(
+        __dirname,
+        "../../packages/zod-schemas/dist"
+      ),
     },
   },
   css: {

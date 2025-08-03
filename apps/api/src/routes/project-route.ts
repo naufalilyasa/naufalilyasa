@@ -18,6 +18,7 @@ router.use(deserializeUser, requireUser);
 
 router.get("/", getAllProjectsHandler);
 router.get("/:projectId", getProjectByIdHandler);
+
 router.post(
   "/",
   // projectLimiter,
@@ -25,7 +26,14 @@ router.post(
   handleMulterError,
   createProjectHandler,
 );
-router.put("/:projectId", projectLimiter, upload.single("thumbnail"), editProjectHandler);
+
+router.put(
+  "/:projectId",
+  //  projectLimiter,
+  upload.single("thumbnail"),
+  editProjectHandler,
+);
+
 router.delete("/:projectId", deleteProjectHandler);
 
 export { router };
