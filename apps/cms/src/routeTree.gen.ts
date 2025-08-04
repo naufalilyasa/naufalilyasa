@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AuthIndexRouteImport } from './routes/_auth/index'
 import { Route as AuthProjectsIndexRouteImport } from './routes/_auth/projects/index'
 import { Route as AuthProjectsCreateRouteImport } from './routes/_auth/projects/create'
+import { Route as AuthProjectsDetailIdRouteImport } from './routes/_auth/projects/detail.$id'
 import { Route as AuthProjectsIdEditRouteImport } from './routes/_auth/projects/$id.edit'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -46,6 +47,11 @@ const AuthProjectsCreateRoute = AuthProjectsCreateRouteImport.update({
   path: '/projects/create',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthProjectsDetailIdRoute = AuthProjectsDetailIdRouteImport.update({
+  id: '/projects/detail/$id',
+  path: '/projects/detail/$id',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthProjectsIdEditRoute = AuthProjectsIdEditRouteImport.update({
   id: '/projects/$id/edit',
   path: '/projects/$id/edit',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/projects/create': typeof AuthProjectsCreateRoute
   '/projects': typeof AuthProjectsIndexRoute
   '/projects/$id/edit': typeof AuthProjectsIdEditRoute
+  '/projects/detail/$id': typeof AuthProjectsDetailIdRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/projects/create': typeof AuthProjectsCreateRoute
   '/projects': typeof AuthProjectsIndexRoute
   '/projects/$id/edit': typeof AuthProjectsIdEditRoute
+  '/projects/detail/$id': typeof AuthProjectsDetailIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/_auth/projects/create': typeof AuthProjectsCreateRoute
   '/_auth/projects/': typeof AuthProjectsIndexRoute
   '/_auth/projects/$id/edit': typeof AuthProjectsIdEditRoute
+  '/_auth/projects/detail/$id': typeof AuthProjectsDetailIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/projects/create'
     | '/projects'
     | '/projects/$id/edit'
+    | '/projects/detail/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
     | '/projects/create'
     | '/projects'
     | '/projects/$id/edit'
+    | '/projects/detail/$id'
   id:
     | '__root__'
     | '/_auth'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '/_auth/projects/create'
     | '/_auth/projects/'
     | '/_auth/projects/$id/edit'
+    | '/_auth/projects/detail/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -156,6 +168,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthProjectsCreateRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/projects/detail/$id': {
+      id: '/_auth/projects/detail/$id'
+      path: '/projects/detail/$id'
+      fullPath: '/projects/detail/$id'
+      preLoaderRoute: typeof AuthProjectsDetailIdRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/projects/$id/edit': {
       id: '/_auth/projects/$id/edit'
       path: '/projects/$id/edit'
@@ -171,6 +190,7 @@ interface AuthRouteChildren {
   AuthProjectsCreateRoute: typeof AuthProjectsCreateRoute
   AuthProjectsIndexRoute: typeof AuthProjectsIndexRoute
   AuthProjectsIdEditRoute: typeof AuthProjectsIdEditRoute
+  AuthProjectsDetailIdRoute: typeof AuthProjectsDetailIdRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
@@ -178,6 +198,7 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthProjectsCreateRoute: AuthProjectsCreateRoute,
   AuthProjectsIndexRoute: AuthProjectsIndexRoute,
   AuthProjectsIdEditRoute: AuthProjectsIdEditRoute,
+  AuthProjectsDetailIdRoute: AuthProjectsDetailIdRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)

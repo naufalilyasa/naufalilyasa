@@ -45,7 +45,6 @@ import {
   X,
   Save,
   Loader2,
-  Upload,
   Link,
   Check,
   ChevronsUpDown,

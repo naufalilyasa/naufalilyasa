@@ -41,7 +41,6 @@ import {
   MoreHorizontal,
   Edit,
   Trash2,
-  Copy,
 } from "lucide-react";
 import ProjectForm from "../../../components/dashboard/projects/ProjectForm";
 import DeleteProjectDialog from "../../../components/dashboard/projects/DeleteProjectDialog";
