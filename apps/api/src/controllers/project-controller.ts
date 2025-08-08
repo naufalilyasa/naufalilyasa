@@ -6,9 +6,7 @@ import {
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "generated/prisma/index.js";
-import { isArray } from "lodash-es";
 import { ZodError } from "zod";
-import { upload } from "~/middleware/multer.js";
 
 import { prisma } from "~/prisma/prisma.js";
 import {

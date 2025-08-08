@@ -6,9 +6,10 @@ import morgan from "morgan";
 import corsMiddleware from "./middleware/cors-middleware.js";
 import { errorHandler } from "./middleware/error-middleware.js";
 import { generalLimit } from "./middleware/rate-limit-middleware.js";
-import { router as authRoute } from "./routes/auth-route.js";
-import { router as projectRoute } from "./routes/project-route.js";
-import { router as technologiesRoute } from "./routes/technology-route.js";
+import { authRoute } from "./routes/auth-route.js";
+import { projectRoute } from "./routes/project-route.js";
+import { technologiesRoute } from "./routes/technology-route.js";
+import { uploadRouter } from "./routes/upload-route.js";
 
 const app: Application = express();
 
@@ -29,6 +30,7 @@ app.get("/ping", (req: Request, res: Response) => {
 app.use("/api/auth", authRoute);
 app.use("/api/projects", projectRoute);
 app.use("/api/technologies", technologiesRoute);
+app.use("/api/upload", uploadRouter);
 
 // Global error
 app.use(errorHandler);

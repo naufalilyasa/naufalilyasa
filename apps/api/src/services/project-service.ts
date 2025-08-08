@@ -88,7 +88,15 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
               content: projectDetail as Prisma.InputJsonValue,
             },
           }
-        : undefined,
+        : {
+            create: {
+              content: {
+                time: Date.now(),
+                blocks: [],
+                version: "2.29.0",
+              },
+            },
+          },
     },
     include: {
       technologies: { include: { technology: true } },

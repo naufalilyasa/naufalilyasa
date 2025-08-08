@@ -1,3 +1,5 @@
+import { OutputData } from "@editorjs/editorjs";
+
 export type GenericResponseType = {
   statusCode: number;
   status: string;
@@ -9,14 +11,14 @@ export type Project = {
   userId: string;
   title: string;
   description: string;
-  startDate: string | null;
-  endDate: string | null;
+  startDate: Date;
+  endDate: Date | undefined;
   githubUrl: string;
   liveUrl: string;
   featured: boolean;
   category: CategoryProject;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   thumbnail?: ProjectThumbnailType;
   projectDetail: ProjectDetail[];
   technologies: ProjectTechnology[];
@@ -37,8 +39,8 @@ export type ProjectThumbnailType = {
   projectId: string;
   url: string;
   publicId: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type ProjectTechnology = {
@@ -52,15 +54,11 @@ export type ProjectDetail = {
   id: string;
   projectId: string;
   content: ProjectDetailBlock;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
-export type ProjectDetailBlock = {
-  time: number;
-  blocks: any[];
-  version: string;
-};
+export type ProjectDetailBlock = OutputData;
 
 export type ProjectThumbnail = {
   id: string;

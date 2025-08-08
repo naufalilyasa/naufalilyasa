@@ -64,11 +64,8 @@ import { format } from "date-fns";
 interface ProjectFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  project?: Project | null;
-  onSubmit: ({
-    projectId,
-    data,
-  }: {
+  editProject?: Project | null;
+  onSubmit: (payload: {
     projectId?: string;
     data: CreateProjectFormDTO;
   }) => void;
@@ -89,13 +86,22 @@ const categories = [
 function ProjectForm({
   open,
   onOpenChange,
-  project,
+  editProject,
   onSubmit,
   isLoading = false,
 }: ProjectFormProps) {
   const [comboboxOpen, setComboboxOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
+  const [project, setProject] = useState<Project | null | undefined>(null);
+
+  useEffect(() => {
+    if (editProject) {
+      setProject(editProject);
+    } else {
+      setProject(undefined);
+    }
+  }, [editProject]);
 
   const {
     data: categoryTechnologies,
@@ -193,7 +199,62 @@ function ProjectForm({
     onOpenChange(false);
   };
 
-  // if (isLoadingTechnologies) return <p>Loading...</p>;
+  useEffect(() => {
+    if (project) {
+      form.reset({
+        title: project.title,
+        description: project.description,
+        category: project.category,
+        githubUrl: project.githubUrl,
+        liveUrl: project.liveUrl,
+        technologies: project.technologies.map((tech) => tech.id),
+        projectDetail: {
+          time: project.projectDetail[0]?.content?.time ?? Date.now(),
+          blocks: project.projectDetail[0]?.content?.blocks ?? [],
+          version: project.projectDetail[0]?.content?.version ?? "2.29.0",
+        },
+        featured: project.featured,
+        startDate: project.startDate ? new Date(project.startDate) : new Date(),
+        endDate: project.endDate ? new Date(project.endDate) : undefined,
+        thumbnail: undefined,
+      });
+    } else {
+      form.reset({
+        title: "",
+        description: "",
+        category: "FULLSTACK",
+        githubUrl: "",
+        liveUrl: "",
+        technologies: [],
+        projectDetail: {
+          time: Date.now(),
+          blocks: [],
+          version: "2.29.0",
+        },
+        featured: false,
+        startDate: new Date(),
+        endDate: undefined,
+        thumbnail: undefined,
+      });
+      setSelectedTechnologies([]);
+      setPreview(null);
+    }
+  }, [project, form]);
+
+  useEffect(() => {
+    if (project?.technologies) {
+      setSelectedTechnologies(
+        project.technologies.map((tech) => tech.technology)
+      );
+    }
+  }, [project]);
+
+  useEffect(() => {
+    if (project?.thumbnail?.url) {
+      setPreview(project.thumbnail.url);
+    }
+  }, [project]);
+
   if (isErrorTechnologies) return <ErrorDisplay error={errorTechnologies} />;
 
   return (
@@ -212,9 +273,9 @@ function ProjectForm({
 
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit((data) =>
-              handleSubmit({ projectId: project?.id, data })
-            )}
+            onSubmit={form.handleSubmit((data) => {
+              handleSubmit({ projectId: project?.id, data });
+            })}
             className="space-y-6"
             encType="multipart/form-data"
           >
@@ -301,34 +362,6 @@ function ProjectForm({
               )}
             </div>
             <div className="grid gap-4 md:grid-cols-1">
-              {/* <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Status *</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select status" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {statuses.map((status) => (
-                          <SelectItem key={status} value={status}>
-                            {status}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
-
               <FormField
                 control={form.control}
                 name="thumbnail"
@@ -533,9 +566,8 @@ function ProjectForm({
                                 )
                                 .map((tech) => {
                                   return (
-                                    <CommandGroup>
+                                    <CommandGroup key={tech.id}>
                                       <CommandItem
-                                        key={tech.id}
                                         value={tech.name}
                                         onSelect={() => addTechnology(tech)}
                                         className="cursor-pointer flex items-center gap-2"

@@ -6,4 +6,4 @@ const router: Router = Router();
 
 router.get("/", getAllTechnologiesHandler);
 
-export { router };
+export { router as technologiesRoute };

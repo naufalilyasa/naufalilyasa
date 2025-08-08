@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -41,6 +41,7 @@ import {
   MoreHorizontal,
   Edit,
   Trash2,
+  Eye,
 } from "lucide-react";
 import ProjectForm from "../../../components/dashboard/projects/ProjectForm";
 import DeleteProjectDialog from "../../../components/dashboard/projects/DeleteProjectDialog";
@@ -59,6 +60,16 @@ export const Route = createFileRoute("/_auth/projects/")({
   component: ProjectsPage,
 });
 
+enum CategoryProject {
+  FULLSTACK = "FULLSTACK",
+  FRONTEND = "FRONTEND",
+  BACKEND = "BACKEND",
+  MOBILE = "MOBILE",
+  DESKTOP = "DESKTOP",
+  AIML = "AIML",
+  DEVOPS = "DEVOPS",
+}
+
 export function ProjectsPage() {
   const {
     data,
@@ -75,15 +86,29 @@ export function ProjectsPage() {
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [deletingProject, setDeletingProject] = useState<Project | null>(null);
+  const [categories, setCategories] = useState<
+    { value: string; label: string }[]
+  >([]);
 
   const queryClient = useQueryClient();
 
-  const categories = ["all", "Full Stack", "Frontend", "Backend", "Mobile"];
   const statuses = ["all", "Completed", "In Progress"];
 
   useEffect(() => {
     if (!data) return setProjects(undefined);
     setProjects(data);
+    function formatCategoryName(category: string): string {
+      if (category === "AIML") return "AI/ML";
+      return category.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+
+    setCategories([
+      { label: "All", value: "all" },
+      ...Object.values(CategoryProject).map((value) => ({
+        value,
+        label: formatCategoryName(value),
+      })),
+    ]);
   }, [data]);
 
   const filteredProjects = projects?.filter((project) => {
@@ -95,10 +120,6 @@ export function ProjectsPage() {
       );
     const matchesCategory =
       selectedCategory === "all" || project.category === selectedCategory;
-    // const matchesStatus =
-    //   selectedStatus === "all" || project.status === selectedStatus;
-
-    // return matchesSearch && matchesCategory && matchesStatus;
     return matchesSearch && matchesCategory;
   });
 
@@ -156,14 +177,11 @@ export function ProjectsPage() {
     },
   });
 
-  const handleCreateProject = async ({
-    projectId,
-    data,
-  }: {
+  const handleCreateProject = async (payload: {
     projectId?: string;
     data: CreateProjectFormDTO;
   }) => {
-    mutateCreateProject(data);
+    mutateCreateProject(payload.data);
     setShowProjectForm(false);
   };
 
@@ -185,17 +203,22 @@ export function ProjectsPage() {
 
   const handleToggleFeatured = async (project: Project) => {
     try {
-      // const updatedProject = { ...project, featured: !project.featured };
-
       mutateEditProject({
         projectId: project.id,
         data: {
           ...project,
           technologies:
             project?.technologies.map((tech) => tech.technology.id) ?? [],
-          projectDetail: project?.projectDetail[0].content ?? {
+          projectDetail: {
             time: Date.now(),
-            blocks: [],
+            blocks: [
+              {
+                type: "paragraph",
+                data: {
+                  text: "This is a project description",
+                },
+              },
+            ],
             version: "2.29.0",
           },
           featured: !project?.featured,
@@ -218,7 +241,7 @@ export function ProjectsPage() {
     <Card className="group hover:shadow-lg transition-all duration-300">
       <div className="aspect-video overflow-hidden rounded-t-lg relative">
         <img
-          src={project?.thumbnail?.url || "/placeholder.svg"}
+          src={project?.thumbnail?.url || "/placeholder.png"}
           alt={project.title}
           className="h-full w-full object-cover transition-transform group-hover:scale-105"
         />
@@ -230,6 +253,12 @@ export function ProjectsPage() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
+              <Link to={`/projects/detail/$id`} params={{ id: project.id }}>
+                <DropdownMenuItem>
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Details
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem
                 onClick={() => {
                   setEditingProject(project);
@@ -266,10 +295,21 @@ export function ProjectsPage() {
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
               {project.startDate
-                ? format(new Date(project?.startDate), "yyyy") +
-                  format(new Date(project.startDate), "MMMM") +
-                  format(new Date(project.startDate), "d")
+                ? "Start " +
+                  format(new Date(project.startDate), "d") +
+                  "/" +
+                  format(new Date(project.startDate), "M") +
+                  "/" +
+                  format(new Date(project?.startDate), "yyyy")
                 : ""}
+              {project.endDate
+                ? "End " +
+                  format(new Date(project.endDate), "d") +
+                  "/" +
+                  format(new Date(project.endDate), "M") +
+                  "/" +
+                  format(new Date(project?.endDate), "yyyy")
+                : " - present"}
               {project.featured && (
                 <Badge variant="default" className="text-xs">
                   Featured
@@ -295,12 +335,19 @@ export function ProjectsPage() {
               variant="outline"
               className="text-xs"
             >
+              <img src={tech.technology.iconUrl} alt="" className="size-5" />
               {tech.technology.name}
             </Badge>
           ))}
         </div>
         <div className="flex items-center justify-between">
-          <Badge variant="secondary">{project.category}</Badge>
+          <Badge variant="secondary">
+            {categories.map((category) => {
+              if (category.value === project.category) {
+                return category.label;
+              }
+            })}
+          </Badge>
           <div className="flex gap-2">
             {project.githubUrl && (
               <Button size="sm" variant="outline" asChild>
@@ -388,8 +435,10 @@ export function ProjectsPage() {
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((category) => (
-                      <SelectItem key={category} value={category}>
-                        {category === "all" ? "All Categories" : category}
+                      <SelectItem key={category.label} value={category.value}>
+                        {category.value === "all"
+                          ? "All Categories"
+                          : category.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -470,9 +519,11 @@ export function ProjectsPage() {
             setEditingProject(null);
           }
         }}
-        project={editingProject}
+        editProject={editingProject}
         onSubmit={editingProject ? handleEditProject : handleCreateProject}
-        isLoading={isPendingCreateProject}
+        isLoading={
+          editingProject ? isPendingEditProject : isPendingCreateProject
+        }
       />
 
       {/* Delete Confirmation Dialog */}

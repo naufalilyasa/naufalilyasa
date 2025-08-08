@@ -22,7 +22,7 @@ export const projectFormSchema = baseProjectSchema.extend({
     time: z.number(),
     blocks: z.array(
       z.object({
-        id: z.string(),
+        id: z.string().optional(),
         type: z.string(),
         data: z.record(z.string(), z.unknown()),
       })
@@ -45,3 +45,4 @@ export const projectFormSchema = baseProjectSchema.extend({
 });
 
 export type CreateProjectFormDTO = z.infer<typeof projectFormSchema>;
+export type EditProjectFormDTO = z.infer<typeof projectFormSchema>;

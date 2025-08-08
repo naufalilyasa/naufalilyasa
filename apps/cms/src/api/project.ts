@@ -1,16 +1,31 @@
 import { isAxiosError } from "axios";
 import api from "../lib/axios";
 import { GenericResponseType, Project } from "@repo/types/project";
-import { CreateProjectFormDTO } from "@repo/zod-schemas";
+import { CreateProjectFormDTO, EditProjectFormDTO } from "@repo/zod-schemas";
 
 export const getAllProjectsFn = async () => {
   try {
-    const response = await api.get<{
-      data: Project[];
-      message: string;
-      status: string;
-      statusCode: number;
-    }>("/projects");
+    const response = await api.get<
+      {
+        data: Project[];
+      } & GenericResponseType
+    >("/projects");
+    return response.data.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      throw error;
+    }
+    throw error;
+  }
+};
+
+export const getProjectByIdFn = async (projectId: string) => {
+  try {
+    const response = await api.get<
+      {
+        data: Project;
+      } & GenericResponseType
+    >(`/projects/${projectId}`);
     return response.data.data;
   } catch (error) {
     if (isAxiosError(error)) {
@@ -41,7 +56,7 @@ export const editProjectFn = async ({
   data,
 }: {
   projectId?: string;
-  data: CreateProjectFormDTO;
+  data: EditProjectFormDTO;
 }) => {
   try {
     const response = await api.put<GenericResponseType>(

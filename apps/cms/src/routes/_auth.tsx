@@ -14,10 +14,12 @@ import {
 } from "@repo/ui/components/breadcrumb";
 import { Separator } from "@repo/ui/components/separator";
 import { AppSidebar } from "../components/dashboard/AppSidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { meFn } from "../api/auth";
+import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "../store/auth";
 
 export const Route = createFileRoute("/_auth")({
   loader: async ({ location }) => {
@@ -55,11 +57,20 @@ export type PageType =
   | "profile"
   | "experience"
   | "analytics"
-  | "contact"
-  | "settings";
+  | "contact";
 
 function PortfolioDashboardLayout() {
   const [currentPage, setCurrentPage] = useState<PageType>("dashboard");
+  const { data: dataMe, isLoading } = useQuery({
+    queryKey: ["me"],
+    queryFn: meFn,
+  });
+  const { setAuthUser } = useAuth();
+
+  useEffect(() => {
+    if (isLoading || !dataMe) return;
+    setAuthUser(dataMe?.data);
+  }, [isLoading, dataMe, setAuthUser]);
 
   const getPageTitle = () => {
     switch (currentPage) {
@@ -73,8 +84,6 @@ function PortfolioDashboardLayout() {
         return "Experience";
       case "analytics":
         return "Analytics";
-      case "settings":
-        return "Settings";
       case "dashboard":
       default:
         return "Dashboard";

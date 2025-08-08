@@ -63,29 +63,24 @@ const menuItems: MenuItemsType[] = [
     icon: FolderOpen,
   },
   {
+    title: "profile",
+    url: "/profile",
+    icon: User,
+  },
+  {
     title: "experience",
-    url: "#",
+    url: "/experience",
     icon: Briefcase,
   },
   {
     title: "analytics",
-    url: "#",
+    url: "/analytics",
     icon: BarChart3,
   },
   {
-    title: "profile",
-    url: "#",
-    icon: User,
-  },
-  {
     title: "contact",
-    url: "#",
+    url: "/contact",
     icon: Mail,
-  },
-  {
-    title: "settings",
-    url: "#",
-    icon: Settings,
   },
 ];
 
@@ -96,7 +91,7 @@ interface AppSidebarProps {
 
 export function AppSidebar({ onNavigate, currentPage }: AppSidebarProps) {
   const navigate = useNavigate();
-  const { clearAuthUser } = useAuth();
+  const { clearAuthUser, authUser } = useAuth();
 
   const { isPending, mutateAsync } = useLogout();
 
@@ -106,6 +101,11 @@ export function AppSidebar({ onNavigate, currentPage }: AppSidebarProps) {
     clearAuthUser();
     navigate({ to: "/login" });
   };
+
+  // if (!authUser) {
+  //   navigate({ to: "/login" });
+  //   return <p>Redirecting...</p>;
+  // }
 
   return (
     <Sidebar>
@@ -119,7 +119,7 @@ export function AppSidebar({ onNavigate, currentPage }: AppSidebarProps) {
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold">John Doe</span>
+            <span className="text-sm font-semibold">{authUser?.name}</span>
             <span className="text-xs text-muted-foreground">
               Full Stack Developer
             </span>

@@ -27,7 +27,7 @@ export const authLimiter = rateLimit({
 
 // Strict rate limiting for auth endpoints
 export const projectLimiter = rateLimit({
-  limit: 5, // limit each IP to 5 auth request per windowMs,
+  limit: 100,
   message: {
     message: "Too many request attempts, please try again later",
     status: "error",
