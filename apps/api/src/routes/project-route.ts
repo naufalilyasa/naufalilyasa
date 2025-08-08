@@ -18,14 +18,17 @@ router.use(deserializeUser, requireUser);
 
 router.get("/", getAllProjectsHandler);
 router.get("/:projectId", getProjectByIdHandler);
+
 router.post(
   "/",
-  // projectLimiter,
+  projectLimiter,
   upload.single("thumbnail"),
   handleMulterError,
   createProjectHandler,
 );
+
 router.put("/:projectId", projectLimiter, upload.single("thumbnail"), editProjectHandler);
+
 router.delete("/:projectId", deleteProjectHandler);
 
-export { router };
+export { router as projectRoute };

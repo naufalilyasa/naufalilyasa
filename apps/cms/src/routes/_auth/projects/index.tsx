@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -24,144 +24,269 @@ import {
   TabsTrigger,
 } from "@repo/ui/components/tabs";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@repo/ui/components/dropdown-menu";
+import { toast } from "sonner";
+import {
   ExternalLink,
   Github,
   Search,
   Filter,
   Calendar,
   Star,
+  Plus,
+  MoreHorizontal,
+  Edit,
+  Trash2,
+  Eye,
 } from "lucide-react";
+import ProjectForm from "../../../components/dashboard/projects/ProjectForm";
+import DeleteProjectDialog from "../../../components/dashboard/projects/DeleteProjectDialog";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Project } from "@repo/types/project";
+import {
+  createProjectFn,
+  deleteProjectFn,
+  editProjectFn,
+  getAllProjectsFn,
+} from "../../../api/project";
+import { CreateProjectFormDTO } from "@repo/zod-schemas";
+import { format } from "date-fns";
 
 export const Route = createFileRoute("/_auth/projects/")({
   component: ProjectsPage,
 });
 
-const allProjects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "Full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, inventory management, and admin dashboard.",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "Redis", "AWS"],
-    category: "Full Stack",
-    status: "Completed",
-    date: "2024-12-15",
-    stars: 45,
-    githubUrl: "#",
-    liveUrl: "#",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Task Management App",
-    description:
-      "Collaborative task management tool with real-time updates using Socket.io. Includes team collaboration, file sharing, and project tracking features.",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["Next.js", "Socket.io", "MongoDB", "Tailwind CSS"],
-    category: "Frontend",
-    status: "In Progress",
-    date: "2024-01-10",
-    stars: 32,
-    githubUrl: "#",
-    liveUrl: "#",
-    featured: false,
-  },
-  {
-    id: 3,
-    title: "Weather Dashboard",
-    description:
-      "Beautiful weather dashboard with data visualization and forecasting. Includes interactive maps, charts, and weather alerts.",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["Vue.js", "Chart.js", "OpenWeather API", "Mapbox"],
-    category: "Frontend",
-    status: "Completed",
-    date: "2024-11-20",
-    stars: 28,
-    githubUrl: "#",
-    liveUrl: "#",
-    featured: true,
-  },
-  {
-    id: 4,
-    title: "API Gateway Service",
-    description:
-      "Microservices API gateway with authentication, rate limiting, and monitoring. Built with Node.js and Docker for scalability.",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["Node.js", "Express", "Docker", "Redis", "JWT"],
-    category: "Backend",
-    status: "Completed",
-    date: "2024-10-05",
-    stars: 67,
-    githubUrl: "#",
-    liveUrl: "#",
-    featured: false,
-  },
-  {
-    id: 5,
-    title: "Mobile Banking App",
-    description:
-      "React Native mobile banking application with biometric authentication, transaction history, and budget tracking features.",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["React Native", "Firebase", "Expo", "TypeScript"],
-    category: "Mobile",
-    status: "In Progress",
-    date: "2024-09-12",
-    stars: 23,
-    githubUrl: "#",
-    liveUrl: "#",
-    featured: true,
-  },
-  {
-    id: 6,
-    title: "Data Analytics Platform",
-    description:
-      "Business intelligence platform with interactive dashboards, data visualization, and automated reporting capabilities.",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["Python", "Django", "PostgreSQL", "D3.js", "Celery"],
-    category: "Full Stack",
-    status: "Completed",
-    date: "2024-08-30",
-    stars: 89,
-    githubUrl: "#",
-    liveUrl: "#",
-    featured: true,
-  },
-];
+enum CategoryProject {
+  FULLSTACK = "FULLSTACK",
+  FRONTEND = "FRONTEND",
+  BACKEND = "BACKEND",
+  MOBILE = "MOBILE",
+  DESKTOP = "DESKTOP",
+  AIML = "AIML",
+  DEVOPS = "DEVOPS",
+}
 
-function ProjectsPage() {
+export function ProjectsPage() {
+  const {
+    data,
+    isLoading: isLoadingProjects,
+    isError: isErrorProjects,
+    error: errorProjects,
+  } = useQuery({ queryKey: ["getAllProjects"], queryFn: getAllProjectsFn });
+
+  const [projects, setProjects] = useState<Project[] | undefined>(data);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [showProjectForm, setShowProjectForm] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [deletingProject, setDeletingProject] = useState<Project | null>(null);
+  const [categories, setCategories] = useState<
+    { value: string; label: string }[]
+  >([]);
 
-  const categories = ["all", "Full Stack", "Frontend", "Backend", "Mobile"];
+  const queryClient = useQueryClient();
+
   const statuses = ["all", "Completed", "In Progress"];
 
-  const filteredProjects = allProjects.filter((project) => {
+  useEffect(() => {
+    if (!data) return setProjects(undefined);
+    setProjects(data);
+    function formatCategoryName(category: string): string {
+      if (category === "AIML") return "AI/ML";
+      return category.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+
+    setCategories([
+      { label: "All", value: "all" },
+      ...Object.values(CategoryProject).map((value) => ({
+        value,
+        label: formatCategoryName(value),
+      })),
+    ]);
+  }, [data]);
+
+  const filteredProjects = projects?.filter((project) => {
     const matchesSearch =
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.technologies.some((tech) =>
-        tech.toLowerCase().includes(searchTerm.toLowerCase())
+        tech.technology.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     const matchesCategory =
       selectedCategory === "all" || project.category === selectedCategory;
-    const matchesStatus =
-      selectedStatus === "all" || project.status === selectedStatus;
-
-    return matchesSearch && matchesCategory && matchesStatus;
+    return matchesSearch && matchesCategory;
   });
 
-  const featuredProjects = allProjects.filter((project) => project.featured);
+  const featuredProjects = projects?.filter((project) => project.featured);
 
-  const ProjectCard = ({ project }: { project: (typeof allProjects)[0] }) => (
+  const {
+    mutateAsync: mutateCreateProject,
+    isPending: isPendingCreateProject,
+  } = useMutation({
+    mutationKey: ["createProject"],
+    mutationFn: createProjectFn,
+    onMutate: () => {
+      toast.loading("Loading...", { id: "create-project" });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getAllProjects"] });
+      toast.success("Successfully create project", { id: "create-project" });
+    },
+    onError: () => {
+      toast.error("Failed create project", { id: "create-project" });
+    },
+  });
+
+  const { mutateAsync: mutateEditProject, isPending: isPendingEditProject } =
+    useMutation({
+      mutationKey: ["editProject"],
+      mutationFn: editProjectFn,
+      onMutate: () => {
+        toast.loading("Loading...", { id: "edit-project" });
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["getAllProjects"] });
+        toast.success("Successfully edit project", { id: "edit-project" });
+      },
+      onError: () => {
+        toast.error("Failed edit project", { id: "edit-project" });
+      },
+    });
+
+  const {
+    mutateAsync: mutateDeleteProject,
+    isPending: isPendingDeleteProject,
+  } = useMutation({
+    mutationKey: ["deleteProject"],
+    mutationFn: deleteProjectFn,
+    onMutate: () => {
+      toast.loading("Loading...", { id: "delete-project" });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getAllProjects"] });
+      toast.success("Successfully delete project", { id: "delete-project" });
+    },
+    onError: () => {
+      toast.error("Failed delete project", { id: "delete-project" });
+    },
+  });
+
+  const handleCreateProject = async (payload: {
+    projectId?: string;
+    data: CreateProjectFormDTO;
+  }) => {
+    mutateCreateProject(payload.data);
+    setShowProjectForm(false);
+  };
+
+  const handleEditProject = async (payload: {
+    projectId?: string;
+    data: CreateProjectFormDTO;
+  }) => {
+    if (!editingProject) return;
+    mutateEditProject({ ...payload });
+    setEditingProject(null);
+    setShowProjectForm(false);
+  };
+
+  const handleDeleteProject = async (projectId: string) => {
+    if (!deletingProject) return;
+    mutateDeleteProject(projectId);
+    setShowDeleteDialog(false);
+  };
+
+  const handleToggleFeatured = async (project: Project) => {
+    try {
+      mutateEditProject({
+        projectId: project.id,
+        data: {
+          ...project,
+          technologies:
+            project?.technologies.map((tech) => tech.technology.id) ?? [],
+          projectDetail: {
+            time: Date.now(),
+            blocks: [
+              {
+                type: "paragraph",
+                data: {
+                  text: "This is a project description",
+                },
+              },
+            ],
+            version: "2.29.0",
+          },
+          featured: !project?.featured,
+          startDate: project?.startDate
+            ? new Date(project?.startDate)
+            : new Date(),
+          endDate: project?.endDate ? new Date(project.endDate) : undefined,
+          thumbnail: undefined,
+        },
+      });
+      toast.success(
+        `Project ${project.featured ? "added to" : "removed from"} featured!`
+      );
+    } catch (error) {
+      toast.error("Failed to update project status.");
+    }
+  };
+
+  const ProjectCard = ({ project }: { project: Project }) => (
     <Card className="group hover:shadow-lg transition-all duration-300">
-      <div className="aspect-video overflow-hidden rounded-t-lg">
+      <div className="aspect-video overflow-hidden rounded-t-lg relative">
         <img
-          src={project.image || "/placeholder.svg"}
+          src={project?.thumbnail?.url || "/placeholder.png"}
           alt={project.title}
           className="h-full w-full object-cover transition-transform group-hover:scale-105"
         />
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" size="sm" className="h-8 w-8 p-0">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <Link to={`/projects/detail/$id`} params={{ id: project.id }}>
+                <DropdownMenuItem>
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Details
+                </DropdownMenuItem>
+              </Link>
+              <DropdownMenuItem
+                onClick={() => {
+                  setEditingProject(project);
+                  setShowProjectForm(true);
+                }}
+              >
+                <Edit className="mr-2 h-4 w-4" />
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleToggleFeatured(project)}>
+                <Star
+                  className={`mr-2 h-4 w-4 ${project.featured ? "fill-current" : ""}`}
+                />
+                {project.featured ? "Remove from Featured" : "Add to Featured"}
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  setDeletingProject(project);
+                  setShowDeleteDialog(true);
+                }}
+                className="text-red-600"
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <CardHeader>
         <div className="flex items-start justify-between">
@@ -169,16 +294,34 @@ function ProjectsPage() {
             <CardTitle className="text-lg">{project.title}</CardTitle>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
-              {new Date(project.date).toLocaleDateString()}
-              <Star className="h-4 w-4" />
-              {project.stars}
+              {project.startDate
+                ? "Start " +
+                  format(new Date(project.startDate), "d") +
+                  "/" +
+                  format(new Date(project.startDate), "M") +
+                  "/" +
+                  format(new Date(project?.startDate), "yyyy")
+                : ""}
+              {project.endDate
+                ? "End " +
+                  format(new Date(project.endDate), "d") +
+                  "/" +
+                  format(new Date(project.endDate), "M") +
+                  "/" +
+                  format(new Date(project?.endDate), "yyyy")
+                : " - present"}
+              {project.featured && (
+                <Badge variant="default" className="text-xs">
+                  Featured
+                </Badge>
+              )}
             </div>
           </div>
-          <Badge
+          {/* <Badge
             variant={project.status === "Completed" ? "default" : "secondary"}
           >
             {project.status}
-          </Badge>
+          </Badge> */}
         </div>
       </CardHeader>
       <CardContent>
@@ -187,53 +330,80 @@ function ProjectsPage() {
         </CardDescription>
         <div className="flex flex-wrap gap-1 mb-4">
           {project.technologies.map((tech) => (
-            <Badge key={tech} variant="outline" className="text-xs">
-              {tech}
+            <Badge
+              key={tech.technology.id}
+              variant="outline"
+              className="text-xs"
+            >
+              <img src={tech.technology.iconUrl} alt="" className="size-5" />
+              {tech.technology.name}
             </Badge>
           ))}
         </div>
         <div className="flex items-center justify-between">
-          <Badge variant="secondary">{project.category}</Badge>
+          <Badge variant="secondary">
+            {categories.map((category) => {
+              if (category.value === project.category) {
+                return category.label;
+              }
+            })}
+          </Badge>
           <div className="flex gap-2">
-            <Button size="sm" variant="outline" asChild>
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="h-4 w-4 mr-1" />
-                Code
-              </a>
-            </Button>
-            <Button size="sm" asChild>
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink className="h-4 w-4 mr-1" />
-                Live
-              </a>
-            </Button>
+            {project.githubUrl && (
+              <Button size="sm" variant="outline" asChild>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="h-4 w-4 mr-1" />
+                  Code
+                </a>
+              </Button>
+            )}
+            {project.liveUrl && (
+              <Button size="sm" asChild>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  Live
+                </a>
+              </Button>
+            )}
           </div>
         </div>
       </CardContent>
     </Card>
   );
 
+  if (isLoadingProjects) return <p>Loading...</p>;
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Projects</h1>
-        <p className="text-muted-foreground">
-          Explore my portfolio of projects and applications
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Projects</h1>
+          <p className="text-muted-foreground">
+            Manage your portfolio projects
+          </p>
+        </div>
+        <Button onClick={() => setShowProjectForm(true)}>
+          <Plus className="h-4 w-4 mr-2" />
+          New Project
+        </Button>
       </div>
 
       <Tabs defaultValue="all" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="all">All Projects</TabsTrigger>
-          <TabsTrigger value="featured">Featured</TabsTrigger>
+          <TabsTrigger value="all">
+            All Projects ({projects?.length})
+          </TabsTrigger>
+          <TabsTrigger value="featured">
+            Featured ({featuredProjects?.length})
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="all" className="space-y-6">
@@ -265,8 +435,10 @@ function ProjectsPage() {
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((category) => (
-                      <SelectItem key={category} value={category}>
-                        {category === "all" ? "All Categories" : category}
+                      <SelectItem key={category.label} value={category.value}>
+                        {category.value === "all"
+                          ? "All Categories"
+                          : category.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -292,21 +464,25 @@ function ProjectsPage() {
 
           {/* Projects Grid */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filteredProjects.map((project) => (
+            {filteredProjects?.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
 
-          {filteredProjects.length === 0 && (
+          {filteredProjects?.length === 0 && (
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <Search className="h-12 w-12 text-muted-foreground mb-4" />
                 <h3 className="text-lg font-semibold mb-2">
                   No projects found
                 </h3>
-                <p className="text-muted-foreground text-center">
+                <p className="text-muted-foreground text-center mb-4">
                   Try adjusting your search terms or filters
                 </p>
+                <Button onClick={() => setShowProjectForm(true)}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Create Your First Project
+                </Button>
               </CardContent>
             </Card>
           )}
@@ -314,12 +490,50 @@ function ProjectsPage() {
 
         <TabsContent value="featured" className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
+            {featuredProjects?.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
+
+          {featuredProjects?.length === 0 && (
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center py-12">
+                <Star className="h-12 w-12 text-muted-foreground mb-4" />
+                <h3 className="text-lg font-semibold mb-2">
+                  No featured projects
+                </h3>
+                <p className="text-muted-foreground text-center">
+                  Mark your best projects as featured to showcase them here
+                </p>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
       </Tabs>
+      {/* Project Form Dialog */}
+      <ProjectForm
+        open={showProjectForm}
+        onOpenChange={(open) => {
+          setShowProjectForm(open);
+          if (!open) {
+            setEditingProject(null);
+          }
+        }}
+        editProject={editingProject}
+        onSubmit={editingProject ? handleEditProject : handleCreateProject}
+        isLoading={
+          editingProject ? isPendingEditProject : isPendingCreateProject
+        }
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <DeleteProjectDialog
+        open={showDeleteDialog}
+        onOpenChange={setShowDeleteDialog}
+        project={deletingProject}
+        onConfirm={handleDeleteProject}
+        isLoading={isPendingDeleteProject}
+      />
     </div>
   );
 }

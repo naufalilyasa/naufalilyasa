@@ -34,7 +34,6 @@ function RegisterForm({ className, ...props }: React.ComponentProps<"div">) {
   });
 
   const { mutateAsync, data, isPending, isSuccess, error } = useRegister();
-  console.log(error);
 
   const navigate = useNavigate();
 

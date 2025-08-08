@@ -18,4 +18,4 @@ router.post("/logout", deserializeUser, requireUser, logoutHandler);
 router.get("/refresh", refreshHandler);
 router.get("/me", deserializeUser, requireUser, getMeHandler);
 
-export { router };
+export { router as authRoute };

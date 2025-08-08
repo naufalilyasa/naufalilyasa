@@ -10,6 +10,14 @@
     "./auth": {
       "import": "./dist/auth-type.js",
       "types": "./dist/auth-type.d.ts"
+    },
+    "./project": {
+      "import": "./dist/project-type.js",
+      "types": "./dist/project-type.d.ts"
+    },
+    "./upload": {
+      "import": "./dist/upload-type.js",
+      "types": "./dist/upload-type.d.ts"
     }
   },
   "keywords": [],
@@ -17,7 +25,10 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@editorjs/editorjs": "^2.30.8"
   }
 }
