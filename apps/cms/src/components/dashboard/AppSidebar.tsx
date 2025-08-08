@@ -3,7 +3,6 @@ import {
   User,
   Briefcase,
   Mail,
-  Settings,
   BarChart3,
   FolderOpen,
   AlertTriangle,
