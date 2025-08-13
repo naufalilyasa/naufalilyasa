@@ -11,8 +11,8 @@ import { Prisma } from "generated/prisma/index.js";
 import { ZodError } from "zod";
 
 import { findUniqueUser, loginUser, registerUser } from "~/services/auth-service.js";
-import { AppError } from "~/utils/appError.js";
-import redisClient from "~/utils/connectRedis.js";
+import { AppError } from "~/utils/app-error.js";
+import redisClient from "~/utils/connect-redis.js";
 import { signJwt, verifyJwt } from "~/utils/jwt.js";
 
 const isProduction = config.nodeEnv !== "development";

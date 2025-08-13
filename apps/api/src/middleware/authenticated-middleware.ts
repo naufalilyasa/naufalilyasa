@@ -4,8 +4,8 @@ import { LoginResponseSchema } from "@repo/zod-schemas";
 import config from "config/config.js";
 
 import { findUniqueUser } from "~/services/auth-service.js";
-import { AppError } from "~/utils/appError.js";
-import redisClient from "~/utils/connectRedis.js";
+import { AppError } from "~/utils/app-error.js";
+import redisClient from "~/utils/connect-redis.js";
 import { verifyJwt } from "~/utils/jwt.js";
 
 const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {

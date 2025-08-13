@@ -5,7 +5,7 @@ import { ZodError } from "zod";
 import { deserializeUser, requireUser } from "~/middleware/authenticated-middleware.js";
 import { upload } from "~/middleware/multer.js";
 import { uploadSingleImage } from "~/services/upload-services.js";
-import { AppError } from "~/utils/appError.js";
+import { AppError } from "~/utils/app-error.js";
 
 const router: Router = Router();
 

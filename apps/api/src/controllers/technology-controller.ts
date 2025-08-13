@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { prisma } from "~/prisma/prisma.js";
-import { AppError } from "~/utils/appError.js";
+import { AppError } from "~/utils/app-error.js";
 
 export const getAllTechnologiesHandler = async (
   req: Request,

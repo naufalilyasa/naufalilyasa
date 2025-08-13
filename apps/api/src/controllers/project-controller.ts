@@ -16,8 +16,8 @@ import {
   updateProject,
 } from "~/services/project-service.js";
 import { uploadSingleImage } from "~/services/upload-services.js";
-import { AppError } from "~/utils/appError.js";
-import { deleteSingleImage } from "~/utils/deleteImage.js";
+import { AppError } from "~/utils/app-error.js";
+import { deleteSingleImage } from "~/utils/delete-image.js";
 
 export const getAllProjectsHandler = async (
   req: Request,

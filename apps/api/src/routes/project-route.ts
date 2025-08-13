@@ -10,7 +10,7 @@ import {
 import { deserializeUser, requireUser } from "~/middleware/authenticated-middleware.js";
 import { upload } from "~/middleware/multer.js";
 import { projectLimiter } from "~/middleware/rate-limit-middleware.js";
-import { handleMulterError } from "~/utils/multerError.js";
+import { handleMulterError } from "~/utils/multer-error.js";
 
 const router: Router = Router();
 
