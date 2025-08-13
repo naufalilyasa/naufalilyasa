@@ -8,6 +8,7 @@ import {
   getProjectByIdHandler,
 } from "~/controllers/project-controller.js";
 import { deserializeUser, requireUser } from "~/middleware/authenticated-middleware.js";
+import { authorizeRole } from "~/middleware/authorize-role-middleware.js";
 import { upload } from "~/middleware/multer.js";
 import { projectLimiter } from "~/middleware/rate-limit-middleware.js";
 import { handleMulterError } from "~/utils/multer-error.js";
@@ -22,13 +23,20 @@ router.get("/:projectId", getProjectByIdHandler);
 router.post(
   "/",
   projectLimiter,
+  authorizeRole("ADMIN"),
   upload.single("thumbnail"),
   handleMulterError,
   createProjectHandler,
 );
 
-router.put("/:projectId", projectLimiter, upload.single("thumbnail"), editProjectHandler);
+router.put(
+  "/:projectId",
+  projectLimiter,
+  authorizeRole("ADMIN"),
+  upload.single("thumbnail"),
+  editProjectHandler,
+);
 
-router.delete("/:projectId", deleteProjectHandler);
+router.delete("/:projectId", authorizeRole("ADMIN"), deleteProjectHandler);
 
 export { router as projectRoute };

@@ -1,3 +1,4 @@
+import type { UserType } from "@repo/types/auth";
 import type {
   LoginResponseDTO,
   LoginUserDTO,
@@ -5,7 +6,7 @@ import type {
 
 import bcrypt from "bcrypt";
 import config from "config/config.js";
-import { Prisma } from "generated/prisma/index.js";
+import { Prisma, Role } from "generated/prisma/index.js";
 import { omit } from "lodash-es";
 import { z } from "zod/v4";
 
@@ -94,11 +95,9 @@ export const registerUser = async (payload: Prisma.UserCreateInput) => {
   return { result };
 };
 
-export const signTokens = async (payload: {
-  id: string;
-  password: string;
-  username: string;
-}): Promise<{ accessToken: string; refreshToken: string }> => {
+export const signTokens = async (
+  payload: UserType & { role: Role },
+): Promise<{ accessToken: string; refreshToken: string }> => {
   // Create session
   await redisClient.set(payload.id, JSON.stringify(omit(payload, ["password"])), {
     expiration: { type: "EX", value: config.redisCacheExpiresIn * 60 },

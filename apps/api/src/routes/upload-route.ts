@@ -3,6 +3,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import { ZodError } from "zod";
 
 import { deserializeUser, requireUser } from "~/middleware/authenticated-middleware.js";
+import { authorizeRole } from "~/middleware/authorize-role-middleware.js";
 import { upload } from "~/middleware/multer.js";
 import { uploadSingleImage } from "~/services/upload-services.js";
 import { AppError } from "~/utils/app-error.js";
@@ -14,6 +15,7 @@ router.post(
   upload.single("file"),
   deserializeUser,
   requireUser,
+  authorizeRole("ADMIN"),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const user = res.locals.user as null | {

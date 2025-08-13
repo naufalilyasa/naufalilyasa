@@ -7,6 +7,7 @@ import { findUniqueUser } from "~/services/auth-service.js";
 import { AppError } from "~/utils/app-error.js";
 import redisClient from "~/utils/connect-redis.js";
 import { verifyJwt } from "~/utils/jwt.js";
+import { Role } from "generated/prisma/index.js";
 
 const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -45,6 +46,7 @@ const deserializeUser = async (req: Request, res: Response, next: NextFunction) 
       name: string;
       updatedAt: Date;
       username: string;
+      role: Role;
     } = await findUniqueUser(sessionParse, { password: true });
 
     if (!user) {
@@ -68,6 +70,7 @@ const requireUser = (req: Request, res: Response, next: NextFunction) => {
       name: string;
       updatedAt: Date;
       username: string;
+      role: Role;
     };
 
     if (!user) {
