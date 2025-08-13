@@ -15,7 +15,7 @@
   --color-brown: oklch(0.5141 0.0219 51.69);
   --color-ruby: oklch(0.6395 0.1942 31.54);
   --font-inter: "Inter", ui-sans-serif, sans-serif;
-  --font-noto: "Noto Serif JP", serif;
+  --font-noto: "Noto Serif", serif;
   --font-overpass: "Overpass Mono", monospace;
   --font-ibm: "IBM Plex Mono", monospace;
 }

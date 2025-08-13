@@ -8,8 +8,8 @@ import { errorHandler } from "./middleware/error-middleware.js";
 import { generalLimit } from "./middleware/rate-limit-middleware.js";
 import { authRoute } from "./routes/auth-route.js";
 import { projectRoute } from "./routes/project-route.js";
-import { technologiesRoute } from "./routes/technology-route.js";
-import { uploadRouter } from "./routes/upload-route.js";
+import { publicRoute } from "./routes/public-route.js";
+import { uploadRoute } from "./routes/upload-route.js";
 
 const app: Application = express();
 
@@ -29,8 +29,8 @@ app.get("/ping", (req: Request, res: Response) => {
 // Route
 app.use("/api/auth", authRoute);
 app.use("/api/projects", projectRoute);
-app.use("/api/technologies", technologiesRoute);
-app.use("/api/upload", uploadRouter);
+app.use("/api/public", publicRoute);
+app.use("/api/upload", uploadRoute);
 
 // Global error
 app.use(errorHandler);

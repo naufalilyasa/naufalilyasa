@@ -68,7 +68,7 @@ const menuItems: MenuItemsType[] = [
   },
   {
     title: "experience",
-    url: "/experience",
+    url: "/experiences",
     icon: Briefcase,
   },
   {
