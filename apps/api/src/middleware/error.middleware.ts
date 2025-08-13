@@ -3,7 +3,7 @@ import type { NextFunction, Request, Response } from "express";
 
 import config from "config/config.js";
 
-import { AppError } from "~/utils/app-error.js";
+import { AppError } from "~/utils/appError.js";
 
 export const errorHandler = (
   err: AppError | Error,

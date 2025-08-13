@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getAllTechnologiesHandler } from "~/controllers/technology-controller.js";
+import { getAllTechnologiesHandler } from "~/controllers/technology.controller.js";
 
 const router: Router = Router();
 
