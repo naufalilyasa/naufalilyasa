@@ -8,16 +8,22 @@ import {
   updateProfileHandler,
 } from "~/controllers/profile.controller.js";
 import { deserializeUser, requireUser } from "~/middleware/authenticated.middleware.js";
+import { authorizeRole } from "~/middleware/authorizeRole.middleware.js";
 import { upload } from "~/middleware/multer.middleware.js";
 
 const router: Router = Router();
 
 router.use(deserializeUser, requireUser);
 
-router.get("/", getAllProfilesHandler);
-router.get("/:userId", getProfileByIdHandler);
-router.post("/", upload.single("photo"), createProfileHandler);
-router.patch("/:userId", updateProfileHandler);
-router.delete("/:userId", deleteProfileHandler);
+router.get("/", authorizeRole("ADMIN"), getAllProfilesHandler);
+router.get("/:userId", authorizeRole("ADMIN", "USER"), getProfileByIdHandler);
+router.post("/", authorizeRole("ADMIN"), createProfileHandler);
+router.patch(
+  "/:userId",
+  authorizeRole("ADMIN"),
+  upload.single("photo"),
+  updateProfileHandler,
+);
+router.delete("/:userId", authorizeRole("ADMIN"), deleteProfileHandler);
 
 export { router as ProfileRoute };

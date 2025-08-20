@@ -6,23 +6,10 @@ export const paramsProfileSchema = z.object({
   userId: z.uuid(),
 });
 
-const trimStr = z.string().trim();
-
 export const baseProfileSchema = z
   .object({
-    name: trimStr.min(1, "Name is required"),
-    username: trimStr
-      .min(3, "Username must be at least 3 characters")
-      .max(30, "Username must be at most 30 characters")
-      .regex(/^[a-z0-9._-]+$/i, "Only letters, numbers, ., _, - are allowed"),
-    password: z
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .max(72, "Password must be at most 72 characters"),
-    role: RoleEnum.default("USER").optional(),
-
     // Optional fields
-    email: z.string().email("Invalid email format").optional(),
+    email: z.email("Invalid email format").optional(),
     phoneNumber: z
       .string()
       .regex(

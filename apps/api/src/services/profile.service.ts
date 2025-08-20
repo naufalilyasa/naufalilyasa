@@ -1,3 +1,4 @@
+import { ProfileRequestDTO } from "@repo/zod-schemas/backend/profile-schema";
 import { Role } from "generated/prisma/index.js";
 
 import { prisma } from "~/prisma/prisma.js";
@@ -61,4 +62,15 @@ export const getProfileById = async (
   });
 
   return profiles;
+};
+
+export const updateProfile = async (payload: ProfileRequestDTO, userId: string) => {
+  const result = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: payload,
+  });
+
+  return result;
 };
