@@ -14,6 +14,10 @@
       "import": "./dist/shared/project-schema.js",
       "types": "./dist/shared/project-schema.d.ts"
     },
+    "./shared/profile-schema": {
+      "import": "./dist/shared/profile-schema.js",
+      "types": "./dist/shared/profile-schema.d.ts"
+    },
     "./frontend/project-schema": {
       "import": "./dist/frontend/project-schema.js",
       "types": "./dist/frontend/project-schema.d.ts"
