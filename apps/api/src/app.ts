@@ -32,7 +32,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/projects", projectRoute);
 app.use("/api/technologies", technologiesRoute);
 app.use("/api/upload", uploadRoute);
-app.use("/api/profiles:", ProfileRoute);
+app.use("/api/profiles", ProfileRoute);
 
 // Global error
 app.use(errorHandler);

@@ -1,4 +1,4 @@
-import { UploadApiResponse, UploadStream } from "cloudinary";
+import { UploadApiResponse } from "cloudinary";
 import { Readable } from "stream";
 
 import cloudinary from "~/utils/cloudinary.js";

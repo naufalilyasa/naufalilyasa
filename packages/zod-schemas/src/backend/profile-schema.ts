@@ -1,4 +1,4 @@
-import { baseProfileSchema } from "src/shared/profile-schema.js";
+import { baseProfileSchema } from "../shared/profile-schema.js";
 
 import { z } from "zod";
 

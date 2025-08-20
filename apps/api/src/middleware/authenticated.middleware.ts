@@ -2,12 +2,12 @@ import type { NextFunction, Request, Response } from "express";
 
 import { LoginResponseSchema } from "@repo/zod-schemas";
 import config from "config/config.js";
+import { Role } from "generated/prisma/index.js";
 
 import { findUniqueUser } from "~/services/auth.service.js";
 import { AppError } from "~/utils/appError.js";
 import redisClient from "~/utils/connectRedis.js";
 import { verifyJwt } from "~/utils/jwt.js";
-import { Role } from "generated/prisma/index.js";
 
 const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
   try {

@@ -1,4 +1,4 @@
-import { ProfileRequestDTO } from "@repo/zod-schemas/backend/profile-schema";
+import { ProfileRequestDTO } from "@repo/zod-schemas";
 import { Role } from "generated/prisma/index.js";
 
 import { prisma } from "~/prisma/prisma.js";

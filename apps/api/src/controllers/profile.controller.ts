@@ -1,12 +1,10 @@
-import { registerUserSchema } from "@repo/zod-schemas";
-import {
-  ProfileRequestDTO,
-  profileRequestSchema,
-} from "@repo/zod-schemas/backend/profile-schema";
 import {
   baseProfileSchema,
   paramsProfileSchema,
-} from "@repo/zod-schemas/shared/profile-schema";
+  ProfileRequestDTO,
+  profileRequestSchema,
+  registerUserSchema,
+} from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
 import { Prisma, Role } from "generated/prisma/index.js";
 import { ZodError } from "zod";
