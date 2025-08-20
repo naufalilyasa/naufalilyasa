@@ -211,14 +211,16 @@ export function ProjectsPage() {
             project?.technologies.map((tech) => tech.technology.id) ?? [],
           projectDetail: {
             time: Date.now(),
-            blocks: [
-              {
-                type: "paragraph",
-                data: {
-                  text: "This is a project description",
-                },
-              },
-            ],
+            blocks: project.projectDetail[0].content.blocks
+              ? project.projectDetail[0].content.blocks
+              : [
+                  {
+                    type: "paragraph",
+                    data: {
+                      text: "This is a project description",
+                    },
+                  },
+                ],
             version: "2.29.0",
           },
           featured: !project?.featured,
@@ -303,7 +305,7 @@ export function ProjectsPage() {
                   format(new Date(project?.startDate), "yyyy")
                 : ""}
               {project.endDate
-                ? "End " +
+                ? " - End " +
                   format(new Date(project.endDate), "d") +
                   "/" +
                   format(new Date(project.endDate), "M") +

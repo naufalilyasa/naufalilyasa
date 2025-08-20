@@ -6,7 +6,7 @@ export const getAllTechnologiesFn = async () => {
   try {
     const response = await api.get<
       GenericResponseType & { data: Technologies[] }
-    >("/technologies");
+    >("/public/technologies");
 
     return response.data;
   } catch (error) {

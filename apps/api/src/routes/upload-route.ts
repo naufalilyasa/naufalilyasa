@@ -65,4 +65,4 @@ router.post(
   },
 );
 
-export { router as uploadRouter };
+export { router as uploadRoute };

@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
@@ -13,16 +12,18 @@ import {
   Server,
   Wrench,
   Database,
+  File,
+  Eye,
+  Calendar,
 } from "lucide-react";
-import { Noto_Serif_JP } from "next/font/google";
+import { fetchProjects } from "@/lib/projectService";
+import { format } from "date-fns";
+import { fetchTechnologies } from "@/lib/technologiesService";
 
-export const notoSerifJP = Noto_Serif_JP({
-  subsets: ["latin"],
-  style: "normal",
-  weight: "400",
-});
+export default async function Portfolio() {
+  const allProjects = await fetchProjects();
+  const allTechnologies = await fetchTechnologies();
 
-export default function Portfolio() {
   const techStack = {
     frontend: [
       { name: "React", icon: "⚛️" },
@@ -51,61 +52,40 @@ export default function Portfolio() {
       { name: "SQL", icon: "🗃️" },
     ],
   };
-
-  const projects = [
-    {
-      title: "CVku Project",
-      description:
-        "A web-based CV builder that allows users to create professional resumes easily with real-time preview and PDF generation.",
-      tech: ["React", "TypeScript", "Tailwind CSS", "ShadCN UI", "React-PDF"],
-      demo: "https://cvku-fe.vercel.app",
-      github: "https://github.com/naufalilyasa/cvku-fe",
-      logo: "📄",
-    },
-    {
-      title: "Circle App",
-      description:
-        "X (formerly Twitter) clone with full-stack implementation featuring authentication, posts, and social interactions.",
-      tech: ["React", "Express.js", "TypeScript", "Prisma", "PostgreSQL"],
-      demo: "https://circle-app-sage-delta.vercel.app",
-      github: "https://github.com/naufalilyasa/circle-app",
-      logo: "🐦",
-    },
+  const allBlogPosts = [
+    "Understanding React's useEffect Hook",
+    "Building RESTful APIs with Express.js",
+    "A Beginner's Guide to TypeScript",
+    "Deploying Node.js Applications on Heroku",
+    "Optimizing Performance in React Applications",
   ];
 
-  const blogPosts = [
-    "Building Modern Web Applications with React and TypeScript",
-    "Full-Stack Development: From Frontend to Backend",
-    "Database Design Best Practices with PostgreSQL",
-    "Deploying Applications with Docker and Vercel",
-    "Understanding Modern CSS with Tailwind",
-    "API Development with Express.js and Prisma",
-  ];
+  const featuredProjects = allProjects
+    .filter((project) => project.featured)
+    .slice(0, 2);
+  const latestBlogPosts = allBlogPosts.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-beige">
       {/* Header */}
-      <header className="bg-beige">
+      <header className="bg-beige mt-5">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-gray-900">
+          <h1 className="text-base font-medium md:text-lg lg:text-xl 2xl:text-2xl">
             Achmad Naufal Ilyasa
           </h1>
-          <nav className="flex space-x-6">
-            <Link href="#about" className="text-gray-600 hover:text-gray-900">
+          <nav className="flex space-x-6 text-xl">
+            <Link href="#about" className="hover:text-ruby hover:underline">
               About
             </Link>
-            <Link
-              href="#projects"
-              className="text-gray-600 hover:text-gray-900"
-            >
+            <Link href="/projects" className="hover:text-ruby hover:underline">
               Projects
             </Link>
-            <Link href="#blog" className="text-gray-600 hover:text-gray-900">
+            <Link href="/blog" className="hover:text-ruby hover:underline">
               Blog
             </Link>
             <Link
               href="mailto:naufal.ilyasa7@gmail.com"
-              className="text-orange-500 hover:text-orange-600"
+              className="text-ruby hover:underline"
             >
               naufal.ilyasa7@gmail.com
             </Link>
@@ -117,7 +97,7 @@ export default function Portfolio() {
       <section id="about" className="max-w-6xl mx-auto px-4 py-16">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           <div className="lg:w-1/3">
-            <div className="relative w-64 h-80 mx-auto lg:mx-0">
+            <div className="relative w-94 h-110 mx-auto lg:mx-0">
               <Image
                 src="/photo.jpg"
                 alt="Achmad Naufal Ilyasa"
@@ -126,20 +106,19 @@ export default function Portfolio() {
               />
             </div>
           </div>
-          <div className="lg:w-2/3">
-            <h2
-              className={`text-4xl font-bold text-gray-900 mb-6 ${notoSerifJP}`}
-            >
-              {"I'm Naufal, a full-stack web developer from Indonesia."}
+          <div className="mt-20 lg:w-2/3">
+            <h2 className={`text-4xl font-light mb-6 leading-tight font-noto`}>
+              I&apos;m Naufal, a full-stack web developer.
             </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Informatics fresh graduate with entrepreneurial experience and
-              expertise in modern web development. I specialize in building
-              full-stack applications using React, TypeScript, Express.js, and
-              PostgreSQL. Passionate about creating efficient, scalable
-              solutions and continuously learning new technologies.
+            <p className="text-lg mb-8 leading-relaxed">
+              Full Stack Web Developer with a strong foundation in building
+              scalable web applications and REST APIs. Skilled in Express.js,
+              TypeScript, PostgreSQL, React, Tailwind CSS, and modern tooling
+              for cloud deployment and CI/CD. Passionate about delivering clean,
+              efficient, and maintainable solutions across both frontend and
+              backend development.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 text-white">
               <Button variant="outline" size="sm" asChild>
                 <Link href="https://github.com/naufalilyasa" target="_blank">
                   <Github className="w-4 h-4 mr-2" />
@@ -161,91 +140,140 @@ export default function Portfolio() {
                   Email
                 </Link>
               </Button>
+              <Button variant="outline" size="sm" asChild>
+                <Link
+                  href="https://drive.google.com/file/d/1W77M9c5HOfwUD4q3BCk_PcXex6lEnU8K/view?usp=sharing"
+                  target="_blank"
+                >
+                  <File className="w-4 h-4 mr-2" />
+                  Resume
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
       <section id="projects" className="bg-beige py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8">
+        <div className="max-w-6xl mx-auto px-4 border-b-1">
+          <h3 className="text-4xl font-medium leading-tight font-noto mb-8">
             Featured Projects
           </h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
+          <div className="grid md:grid-cols-3 gap-8">
+            {featuredProjects.map((project) => (
               <Card
-                key={index}
-                className="hover:shadow-lg transition-shadow bg-dark-olive"
+                key={project.id}
+                className="group hover:shadow-lg transition-all duration-300 bg-gray-100 border-0 border-gray-200"
               >
+                {project.thumbnail && (
+                  <div className="aspect-video overflow-hidden rounded-t-lg relative">
+                    <Image
+                      src={project.thumbnail.url || "/placeholder.svg"}
+                      alt={`${project.title} thumbnail`}
+                      fill
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105 duration-500 ease-in-out"
+                    />
+                  </div>
+                )}
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="text-3xl">{project.logo}</div>
-                    <h4 className="text-xl font-semibold text-white">
+                    {/* <div className="text-3xl">
+                      {project.category === "FULLSTACK" && "Fullstack"}
+                      {project.category === "FRONTEND" && "Frontend"}
+                      {project.category === "BACKEND" && "Backend"}
+                      {project.category === "MOBILE" && "Mobile"}
+                      {project.category === "DESKTOP" && "Desktop"}
+                      {project.category === "AIML" && "AI/ML"}
+                      {project.category === "DEVOPS" && "DevOps"}
+                    </div> */}
+
+                    <h4 className="text-xl font-semibold text-gray-900">
                       {project.title}
                     </h4>
                   </div>
-                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                    <Calendar className="h-4 w-4" />
+                    {project.startDate
+                      ? "Start " +
+                        format(new Date(project.startDate), "d") +
+                        "/" +
+                        format(new Date(project.startDate), "M") +
+                        "/" +
+                        format(new Date(project?.startDate), "yyyy")
+                      : ""}
+                    {project.endDate
+                      ? " - End " +
+                        format(new Date(project.endDate), "d") +
+                        "/" +
+                        format(new Date(project.endDate), "M") +
+                        "/" +
+                        format(new Date(project?.endDate), "yyyy")
+                      : " - present"}
+                  </div>
+                  <p className="text-gray-900 mb-4">
+                    {project.description.substring(0, 150)}...
+                  </p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, techIndex) => (
-                      <Badge
-                        key={techIndex}
-                        variant="secondary"
-                        className="text-xs bg-gold"
+                    {project.technologies.map((tech) => (
+                      <div
+                        key={tech.id}
+                        className="flex items-center gap-1 bg-gray-100 rounded-full px-2 py-1"
                       >
-                        {tech}
-                      </Badge>
+                        {tech.technology.iconUrl && (
+                          <Image
+                            src={tech.technology.iconUrl || "/placeholder.svg"}
+                            alt={tech.technology.name}
+                            width={16}
+                            height={16}
+                            className="rounded"
+                          />
+                        )}
+                        <span className="text-xs font-medium text-black">
+                          {tech.technology.name}
+                        </span>
+                      </div>
                     ))}
                   </div>
                   <div className="flex space-x-3">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="bg-taupe"
-                      asChild
-                    >
-                      <Link href={project.demo} target="_blank">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Demo
+                    <Button variant="outline" size="sm" asChild>
+                      <Link href={`/projects/${project.id}`}>
+                        <Eye />
+                        View Details
                       </Link>
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="bg-taupe"
-                      asChild
-                    >
-                      <Link href={project.github} target="_blank">
-                        <Github className="w-4 h-4 mr-2" />
-                        Code
-                      </Link>
-                    </Button>
+                    {project.liveUrl && (
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={project.liveUrl} target="_blank">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Demo
+                        </Link>
+                      </Button>
+                    )}
+                    {project.githubUrl && (
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={project.githubUrl} target="_blank">
+                          <Github className="w-4 h-4 mr-2" />
+                          Code
+                        </Link>
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Button
-              variant="outline"
-              className="bg-taupe hover:bg-dark-olive cursor-pointer"
-              asChild
-            >
-              <Link
-                href="https://tinyurl.com/portofolio-a-naufal-ilyasa-7"
-                target="_blank"
-              >
-                See All Projects
-              </Link>
-            </Button>
+          <div className="font-overpass text-ruby hover:underline text-center my-8">
+            <Link href="/projects">See All Projects</Link>
           </div>
         </div>
       </section>
 
       {/* Tech Stack */}
       <section id="tech-stack" className="bg-beige py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8">Tech Stack</h3>
+        <div className="max-w-6xl mx-auto px-4 border-b-1">
+          <h3 className="text-4xl font-medium leading-tight font-noto mb-8">
+            Tech Stack
+          </h3>
 
           <div className="space-y-4">
             {/* Frontend */}
@@ -309,7 +337,7 @@ export default function Portfolio() {
             </div>
 
             {/* Database */}
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 mb-8">
               <span className="w-[100px] font-semibold flex items-center gap-1 text-gray-900">
                 <Database className="size-6 text-purple-600" />
                 <div className="flex justify-between w-full text-md">
@@ -333,13 +361,13 @@ export default function Portfolio() {
 
       {/* Latest Posts */}
       <section id="blog" className="bg-beige py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8">
+        <div className="max-w-6xl mx-auto px-4 border-b-1">
+          <h3 className="text-4xl font-medium leading-tight font-noto mb-8">
             Latest Posts
           </h3>
           <div className="space-y-4">
-            {blogPosts.map((post, index) => (
-              <div key={index} className="border-b border-gray-200 pb-4">
+            {latestBlogPosts.map((post, index) => (
+              <div key={index} className="border-b border-black pb-4">
                 <Link
                   href="#"
                   className="text-lg text-gray-700 hover:text-gray-900 transition-colors hover:underline hover:underline-offset-1"
@@ -349,13 +377,8 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Button
-              variant="outline"
-              className="bg-taupe hover:bg-dark-olive cursor-pointer"
-            >
-              See All Posts
-            </Button>
+          <div className="font-overpass text-ruby hover:underline text-center my-8">
+            <Link href="/blog">See All Posts</Link>
           </div>
         </div>
       </section>
