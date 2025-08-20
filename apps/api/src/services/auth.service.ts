@@ -11,8 +11,8 @@ import { omit } from "lodash-es";
 import { z } from "zod/v4";
 
 import { prisma } from "~/prisma/prisma.js";
-import { AppError } from "~/utils/app-error.js";
-import redisClient from "~/utils/connect-redis.js";
+import { AppError } from "~/utils/appError.js";
+import redisClient from "~/utils/connectRedis.js";
 import { signJwt } from "~/utils/jwt.js";
 
 export const loginUser = async (

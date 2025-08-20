@@ -6,12 +6,12 @@ import {
   editProjectHandler,
   getAllProjectsHandler,
   getProjectByIdHandler,
-} from "~/controllers/project-controller.js";
-import { deserializeUser, requireUser } from "~/middleware/authenticated-middleware.js";
-import { authorizeRole } from "~/middleware/authorize-role-middleware.js";
-import { upload } from "~/middleware/multer.js";
-import { projectLimiter } from "~/middleware/rate-limit-middleware.js";
-import { handleMulterError } from "~/utils/multer-error.js";
+} from "~/controllers/project.controller.js";
+import { deserializeUser, requireUser } from "~/middleware/authenticated.middleware.js";
+import { authorizeRole } from "~/middleware/authorizeRole.middleware.js";
+import { upload } from "~/middleware/multer.middleware.js";
+import { projectLimiter } from "~/middleware/rateLimit.middleware.js";
+import { handleMulterError } from "~/utils/multerError.js";
 
 const router: Router = Router();
 

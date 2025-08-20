@@ -6,9 +6,9 @@ import {
   logoutHandler,
   refreshHandler,
   registerHandler,
-} from "~/controllers/auth-controller.js";
-import { deserializeUser, requireUser } from "~/middleware/authenticated-middleware.js";
-import { authLimiter } from "~/middleware/rate-limit-middleware.js";
+} from "~/controllers/auth.controller.js";
+import { deserializeUser, requireUser } from "~/middleware/authenticated.middleware.js";
+import { authLimiter } from "~/middleware/rateLimit.middleware.js";
 
 const router: Router = Router();
 

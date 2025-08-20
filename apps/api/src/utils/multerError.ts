@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { MulterError } from "multer";
 
-import { AppError } from "./app-error.js";
+import { AppError } from "./appError.js";
 
 // Error handling middleware untuk multer errors
 export const handleMulterError = (

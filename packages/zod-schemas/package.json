@@ -14,13 +14,25 @@
       "import": "./dist/shared/project-schema.js",
       "types": "./dist/shared/project-schema.d.ts"
     },
+    "./shared/profile-schema": {
+      "import": "./dist/shared/profile-schema.js",
+      "types": "./dist/shared/profile-schema.d.ts"
+    },
     "./frontend/project-schema": {
       "import": "./dist/frontend/project-schema.js",
       "types": "./dist/frontend/project-schema.d.ts"
     },
+    "./frontend/profile-schema": {
+      "import": "./dist/frontend/profile-schema.js",
+      "types": "./dist/frontend/profile-schema.d.ts"
+    },
     "./backend/project-schema": {
       "import": "./dist/backend/project-schema.js",
       "types": "./dist/backend/project-schema.d.ts"
+    },
+    "./backend/profile-schema": {
+      "import": "./dist/backend/profile-schema.js",
+      "types": "./dist/backend/profile-schema.d.ts"
     }
   },
   "types": "./dist/index.d.ts",

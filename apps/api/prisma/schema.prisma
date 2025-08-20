@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -15,42 +9,131 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String
-  username  String    @unique
-  password  String
-  role      Role      @default(USER)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  projects  Project[]
+  id               String           @id @default(uuid())
+  name             String
+  username         String           @unique
+  password         String
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  role             Role             @default(USER)
+  description      String?
+  email            String?          @unique
+  github           String?
+  linkedin         String?
+  phoneNumber      String?
+  photoId          String?
+  photoUrl         String?
+  website          String?
+  projects         Project[]
+  userTechnologies UserTechnology[]
+}
+
+model UserTechnology {
+  id           String @id @default(cuid())
+  userId       String
+  technologyId String
+
+  technology Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, technologyId])
+}
+
+model Project {
+  id            String              @id @default(cuid())
+  userId        String
+  description   String
+  startDate     DateTime
+  endDate       DateTime?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  category      CategoryProject
+  featured      Boolean             @default(false)
+  githubUrl     String?
+  liveUrl       String?
+  title         String
+  user          User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectDetail ProjectDetail[]
+  technologies  ProjectTechnology[]
+  thumbnail     ProjectThumbnail?
+}
+
+model ProjectThumbnail {
+  id        String   @id @default(cuid())
+  projectId String   @unique
+  url       String
+  publicId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectTechnology {
+  id           String     @id @default(cuid())
+  projectId    String
+  technologyId String
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id])
+
+  @@unique([projectId, technologyId])
+}
+
+model Technology {
+  id       String       @id @default(cuid())
+  name     String       @unique
+  iconUrl  String
+  category TechCategory
+
+  projects ProjectTechnology[]
+  users    UserTechnology[]
+}
+
+model ProjectDetail {
+  id        String   @id @default(cuid())
+  projectId String
+  content   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+enum TechCategory {
+  COMMUNICATION
+  VERSION_CONTROL
+  TOOLS
+  WEB_DEV
+  UI_UX
+  JAVASCRIPT
+  JAVA
+  C_CPP
+  C_SHARP
+  LUA
+  PYTHON
+  PHP
+  RUBY
+  ZIG
+  RUST
+  FORTRAN
+  GO
+  ERLANG_ELIXIR
+  APACHE
+  MOBILE_DEV
+  DATABASE
+  DEVOPS
+  CLOUD
+  AI
+  ANALYTICS
+  TESTING
+  GAME_DEVELOPMENT
+  OPERATING_SYSTEM
+  MICROCONTROLLER
+  MQTT_TECHNOLOGIES
+  BLOCKCHAIN
 }
 
 enum Role {
   ADMIN
   USER
-}
-
-model Project {
-  id     String @id @default(cuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  title       String
-  description String
-  startDate   DateTime
-  endDate     DateTime?
-  githubUrl   String?
-  liveUrl     String?
-  thumbnail   ProjectThumbnail?
-  featured    Boolean           @default(false)
-
-  category     CategoryProject
-  technologies ProjectTechnology[]
-
-  projectDetail ProjectDetail[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 enum CategoryProject {
@@ -61,44 +144,4 @@ enum CategoryProject {
   DESKTOP
   AIML
   DEVOPS
-}
-
-model ProjectThumbnail {
-  id        String  @id @default(cuid())
-  projectId String  @unique
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  url      String
-  publicId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ProjectTechnology {
-  id           String     @id @default(cuid())
-  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId    String
-  technology   Technology @relation(fields: [technologyId], references: [id])
-  technologyId String
-
-  @@unique([projectId, technologyId])
-}
-
-model Technology {
-  id       String              @id @default(cuid())
-  name     String              @unique
-  iconUrl  String
-  projects ProjectTechnology[]
-}
-
-model ProjectDetail {
-  id        String @id @default(cuid())
-  projectId String
-  content   Json
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
