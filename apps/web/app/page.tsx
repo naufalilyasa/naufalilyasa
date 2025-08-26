@@ -2,63 +2,59 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
 import { Card, CardContent } from "@repo/ui/components/card";
-import { Badge } from "@repo/ui/components/badge";
 import {
   Github,
   Linkedin,
   Mail,
   ExternalLink,
-  Code2,
-  Server,
-  Wrench,
-  Database,
   File,
   Eye,
   Calendar,
 } from "lucide-react";
 import { fetchProjects } from "@/lib/projectService";
 import { format } from "date-fns";
-import { fetchTechnologies } from "@/lib/technologiesService";
+import { fetchUser } from "@/lib/userService";
+import React from "react";
+import { CategoryProject } from "@repo/types/project";
+import { Badge } from "@repo/ui/components/badge";
 
 export default async function Portfolio() {
   const allProjects = await fetchProjects();
-  const allTechnologies = await fetchTechnologies();
+  const user = await fetchUser();
 
-  const techStack = {
-    frontend: [
-      { name: "React", icon: "⚛️" },
-      { name: "TypeScript", icon: "🔷" },
-      { name: "Tailwind CSS", icon: "🎨" },
-      { name: "HTML", icon: "🌐" },
-      { name: "CSS", icon: "💅" },
-      { name: "ShadCN UI", icon: "🎯" },
-    ],
-    backend: [
-      { name: "Express.js", icon: "🚀" },
-      { name: "Node.js", icon: "💚" },
-      { name: "JavaScript", icon: "📜" },
-      { name: "Prisma", icon: "🔺" },
-      { name: "Sequelize", icon: "🔄" },
-    ],
-    tools: [
-      { name: "Git", icon: "📝" },
-      { name: "Docker", icon: "🐳" },
-      { name: "Postman", icon: "📮" },
-      { name: "VS Code", icon: "💻" },
-      { name: "Vercel", icon: "▲" },
-    ],
-    database: [
-      { name: "PostgreSQL", icon: "🐘" },
-      { name: "SQL", icon: "🗃️" },
-    ],
-  };
-  const allBlogPosts = [
-    "Understanding React's useEffect Hook",
-    "Building RESTful APIs with Express.js",
-    "A Beginner's Guide to TypeScript",
-    "Deploying Node.js Applications on Heroku",
-    "Optimizing Performance in React Applications",
+  const grouped = user?.userTechnologies.reduce(
+    (acc, item) => {
+      const category = item.technology.category;
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(item.technology);
+      return acc;
+    },
+    {} as Record<string, (typeof user.userTechnologies)[number]["technology"][]>
+  );
+
+  function formatCategoryName(category: string): string {
+    if (category === "AIML") return "AI/ML";
+    return category.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+
+  const categories = [
+    { label: "All", value: "all" },
+    ...Object.values(CategoryProject).map((value) => ({
+      value,
+      label: formatCategoryName(value),
+    })),
   ];
+
+  // const allBlogPosts = [
+  //   "Understanding React's useEffect Hook",
+  //   "Building RESTful APIs with Express.js",
+  //   "A Beginner's Guide to TypeScript",
+  //   "Deploying Node.js Applications on Heroku",
+  //   "Optimizing Performance in React Applications",
+  // ];
+  const allBlogPosts: string[] = [];
 
   const featuredProjects = allProjects
     .filter((project) => project.featured)
@@ -74,13 +70,13 @@ export default async function Portfolio() {
             Achmad Naufal Ilyasa
           </h1>
           <nav className="flex space-x-6 text-xl">
-            <Link href="#about" className="hover:text-ruby hover:underline">
+            <Link href="/" className="hover:text-ruby hover:underline">
               About
             </Link>
             <Link href="/projects" className="hover:text-ruby hover:underline">
               Projects
             </Link>
-            <Link href="/blog" className="hover:text-ruby hover:underline">
+            <Link href="#blog" className="hover:text-ruby hover:underline">
               Blog
             </Link>
             <Link
@@ -177,19 +173,16 @@ export default async function Portfolio() {
                 )}
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    {/* <div className="text-3xl">
-                      {project.category === "FULLSTACK" && "Fullstack"}
-                      {project.category === "FRONTEND" && "Frontend"}
-                      {project.category === "BACKEND" && "Backend"}
-                      {project.category === "MOBILE" && "Mobile"}
-                      {project.category === "DESKTOP" && "Desktop"}
-                      {project.category === "AIML" && "AI/ML"}
-                      {project.category === "DEVOPS" && "DevOps"}
-                    </div> */}
-
                     <h4 className="text-xl font-semibold text-gray-900">
                       {project.title}
                     </h4>
+                    <Badge variant="secondary">
+                      {categories.map((category) => {
+                        if (category.value === project.category) {
+                          return category.label;
+                        }
+                      })}
+                    </Badge>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                     <Calendar className="h-4 w-4" />
@@ -275,86 +268,29 @@ export default async function Portfolio() {
             Tech Stack
           </h3>
 
-          <div className="space-y-4">
-            {/* Frontend */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="w-[100px] font-semibold flex items-center gap-1 text-gray-900">
-                <Code2 className="size-6 text-blue-600" />
-                <div className="flex justify-between w-full text-md">
-                  <span>Frontend</span>
-                  <span>:</span>
+          <div className="grid grid-cols-[150px_15px_1fr] gap-y-2 text-sm text-gray-900 mb-8">
+            {Object.entries(grouped!).map(([category, techs]) => (
+              <React.Fragment key={category}>
+                <div className="font-medium text-lg">
+                  {category
+                    .replace(/_/g, " ")
+                    .toLowerCase()
+                    .replace(/\b\w/g, (c) => c.toUpperCase())}
                 </div>
-              </span>
-              {techStack.frontend.map((tech, index) => (
-                <span
-                  key={index}
-                  className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded-md shadow-sm text-gray-700 text-sm"
-                >
-                  <span>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </span>
-              ))}
-            </div>
-
-            {/* Backend */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="w-[100px] font-semibold flex items-center gap-1 text-gray-900">
-                <Server className="size-6 text-green-600" />
-                <div className="flex justify-between w-full text-md">
-                  <span>Backend</span>
-                  <span>:</span>
+                <div className="text-right mr-2 font-medium text-lg">: </div>
+                <div className="flex flex-wrap gap-2">
+                  {techs.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="flex items-center gap-1 px-1 py-1 text-gray-700 text-sm"
+                    >
+                      <Image src={tech.iconUrl} alt="" width={23} height={23} />
+                      <span>{tech.name}</span>
+                    </span>
+                  ))}
                 </div>
-              </span>
-              {techStack.backend.map((tech, index) => (
-                <span
-                  key={index}
-                  className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded-md shadow-sm text-gray-700 text-sm"
-                >
-                  <span>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </span>
-              ))}
-            </div>
-
-            {/* Tools */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="w-[100px] font-semibold flex items-center gap-1 text-gray-900">
-                <Wrench className="size-6 text-orange-600" />
-                <div className="flex justify-between w-full text-md">
-                  <span>Tools</span>
-                  <span>:</span>
-                </div>
-              </span>
-              {techStack.tools.map((tech, index) => (
-                <span
-                  key={index}
-                  className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded-md shadow-sm text-gray-700 text-sm"
-                >
-                  <span>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </span>
-              ))}
-            </div>
-
-            {/* Database */}
-            <div className="flex flex-wrap items-center gap-2 mb-8">
-              <span className="w-[100px] font-semibold flex items-center gap-1 text-gray-900">
-                <Database className="size-6 text-purple-600" />
-                <div className="flex justify-between w-full text-md">
-                  <span>Database</span>
-                  <span>:</span>
-                </div>
-              </span>
-              {techStack.database.map((tech, index) => (
-                <span
-                  key={index}
-                  className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded-md shadow-sm text-gray-700 text-sm"
-                >
-                  <span>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </span>
-              ))}
-            </div>
+              </React.Fragment>
+            ))}
           </div>
         </div>
       </section>
@@ -366,20 +302,32 @@ export default async function Portfolio() {
             Latest Posts
           </h3>
           <div className="space-y-4">
-            {latestBlogPosts.map((post, index) => (
-              <div key={index} className="border-b border-black pb-4">
-                <Link
-                  href="#"
-                  className="text-lg text-gray-700 hover:text-gray-900 transition-colors hover:underline hover:underline-offset-1"
-                >
-                  {post}
-                </Link>
+            {latestBlogPosts.length > 0 ? (
+              latestBlogPosts.map((post, index) => (
+                <div key={index} className="border-b border-black pb-4">
+                  <Link
+                    href="#"
+                    className="text-lg text-gray-700 hover:text-gray-900 transition-colors hover:underline hover:underline-offset-1"
+                  >
+                    {post}
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div className="pb-4">
+                <p className="text-lg text-gray-700 hover:text-gray-900 transition-colors">
+                  No posts available.
+                </p>
               </div>
-            ))}
+            )}
           </div>
-          <div className="font-overpass text-ruby hover:underline text-center my-8">
-            <Link href="/blog">See All Posts</Link>
-          </div>
+          {latestBlogPosts.length > 0 ? (
+            <div className="font-overpass text-ruby hover:underline text-center my-8">
+              <Link href="/blog">See All Posts</Link>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </section>
 

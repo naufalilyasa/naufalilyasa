@@ -1,5 +1,5 @@
 import { ProfileRequestDTO } from "@repo/zod-schemas";
-import { Role } from "generated/prisma/index.js";
+import { $Enums, Role } from "generated/prisma/index.js";
 
 import { prisma } from "~/prisma/prisma.js";
 
@@ -32,31 +32,21 @@ export const getAllProfiles = async (): Promise<
   return profiles;
 };
 
-export const getProfileById = async (
-  userId: string,
-): Promise<{
-  id: string;
-  username: string;
-  name: string;
-  role: Role;
-  updatedAt: Date;
-  createdAt: Date;
-}> => {
+export const getProfileById = async (userId: string) => {
   const profiles = await prisma.user.findFirstOrThrow({
-    select: {
-      id: true,
-      username: true,
-      name: true,
-      role: true,
-      updatedAt: true,
-      createdAt: true,
-    },
     where: {
-      role: {
-        not: "ADMIN", // Exclude admin profiles
-      },
-      AND: {
-        id: userId,
+      id: userId,
+    },
+    omit: {
+      id: true,
+      password: true,
+      photoId: true,
+    },
+    include: {
+      userTechnologies: {
+        select: {
+          technology: true,
+        },
       },
     },
   });
@@ -65,11 +55,25 @@ export const getProfileById = async (
 };
 
 export const updateProfile = async (payload: ProfileRequestDTO, userId: string) => {
+  const { technologies, ...rest } = payload;
   const result = await prisma.user.update({
     where: {
       id: userId,
     },
-    data: payload,
+    data: {
+      ...rest,
+      userTechnologies: technologies
+        ? {
+            deleteMany: {},
+            create: technologies.map((techId) => ({
+              technologyId: techId,
+            })),
+          }
+        : undefined,
+    },
+    include: {
+      userTechnologies: { include: { technology: true } },
+    },
   });
 
   return result;

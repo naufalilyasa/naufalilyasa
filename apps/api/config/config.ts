@@ -16,6 +16,7 @@ const env = cleanEnv(process.env, {
   NODE_ENV: str(),
   PORT: num(),
   REDIS_URL: url(),
+  USER_ID: str(),
 });
 
 export default {
@@ -35,4 +36,5 @@ export default {
   refreshTokenExpiresIn: 1440,
   refreshTokenPrivateKey: env.JWT_REFRESH_TOKEN_PRIVATE_KEY,
   refreshTokenPublicKey: env.JWT_REFRESH_TOKEN_PUBLIC_KEY,
+  userId: env.USER_ID,
 };

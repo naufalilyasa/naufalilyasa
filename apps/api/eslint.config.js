@@ -24,6 +24,7 @@ export default tseslint.config(
       // Disable sort-objects rule
       "perfectionist/sort-objects": "off",
       "perfectionist/sort-object-types": "off"
+      "perfectionist/sort-union-types": "off",
     },
   },
 );

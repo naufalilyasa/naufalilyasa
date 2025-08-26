@@ -130,9 +130,17 @@ function ProjectForm({
       githubUrl: project?.githubUrl ?? "",
       liveUrl: project?.liveUrl ?? "",
       technologies: project?.technologies.map((tech) => tech.id) ?? [],
-      projectDetail: project?.projectDetail[0].content ?? {
+      projectDetail: {
         time: Date.now(),
-        blocks: [],
+        blocks: [
+          {
+            id: "1",
+            type: "paragraph",
+            data: {
+              text: "This is a project description",
+            },
+          },
+        ],
         version: "2.29.0",
       },
       featured: project?.featured ?? false,
@@ -210,7 +218,15 @@ function ProjectForm({
         technologies: project.technologies.map((tech) => tech.id),
         projectDetail: {
           time: project.projectDetail[0]?.content?.time ?? Date.now(),
-          blocks: project.projectDetail[0]?.content?.blocks ?? [],
+          blocks: project.projectDetail[0]?.content?.blocks ?? [
+            {
+              id: "1",
+              type: "paragraph",
+              data: {
+                text: "This is a project description",
+              },
+            },
+          ],
           version: project.projectDetail[0]?.content?.version ?? "2.29.0",
         },
         featured: project.featured,
@@ -228,7 +244,15 @@ function ProjectForm({
         technologies: [],
         projectDetail: {
           time: Date.now(),
-          blocks: [],
+          blocks: [
+            {
+              id: "1",
+              type: "paragraph",
+              data: {
+                text: "This is a project description",
+              },
+            },
+          ],
           version: "2.29.0",
         },
         featured: false,
@@ -626,7 +650,7 @@ function ProjectForm({
 
                 <div className="flex flex-wrap gap-2 min-h-[60px] p-3 border rounded-md bg-muted/20">
                   {selectedTechnologies!.length > 0 ? (
-                    selectedTechnologies?.map((tech, index) => (
+                    selectedTechnologies?.map((tech) => (
                       <Badge
                         key={tech.id}
                         variant="secondary"

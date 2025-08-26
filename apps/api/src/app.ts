@@ -9,7 +9,7 @@ import { generalLimit } from "./middleware/rateLimit.middleware.js";
 import { authRoute } from "./routes/auth.route.js";
 import { ProfileRoute } from "./routes/profile.route.js";
 import { projectRoute } from "./routes/project.route.js";
-import { technologiesRoute } from "./routes/technology.route.js";
+import { publicRoute } from "./routes/public-route.js";
 import { uploadRoute } from "./routes/upload.route.js";
 
 const app: Application = express();
@@ -30,7 +30,7 @@ app.get("/ping", (req: Request, res: Response) => {
 // Route
 app.use("/api/auth", authRoute);
 app.use("/api/projects", projectRoute);
-app.use("/api/technologies", technologiesRoute);
+app.use("/api/public", publicRoute);
 app.use("/api/upload", uploadRoute);
 app.use("/api/profiles", ProfileRoute);
 

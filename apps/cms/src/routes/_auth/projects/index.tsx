@@ -74,8 +74,8 @@ export function ProjectsPage() {
   const {
     data,
     isLoading: isLoadingProjects,
-    isError: isErrorProjects,
-    error: errorProjects,
+    // isError: isErrorProjects,
+    // error: errorProjects,
   } = useQuery({ queryKey: ["getAllProjects"], queryFn: getAllProjectsFn });
 
   const [projects, setProjects] = useState<Project[] | undefined>(data);
@@ -215,6 +215,7 @@ export function ProjectsPage() {
               ? project.projectDetail[0].content.blocks
               : [
                   {
+                    id: "1",
                     type: "paragraph",
                     data: {
                       text: "This is a project description",
@@ -234,8 +235,9 @@ export function ProjectsPage() {
       toast.success(
         `Project ${project.featured ? "added to" : "removed from"} featured!`
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      toast.error("Failed to update project status.");
+      toast.error(`Failed to update project status`);
     }
   };
 

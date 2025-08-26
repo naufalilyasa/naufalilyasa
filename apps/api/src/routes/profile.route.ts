@@ -18,7 +18,7 @@ router.use(deserializeUser, requireUser);
 router.get("/", authorizeRole("ADMIN"), getAllProfilesHandler);
 router.get("/:userId", authorizeRole("ADMIN", "USER"), getProfileByIdHandler);
 router.post("/", authorizeRole("ADMIN"), createProfileHandler);
-router.patch(
+router.put(
   "/:userId",
   authorizeRole("ADMIN"),
   upload.single("photo"),

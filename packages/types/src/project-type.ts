@@ -70,4 +70,39 @@ export type Technologies = {
   id: string;
   name: string;
   iconUrl: string;
+  category: CategoryTech;
 };
+
+export enum CategoryTech {
+  COMMUNICATION = "COMMUNICATION",
+  VERSION_CONTROL = "VERSION_CONTROL",
+  TOOLS = "TOOLS",
+  WEB_DEV = "WEB_DEV",
+  UI_UX = "UI_UX",
+  JAVASCRIPT = "JAVASCRIPT",
+  JAVA = "JAVA",
+  C_CPP = "C_CPP",
+  C_SHARP = "C_SHARP",
+  LUA = "LUA",
+  PYTHON = "PYTHON",
+  PHP = "PHP",
+  RUBY = "RUBY",
+  ZIG = "ZIG",
+  RUST = "RUST",
+  FORTRAN = "FORTRAN",
+  GO = "GO",
+  ERLANG_ELIXIR = "ERLANG_ELIXIR",
+  APACHE = "APACHE",
+  MOBILE_DEV = "MOBILE_DEV",
+  DATABASE = "DATABASE",
+  DEVOPS = "DEVOPS",
+  CLOUD = "CLOUD",
+  AI = "AI",
+  ANALYTICS = "ANALYTICS",
+  TESTING = "TESTING",
+  GAME_DEVELOPMENT = "GAME_DEVELOPMENT",
+  OPERATING_SYSTEM = "OPERATING_SYSTEM",
+  MICROCONTROLLER = "MICROCONTROLLER",
+  MQTT_TECHNOLOGIES = "MQTT_TECHNOLOGIES",
+  BLOCKCHAIN = "BLOCKCHAIN",
+}

@@ -3,7 +3,7 @@ import rateLimit from "express-rate-limit";
 // General rate limiting
 export const generalLimit = rateLimit({
   legacyHeaders: false,
-  limit: 100, // limit each IP to 100 requests per windowMs
+  limit: 1000, // limit each IP to 100 requests per windowMs
   message: {
     message: "Too many Requests, please try again later",
     status: "error",

@@ -129,7 +129,7 @@ export const createProfileHandler = async (
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Successfully edited profile",
+      message: "Successfully created profile",
     });
   } catch (error) {
     if (error instanceof ZodError) {
@@ -182,6 +182,7 @@ export const updateProfileHandler = async (
     // Create payload
     const payload: ProfileRequestDTO = {
       ...parsedBase,
+      technologies: req.body.technologies,
       photoUrl: photo ? photo.secure_url : undefined,
       photoId: photo ? photo.public_id : undefined,
     };
