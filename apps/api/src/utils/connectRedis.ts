@@ -1,4 +1,4 @@
-import config from "config/config.js";
+import config from "#/config/config.js";
 import { createClient, RedisClientType } from "redis";
 
 const redisUrl = config.redisUrl;

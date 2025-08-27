@@ -1,4 +1,4 @@
-import config from "config/config.js";
+import config from "#/config/config.js";
 import "dotenv/config";
 import cors from "cors";
 

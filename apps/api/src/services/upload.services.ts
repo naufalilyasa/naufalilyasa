@@ -1,7 +1,7 @@
 import { UploadApiResponse } from "cloudinary";
 import { Readable } from "stream";
 
-import cloudinary from "~/utils/cloudinary.js";
+import cloudinary from "#/utils/cloudinary.js";
 
 export const uploadImages = async (
   files: Express.Multer.File[],

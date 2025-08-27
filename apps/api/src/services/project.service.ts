@@ -1,7 +1,7 @@
 import { CreateProjectBackendDTO, EditProjectBackendDTO } from "@repo/zod-schemas";
-import { Prisma } from "generated/prisma/index.js";
+import { Prisma } from "#/generated/prisma/index.js";
 
-import { prisma } from "~/prisma/prisma.js";
+import { prisma } from "#/prisma/prisma.js";
 
 export const getAllProjects = async (userId: string) => {
   return await prisma.project.findMany({

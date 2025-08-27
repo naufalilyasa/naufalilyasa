@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Role } from "generated/prisma/index.js";
+import { Role } from "#/generated/prisma/index.js";
 
 export function authorizeRole(...allowedRoles: Role[]) {
   return (req: Request, res: Response, next: NextFunction) => {

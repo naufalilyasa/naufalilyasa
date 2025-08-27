@@ -5,7 +5,7 @@ import {
   getAllTechnologiesHandler,
   getPublicProjectByIdHandler,
   getPublicUserProfile,
-} from "~/controllers/public-controller.js";
+} from "#/controllers/public-controller.js";
 
 const router: Router = Router();
 

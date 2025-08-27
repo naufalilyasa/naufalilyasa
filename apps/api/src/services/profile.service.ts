@@ -1,7 +1,7 @@
 import { ProfileRequestDTO } from "@repo/zod-schemas";
-import { $Enums, Role } from "generated/prisma/index.js";
+import { $Enums, Role } from "#/generated/prisma/index.js";
 
-import { prisma } from "~/prisma/prisma.js";
+import { prisma } from "#/prisma/prisma.js";
 
 export const getAllProfiles = async (): Promise<
   {

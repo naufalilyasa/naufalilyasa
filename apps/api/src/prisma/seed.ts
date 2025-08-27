@@ -1,4 +1,4 @@
-import { PrismaClient, TechCategory } from "../../generated/prisma/index.js";
+import { PrismaClient, TechCategory } from "../generated/prisma/index.js";
 import { technologiesWithCategory } from "./transformTechData.js";
 const prisma = new PrismaClient();
 

@@ -6,19 +6,19 @@ import {
   registerUserSchema,
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
-import { Prisma, Role } from "generated/prisma/index.js";
+import { Prisma, Role } from "#/generated/prisma/index.js";
 import { ZodError } from "zod";
 
-import { prisma } from "~/prisma/prisma.js";
-import { registerUser } from "~/services/auth.service.js";
+import { prisma } from "#/prisma/prisma.js";
+import { registerUser } from "#/services/auth.service.js";
 import {
   getAllProfiles,
   getProfileById,
   updateProfile,
-} from "~/services/profile.service.js";
-import { uploadSingleImage } from "~/services/upload.services.js";
-import { AppError } from "~/utils/appError.js";
-import { deleteSingleImage } from "~/utils/deleteImage.js";
+} from "#/services/profile.service.js";
+import { uploadSingleImage } from "#/services/upload.services.js";
+import { AppError } from "#/utils/appError.js";
+import { deleteSingleImage } from "#/utils/deleteImage.js";
 
 export const getAllProfilesHandler = async (
   req: Request,

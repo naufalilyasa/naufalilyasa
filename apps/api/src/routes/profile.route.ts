@@ -6,10 +6,10 @@ import {
   getAllProfilesHandler,
   getProfileByIdHandler,
   updateProfileHandler,
-} from "~/controllers/profile.controller.js";
-import { deserializeUser, requireUser } from "~/middleware/authenticated.middleware.js";
-import { authorizeRole } from "~/middleware/authorizeRole.middleware.js";
-import { upload } from "~/middleware/multer.middleware.js";
+} from "#/controllers/profile.controller.js";
+import { deserializeUser, requireUser } from "#/middleware/authenticated.middleware.js";
+import { authorizeRole } from "#/middleware/authorizeRole.middleware.js";
+import { upload } from "#/middleware/multer.middleware.js";
 
 const router: Router = Router();
 

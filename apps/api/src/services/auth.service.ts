@@ -5,15 +5,15 @@ import type {
 } from "@repo/zod-schemas/shared/auth-schema";
 
 import bcrypt from "bcrypt";
-import config from "config/config.js";
-import { Prisma, Role } from "generated/prisma/index.js";
+import config from "#/config/config.js";
+import { Prisma, Role } from "#/generated/prisma/index.js";
 import { omit } from "lodash-es";
 import { z } from "zod/v4";
 
-import { prisma } from "~/prisma/prisma.js";
-import { AppError } from "~/utils/appError.js";
-import redisClient from "~/utils/connectRedis.js";
-import { signJwt } from "~/utils/jwt.js";
+import { prisma } from "#/prisma/prisma.js";
+import { AppError } from "#/utils/appError.js";
+import redisClient from "#/utils/connectRedis.js";
+import { signJwt } from "#/utils/jwt.js";
 
 export const loginUser = async (
   payload: LoginUserDTO,

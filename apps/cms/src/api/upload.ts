@@ -19,7 +19,6 @@ export const uploadImagetoCloudinary = async (
         },
       }
     );
-    console.log(response);
 
     if (response.status !== 200) {
       throw new Error("Failed to upload image");

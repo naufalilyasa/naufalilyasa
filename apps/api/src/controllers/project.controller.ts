@@ -5,19 +5,19 @@ import {
   projectBackendSchema,
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
-import { Prisma } from "generated/prisma/index.js";
+import { Prisma } from "#/generated/prisma/index.js";
 import { ZodError } from "zod";
 
-import { prisma } from "~/prisma/prisma.js";
+import { prisma } from "#/prisma/prisma.js";
 import {
   createProject,
   getAllProjects,
   getProjectById,
   updateProject,
-} from "~/services/project.service.js";
-import { uploadSingleImage } from "~/services/upload.services.js";
-import { AppError } from "~/utils/appError.js";
-import { deleteSingleImage } from "~/utils/deleteImage.js";
+} from "#/services/project.service.js";
+import { uploadSingleImage } from "#/services/upload.services.js";
+import { AppError } from "#/utils/appError.js";
+import { deleteSingleImage } from "#/utils/deleteImage.js";
 
 export const getAllProjectsHandler = async (
   req: Request,
