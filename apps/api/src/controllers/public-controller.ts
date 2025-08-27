@@ -1,9 +1,11 @@
-import { paramsProjectSchema } from "@repo/zod-schemas";
+import { paramsProfileSchema, paramsProjectSchema } from "@repo/zod-schemas";
+import config from "#/config/config.js";
 import { NextFunction, Request, Response } from "express";
-import { Prisma } from "generated/prisma/index.js";
+import { Prisma } from "#/generated/prisma/index.js";
+import { ZodError } from "zod";
 
-import { prisma } from "~/prisma/prisma.js";
-import { AppError } from "~/utils/appError.js";
+import { prisma } from "#/prisma/prisma.js";
+import { AppError } from "#/utils/appError.js";
 
 export const getAllTechnologiesHandler = async (
   req: Request,
@@ -98,6 +100,48 @@ export const getPublicProjectByIdHandler = async (
   } catch (error) {
     if (Prisma.PrismaClientUnknownRequestError) {
       return next(new AppError(500, "Server internal error"));
+    }
+    return next(error);
+  }
+};
+
+export const getPublicUserProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const profile = await prisma.user.findFirstOrThrow({
+      where: {
+        id: config.userId,
+      },
+      omit: {
+        id: true,
+        password: true,
+        photoId: true,
+      },
+      include: {
+        userTechnologies: {
+          select: {
+            technology: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Succesfully get profile by id",
+      data: profile,
+    });
+  } catch (error) {
+    if (error instanceof ZodError) {
+      const formattedErrors = error.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      }));
+      return next(new AppError(400, "Validation failed", formattedErrors));
     }
     return next(error);
   }

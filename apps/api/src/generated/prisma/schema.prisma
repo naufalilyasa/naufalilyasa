@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String           @id @default(uuid())
+  name             String
+  username         String           @unique
+  password         String
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  role             Role             @default(USER)
+  description      String?
+  email            String?          @unique
+  github           String?
+  linkedin         String?
+  phoneNumber      String?
+  photoId          String?
+  photoUrl         String?
+  website          String?
+  projects         Project[]
+  userTechnologies UserTechnology[]
+}
+
+model UserTechnology {
+  id           String @id @default(cuid())
+  userId       String
+  technologyId String
+
+  technology Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, technologyId])
+}
+
+model Project {
+  id            String              @id @default(cuid())
+  userId        String
+  description   String
+  startDate     DateTime
+  endDate       DateTime?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  category      CategoryProject
+  featured      Boolean             @default(false)
+  githubUrl     String?
+  liveUrl       String?
+  title         String
+  user          User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectDetail ProjectDetail[]
+  technologies  ProjectTechnology[]
+  thumbnail     ProjectThumbnail?
+}
+
+model ProjectThumbnail {
+  id        String   @id @default(cuid())
+  projectId String   @unique
+  url       String
+  publicId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectTechnology {
+  id           String     @id @default(cuid())
+  projectId    String
+  technologyId String
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id])
+
+  @@unique([projectId, technologyId])
+}
+
+model Technology {
+  id       String       @id @default(cuid())
+  name     String       @unique
+  iconUrl  String
+  category TechCategory
+
+  projects ProjectTechnology[]
+  users    UserTechnology[]
+}
+
+model ProjectDetail {
+  id        String   @id @default(cuid())
+  projectId String
+  content   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+enum TechCategory {
+  COMMUNICATION
+  VERSION_CONTROL
+  TOOLS
+  WEB_DEV
+  UI_UX
+  JAVASCRIPT
+  JAVA
+  C_CPP
+  C_SHARP
+  LUA
+  PYTHON
+  PHP
+  RUBY
+  ZIG
+  RUST
+  FORTRAN
+  GO
+  ERLANG_ELIXIR
+  APACHE
+  MOBILE_DEV
+  DATABASE
+  DEVOPS
+  CLOUD
+  AI
+  ANALYTICS
+  TESTING
+  GAME_DEVELOPMENT
+  OPERATING_SYSTEM
+  MICROCONTROLLER
+  MQTT_TECHNOLOGIES
+  BLOCKCHAIN
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum CategoryProject {
+  FULLSTACK
+  FRONTEND
+  BACKEND
+  MOBILE
+  DESKTOP
+  AIML
+  DEVOPS
+}

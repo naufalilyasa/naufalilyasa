@@ -2,7 +2,10 @@
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": "."
+    "rootDir": ".",
+    "paths": {
+      "@repo/zod-schemas": ["packages/zod-schemas/src"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }

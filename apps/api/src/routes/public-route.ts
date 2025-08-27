@@ -4,7 +4,8 @@ import {
   getAllPublicProjectsHandler,
   getAllTechnologiesHandler,
   getPublicProjectByIdHandler,
-} from "~/controllers/public-controller.js";
+  getPublicUserProfile,
+} from "#/controllers/public-controller.js";
 
 const router: Router = Router();
 
@@ -14,5 +15,8 @@ router.get("/technologies", getAllTechnologiesHandler);
 // Public route to get all projects
 router.get("/projects", getAllPublicProjectsHandler);
 router.get("/projects/:projectId", getPublicProjectByIdHandler);
+
+// Public route to get user
+router.get("/user", getPublicUserProfile);
 
 export { router as publicRoute };

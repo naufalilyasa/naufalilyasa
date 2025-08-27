@@ -37,62 +37,57 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@repo/ui/components/alert-dialog";
-import { PageType } from "../../routes/_auth";
-import { useNavigate } from "@tanstack/react-router";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import useLogout from "../../hooks/useLogout";
 import { useAuth } from "../../store/auth";
 
 type MenuItemsType = {
-  title: PageType;
+  title: string;
   url: string;
   icon: React.ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
   >;
 };
 
-const menuItems: MenuItemsType[] = [
-  {
-    title: "dashboard",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "projects",
-    url: "/projects",
-    icon: FolderOpen,
-  },
-  {
-    title: "profile",
-    url: "/profile",
-    icon: User,
-  },
-  {
-    title: "experience",
-    url: "/experiences",
-    icon: Briefcase,
-  },
-  {
-    title: "analytics",
-    url: "/analytics",
-    icon: BarChart3,
-  },
-  {
-    title: "contact",
-    url: "/contact",
-    icon: Mail,
-  },
-];
-
-interface AppSidebarProps {
-  onNavigate: React.Dispatch<React.SetStateAction<PageType>>;
-  currentPage: string;
-}
-
-export function AppSidebar({ onNavigate, currentPage }: AppSidebarProps) {
+export function AppSidebar() {
   const navigate = useNavigate();
   const { clearAuthUser, authUser } = useAuth();
 
   const { isPending, mutateAsync } = useLogout();
+  const pathname = useLocation().pathname;
+
+  const menuItems: MenuItemsType[] = [
+    {
+      title: "dashboard",
+      url: "/",
+      icon: Home,
+    },
+    {
+      title: "projects",
+      url: "/projects",
+      icon: FolderOpen,
+    },
+    {
+      title: "profile",
+      url: "/profile",
+      icon: User,
+    },
+    {
+      title: "experience",
+      url: "/experiences",
+      icon: Briefcase,
+    },
+    {
+      title: "analytics",
+      url: "/analytics",
+      icon: BarChart3,
+    },
+    {
+      title: "contact",
+      url: "/contact",
+      icon: Mail,
+    },
+  ];
 
   const onLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -100,11 +95,6 @@ export function AppSidebar({ onNavigate, currentPage }: AppSidebarProps) {
     clearAuthUser();
     navigate({ to: "/login" });
   };
-
-  // if (!authUser) {
-  //   navigate({ to: "/login" });
-  //   return <p>Redirecting...</p>;
-  // }
 
   return (
     <Sidebar>
@@ -135,9 +125,8 @@ export function AppSidebar({ onNavigate, currentPage }: AppSidebarProps) {
                   <SidebarMenuButton
                     onClick={() => {
                       navigate({ to: item.url });
-                      onNavigate(item.title);
                     }}
-                    isActive={currentPage === item.title.toLowerCase()}
+                    isActive={pathname === item.url.toLowerCase()}
                   >
                     <item.icon />
                     <span>{item.title}</span>

@@ -1,6 +1,6 @@
 import jwt, { type JwtPayload, type SignOptions } from "jsonwebtoken";
 
-import { AppError } from "./app-error.js";
+import { AppError } from "./appError.js";
 
 export interface UserPayload {
   id: number;

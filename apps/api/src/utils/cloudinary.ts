@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-import config from "config/config.js";
+import config from "#/config/config.js";
 
 cloudinary.config({
   api_key: config.apiKeyCloudinary,

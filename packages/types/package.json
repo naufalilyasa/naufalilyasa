@@ -18,6 +18,10 @@
     "./upload": {
       "import": "./dist/upload-type.js",
       "types": "./dist/upload-type.d.ts"
+    },
+    "./user": {
+      "import": "./dist/user-type.js",
+      "types": "./dist/user-type.d.ts"
     }
   },
   "keywords": [],
