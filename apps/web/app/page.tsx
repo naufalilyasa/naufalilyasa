@@ -15,7 +15,7 @@ import { fetchProjects } from "@/lib/projectService";
 import { format } from "date-fns";
 import { fetchUser } from "@/lib/userService";
 import React from "react";
-import { CategoryProject } from "@repo/types/project";
+import { CategoryProject } from "@repo/types";
 import { Badge } from "@repo/ui/components/badge";
 
 export default async function Portfolio() {

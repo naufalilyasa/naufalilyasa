@@ -4,7 +4,7 @@ import edjsHTML from "editorjs-html";
 import { Button } from "@repo/ui/components/button";
 import { Github, ExternalLink } from "lucide-react";
 import { fetchProjects, fetchProjectById } from "@/lib/projectService";
-import { CategoryProject } from "@repo/types/project";
+import { CategoryProject } from "@repo/types";
 
 export async function generateStaticParams() {
   const projects = await fetchProjects();

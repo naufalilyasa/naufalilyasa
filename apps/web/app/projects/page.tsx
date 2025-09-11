@@ -6,7 +6,7 @@ import { Badge } from "@repo/ui/components/badge";
 import { Github, ExternalLink, Eye, Calendar } from "lucide-react";
 import { fetchProjects } from "@/lib/projectService";
 import { format } from "date-fns";
-import { CategoryProject } from "@repo/types/project";
+import { CategoryProject } from "@repo/types";
 
 export default async function AllProjectsPage() {
   const projects = await fetchProjects();
