@@ -17,8 +17,10 @@ import { Route as AuthProjectsIndexRouteImport } from './routes/_auth/projects/i
 import { Route as AuthProfileIndexRouteImport } from './routes/_auth/profile/index'
 import { Route as AuthExperiencesIndexRouteImport } from './routes/_auth/experiences/index'
 import { Route as AuthContactIndexRouteImport } from './routes/_auth/contact/index'
+import { Route as AuthBlogsIndexRouteImport } from './routes/_auth/blogs/index'
 import { Route as AuthAnalyticsIndexRouteImport } from './routes/_auth/analytics/index'
 import { Route as AuthProjectsDetailIdRouteImport } from './routes/_auth/projects/detail.$id'
+import { Route as AuthBlogsDetailSlugRouteImport } from './routes/_auth/blogs/detail.$slug'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -59,6 +61,11 @@ const AuthContactIndexRoute = AuthContactIndexRouteImport.update({
   path: '/contact/',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthBlogsIndexRoute = AuthBlogsIndexRouteImport.update({
+  id: '/blogs/',
+  path: '/blogs/',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthAnalyticsIndexRoute = AuthAnalyticsIndexRouteImport.update({
   id: '/analytics/',
   path: '/analytics/',
@@ -69,16 +76,23 @@ const AuthProjectsDetailIdRoute = AuthProjectsDetailIdRouteImport.update({
   path: '/projects/detail/$id',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthBlogsDetailSlugRoute = AuthBlogsDetailSlugRouteImport.update({
+  id: '/blogs/detail/$slug',
+  path: '/blogs/detail/$slug',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/': typeof AuthIndexRoute
   '/analytics': typeof AuthAnalyticsIndexRoute
+  '/blogs': typeof AuthBlogsIndexRoute
   '/contact': typeof AuthContactIndexRoute
   '/experiences': typeof AuthExperiencesIndexRoute
   '/profile': typeof AuthProfileIndexRoute
   '/projects': typeof AuthProjectsIndexRoute
+  '/blogs/detail/$slug': typeof AuthBlogsDetailSlugRoute
   '/projects/detail/$id': typeof AuthProjectsDetailIdRoute
 }
 export interface FileRoutesByTo {
@@ -86,10 +100,12 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/': typeof AuthIndexRoute
   '/analytics': typeof AuthAnalyticsIndexRoute
+  '/blogs': typeof AuthBlogsIndexRoute
   '/contact': typeof AuthContactIndexRoute
   '/experiences': typeof AuthExperiencesIndexRoute
   '/profile': typeof AuthProfileIndexRoute
   '/projects': typeof AuthProjectsIndexRoute
+  '/blogs/detail/$slug': typeof AuthBlogsDetailSlugRoute
   '/projects/detail/$id': typeof AuthProjectsDetailIdRoute
 }
 export interface FileRoutesById {
@@ -99,10 +115,12 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/_auth/': typeof AuthIndexRoute
   '/_auth/analytics/': typeof AuthAnalyticsIndexRoute
+  '/_auth/blogs/': typeof AuthBlogsIndexRoute
   '/_auth/contact/': typeof AuthContactIndexRoute
   '/_auth/experiences/': typeof AuthExperiencesIndexRoute
   '/_auth/profile/': typeof AuthProfileIndexRoute
   '/_auth/projects/': typeof AuthProjectsIndexRoute
+  '/_auth/blogs/detail/$slug': typeof AuthBlogsDetailSlugRoute
   '/_auth/projects/detail/$id': typeof AuthProjectsDetailIdRoute
 }
 export interface FileRouteTypes {
@@ -112,10 +130,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/'
     | '/analytics'
+    | '/blogs'
     | '/contact'
     | '/experiences'
     | '/profile'
     | '/projects'
+    | '/blogs/detail/$slug'
     | '/projects/detail/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -123,10 +143,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/'
     | '/analytics'
+    | '/blogs'
     | '/contact'
     | '/experiences'
     | '/profile'
     | '/projects'
+    | '/blogs/detail/$slug'
     | '/projects/detail/$id'
   id:
     | '__root__'
@@ -135,10 +157,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/_auth/'
     | '/_auth/analytics/'
+    | '/_auth/blogs/'
     | '/_auth/contact/'
     | '/_auth/experiences/'
     | '/_auth/profile/'
     | '/_auth/projects/'
+    | '/_auth/blogs/detail/$slug'
     | '/_auth/projects/detail/$id'
   fileRoutesById: FileRoutesById
 }
@@ -206,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthContactIndexRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/blogs/': {
+      id: '/_auth/blogs/'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof AuthBlogsIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/analytics/': {
       id: '/_auth/analytics/'
       path: '/analytics'
@@ -220,26 +251,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthProjectsDetailIdRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/blogs/detail/$slug': {
+      id: '/_auth/blogs/detail/$slug'
+      path: '/blogs/detail/$slug'
+      fullPath: '/blogs/detail/$slug'
+      preLoaderRoute: typeof AuthBlogsDetailSlugRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
 
 interface AuthRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
   AuthAnalyticsIndexRoute: typeof AuthAnalyticsIndexRoute
+  AuthBlogsIndexRoute: typeof AuthBlogsIndexRoute
   AuthContactIndexRoute: typeof AuthContactIndexRoute
   AuthExperiencesIndexRoute: typeof AuthExperiencesIndexRoute
   AuthProfileIndexRoute: typeof AuthProfileIndexRoute
   AuthProjectsIndexRoute: typeof AuthProjectsIndexRoute
+  AuthBlogsDetailSlugRoute: typeof AuthBlogsDetailSlugRoute
   AuthProjectsDetailIdRoute: typeof AuthProjectsDetailIdRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   AuthAnalyticsIndexRoute: AuthAnalyticsIndexRoute,
+  AuthBlogsIndexRoute: AuthBlogsIndexRoute,
   AuthContactIndexRoute: AuthContactIndexRoute,
   AuthExperiencesIndexRoute: AuthExperiencesIndexRoute,
   AuthProfileIndexRoute: AuthProfileIndexRoute,
   AuthProjectsIndexRoute: AuthProjectsIndexRoute,
+  AuthBlogsDetailSlugRoute: AuthBlogsDetailSlugRoute,
   AuthProjectsDetailIdRoute: AuthProjectsDetailIdRoute,
 }
 

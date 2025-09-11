@@ -2,16 +2,13 @@ import api from "../lib/axios";
 import { GenericResponseType } from "@repo/types/project";
 import { Upload } from "@repo/types/upload";
 
-export const uploadImagetoCloudinary = async (
-  projectId: string,
-  file: File
-) => {
+export const uploadImagetoCloudinary = async (id: string, file: File) => {
   try {
     const formData = new FormData();
     formData.append("file", file);
 
     const response = await api.post<GenericResponseType & { data: Upload }>(
-      `/upload/${projectId}`,
+      `/upload/${id}`,
       formData,
       {
         headers: {

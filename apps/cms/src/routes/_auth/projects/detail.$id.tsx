@@ -21,7 +21,7 @@ function RouteComponent() {
   const [projectDetail, setProjectDetail] = useState<OutputData>({
     time: Date.now(),
     blocks: [],
-    version: "2.29.0", // pastikan sesuaikan dengan versimu
+    version: "2.30.8",
   });
   const [isEditing, setIsEditing] = useState(false);
 
@@ -59,7 +59,7 @@ function RouteComponent() {
           projectDetail: {
             time: projectDetail.time ? projectDetail.time : Date.now(),
             blocks: projectDetail.blocks ? projectDetail.blocks : [],
-            version: projectDetail.version ? projectDetail.version : "2.29.0",
+            version: projectDetail.version ? projectDetail.version : "2.30.8",
           },
           thumbnail: undefined,
         },

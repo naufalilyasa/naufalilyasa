@@ -36,3 +36,14 @@ export const projectLimiter = rateLimit({
   skipSuccessfulRequests: true, // Don't count successful requests
   windowMs: 15 * 60 * 1000, // 15 minutes,
 });
+
+export const blogLimiter = rateLimit({
+  limit: 100,
+  message: {
+    message: "Too many request attempts, please try again later",
+    status: "error",
+    statusCode: 429,
+  },
+  skipSuccessfulRequests: true, // Don't count successful requests
+  windowMs: 15 * 60 * 1000, // 15 minutes,
+});

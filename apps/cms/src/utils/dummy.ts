@@ -1,5 +1,6 @@
 import {
   CategoryProject,
+  CategoryTech,
   GenericResponseType,
   Project,
   ProjectDetail,
@@ -11,8 +12,17 @@ import {
 
 export const defaultProjectDetailBlock: ProjectDetailBlock = {
   time: Date.now(),
-  blocks: [],
-  version: "2.29.0", // default Editor.js version
+  blocks: [
+    {
+      id: "1",
+      type: "paragraph",
+      data: {
+        text: "Start writing your project post...",
+      },
+    },
+  ],
+
+  version: "2.30.8",
 };
 
 export const defaultProjectThumbnail: ProjectThumbnailType = {
@@ -20,14 +30,15 @@ export const defaultProjectThumbnail: ProjectThumbnailType = {
   projectId: "",
   url: "",
   publicId: "",
-  createdAt: "",
-  updatedAt: "",
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 export const defaultTechnology: Technologies = {
   id: "",
   name: "",
   iconUrl: "",
+  category: CategoryTech.AI,
 };
 
 export const defaultProjectTechnology: ProjectTechnology = {
@@ -41,8 +52,8 @@ export const defaultProjectDetail: ProjectDetail = {
   id: "",
   projectId: "",
   content: defaultProjectDetailBlock,
-  createdAt: "",
-  updatedAt: "",
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 export const defaultProject: Project = {
@@ -50,14 +61,14 @@ export const defaultProject: Project = {
   userId: "",
   title: "",
   description: "",
-  startDate: null,
-  endDate: null,
+  startDate: new Date(),
+  endDate: new Date(),
   githubUrl: "",
   liveUrl: "",
   featured: false,
   category: "FULLSTACK" as CategoryProject,
-  createdAt: "",
-  updatedAt: "",
+  createdAt: new Date(),
+  updatedAt: new Date(),
   thumbnail: undefined,
   projectDetail: [],
   technologies: [],
@@ -68,3 +79,33 @@ export const defaultResponse: GenericResponseType = {
   status: "success",
   message: "",
 };
+
+export const categories: {
+  name: string;
+  slug: string;
+}[] = [
+  {
+    name: "Technology",
+    slug: "technology",
+  },
+  {
+    name: "Programming",
+    slug: "programming",
+  },
+  {
+    name: "Web Development",
+    slug: "web-development",
+  },
+  {
+    name: "Mobile Development",
+    slug: "mobile-development",
+  },
+  {
+    name: "DevOps",
+    slug: "devops",
+  },
+  {
+    name: "Career",
+    slug: "career",
+  },
+];

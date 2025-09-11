@@ -272,7 +272,7 @@ function RouteComponent() {
 
         <TabsContent value="work" className="space-y-6">
           <div className="space-y-6">
-            {workExperience.map((job, index) => (
+            {workExperience.map((job) => (
               <Card key={job.id} className="overflow-hidden">
                 <CardHeader>
                   <div className="flex items-start gap-4">

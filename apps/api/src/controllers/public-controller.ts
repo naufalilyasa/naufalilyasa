@@ -1,4 +1,8 @@
-import { paramsProfileSchema, paramsProjectSchema } from "@repo/zod-schemas";
+import {
+  paramsProfileSchema,
+  paramsProjectSchema,
+  paramsSlugBlogSchema,
+} from "@repo/zod-schemas";
 import config from "#/config/config.js";
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "#/generated/prisma/index.js";
@@ -6,6 +10,7 @@ import { ZodError } from "zod";
 
 import { prisma } from "#/prisma/prisma.js";
 import { AppError } from "#/utils/appError.js";
+import { getAllBlogs, getBlogById } from "#/services/blog.service.js";
 
 export const getAllTechnologiesHandler = async (
   req: Request,
@@ -142,6 +147,88 @@ export const getPublicUserProfile = async (
         message: issue.message,
       }));
       return next(new AppError(400, "Validation failed", formattedErrors));
+    }
+    return next(error);
+  }
+};
+
+export const getPublicAllBlogsHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const user = res.locals.user as null | {
+      createdAt: Date;
+      id: string;
+      name: string;
+      updatedAt: Date;
+      username: string;
+    };
+
+    if (!user) {
+      return next(new AppError(401, "You're not logged in"));
+    }
+
+    const blogs = await getAllBlogs(user.id);
+
+    if (!blogs) {
+      return next(new AppError(403, "Failed to get blogs"));
+    }
+
+    res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Successfully get all blogs",
+      data: blogs,
+    });
+    return;
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        return next(new AppError(409, "Duplicate entry"));
+      }
+      return next(new AppError(400, error.message));
+    }
+    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
+      return next(new AppError(500, error.message));
+    }
+    return next(error);
+  }
+};
+
+export const getPublicBlogBySlugHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const user = res.locals.user as null | {
+    createdAt: Date;
+    id: string;
+    name: string;
+    updatedAt: Date;
+    username: string;
+  };
+
+  if (!user) {
+    return next(new AppError(401, "You're not logged in"));
+  }
+
+  const parsedParams = paramsSlugBlogSchema.parse(req.params);
+
+  try {
+    const blog = await getBlogById(parsedParams.slug, user.id);
+
+    res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Succesfully get blog by slug",
+      data: blog,
+    });
+    return;
+  } catch (error) {
+    if (Prisma.PrismaClientUnknownRequestError) {
+      return next(new AppError(500, "Server internal error"));
     }
     return next(error);
   }

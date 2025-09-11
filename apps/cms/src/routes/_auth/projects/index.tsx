@@ -222,7 +222,7 @@ export function ProjectsPage() {
                     },
                   },
                 ],
-            version: "2.29.0",
+            version: "2.30.8",
           },
           featured: !project?.featured,
           startDate: project?.startDate

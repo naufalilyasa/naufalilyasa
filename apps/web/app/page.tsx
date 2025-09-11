@@ -306,7 +306,7 @@ export default async function Portfolio() {
               latestBlogPosts.map((post, index) => (
                 <div key={index} className="border-b border-black pb-4">
                   <Link
-                    href="#"
+                    href="/blogs"
                     className="text-lg text-gray-700 hover:text-gray-900 transition-colors hover:underline hover:underline-offset-1"
                   >
                     {post}

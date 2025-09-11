@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import {
   LoginUserDTO,
   loginUserSchema,
-} from "@repo/zod-schemas/shared/auth-schema";
+} from "@repo/zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,

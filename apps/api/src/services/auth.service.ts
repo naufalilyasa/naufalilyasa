@@ -1,8 +1,5 @@
 import type { UserType } from "@repo/types/auth";
-import type {
-  LoginResponseDTO,
-  LoginUserDTO,
-} from "@repo/zod-schemas/shared/auth-schema";
+import type { LoginResponseDTO, LoginUserDTO } from "@repo/zod-schemas";
 
 import bcrypt from "bcrypt";
 import config from "#/config/config.js";

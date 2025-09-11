@@ -14,7 +14,7 @@ import {
 } from "@repo/ui/components/breadcrumb";
 import { Separator } from "@repo/ui/components/separator";
 import { AppSidebar } from "../components/dashboard/AppSidebar";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { redirect } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { meFn } from "../api/auth";

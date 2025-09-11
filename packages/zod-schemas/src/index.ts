@@ -5,3 +5,7 @@ export * from "./shared/project-schema.js";
 export * from "./shared/profile-schema.js";
 export * from "./backend/profile-schema.js";
 export * from "./frontend/profile-schema.js";
+export * from "./shared/blog-schema.js";
+export * from "./backend/blog-schema.js";
+export * from "./frontend/blog-schema.js";
+export * from "./shared/upload-schema.js";

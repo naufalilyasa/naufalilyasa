@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.14.0
- * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
+ * Prisma Client JS version: 6.15.0
+ * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
  */
 Prisma.prismaVersion = {
-  client: "6.14.0",
-  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
+  client: "6.15.0",
+  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -189,6 +189,40 @@ exports.Prisma.ProjectDetailScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.BlogPostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  excerpt: 'excerpt',
+  content: 'content',
+  categoryId: 'categoryId',
+  authorId: 'authorId',
+  published: 'published',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BlogThumbnailScalarFieldEnum = {
+  id: 'id',
+  blogId: 'blogId',
+  url: 'url',
+  publicId: 'publicId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -269,7 +303,11 @@ exports.Prisma.ModelName = {
   ProjectThumbnail: 'ProjectThumbnail',
   ProjectTechnology: 'ProjectTechnology',
   Technology: 'Technology',
-  ProjectDetail: 'ProjectDetail'
+  ProjectDetail: 'ProjectDetail',
+  Category: 'Category',
+  Tag: 'Tag',
+  BlogPost: 'BlogPost',
+  BlogThumbnail: 'BlogThumbnail'
 };
 
 /**
