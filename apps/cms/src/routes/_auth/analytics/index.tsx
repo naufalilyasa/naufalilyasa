@@ -460,10 +460,10 @@ function RouteComponent() {
                         percent ? `${skill} ${(percent * 100).toFixed(0)}%` : ""
                       }
                     >
-                      {skillsData.map((entry, index) => (
+                      {skillsData.map((index) => (
                         <Cell
                           key={`cell-${index}`}
-                          fill={`hsl(${index * 60}, 70%, 50%)`}
+                          fill={`hsl(${index.level * 60}, 70%, 50%)`}
                         />
                       ))}
                     </Pie>

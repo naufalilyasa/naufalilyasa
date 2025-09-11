@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { logoutFn } from "../api/auth";
 import { toast } from "sonner";
 import { LogoutResponseType } from "@repo/types/auth";

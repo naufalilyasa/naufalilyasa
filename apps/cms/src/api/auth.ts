@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { LoginUserDTO } from "@repo/zod-schemas/shared/auth-schema";
+import { LoginUserDTO } from "@repo/zod-schemas";
 import api from "../lib/axios";
 import { AxiosError, isAxiosError } from "axios";
 import {
@@ -10,7 +10,7 @@ import {
   RefreshTokenResponseType,
   RegisterResponseType,
 } from "@repo/types/auth";
-import { RegisterUserDTO } from "@repo/zod-schemas/shared/auth-schema";
+import { RegisterUserDTO } from "@repo/zod-schemas";
 import { useAuth } from "../store/auth";
 import { redirect } from "@tanstack/react-router";
 

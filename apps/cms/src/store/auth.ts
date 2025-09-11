@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LoginResponseDTO } from "@repo/zod-schemas/shared/auth-schema";
+import { LoginResponseDTO } from "@repo/zod-schemas";
 
 type AuthUserStoreType = {
   authUser: LoginResponseDTO | null;

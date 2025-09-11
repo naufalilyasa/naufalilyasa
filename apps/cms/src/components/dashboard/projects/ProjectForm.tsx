@@ -89,7 +89,6 @@ function ProjectForm({
   isLoading = false,
 }: ProjectFormProps) {
   const [comboboxOpen, setComboboxOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
   const [project, setProject] = useState<Project | null | undefined>(null);
 
@@ -183,7 +182,6 @@ function ProjectForm({
         "technologies",
         currentSelectedTechnologies.map((tech) => tech.id)
       );
-      setSearchValue(""); // Reset search after selection
     }
   };
 
@@ -201,7 +199,6 @@ function ProjectForm({
     form.reset();
     setSelectedTechnologies([]);
     setComboboxOpen(false);
-    setSearchValue("");
     onOpenChange(false);
   };
 

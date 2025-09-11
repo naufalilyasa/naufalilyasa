@@ -84,7 +84,7 @@ function RouteComponent() {
     message: string;
   } | null>(null);
 
-  const form = useForm<any>({
+  const form = useForm({
     // resolver: zodResolver(),
     defaultValues: {
       name: "",
@@ -96,7 +96,7 @@ function RouteComponent() {
     },
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async () => {
     setIsSubmitting(true);
     setSubmitResult(null);
 
