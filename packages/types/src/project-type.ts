@@ -63,7 +63,6 @@ export type ProjectDetailBlock = OutputData;
 export type ProjectThumbnail = {
   id: string;
   url: string;
-  publicId: string;
 };
 
 export type Technologies = {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,10 +54,7 @@ import {
 import { cn } from "@repo/ui/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { getAllTechnologiesFn } from "../../../api/technology";
-import {
-  CreateProjectFormDTO,
-  projectFormSchema,
-} from "@repo/zod-schemas/frontend/project-schema";
+import { CreateProjectFormDTO, projectFormSchema } from "@repo/zod-schemas";
 import ErrorDisplay from "../../ErrorDisplay";
 import { Project, Technologies } from "@repo/types/project";
 import { format } from "date-fns";
@@ -137,11 +135,11 @@ function ProjectForm({
             id: "1",
             type: "paragraph",
             data: {
-              text: "This is a project description",
+              text: "This is example a project description",
             },
           },
         ],
-        version: "2.29.0",
+        version: "2.30.8",
       },
       featured: project?.featured ?? false,
       startDate: project?.startDate ? new Date(project?.startDate) : new Date(),
@@ -227,7 +225,7 @@ function ProjectForm({
               },
             },
           ],
-          version: project.projectDetail[0]?.content?.version ?? "2.29.0",
+          version: project.projectDetail[0]?.content?.version ?? "2.30.8",
         },
         featured: project.featured,
         startDate: project.startDate ? new Date(project.startDate) : new Date(),
@@ -253,7 +251,7 @@ function ProjectForm({
               },
             },
           ],
-          version: "2.29.0",
+          version: "2.30.8",
         },
         featured: false,
         startDate: new Date(),

@@ -18,7 +18,11 @@ export const getAllProjects = async (userId: string) => {
           technology: true,
         },
       },
-      thumbnail: true,
+      thumbnail: {
+        omit: {
+          publicId: true,
+        },
+      },
     },
   });
 };
@@ -38,7 +42,11 @@ export const getProjectById = async (id: string, userId: string) => {
         },
       },
       projectDetail: true,
-      thumbnail: true,
+      thumbnail: {
+        omit: {
+          publicId: true,
+        },
+      },
     },
   });
 };
@@ -93,7 +101,7 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
               content: {
                 time: Date.now(),
                 blocks: [],
-                version: "2.29.0",
+                version: "2.30.8",
               },
             },
           },

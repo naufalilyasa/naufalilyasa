@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -164,7 +164,7 @@ model BlogPost {
   id          String         @id @default(cuid())
   title       String
   slug        String         @unique
-  excerpt     String
+  excerpt     String?
   thumbnail   BlogThumbnail?
   content     Json
   categoryId  String?

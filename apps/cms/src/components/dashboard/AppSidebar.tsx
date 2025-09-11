@@ -8,6 +8,7 @@ import {
   AlertTriangle,
   LogOut,
   LucideProps,
+  FileText,
 } from "lucide-react";
 import {
   Sidebar,
@@ -66,6 +67,11 @@ export function AppSidebar() {
       title: "projects",
       url: "/projects",
       icon: FolderOpen,
+    },
+    {
+      title: "blogs",
+      url: "/blogs",
+      icon: FileText,
     },
     {
       title: "profile",
@@ -175,7 +181,7 @@ export function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
         <div className="p-2 text-xs text-muted-foreground">
-          © 2024 Portfolio Dashboard
+          © 2025 Portfolio Dashboard Achmad Naufal Ilyasa
         </div>
       </SidebarFooter>
     </Sidebar>

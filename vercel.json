@@ -1,0 +1,8 @@
+{
+  "builds": [
+    { "src": "apps/api/index.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "apps/api/index.ts" }
+  ]
+}

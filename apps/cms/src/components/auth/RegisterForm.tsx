@@ -14,10 +14,7 @@ import { GalleryVerticalEnd } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import {
-  RegisterUserDTO,
-  registerUserSchema,
-} from "@repo/zod-schemas/shared/auth-schema";
+import { RegisterUserDTO, registerUserSchema } from "@repo/zod-schemas";
 import useRegister from "../../hooks/useRegister";
 import { PulseLoader } from "react-spinners";
 import ErrorDisplay from "../ErrorDisplay";

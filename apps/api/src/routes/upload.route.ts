@@ -1,4 +1,4 @@
-import { paramsProjectSchema } from "@repo/zod-schemas";
+import { paramsProjectSchema, paramsUploadSchema } from "@repo/zod-schemas";
 import { NextFunction, Request, Response, Router } from "express";
 import { ZodError } from "zod";
 
@@ -7,11 +7,12 @@ import { authorizeRole } from "#/middleware/authorizeRole.middleware.js";
 import { upload } from "#/middleware/multer.middleware.js";
 import { uploadSingleImage } from "#/services/upload.services.js";
 import { AppError } from "#/utils/appError.js";
+import { validate as uuidValidate } from "uuid";
 
 const router: Router = Router();
 
 router.post(
-  "/:projectId",
+  "/:id",
   upload.single("file"),
   deserializeUser,
   requireUser,
@@ -29,8 +30,9 @@ router.post(
       if (!user) {
         return next(new AppError(401, "You're not logged in"));
       }
+
       // Parse params id
-      const parsedParams = paramsProjectSchema.parse(req.params);
+      const parsedParams = paramsUploadSchema.parse(req.params);
 
       const file = req.file as Express.Multer.File | undefined;
       if (!file) {
@@ -39,10 +41,19 @@ router.post(
 
       let fileUrl: undefined | { public_id: string; secure_url: string } = undefined;
 
-      const uploadResponse = await uploadSingleImage(
-        file,
-        `naufalilyasa/projects/${parsedParams.projectId}`,
-      );
+      let uploadResponse = undefined;
+
+      if (uuidValidate(parsedParams.id)) {
+        uploadResponse = await uploadSingleImage(
+          file,
+          `naufalilyasa/projects/${parsedParams.id}`,
+        );
+      } else {
+        uploadResponse = await uploadSingleImage(
+          file,
+          `naufalilyasa/blogs/${parsedParams.id}`,
+        );
+      }
 
       fileUrl = uploadResponse;
 

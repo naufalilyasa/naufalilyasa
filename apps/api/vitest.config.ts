@@ -21,5 +21,9 @@ export default defineConfig({
       "#": resolve(__dirname, "./src"),
       "@repo": resolve(__dirname, "../packages"),
     },
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "html"],
+    },
   },
 });
