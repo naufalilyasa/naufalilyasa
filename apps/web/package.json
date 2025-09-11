@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

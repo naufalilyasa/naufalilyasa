@@ -2,3 +2,4 @@ export * from "./auth-type";
 export * from "./project-type";
 export * from "./upload-type";
 export * from "./blog-type";
+export * from "./user-type";

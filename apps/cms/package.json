@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5180",
+    "prebuild": "pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
