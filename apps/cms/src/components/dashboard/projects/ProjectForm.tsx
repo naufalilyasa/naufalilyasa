@@ -532,7 +532,7 @@ function ProjectForm({
               <FormField
                 control={form.control}
                 name="technologies"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Technologies Used *</FormLabel>
                     <Popover open={comboboxOpen} onOpenChange={setComboboxOpen}>
