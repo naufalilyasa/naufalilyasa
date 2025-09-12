@@ -5,7 +5,9 @@
     "baseUrl": ".",
     "outDir": "dist",
     "paths": {
-      "#/*": ["./src/*"]
+      "#/*": ["./src/*"],
+      "@repo/zod-schemas": ["../../packages/zod-schemas/src/index.ts"],
+      "@repo/types": ["../../packages/zod-schemas/src/index.ts"]
     }
   },
   "include": ["src", "tests", "api/index.ts"],
