@@ -325,6 +325,9 @@ importers:
       '@editorjs/editorjs':
         specifier: ^2.30.8
         version: 2.30.8
+      '@repo/types':
+        specifier: workspace:^
+        version: link:../../packages/types
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -353,9 +356,6 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:^
         version: link:../../packages/eslint-config
-      '@repo/types':
-        specifier: workspace:^
-        version: link:../../packages/types
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
