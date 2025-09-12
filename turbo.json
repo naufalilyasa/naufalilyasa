@@ -25,5 +25,27 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": [
+    "NODE_ENV",
+    "BASE_URL",
+    "CMS_URL",
+    "WEB_URL",
+    "PORT",
+    "DATABASE_URL",
+    "POSTGRES_HOST",
+    "POSTGRES_PORT",
+    "POSTGRES_USER",
+    "POSTGRES_PASSWORD",
+    "POSTGRES_DB",
+    "JWT_ACCESS_TOKEN_PRIVATE_KEY",
+    "JWT_ACCESS_TOKEN_PUBLIC_KEY",
+    "JWT_REFRESH_TOKEN_PRIVATE_KEY",
+    "JWT_REFRESH_TOKEN_PUBLIC_KEY",
+    "CLOUD_NAME_CLOUDINARY",
+    "API_KEY_CLOUDINARY",
+    "API_SECRET_CLOUDINARY",
+    "USER_ID",
+    "REDIS_URL"
+  ]
 }
