@@ -14,14 +14,13 @@ export async function generateStaticParams() {
   }));
 }
 
-type ProjectPageProps = {
-  params: {
-    slug: string;
-  };
-};
+type ProjectPageProps = Promise<{ slug: string }>;
 
-export default async function ProjectDetailPage({ params }: ProjectPageProps) {
+export default async function ProjectDetailPage(props: {
+  params: ProjectPageProps;
+}) {
   // Fetch project by ID instead of finding by slug
+  const params = await props.params;
   const project = await fetchProjectById(params.slug);
 
   function formatCategoryName(category: string): string {
