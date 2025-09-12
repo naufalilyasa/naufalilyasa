@@ -14,13 +14,15 @@ export async function generateStaticParams() {
   }));
 }
 
-interface ProjectPageProps {
-  params: Promise<{ slug: string }>;
-}
+type ProjectPageProps = {
+  params: {
+    slug: string;
+  };
+};
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   // Fetch project by ID instead of finding by slug
-  const project = await fetchProjectById((await params).slug);
+  const project = await fetchProjectById(params.slug);
 
   function formatCategoryName(category: string): string {
     if (category === "AIML") return "AI/ML";
