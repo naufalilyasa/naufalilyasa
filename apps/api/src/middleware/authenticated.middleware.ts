@@ -30,8 +30,8 @@ const deserializeUser = async (req: Request, res: Response, next: NextFunction) 
 
     const session = await redisClient.get(decoded.sub);
 
-    if (!session) {
-      return next(new AppError(401, message));
+    if (typeof session !== "string") {
+      return next(new AppError(500, "Invalid session format"));
     }
 
     const sessionParse = LoginResponseSchema.parse(JSON.parse(session));
