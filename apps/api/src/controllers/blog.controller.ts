@@ -8,19 +8,19 @@ import {
   RequestBlogBackendDTO,
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
-import { Prisma } from "#/generated/prisma/index.js";
+import { Prisma } from "../generated/prisma/index.js";
 import { ZodError } from "zod";
 
-import { prisma } from "#/prisma/prisma.js";
-import { uploadSingleImage } from "#/services/upload.services.js";
-import { AppError } from "#/utils/appError.js";
-import { deleteSingleImage } from "#/utils/deleteImage.js";
+import { prisma } from "../prisma/prisma.js";
+import { uploadSingleImage } from "../services/upload.services.js";
+import { AppError } from "../utils/appError.js";
+import { deleteSingleImage } from "../utils/deleteImage.js";
 import {
   createBlog,
   getAllBlogs,
   getBlogById,
   updateBlog,
-} from "#/services/blog.service.js";
+} from "../services/blog.service.js";
 
 export const getAllBlogsHandler = async (
   req: Request,

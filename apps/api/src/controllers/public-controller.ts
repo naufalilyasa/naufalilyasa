@@ -1,15 +1,12 @@
-import {
-  paramsProjectSchema,
-  paramsSlugBlogSchema,
-} from "@repo/zod-schemas";
+import { paramsProjectSchema, paramsSlugBlogSchema } from "@repo/zod-schemas";
 import config from "../config/config.js";
 import { NextFunction, Request, Response } from "express";
-import { Prisma } from "#/generated/prisma/index.js";
+import { Prisma } from "../generated/prisma/index.js";
 import { ZodError } from "zod";
 
-import { prisma } from "#/prisma/prisma.js";
-import { AppError } from "#/utils/appError.js";
-import { getAllBlogs, getBlogById } from "#/services/blog.service.js";
+import { prisma } from "../prisma/prisma.js";
+import { AppError } from "../utils/appError.js";
+import { getAllBlogs, getBlogById } from "../services/blog.service.js";
 
 export const getAllTechnologiesHandler = async (
   req: Request,

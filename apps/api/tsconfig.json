@@ -4,10 +4,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "outDir": "dist",
-    "allowSyntheticDefaultImports": true,
-    "paths": {
-      "#/*": ["./src/*"]
-    }
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src", "tests", "api/index.ts"],
   "exclude": ["node_modules", "dist"]

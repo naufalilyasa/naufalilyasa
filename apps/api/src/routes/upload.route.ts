@@ -2,11 +2,11 @@ import { paramsProjectSchema, paramsUploadSchema } from "@repo/zod-schemas";
 import { NextFunction, Request, Response, Router } from "express";
 import { ZodError } from "zod";
 
-import { deserializeUser, requireUser } from "#/middleware/authenticated.middleware.js";
-import { authorizeRole } from "#/middleware/authorizeRole.middleware.js";
-import { upload } from "#/middleware/multer.middleware.js";
-import { uploadSingleImage } from "#/services/upload.services.js";
-import { AppError } from "#/utils/appError.js";
+import { deserializeUser, requireUser } from "../middleware/authenticated.middleware.js";
+import { authorizeRole } from "../middleware/authorizeRole.middleware.js";
+import { upload } from "../middleware/multer.middleware.js";
+import { uploadSingleImage } from "../services/upload.services.js";
+import { AppError } from "../utils/appError.js";
 import { validate as uuidValidate } from "uuid";
 
 const router: Router = Router();

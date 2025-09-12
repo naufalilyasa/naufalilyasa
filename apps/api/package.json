@@ -11,9 +11,6 @@
   "author": "Achmad Naufal Ilyasa",
   "type": "module",
   "main": "app.ts",
-  "imports": {
-    "#/*": "./dist/*"
-  },
   "scripts": {
     "prebuild": "pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
     "build": "tsc",
