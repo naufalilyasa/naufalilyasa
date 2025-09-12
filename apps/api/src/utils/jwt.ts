@@ -18,14 +18,16 @@ export const signJwt = (
   return jwt.sign(payload, privateKey, { ...options, algorithm: "RS256" });
 };
 
-export const verifyJwt = (
-  token: string,
-  publicTokenKey: string,
-): JwtPayload | null | string => {
+export const verifyJwt = (token: string, publicTokenKey: string): JwtPayload | null => {
   try {
     const publicKey = Buffer.from(publicTokenKey, "base64").toString("ascii");
     const decoded = jwt.verify(token, publicKey);
-    return decoded;
+
+    if (typeof decoded === "string") {
+      return null; // abaikan string payload
+    }
+
+    return decoded as JwtPayload;
   } catch (error) {
     console.error(error);
     return null;
