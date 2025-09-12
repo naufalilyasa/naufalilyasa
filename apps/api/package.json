@@ -12,7 +12,7 @@
   "type": "module",
   "main": "app.ts",
   "imports": {
-    "#/*": "./src/*"
+    "#/*": "./dist/*"
   },
   "scripts": {
     "prebuild": "pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
