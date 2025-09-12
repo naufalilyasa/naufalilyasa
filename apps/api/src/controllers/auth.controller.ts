@@ -203,8 +203,8 @@ const refreshHandler = async (req: Request, res: Response, next: NextFunction) =
     const session = await redisClient.get(payload.sub as string);
 
     // Check is session data exist
-    if (!session) {
-      throw new AppError(401, "Session or token expired");
+    if (typeof session !== "string") {
+      return next(new AppError(500, "Invalid session format"));
     }
 
     // Parse session data json
