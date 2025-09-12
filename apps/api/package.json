@@ -21,7 +21,7 @@
     "test:ci": "vitest run",
     "coverage": "vitest run --coverage",
     "dev": "pnpm dlx tsx --watch src/server.ts",
-    "start": "node dist/index.js",
+    "start": "node dist/api/index.js",
     "prebuild": "pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
     "build": "tsc",
     "type-check": "tsc --noEmit",
