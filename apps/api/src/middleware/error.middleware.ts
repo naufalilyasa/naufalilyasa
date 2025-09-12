@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import type { NextFunction, Request, Response } from "express";
 
-import config from "#/config/config.js";
+import config from "../config/config.js";
 
 import { AppError } from "#/utils/appError.js";
 

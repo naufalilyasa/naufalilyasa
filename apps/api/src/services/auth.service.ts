@@ -2,7 +2,7 @@ import type { UserType } from "@repo/types/auth";
 import type { LoginResponseDTO, LoginUserDTO } from "@repo/zod-schemas";
 
 import bcrypt from "bcrypt";
-import config from "#/config/config.js";
+import config from "../config/config.js";
 import { Prisma, Role } from "#/generated/prisma/index.js";
 import { omit } from "lodash-es";
 import { z } from "zod/v4";

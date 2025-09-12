@@ -1,9 +1,8 @@
 import {
-  paramsProfileSchema,
   paramsProjectSchema,
   paramsSlugBlogSchema,
 } from "@repo/zod-schemas";
-import config from "#/config/config.js";
+import config from "../config/config.js";
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "#/generated/prisma/index.js";
 import { ZodError } from "zod";

@@ -6,7 +6,7 @@ import {
   loginUserSchema,
   registerUserSchema,
 } from "@repo/zod-schemas";
-import config from "#/config/config.js";
+import config from "../config/config.js";
 import { Prisma } from "#/generated/prisma/index.js";
 import { ZodError } from "zod";
 

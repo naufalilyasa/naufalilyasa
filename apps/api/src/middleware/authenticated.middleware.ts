@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 
 import { LoginResponseSchema } from "@repo/zod-schemas";
-import config from "#/config/config.js";
+import config from "../config/config.js";
 import { Role } from "#/generated/prisma/index.js";
 
 import { findUniqueUser } from "#/services/auth.service.js";
