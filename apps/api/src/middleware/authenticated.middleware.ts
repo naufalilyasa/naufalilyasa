@@ -15,47 +15,41 @@ const deserializeUser = async (req: Request, res: Response, next: NextFunction) 
     const message = "You're not logged in";
 
     if (!accessToken) {
-      next(new AppError(401, message));
-      return;
+      return next(new AppError(401, message));
     }
 
     if (!config.accessTokenPublicKey) {
-      next(new AppError(401, "Invalid token or public key"));
-      return;
+      return next(new AppError(401, "Invalid token or public key"));
     }
 
     const decoded = verifyJwt(accessToken, config.accessTokenPublicKey);
 
     if (!decoded?.sub) {
-      next(new AppError(401, message));
-      return;
+      return next(new AppError(401, message));
     }
 
     const session = await redisClient.get(decoded.sub);
 
     if (!session) {
-      next(new AppError(401, message));
-      return;
+      return next(new AppError(401, message));
     }
 
     const sessionParse = LoginResponseSchema.parse(JSON.parse(session));
 
-    const user: null | {
+    const user: {
       createdAt: Date;
       id: string;
       name: string;
       updatedAt: Date;
       username: string;
       role: Role;
-    } = await findUniqueUser(sessionParse, { password: true });
+    } | null = await findUniqueUser(sessionParse, { password: true });
 
     if (!user) {
-      next(new AppError(401, message));
-      return;
+      return next(new AppError(401, message));
     }
 
     res.locals.user = user;
-
     next();
   } catch (error) {
     next(error);
@@ -64,18 +58,17 @@ const deserializeUser = async (req: Request, res: Response, next: NextFunction) 
 
 const requireUser = (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user as null | {
+    const user = res.locals.user as {
       createdAt: Date;
       id: string;
       name: string;
       updatedAt: Date;
       username: string;
       role: Role;
-    };
+    } | null;
 
     if (!user) {
-      new AppError(401, "Session has expired or user doesn't exist");
-      return;
+      return next(new AppError(401, "Session has expired or user doesn't exist"));
     }
 
     next();
