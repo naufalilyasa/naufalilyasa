@@ -31,7 +31,7 @@ const deserializeUser = async (req: Request, res: Response, next: NextFunction) 
       return;
     }
 
-    const session = await redisClient.get(decoded.sub as string);
+    const session = await redisClient.get(decoded.sub);
 
     if (!session) {
       next(new AppError(401, message));
