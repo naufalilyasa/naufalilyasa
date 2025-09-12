@@ -4,6 +4,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "#/*": ["./src/*"]
     }
