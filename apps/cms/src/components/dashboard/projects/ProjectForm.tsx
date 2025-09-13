@@ -67,7 +67,6 @@ interface ProjectFormProps {
     projectId?: string;
     data: CreateProjectFormDTO;
   }) => void;
-  // onSubmit: (projectId?: string, data?: CreateProjectFormDTO) => void;
   isLoading?: boolean;
 }
 
