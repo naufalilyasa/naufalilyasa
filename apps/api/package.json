@@ -13,7 +13,8 @@
   "main": "app.ts",
   "scripts": {
     "prebuild": "prisma generate && pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
-    "build": "tsc",
+    "build": "tsc && pnpm run copy:prisma",
+    "copy:prisma": "cp -r src/generated dist/src/generated",
     "dev": "pnpm dlx tsx --watch src/server.ts",
     "start": "node dist/src/server.js",
     "clean": "rm -rf dist",
