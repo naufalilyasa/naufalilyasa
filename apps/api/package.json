@@ -12,10 +12,10 @@
   "type": "module",
   "main": "app.ts",
   "scripts": {
-    "prebuild": "pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
+    "prebuild": "prisma generate && pnpm turbo run build --filter=@repo/types... --filter=@repo/zod-schemas...",
     "build": "tsc",
     "dev": "pnpm dlx tsx --watch src/server.ts",
-    "start": "node dist/src/index.js",
+    "start": "node dist/src/server.js",
     "clean": "rm -rf dist",
     "test": "vitest",
     "test:watch": "vitest",
