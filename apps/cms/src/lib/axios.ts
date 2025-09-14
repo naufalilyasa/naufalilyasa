@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = import.meta.env.SERVER_URL ?? "http://localhost:3003";
+const baseUrl =
+  import.meta.env.SERVER_URL ?? "https://naufalilyasa-api.vercel.app/";
 
 const api = axios.create({
   baseURL: `${baseUrl}/api`,
