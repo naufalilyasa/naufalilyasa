@@ -46,14 +46,7 @@ export default async function Portfolio() {
       label: formatCategoryName(value),
     })),
   ];
-
-  // const allBlogPosts = [
-  //   "Understanding React's useEffect Hook",
-  //   "Building RESTful APIs with Express.js",
-  //   "A Beginner's Guide to TypeScript",
-  //   "Deploying Node.js Applications on Heroku",
-  //   "Optimizing Performance in React Applications",
-  // ];
+  
   const allBlogPosts: string[] = [];
 
   const featuredProjects = allProjects

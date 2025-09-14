@@ -5,7 +5,7 @@ export async function fetchTechnologies(): Promise<Technologies[]> {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/public/technologies`,
       {
-        cache: "no-store",
+        next: { revalidate: 60 },
       }
     );
 

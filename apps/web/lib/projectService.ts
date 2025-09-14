@@ -5,7 +5,7 @@ export async function fetchProjects(): Promise<Project[]> {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/public/projects`,
       {
-        cache: "no-store",
+        next: { revalidate: 60 },
       }
     );
 
@@ -27,7 +27,7 @@ export async function fetchProjectById(id: string): Promise<Project | null> {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/public/projects/${id}`,
       {
-        cache: "no-store",
+        next: { revalidate: 60 },
       }
     );
 

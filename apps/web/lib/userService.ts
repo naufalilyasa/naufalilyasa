@@ -6,7 +6,7 @@ export async function fetchUser(): Promise<ProfileResponse | undefined> {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/public/user`,
       {
-        cache: "no-store",
+        next: { revalidate: 60 },
       }
     );
 

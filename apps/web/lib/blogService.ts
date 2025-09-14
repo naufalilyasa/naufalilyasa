@@ -5,7 +5,7 @@ export async function fetchBlogs(): Promise<BlogResponse[]> {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/public/blogs`,
       {
-        cache: "no-store",
+        next: { revalidate: 60 },
       }
     );
 
@@ -22,12 +22,14 @@ export async function fetchBlogs(): Promise<BlogResponse[]> {
   }
 }
 
-export async function fetchBlogBySlug(slug: string): Promise<BlogResponse | null> {
+export async function fetchBlogBySlug(
+  slug: string
+): Promise<BlogResponse | null> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/public/blogs/${slug}`,
       {
-        cache: "no-store",
+        next: { revalidate: 60 },
       }
     );
 
