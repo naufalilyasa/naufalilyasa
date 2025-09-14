@@ -15,6 +15,8 @@ import { blogRoute } from "./routes/blog.route.js";
 
 const app: Application = express();
 
+app.set("trust proxy", 1);
+
 app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser());
