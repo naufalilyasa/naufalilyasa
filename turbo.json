@@ -47,7 +47,7 @@
     "API_SECRET_CLOUDINARY",
     "USER_ID",
     "REDIS_URL",
-    "SERVER_URL",
-    "VITE_URL"
+    "VITE_API_URL",
+    "VITE_BASE_URL"
   ]
 }
