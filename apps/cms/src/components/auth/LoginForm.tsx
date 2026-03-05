@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@repo/ui/components/form";
 import useLogin from "../../hooks/useLogin";
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { Link, useRouter, useSearch } from "@tanstack/react-router";
 import { useAuth } from "../../store/auth";
 import ErrorDisplay from "../ErrorDisplay";
@@ -28,7 +28,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const router = useRouter();
   const search = useSearch({ from: "/login" });
-  const { setAuthUser, isAuthenticate } = useAuth();
+  const { isAuthenticate } = useAuth();
 
   const form = useForm<LoginUserDTO>({
     resolver: zodResolver(loginUserSchema),
@@ -38,15 +38,9 @@ export function LoginForm({
     },
   });
 
-  const { mutateAsync, data, isPending, isSuccess, error } = useLogin();
+  const { mutateAsync, isPending, error } = useLogin();
 
-  useEffect(() => {
-    if (!data) return;
 
-    if (isSuccess) {
-      setAuthUser(data.data);
-    }
-  }, [data, isSuccess, setAuthUser]);
 
   function onSubmit(values: LoginUserDTO) {
     mutateAsync(values);

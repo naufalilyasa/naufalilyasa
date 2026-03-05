@@ -6,10 +6,10 @@ import {
   loginUserSchema,
   registerUserSchema,
 } from "@repo/zod-schemas";
-import config from "../config/config.js";
-import { Prisma } from "../generated/prisma/index.js";
 import { ZodError } from "zod";
 
+import config from "../config/config.js";
+import { Prisma } from "../generated/prisma/index.js";
 import { findUniqueUser, loginUser, registerUser } from "../services/auth.service.js";
 import { AppError } from "../utils/appError.js";
 import redisClient from "../utils/connectRedis.js";
@@ -113,14 +113,7 @@ const registerHandler = async (req: Request, res: Response, next: NextFunction) 
     });
     return;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        return next(new AppError(409, "Username already exist."));
-      }
-      return next(new AppError(400, error.message));
-    } else if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      return next(new AppError(500, error.message));
-    } else if (error instanceof ZodError) {
+    if (error instanceof ZodError) {
       const formattedErrors = error.issues.map((issue) => ({
         field: issue.path.join("."),
         message: issue.message,
@@ -136,13 +129,7 @@ const registerHandler = async (req: Request, res: Response, next: NextFunction) 
 const logoutHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // Get data user logged in that is set from middleware
-    const user = res.locals.user as null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    };
+    const user = res.locals.user;
 
     if (!user) {
       return next(new AppError(401, "You're not logged in"));
@@ -256,13 +243,7 @@ const refreshHandler = async (req: Request, res: Response, next: NextFunction) =
 const getMeHandler = (req: Request, res: Response, next: NextFunction) => {
   try {
     // Get data user logged in that is set from middleware
-    const user = res.locals.user as null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    };
+    const user = res.locals.user;
 
     if (!user) {
       return next(new AppError(401, "You're not logged in"));

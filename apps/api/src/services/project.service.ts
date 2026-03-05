@@ -1,7 +1,8 @@
 import { CreateProjectBackendDTO, EditProjectBackendDTO } from "@repo/zod-schemas";
-import { Prisma } from "../generated/prisma/index.js";
 
+import { Prisma } from "../generated/prisma/index.js";
 import { prisma } from "../prisma/prisma.js";
+import { AppError } from "../utils/appError.js";
 
 export const getAllProjects = async (userId: string) => {
   return await prisma.project.findMany({
@@ -28,27 +29,34 @@ export const getAllProjects = async (userId: string) => {
 };
 
 export const getProjectById = async (id: string, userId: string) => {
-  return await prisma.project.findFirstOrThrow({
-    where: {
-      id,
-      AND: {
-        userId,
-      },
-    },
-    include: {
-      technologies: {
-        include: {
-          technology: true,
+  try {
+    return await prisma.project.findFirstOrThrow({
+      where: {
+        id,
+        AND: {
+          userId,
         },
       },
-      projectDetail: true,
-      thumbnail: {
-        omit: {
-          publicId: true,
+      include: {
+        technologies: {
+          include: {
+            technology: true,
+          },
+        },
+        projectDetail: true,
+        thumbnail: {
+          omit: {
+            publicId: true,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+      throw new AppError(404, "Project not found");
+    }
+    throw new AppError(500, "Failed to get project");
+  }
 };
 
 export const createProject = async (payload: CreateProjectBackendDTO, userId: string) => {
@@ -76,11 +84,11 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
       githubUrl,
       thumbnail: thumbnail
         ? {
-            create: {
-              url: thumbnail.url,
-              publicId: thumbnail.publicId,
-            },
-          }
+          create: {
+            url: thumbnail.url,
+            publicId: thumbnail.publicId,
+          },
+        }
         : undefined,
       liveUrl,
       featured,
@@ -92,19 +100,19 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
       },
       projectDetail: projectDetail
         ? {
-            create: {
-              content: projectDetail as Prisma.InputJsonValue,
-            },
-          }
+          create: {
+            content: projectDetail as Prisma.InputJsonValue,
+          },
+        }
         : {
-            create: {
-              content: {
-                time: Date.now(),
-                blocks: [],
-                version: "2.30.8",
-              },
+          create: {
+            content: {
+              time: Date.now(),
+              blocks: [],
+              version: "2.30.8",
             },
           },
+        },
     },
     include: {
       technologies: { include: { technology: true } },
@@ -132,34 +140,34 @@ export const updateProject = async (
       ...payload,
       thumbnail: thumbnail
         ? {
-            upsert: {
-              create: {
-                url: thumbnail.url,
-                publicId: thumbnail.publicId,
-              },
-              update: {
-                url: thumbnail.url,
-                publicId: thumbnail.publicId,
-              },
+          upsert: {
+            create: {
+              url: thumbnail.url,
+              publicId: thumbnail.publicId,
             },
-          }
+            update: {
+              url: thumbnail.url,
+              publicId: thumbnail.publicId,
+            },
+          },
+        }
         : undefined,
       // replace technologies
       technologies: technologies
         ? {
-            deleteMany: {},
-            create: technologies.map((techId) => ({
-              technology: { connect: { id: techId } },
-            })),
-          }
+          deleteMany: {},
+          create: technologies.map((techId) => ({
+            technology: { connect: { id: techId } },
+          })),
+        }
         : undefined,
 
       // replace projectDetail
       projectDetail: projectDetail
         ? {
-            deleteMany: {},
-            create: { content: projectDetail as Prisma.InputJsonValue },
-          }
+          deleteMany: {},
+          create: { content: projectDetail as Prisma.InputJsonValue },
+        }
         : undefined,
     },
     include: {

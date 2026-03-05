@@ -5,9 +5,9 @@ import {
   projectBackendSchema,
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
-import { Prisma } from "../generated/prisma/index.js";
 import { ZodError } from "zod";
 
+import { Prisma } from "../generated/prisma/index.js";
 import { prisma } from "../prisma/prisma.js";
 import {
   createProject,
@@ -25,13 +25,7 @@ export const getAllProjectsHandler = async (
   next: NextFunction,
 ) => {
   try {
-    const user = res.locals.user as null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    };
+    const user = res.locals.user;
 
     if (!user) {
       return next(new AppError(401, "You're not logged in"));
@@ -51,15 +45,6 @@ export const getAllProjectsHandler = async (
     });
     return;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        return next(new AppError(409, "Duplicate entry"));
-      }
-      return next(new AppError(400, error.message));
-    }
-    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      return next(new AppError(500, error.message));
-    }
     return next(error);
   }
 };
@@ -69,13 +54,7 @@ export const getProjectByIdHandler = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const user = res.locals.user as null | {
-    createdAt: Date;
-    id: string;
-    name: string;
-    updatedAt: Date;
-    username: string;
-  };
+  const user = res.locals.user;
 
   if (!user) {
     return next(new AppError(401, "You're not logged in"));
@@ -94,7 +73,7 @@ export const getProjectByIdHandler = async (
     });
     return;
   } catch (error) {
-    if (Prisma.PrismaClientUnknownRequestError) {
+    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
       return next(new AppError(500, "Server internal error"));
     }
     return next(error);
@@ -107,13 +86,7 @@ export const createProjectHandler = async (
   next: NextFunction,
 ) => {
   try {
-    const user = res.locals.user as null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    };
+    const user = res.locals.user;
 
     if (!user) {
       return next(new AppError(401, "You're not logged in"));
@@ -130,6 +103,7 @@ export const createProjectHandler = async (
     if (file) {
       const uploadResponse = await uploadSingleImage(file, "naufalilyasa/projects");
       thumbnail = uploadResponse;
+      (req as any).uploadResponsePublicId = uploadResponse.public_id;
     }
 
     // Final payload
@@ -139,9 +113,9 @@ export const createProjectHandler = async (
       projectDetail: req.body.projectDetail,
       thumbnail: thumbnail
         ? {
-            url: thumbnail.secure_url,
-            publicId: thumbnail!.public_id,
-          }
+          url: thumbnail.secure_url,
+          publicId: thumbnail!.public_id,
+        }
         : undefined,
     };
 
@@ -155,6 +129,12 @@ export const createProjectHandler = async (
       message: "Successfully created project",
     });
   } catch (error) {
+    // Rollback uploaded image if database fails
+    if (req.file && Object.prototype.hasOwnProperty.call(req, 'uploadResponsePublicId')) {
+      const publicId = (req as any).uploadResponsePublicId;
+      if (publicId) await deleteSingleImage(publicId).catch(console.error);
+    }
+
     if (error instanceof ZodError) {
       const formattedErrors = error.issues.map((issue) => ({
         field: issue.path.join("."),
@@ -172,13 +152,7 @@ export const editProjectHandler = async (
   next: NextFunction,
 ) => {
   try {
-    const user = res.locals.user as null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    };
+    const user = res.locals.user;
 
     if (!user) {
       return next(new AppError(401, "You're not logged in"));
@@ -200,6 +174,7 @@ export const editProjectHandler = async (
       const uploadResponse = await uploadSingleImage(file, "naufalilyasa/projects");
 
       thumbnail = uploadResponse;
+      (req as any).uploadResponsePublicId = uploadResponse.public_id;
     }
 
     // Final payload
@@ -209,9 +184,9 @@ export const editProjectHandler = async (
       projectDetail: req.body.projectDetail,
       thumbnail: thumbnail
         ? {
-            url: thumbnail.secure_url,
-            publicId: thumbnail.public_id,
-          }
+          url: thumbnail.secure_url,
+          publicId: thumbnail.public_id,
+        }
         : undefined,
     };
 
@@ -246,6 +221,12 @@ export const editProjectHandler = async (
     });
     return;
   } catch (error) {
+    // Rollback uploaded image if database fails
+    if (req.file && Object.prototype.hasOwnProperty.call(req, 'uploadResponsePublicId')) {
+      const publicId = (req as any).uploadResponsePublicId;
+      if (publicId) await deleteSingleImage(publicId).catch(console.error);
+    }
+
     if (error instanceof ZodError) {
       const formattedErrors = error.issues.map((issue) => ({
         field: issue.path.join("."),
@@ -263,13 +244,7 @@ export const deleteProjectHandler = async (
   next: NextFunction,
 ) => {
   try {
-    const user = res.locals.user as null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    };
+    const user = res.locals.user;
 
     if (!user) {
       return next(new AppError(401, "You're not logged in"));
@@ -297,9 +272,6 @@ export const deleteProjectHandler = async (
         message: issue.message,
       }));
       return next(new AppError(400, "Validation failed", formattedErrors));
-    }
-    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      console.error(error);
     }
     if (error instanceof Prisma.PrismaClientUnknownRequestError) {
       console.error(error);

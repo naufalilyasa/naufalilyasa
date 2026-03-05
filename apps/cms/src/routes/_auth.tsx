@@ -14,11 +14,9 @@ import {
 } from "@repo/ui/components/breadcrumb";
 import { Separator } from "@repo/ui/components/separator";
 import { AppSidebar } from "../components/dashboard/AppSidebar";
-import { useEffect } from "react";
 import { redirect } from "@tanstack/react-router";
 import { isAxiosError } from "axios";
 import { meFn } from "../api/auth";
-import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../store/auth";
 
 export const Route = createFileRoute("/_auth")({
@@ -26,7 +24,8 @@ export const Route = createFileRoute("/_auth")({
     try {
       const me = await meFn();
 
-      if (me.status === "success") {
+      if (me.status === "success" && me.data) {
+        useAuth.getState().setAuthUser(me.data);
         return;
       } else {
         throw redirect({
@@ -53,16 +52,6 @@ export const Route = createFileRoute("/_auth")({
 
 function PortfolioDashboardLayout() {
   const location = useLocation();
-  const { data: dataMe, isLoading } = useQuery({
-    queryKey: ["me"],
-    queryFn: meFn,
-  });
-  const { setAuthUser } = useAuth();
-
-  useEffect(() => {
-    if (isLoading || !dataMe) return;
-    setAuthUser(dataMe?.data);
-  }, [isLoading, dataMe, setAuthUser]);
 
   const getPageTitle = () => {
     switch (location.pathname) {
