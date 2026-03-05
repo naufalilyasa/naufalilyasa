@@ -137,27 +137,13 @@ api.interceptors.response.use(
 );
 
 export const meFn = async () => {
-  try {
-    const response = await api.get<MeResponseType>("/auth/me");
-    return response.data;
-  } catch (error) {
-    if (isAxiosError(error)) {
-      throw error;
-    }
-    throw error;
-  }
+  const response = await api.get<MeResponseType>("/auth/me");
+  return response.data;
 };
 
 export const loginFn = async (payload: LoginUserDTO) => {
-  try {
-    const response = await api.post<LoginResponseType>("/auth/login", payload);
-    return response.data;
-  } catch (error) {
-    if (isAxiosError(error)) {
-      throw error;
-    }
-    throw error;
-  }
+  const response = await api.post<LoginResponseType>("/auth/login", payload);
+  return response.data;
 };
 
 export const registerFn = async (payload: RegisterUserDTO) => {

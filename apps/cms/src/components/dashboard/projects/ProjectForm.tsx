@@ -113,9 +113,6 @@ function ProjectForm({
     Technologies[] | undefined
   >([]);
 
-  useEffect(() => {
-    if (!categoryTechnologies) return;
-  }, [categoryTechnologies]);
 
   const form = useForm<CreateProjectFormDTO>({
     resolver: zodResolver(projectFormSchema),
@@ -169,28 +166,25 @@ function ProjectForm({
   const addTechnology = (tech: Technologies) => {
     if (
       tech &&
-      selectedTechnologies?.filter((selected) => selected.id.includes(tech.id))
+      !selectedTechnologies?.some((selected) => selected.id === tech.id)
     ) {
-      const currentSelectedTechnologies: Technologies[] | undefined =
-        selectedTechnologies?.map((selected) => selected);
-
-      currentSelectedTechnologies?.push(tech);
+      const currentSelectedTechnologies = [...(selectedTechnologies || []), tech];
 
       setSelectedTechnologies(currentSelectedTechnologies);
       form.setValue(
         "technologies",
-        currentSelectedTechnologies.map((tech) => tech.id)
+        currentSelectedTechnologies.map((t) => t.id)
       );
     }
   };
 
   const removeTechnology = (tech: Technologies) => {
-    const newTechs = selectedTechnologies?.filter((t) => t !== tech);
+    const newTechs = selectedTechnologies?.filter((t) => t.id !== tech.id) || [];
 
     setSelectedTechnologies(newTechs);
     form.setValue(
       "technologies",
-      newTechs!.map((tech) => tech.id)
+      newTechs.map((tech) => tech.id)
     );
   };
 

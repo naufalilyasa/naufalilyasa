@@ -190,14 +190,14 @@ function RouteComponent() {
             blocks: blog.content.blocks
               ? blog.content.blocks
               : [
-                  {
-                    id: "1",
-                    type: "paragraph",
-                    data: {
-                      text: "This is a project description",
-                    },
+                {
+                  id: "1",
+                  type: "paragraph",
+                  data: {
+                    text: "This is a project description",
                   },
-                ],
+                },
+              ],
             version: "2.30.8",
           },
           tags: blog.tags,
@@ -227,14 +227,14 @@ function RouteComponent() {
         blocks: blog.content.blocks
           ? blog.content.blocks
           : [
-              {
-                id: "1",
-                type: "paragraph",
-                data: {
-                  text: "This is a project description",
-                },
+            {
+              id: "1",
+              type: "paragraph",
+              data: {
+                text: "This is a project description",
               },
-            ],
+            },
+          ],
         version: "2.30.8",
       },
       tags: blog.tags,
@@ -323,7 +323,7 @@ function RouteComponent() {
             <CardTitle className="text-lg line-clamp-2">{blog.title}</CardTitle>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
-              {format(new Date(blog.createdAt), "MMM dd, yyyy")}
+              {blog.createdAt ? format(new Date(blog.createdAt), "MMM dd, yyyy") : "Unknown Date"}
               <User className="h-4 w-4 ml-2" />
               {blog.author.name}
             </div>
@@ -357,7 +357,7 @@ function RouteComponent() {
           </Badge>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Clock className="h-3 w-3" />
-            {format(new Date(blog.updatedAt), "MMM dd")}
+            {blog.updatedAt ? format(new Date(blog.updatedAt), "MMM dd") : "Unknown Date"}
           </div>
         </div>
       </CardContent>

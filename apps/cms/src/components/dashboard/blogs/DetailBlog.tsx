@@ -209,7 +209,7 @@ function DetailBlog({ blog, onUpdateBlog, isLoading }: BlogDetailPageProps) {
   };
 
   const getContentText = () => {
-    return blog?.content.blocks[0]?.data?.text || "";
+    return blog?.content?.blocks?.[0]?.data?.text || "";
   };
 
   const getReadingTime = () => {
@@ -223,7 +223,7 @@ function DetailBlog({ blog, onUpdateBlog, isLoading }: BlogDetailPageProps) {
     if (blog?.content) {
       setblogContent(blog.content);
     }
-  }, [blog?.content.blocks, blog?.content]);
+  }, [blog?.content?.blocks, blog?.content]);
 
   return (
     <>
@@ -294,18 +294,16 @@ function DetailBlog({ blog, onUpdateBlog, isLoading }: BlogDetailPageProps) {
                         <div className="flex items-center gap-1">
                           <Calendar className="h-4 w-4" />
                           Created:{" "}
-                          {format(
-                            blog?.createdAt ? blog?.createdAt : "",
-                            "PPP"
-                          )}
+                          {blog?.createdAt
+                            ? format(new Date(blog.createdAt), "PPP")
+                            : "Unknown"}
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="h-4 w-4" />
                           Updated:{" "}
-                          {format(
-                            blog?.updatedAt ? blog?.updatedAt : "",
-                            "PPP"
-                          )}
+                          {blog?.updatedAt
+                            ? format(new Date(blog.updatedAt), "PPP")
+                            : "Unknown"}
                         </div>
                         <div className="flex items-center gap-1">
                           <User className="h-4 w-4" />

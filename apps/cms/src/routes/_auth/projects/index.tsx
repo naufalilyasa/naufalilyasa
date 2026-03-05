@@ -214,14 +214,14 @@ export function ProjectsPage() {
             blocks: project.projectDetail[0].content.blocks
               ? project.projectDetail[0].content.blocks
               : [
-                  {
-                    id: "1",
-                    type: "paragraph",
-                    data: {
-                      text: "This is a project description",
-                    },
+                {
+                  id: "1",
+                  type: "paragraph",
+                  data: {
+                    text: "This is a project description",
                   },
-                ],
+                },
+              ],
             version: "2.30.8",
           },
           featured: !project?.featured,
@@ -299,20 +299,10 @@ export function ProjectsPage() {
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
               {project.startDate
-                ? "Start " +
-                  format(new Date(project.startDate), "d") +
-                  "/" +
-                  format(new Date(project.startDate), "M") +
-                  "/" +
-                  format(new Date(project?.startDate), "yyyy")
+                ? "Start " + format(new Date(project.startDate), "d/M/yyyy")
                 : ""}
               {project.endDate
-                ? " - End " +
-                  format(new Date(project.endDate), "d") +
-                  "/" +
-                  format(new Date(project.endDate), "M") +
-                  "/" +
-                  format(new Date(project?.endDate), "yyyy")
+                ? " - End " + format(new Date(project.endDate), "d/M/yyyy")
                 : " - present"}
               {project.featured && (
                 <Badge variant="default" className="text-xs">

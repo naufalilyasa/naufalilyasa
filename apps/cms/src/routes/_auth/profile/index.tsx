@@ -200,28 +200,26 @@ export function ProfilePage() {
     setIsEditing(false);
   };
 
-  const addTechnology = (tech: string) => {
+  const addTechnology = (techId: string) => {
     if (
-      tech &&
-      !selectedTechnologies.some((selectedTech) => selectedTech.id === tech) &&
+      techId &&
+      !selectedTechnologies.some((selectedTech) => selectedTech.id === techId) &&
       technologies
     ) {
-      const newTechs = [
-        ...selectedTechnologies,
-        ...technologies.filter((technology) => technology.id === tech),
-      ];
-
-      setSelectedTechnologies(newTechs);
-      form.setValue(
-        "technologies",
-        newTechs.map((newTech) => newTech.id)
-      );
+      const techToAdd = technologies.find((technology) => technology.id === techId);
+      if (techToAdd) {
+        const newTechs = [...selectedTechnologies, techToAdd];
+        setSelectedTechnologies(newTechs);
+        form.setValue(
+          "technologies",
+          newTechs.map((newTech) => newTech.id)
+        );
+      }
     }
   };
 
-  const removeTechnology = (tech: string) => {
-    const newTechs = selectedTechnologies.filter((t) => t.id !== tech);
-    console.log("hit");
+  const removeTechnology = (techId: string) => {
+    const newTechs = selectedTechnologies.filter((t) => t.id !== techId);
 
     setSelectedTechnologies(newTechs);
     form.setValue(
@@ -251,7 +249,7 @@ export function ProfilePage() {
             <Button
               variant="outline"
               onClick={handleCancelEdit}
-              // disabled={isLoading}
+            // disabled={isLoading}
             >
               Cancel
             </Button>
