@@ -11,7 +11,7 @@ export async function fetchUser(): Promise<ProfileResponse | undefined> {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch projects");
+      throw new Error("Failed to fetch user profile");
     }
 
     const data: {
@@ -19,7 +19,7 @@ export async function fetchUser(): Promise<ProfileResponse | undefined> {
     } & GenericResponseType = await response.json();
     return data.data;
   } catch (error) {
-    console.error("Error fetching projects:", error);
+    console.error("Error fetching user profile:", error);
     return undefined;
   }
 }

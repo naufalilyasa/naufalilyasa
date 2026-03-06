@@ -19,7 +19,7 @@ const router = createRouter({
       <Spinner size={50} />
     </div>
   ),
-  defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
+  defaultErrorComponent: ({ error }: any) => <ErrorComponent error={error} />,
   context: {
     auth: undefined!, // We'll inject this when we render
   },

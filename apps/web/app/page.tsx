@@ -16,7 +16,10 @@ import { format } from "date-fns";
 import { fetchUser } from "@/lib/userService";
 import React from "react";
 import { CategoryProject } from "@repo/types";
+import { ExperienceResponse } from "@repo/types/experience";
+import { EducationResponse } from "@repo/types";
 import { SiGithub } from "@icons-pack/react-simple-icons";
+import { GraduationCap, MapPin, Code, TrendingUp, Award } from "lucide-react";
 
 export default async function Portfolio() {
   const allProjects = await fetchProjects();
@@ -89,6 +92,9 @@ export default async function Portfolio() {
           <nav className="flex justify-center flex-wrap gap-x-8 gap-y-4 text-sm md:text-base font-ibm uppercase tracking-widest border-t-2 border-b-2 border-black py-4 font-bold">
             <Link href="#about" className="hover:text-ruby hover:bg-black px-2 py-1 transition-colors">
               Editorial
+            </Link>
+            <Link href="#experience" className="hover:text-ruby hover:bg-black px-2 py-1 transition-colors">
+              Experience
             </Link>
             <Link href="#projects" className="hover:bg-black hover:text-beige px-2 py-1 transition-colors">
               Featured Works
@@ -189,6 +195,155 @@ export default async function Portfolio() {
           </div>
         </section>
 
+        {/* Work Experience Section */}
+        {user?.workExperiences && user.workExperiences.length > 0 && (
+          <section id="experience" className="mb-16">
+            <div className="border-b-[6px] border-black mb-8 pb-3 flex justify-between items-end">
+              <h3 className="text-5xl font-noto font-black uppercase tracking-tight text-black">
+                Career History
+              </h3>
+              <span className="font-ibm text-xs font-bold uppercase tracking-widest hidden md:inline bg-black text-beige px-3 py-1">
+                Professional Engagements
+              </span>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 border-4 border-black p-6 md:p-8 bg-beige/50">
+              {/* @ts-ignore */}
+              {user.workExperiences.map((job: ExperienceResponse, index: number) => (
+                <div key={job.id} className={`flex flex-col h-full ${index !== user.workExperiences!.length - 1 ? 'md:border-r-2 md:border-black md:pr-8 border-b-2 md:border-b-0 pb-8 md:pb-0 mb-8 md:mb-0 border-black' : ''}`}>
+                  <div className="flex items-start gap-4 mb-4">
+                    {job.logoUrl && (
+                      <div className="w-16 h-16 relative border-2 border-black shrink-0 bg-white p-2">
+                        <Image src={job.logoUrl} alt={job.companyName} fill className="object-contain" />
+                      </div>
+                    )}
+                    <div>
+                      <h4 className="text-2xl font-noto font-black uppercase leading-tight line-clamp-1 text-black">
+                        {job.position}
+                      </h4>
+                      <p className="font-ibm text-sm font-bold uppercase tracking-widest text-ruby">
+                        {job.companyName}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-x-4 gap-y-2 mb-4 font-ibm text-xs font-bold uppercase border-y-2 border-black py-2">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {format(new Date(job.startDate), "MMM yyyy")} - {job.endDate ? format(new Date(job.endDate), "MMM yyyy") : "Present"}
+                    </span>
+                    <span className="text-black/50">|</span>
+                    <span>{job.location}</span>
+                    <span className="text-black/50">|</span>
+                    <span>{job.type}</span>
+                  </div>
+
+                  <p className="font-inter text-sm mb-6 text-black/90 text-justify leading-relaxed grow whitespace-pre-wrap border-l-4 border-ruby pl-4">
+                    {job.description}
+                  </p>
+
+                  {job.achievements && job.achievements.length > 0 && (
+                    <div className="mb-6">
+                      <h5 className="font-ibm text-xs font-bold uppercase mb-2 border-b-2 border-dashed border-black pb-1">Key Contributions</h5>
+                      <ul className="space-y-2 font-inter text-sm font-medium">
+                        {job.achievements.map((achievement: string, i: number) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-ruby font-black select-none text-lg leading-none mt-0.5">&bull;</span>
+                            <span className="text-black/80">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {job.technologies && job.technologies.length > 0 && (
+                    <div className="border-t-2 border-black pt-4 mt-auto">
+                      <div className="flex flex-wrap gap-2">
+                        {job.technologies.map((tech: any) => (
+                          <span key={tech.technology.id} className="text-[10px] font-ibm font-black text-black uppercase border-2 border-black px-2 py-1 bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                            {tech.technology.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Education Section */}
+        {user?.educations && user.educations.length > 0 && (
+          <section id="education" className="mb-16">
+            <div className="border-b-[6px] border-black mb-8 pb-3 flex justify-between items-end">
+              <h3 className="text-5xl font-noto font-black uppercase tracking-tight text-black">
+                Education
+              </h3>
+              <span className="font-ibm text-xs font-bold uppercase tracking-widest hidden md:inline bg-black text-beige px-3 py-1">
+                Academic & Training
+              </span>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 border-4 border-black p-6 md:p-8 bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              {/* @ts-ignore */}
+              {user.educations.map((edu: EducationResponse, index: number) => (
+                <div key={edu.id} className={`flex flex-col h-full ${index !== user.educations!.length - 1 && user.educations!.length > 1 ? 'md:border-r-2 md:border-black md:pr-8 border-b-2 md:border-b-0 pb-8 md:pb-0 mb-8 md:mb-0 border-black' : ''}`}>
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-16 h-16 relative border-2 border-black shrink-0 bg-beige p-2 flex items-center justify-center">
+                      <GraduationCap className="w-8 h-8 text-black" />
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-noto font-black uppercase leading-tight line-clamp-2 text-black">
+                        {edu.degree ? `${edu.degree} ${edu.fieldOfStudy ? `in ${edu.fieldOfStudy}` : ''}` : edu.category === "FORMAL" ? "Formal Education" : "Informal Education"}
+                      </h4>
+                      <p className="font-ibm text-sm font-bold uppercase tracking-widest text-ruby">
+                        {edu.institution}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-x-4 gap-y-2 mb-4 font-ibm text-xs font-bold uppercase border-y-2 border-black py-2">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3 text-black/60" />
+                      {format(new Date(edu.startDate), "MMM yyyy")} - {edu.endDate ? format(new Date(edu.endDate), "MMM yyyy") : "Present"}
+                    </span>
+                    <span className="text-black/50">|</span>
+                    <span className="flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-black/60" />
+                      {edu.location}
+                    </span>
+                    <span className="text-black/50">|</span>
+                    <span className="text-ruby">{edu.category}</span>
+                  </div>
+
+                  {edu.description && (
+                    <p className="font-inter text-sm mb-6 text-black/90 text-justify leading-relaxed grow whitespace-pre-wrap border-l-4 border-black pl-4">
+                      {edu.description}
+                    </p>
+                  )}
+
+                  {edu.achievements && edu.achievements.length > 0 && (
+                    <div className="mt-auto pt-4 border-t-2 border-dashed border-black">
+                      <h5 className="font-ibm text-xs font-bold uppercase mb-3 flex items-center gap-2">
+                        {edu.category === "INFORMAL" ? <><TrendingUp className="w-3 h-3" /> Key Learning Points</> : <><Award className="w-3 h-3" /> Academic Achievements</>}
+                      </h5>
+                      <ul className="space-y-2 font-inter text-sm font-medium">
+                        {edu.achievements.map((achievement: string, i: number) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 bg-black mt-1.5 shrink-0" />
+                            <span className="text-black/80">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Featured Projects Section */}
         <section id="projects" className="mb-16">
           <div className="border-b-[6px] border-black mb-8 pb-3 flex justify-between items-end">
@@ -216,7 +371,7 @@ export default async function Portfolio() {
                     />
                   </div>
                 )}
-                <CardContent className="p-6 flex flex-col flex-grow">
+                <CardContent className="p-6 flex flex-col grow">
                   <div className="border-b-2 border-black pb-4 mb-4">
                     <div className="flex gap-2 font-ibm text-xs font-bold uppercase mb-3">
                       <span className="bg-black text-beige px-2 py-1">
@@ -242,7 +397,7 @@ export default async function Portfolio() {
                     </span>
                   </div>
 
-                  <p className="font-inter text-sm mb-6 text-black/90 text-justify leading-relaxed flex-grow">
+                  <p className="font-inter text-sm mb-6 text-black/90 text-justify leading-relaxed grow">
                     {project.description.length > 150 ? project.description.substring(0, 150) + "..." : project.description}
                   </p>
 
@@ -323,7 +478,7 @@ export default async function Portfolio() {
                         <div className="w-8 h-8 flex items-center justify-center border-2 border-black bg-white group-hover:bg-black transition-colors p-1">
                           <Image src={tech.iconUrl} alt={tech.name} width={20} height={20} className="group-hover:invert transition-all" />
                         </div>
-                        <span className="font-bold border-b border-dotted border-black/30 flex-grow pb-1 group-hover:border-black transition-colors uppercase tracking-wide">
+                        <span className="font-bold border-b border-dotted border-black/30 grow pb-1 group-hover:border-black transition-colors uppercase tracking-wide">
                           {tech.name}
                         </span>
                       </li>

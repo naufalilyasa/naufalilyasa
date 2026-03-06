@@ -1,4 +1,6 @@
 import { Technologies } from "./project-type.js";
+import { ExperienceResponse } from "./experience-type.js";
+import { EducationResponse } from "./education-type.js";
 
 export type ProfileResponse = {
   id: string;
@@ -16,6 +18,8 @@ export type ProfileResponse = {
   website: string | null;
   resume: string | null;
   userTechnologies: { technology: Technologies }[];
+  workExperiences: ExperienceResponse[];
+  educations: EducationResponse[];
 };
 
 export enum Role {

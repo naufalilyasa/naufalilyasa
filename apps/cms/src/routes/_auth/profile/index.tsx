@@ -123,7 +123,6 @@ export function ProfilePage() {
 
   const {
     data: technologiesData,
-    isLoading: isLoadingTechnologies,
   } = useQuery({
     queryKey: ["getAllTechnologies"],
     queryFn: getAllTechnologiesFn,

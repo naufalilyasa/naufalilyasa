@@ -104,6 +104,23 @@ export const getPublicUserProfile = async (req: Request, res: Response, next: Ne
             technology: true,
           },
         },
+        workExperiences: {
+          orderBy: {
+            startDate: "desc",
+          },
+          include: {
+            technologies: {
+              include: {
+                technology: true,
+              },
+            },
+          },
+        },
+        educations: {
+          orderBy: {
+            startDate: "desc",
+          },
+        },
       },
     });
 

@@ -10,9 +10,11 @@ import { format } from "date-fns";
 
 export async function generateStaticParams() {
   const projects = await fetchProjects();
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
+  return projects
+    .filter((project) => !!project.slug)
+    .map((project) => ({
+      slug: project.slug,
+    }));
 }
 
 type ProjectPageProps = Promise<{ slug: string }>;

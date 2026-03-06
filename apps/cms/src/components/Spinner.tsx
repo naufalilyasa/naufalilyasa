@@ -10,14 +10,13 @@ function Spinner({
   size: number;
 }) {
   return (
-    <>
+    <div className={`${wait ?? "delay-300"}`}>
       <PulseLoader
         loading={show}
-        className={`${wait ?? "delay-300"}`}
         color="#ffffff"
         size={size}
       />
-    </>
+    </div>
   );
 }
 

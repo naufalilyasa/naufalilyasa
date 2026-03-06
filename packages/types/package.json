@@ -27,6 +27,14 @@
     "./user": {
       "import": "./dist/user-type.js",
       "types": "./dist/user-type.d.ts"
+    },
+    "./experience": {
+      "import": "./dist/experience-type.js",
+      "types": "./dist/experience-type.d.ts"
+    },
+    "./education": {
+      "import": "./dist/education-type.js",
+      "types": "./dist/education-type.d.ts"
     }
   },
   "keywords": [],

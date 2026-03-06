@@ -5,6 +5,14 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./experience": {
+      "import": "./dist/shared/experience-schema.js",
+      "types": "./dist/shared/experience-schema.d.ts"
+    },
+    "./education": {
+      "import": "./dist/shared/education-schema.js",
+      "types": "./dist/shared/education-schema.d.ts"
     }
   },
   "types": "./dist/index.d.ts",
