@@ -83,15 +83,15 @@ const AuthBlogsDetailSlugRoute = AuthBlogsDetailSlugRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthIndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/': typeof AuthIndexRoute
-  '/analytics': typeof AuthAnalyticsIndexRoute
-  '/blogs': typeof AuthBlogsIndexRoute
-  '/contact': typeof AuthContactIndexRoute
-  '/experiences': typeof AuthExperiencesIndexRoute
-  '/profile': typeof AuthProfileIndexRoute
-  '/projects': typeof AuthProjectsIndexRoute
+  '/analytics/': typeof AuthAnalyticsIndexRoute
+  '/blogs/': typeof AuthBlogsIndexRoute
+  '/contact/': typeof AuthContactIndexRoute
+  '/experiences/': typeof AuthExperiencesIndexRoute
+  '/profile/': typeof AuthProfileIndexRoute
+  '/projects/': typeof AuthProjectsIndexRoute
   '/blogs/detail/$slug': typeof AuthBlogsDetailSlugRoute
   '/projects/detail/$id': typeof AuthProjectsDetailIdRoute
 }
@@ -126,15 +126,15 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/login'
     | '/register'
-    | '/'
-    | '/analytics'
-    | '/blogs'
-    | '/contact'
-    | '/experiences'
-    | '/profile'
-    | '/projects'
+    | '/analytics/'
+    | '/blogs/'
+    | '/contact/'
+    | '/experiences/'
+    | '/profile/'
+    | '/projects/'
     | '/blogs/detail/$slug'
     | '/projects/detail/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -191,7 +191,7 @@ declare module '@tanstack/react-router' {
     '/_auth': {
       id: '/_auth'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -205,42 +205,42 @@ declare module '@tanstack/react-router' {
     '/_auth/projects/': {
       id: '/_auth/projects/'
       path: '/projects'
-      fullPath: '/projects'
+      fullPath: '/projects/'
       preLoaderRoute: typeof AuthProjectsIndexRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/profile/': {
       id: '/_auth/profile/'
       path: '/profile'
-      fullPath: '/profile'
+      fullPath: '/profile/'
       preLoaderRoute: typeof AuthProfileIndexRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/experiences/': {
       id: '/_auth/experiences/'
       path: '/experiences'
-      fullPath: '/experiences'
+      fullPath: '/experiences/'
       preLoaderRoute: typeof AuthExperiencesIndexRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/contact/': {
       id: '/_auth/contact/'
       path: '/contact'
-      fullPath: '/contact'
+      fullPath: '/contact/'
       preLoaderRoute: typeof AuthContactIndexRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/blogs/': {
       id: '/_auth/blogs/'
       path: '/blogs'
-      fullPath: '/blogs'
+      fullPath: '/blogs/'
       preLoaderRoute: typeof AuthBlogsIndexRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/analytics/': {
       id: '/_auth/analytics/'
       path: '/analytics'
-      fullPath: '/analytics'
+      fullPath: '/analytics/'
       preLoaderRoute: typeof AuthAnalyticsIndexRouteImport
       parentRoute: typeof AuthRoute
     }

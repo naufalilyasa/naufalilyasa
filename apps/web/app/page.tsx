@@ -78,7 +78,7 @@ export default async function Portfolio() {
           {/* Title block */}
           <div className="text-center mb-8 w-full">
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black font-noto uppercase tracking-tighter leading-none text-black">
-              Achmad Naufal Ilyasa
+              {user?.name || "Achmad Naufal Ilyasa"}
             </h1>
             <p className="text-xl md:text-3xl font-inter italic mt-4 font-light text-stone-800">
               The Web Development Inquirer
@@ -116,37 +116,53 @@ export default async function Portfolio() {
               </h2>
 
               <div className="columns-1 md:columns-2 gap-8 text-justify font-inter leading-relaxed text-black/90">
-                <p className="first-letter:text-7xl first-letter:font-black first-letter:font-noto first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-ruby mb-4">
-                  I am a Full-Stack Web Developer specializing in transforming manual, fragmented business workflows into streamlined enterprise systems. With a strong foundation in React.js, Next.js, Express, and PostgreSQL, I engineer high-performance web applications and secure REST APIs designed to solve complex operational bottlenecks.
-                </p>
-                <p className="mb-4">
-                  My approach goes beyond just writing code. I am driven by Clean Code principles, MVC architecture, and a rigorous testing mindset. Whether building multi-layer approval workflows or scalable cloud infrastructures, my focus is always on engineering robust, secure digital solutions that drive real business growth.
-                </p>
+                {user?.description ? (
+                  user.description.split('\n').filter(p => p.trim() !== '').map((paragraph, index) => (
+                    <p key={index} className={index === 0 ? "first-letter:text-7xl first-letter:font-black first-letter:font-noto first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-ruby mb-4" : "mb-4"}>
+                      {paragraph}
+                    </p>
+                  ))
+                ) : (
+                  <>
+                    <p className="first-letter:text-7xl first-letter:font-black first-letter:font-noto first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-ruby mb-4">
+                      I am a Full-Stack Web Developer specializing in transforming manual, fragmented business workflows into streamlined enterprise systems. With a strong foundation in React.js, Next.js, Express, and PostgreSQL, I engineer high-performance web applications and secure REST APIs designed to solve complex operational bottlenecks.
+                    </p>
+                    <p className="mb-4">
+                      My approach goes beyond just writing code. I am driven by Clean Code principles, MVC architecture, and a rigorous testing mindset. Whether building multi-layer approval workflows or scalable cloud infrastructures, my focus is always on engineering robust, secure digital solutions that drive real business growth.
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4 mt-8 font-ibm text-xs md:text-sm font-bold">
-                <Button variant="outline" className="border-2 border-black rounded-none uppercase tracking-wider hover:bg-black hover:text-ruby text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
-                  <Link href="https://github.com/naufalilyasa" target="_blank">
-                    <SiGithub className="w-4 h-4 mr-2" />
-                    GitHub
-                  </Link>
-                </Button>
-                <Button variant="outline" className="border-2 border-black rounded-none uppercase tracking-wider hover:bg-black hover:text-ruby text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
-                  <Link href="https://linkedin.com/in/naufalilyasa" target="_blank">
-                    <Linkedin className="w-4 h-4 mr-2" />
-                    LinkedIn
-                  </Link>
-                </Button>
-                <Button variant="outline" className="border-2 border-black rounded-none uppercase tracking-wider hover:bg-black hover:text-ruby text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
-                  <Link href="mailto:naufal.ilyasa7@gmail.com">
-                    <Mail className="w-4 h-4 mr-2" />
-                    Email
-                  </Link>
-                </Button>
+                {(user?.github || !user) && (
+                  <Button variant="outline" className="border-2 border-black rounded-none uppercase tracking-wider hover:bg-black hover:text-ruby text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
+                    <Link href={user?.github || "https://github.com/naufalilyasa"} target="_blank">
+                      <SiGithub className="w-4 h-4 mr-2" />
+                      GitHub
+                    </Link>
+                  </Button>
+                )}
+                {(user?.linkedin || !user) && (
+                  <Button variant="outline" className="border-2 border-black rounded-none uppercase tracking-wider hover:bg-black hover:text-ruby text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
+                    <Link href={user?.linkedin || "https://linkedin.com/in/naufalilyasa"} target="_blank">
+                      <Linkedin className="w-4 h-4 mr-2" />
+                      LinkedIn
+                    </Link>
+                  </Button>
+                )}
+                {(user?.email || !user) && (
+                  <Button variant="outline" className="border-2 border-black rounded-none uppercase tracking-wider hover:bg-black hover:text-ruby text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
+                    <Link href={`mailto:${user?.email || "naufal.ilyasa7@gmail.com"}`}>
+                      <Mail className="w-4 h-4 mr-2" />
+                      Email
+                    </Link>
+                  </Button>
+                )}
                 <Button variant="outline" className="text-ruby border-2 border-ruby rounded-none uppercase tracking-wider hover:bg-ruby hover:text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(164,57,57,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
                   <Link
-                    href="https://drive.google.com/file/d/1W77M9c5HOfwUD4q3BCk_PcXex6lEnU8K/view?usp=sharing"
+                    href={user?.resume || "https://drive.google.com/file/d/1W77M9c5HOfwUD4q3BCk_PcXex6lEnU8K/view?usp=sharing"}
                     target="_blank"
                   >
                     <File className="w-4 h-4 mr-2" />
@@ -160,8 +176,8 @@ export default async function Portfolio() {
             <div className="md:col-span-4 flex flex-col items-center border-t-[6px] md:border-t-0 md:border-l-[6px] border-black pt-8 md:pt-0 md:pl-8">
               <div className="w-full aspect-[4/5] relative border-4 border-black p-2 bg-beige mb-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <Image
-                  src="/achmad_naufal_ilyasa.jpg"
-                  alt="Achmad Naufal Ilyasa"
+                  src={user?.photoUrl || "/achmad_naufal_ilyasa.jpg"}
+                  alt={user?.name || "Achmad Naufal Ilyasa"}
                   fill
                   className="object-cover"
                 />

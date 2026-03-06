@@ -38,7 +38,7 @@ export default async function ProjectDetailPage(props: {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-beige border-[12px] border-black">
+      <div className="min-h-screen flex items-center justify-center bg-beige border-12 border-black">
         <div className="text-center p-12 border-4 border-black bg-beige shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h1 className="text-6xl font-black font-noto uppercase text-black mb-4 tracking-tighter">
             Record Not Found

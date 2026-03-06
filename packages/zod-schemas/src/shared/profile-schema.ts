@@ -23,9 +23,10 @@ export const baseProfileSchema = z.object({
     .string()
     .max(1000, "Description must not exceed 1000 characters")
     .optional(),
-  github: z.url("Invalid GitHub URL").optional(),
-  linkedin: z.url("Invalid LinkedIn URL").optional(),
-  website: z.url("Invalid website URL").optional(),
+  github: z.url("Invalid GitHub URL").optional().or(z.literal("")),
+  linkedin: z.url("Invalid LinkedIn URL").optional().or(z.literal("")),
+  website: z.url("Invalid website URL").optional().or(z.literal("")),
+  resume: z.url("Invalid resume URL").optional().or(z.literal("")),
 });
 
 // DTO type from Zod inference

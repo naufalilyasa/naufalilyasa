@@ -140,6 +140,7 @@ const stats = [
     trend: "up",
     icon: Eye,
     description: "Last 30 days",
+    slug: "total-portfolio-views",
   },
   {
     title: "Unique Visitors",
@@ -284,7 +285,7 @@ function RouteComponent() {
                       cx="50%"
                       cy="50%"
                       labelLine={false}
-                      label={({ name, percent }) =>
+                      label={({ name, percent }: { name: string; percent: number }) =>
                         percent ? `${name} ${(percent * 100).toFixed(0)}%` : ""
                       }
                       outerRadius={80}
@@ -348,9 +349,8 @@ function RouteComponent() {
                     </div>
                     <div className="text-right">
                       <div
-                        className={`flex items-center gap-1 text-sm ${
-                          project.growth > 0 ? "text-green-600" : "text-red-600"
-                        }`}
+                        className={`flex items-center gap-1 text-sm ${project.growth > 0 ? "text-green-600" : "text-red-600"
+                          }`}
                       >
                         {project.growth > 0 ? (
                           <TrendingUp className="h-3 w-3" />
@@ -456,14 +456,14 @@ function RouteComponent() {
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="hours"
-                      label={({ skill, percent }) =>
+                      label={({ skill, percent }: { skill: string; percent: number }) =>
                         percent ? `${skill} ${(percent * 100).toFixed(0)}%` : ""
                       }
                     >
-                      {skillsData.map((index) => (
+                      {skillsData.map((skill, index) => (
                         <Cell
                           key={`cell-${index}`}
-                          fill={`hsl(${index.level * 60}, 70%, 50%)`}
+                          fill={`hsl(${skill.level * 60}, 70%, 50%)`}
                         />
                       ))}
                     </Pie>

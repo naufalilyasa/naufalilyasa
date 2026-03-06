@@ -60,6 +60,7 @@ export const defaultProject: Project = {
   id: "",
   userId: "",
   title: "",
+  slug: "",
   description: "",
   startDate: new Date(),
   endDate: new Date(),
@@ -84,28 +85,28 @@ export const categories: {
   name: string;
   slug: string;
 }[] = [
-  {
-    name: "Technology",
-    slug: "technology",
-  },
-  {
-    name: "Programming",
-    slug: "programming",
-  },
-  {
-    name: "Web Development",
-    slug: "web-development",
-  },
-  {
-    name: "Mobile Development",
-    slug: "mobile-development",
-  },
-  {
-    name: "DevOps",
-    slug: "devops",
-  },
-  {
-    name: "Career",
-    slug: "career",
-  },
-];
+    {
+      name: "Technology",
+      slug: "technology",
+    },
+    {
+      name: "Programming",
+      slug: "programming",
+    },
+    {
+      name: "Web Development",
+      slug: "web-development",
+    },
+    {
+      name: "Mobile Development",
+      slug: "mobile-development",
+    },
+    {
+      name: "DevOps",
+      slug: "devops",
+    },
+    {
+      name: "Career",
+      slug: "career",
+    },
+  ];

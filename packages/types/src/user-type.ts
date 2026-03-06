@@ -1,6 +1,7 @@
 import { Technologies } from "./project-type.js";
 
 export type ProfileResponse = {
+  id: string;
   name: string;
   username: string;
   createdAt: Date;
@@ -13,6 +14,7 @@ export type ProfileResponse = {
   phoneNumber: string | null;
   photoUrl: string | null;
   website: string | null;
+  resume: string | null;
   userTechnologies: { technology: Technologies }[];
 };
 

@@ -19,7 +19,19 @@ export default defineConfig({
         __dirname,
         "../../packages/zod-schemas/dist"
       ),
+      // @hookform/resolvers v5 imports from zod/v4/core (Zod v4 subpath export)
+      // esbuild can't auto-resolve this subpath, so we alias it explicitly
+      "zod/v4/core": path.resolve(
+        __dirname,
+        "../../node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/index.js"
+      ),
     },
+  },
+  optimizeDeps: {
+    include: [
+      "zod",
+      "@hookform/resolvers/zod",
+    ],
   },
   css: {
     postcss: path.resolve(__dirname, "./postcss.config.mjs"),

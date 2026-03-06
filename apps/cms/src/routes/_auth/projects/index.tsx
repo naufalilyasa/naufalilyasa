@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Card,
   CardContent,
@@ -29,7 +29,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@repo/ui/components/dropdown-menu";
-import { toast } from "sonner";
 import {
   ExternalLink,
   Github,
@@ -45,40 +44,25 @@ import {
 } from "lucide-react";
 import ProjectForm from "../../../components/dashboard/projects/ProjectForm";
 import DeleteProjectDialog from "../../../components/dashboard/projects/DeleteProjectDialog";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Project } from "@repo/types/project";
-import {
-  createProjectFn,
-  deleteProjectFn,
-  editProjectFn,
-  getAllProjectsFn,
-} from "../../../api/project";
+import { useQuery } from "@tanstack/react-query";
+import { CategoryProject, Project } from "@repo/types/project";
+import { getAllProjectsFn } from "../../../api/project";
 import { CreateProjectFormDTO } from "@repo/zod-schemas";
 import { format } from "date-fns";
+import useCreateProject from "../../../hooks/useCreateProject";
+import useEditProject from "../../../hooks/useEditProject";
+import useDeleteProject from "../../../hooks/useDeleteProject";
 
 export const Route = createFileRoute("/_auth/projects/")({
   component: ProjectsPage,
 });
 
-enum CategoryProject {
-  FULLSTACK = "FULLSTACK",
-  FRONTEND = "FRONTEND",
-  BACKEND = "BACKEND",
-  MOBILE = "MOBILE",
-  DESKTOP = "DESKTOP",
-  AIML = "AIML",
-  DEVOPS = "DEVOPS",
-}
-
 export function ProjectsPage() {
   const {
-    data,
+    data: projects,
     isLoading: isLoadingProjects,
-    // isError: isErrorProjects,
-    // error: errorProjects,
   } = useQuery({ queryKey: ["getAllProjects"], queryFn: getAllProjectsFn });
 
-  const [projects, setProjects] = useState<Project[] | undefined>(data);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
@@ -86,103 +70,55 @@ export function ProjectsPage() {
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [deletingProject, setDeletingProject] = useState<Project | null>(null);
-  const [categories, setCategories] = useState<
-    { value: string; label: string }[]
-  >([]);
-
-  const queryClient = useQueryClient();
 
   const statuses = ["all", "Completed", "In Progress"];
 
-  useEffect(() => {
-    if (!data) return setProjects(undefined);
-    setProjects(data);
-    function formatCategoryName(category: string): string {
+  const { mutateAsync: mutateCreateProject, isPending: isPendingCreateProject } = useCreateProject();
+  const { mutateAsync: mutateEditProject, isPending: isPendingEditProject } = useEditProject();
+  const { mutateAsync: mutateDeleteProject, isPending: isPendingDeleteProject } = useDeleteProject();
+
+  const categories = useMemo(() => {
+    const formatCategoryName = (category: string): string => {
       if (category === "AIML") return "AI/ML";
       return category.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
-    }
+    };
 
-    setCategories([
+    return [
       { label: "All", value: "all" },
       ...Object.values(CategoryProject).map((value) => ({
         value,
         label: formatCategoryName(value),
       })),
-    ]);
-  }, [data]);
+    ];
+  }, []);
 
-  const filteredProjects = projects?.filter((project) => {
-    const matchesSearch =
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.technologies.some((tech) =>
-        tech.technology.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    const matchesCategory =
-      selectedCategory === "all" || project.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const featuredProjects = projects?.filter((project) => project.featured);
-
-  const {
-    mutateAsync: mutateCreateProject,
-    isPending: isPendingCreateProject,
-  } = useMutation({
-    mutationKey: ["createProject"],
-    mutationFn: createProjectFn,
-    onMutate: () => {
-      toast.loading("Loading...", { id: "create-project" });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAllProjects"] });
-      toast.success("Successfully create project", { id: "create-project" });
-    },
-    onError: () => {
-      toast.error("Failed create project", { id: "create-project" });
-    },
-  });
-
-  const { mutateAsync: mutateEditProject, isPending: isPendingEditProject } =
-    useMutation({
-      mutationKey: ["editProject"],
-      mutationFn: editProjectFn,
-      onMutate: () => {
-        toast.loading("Loading...", { id: "edit-project" });
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["getAllProjects"] });
-        toast.success("Successfully edit project", { id: "edit-project" });
-      },
-      onError: () => {
-        toast.error("Failed edit project", { id: "edit-project" });
-      },
+  const filteredProjects = useMemo(() => {
+    return projects?.filter((project) => {
+      const matchesSearch =
+        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.technologies.some((tech) =>
+          tech.technology.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      const matchesCategory =
+        selectedCategory === "all" || project.category === selectedCategory;
+      return matchesSearch && matchesCategory;
     });
+  }, [projects, searchTerm, selectedCategory]);
 
-  const {
-    mutateAsync: mutateDeleteProject,
-    isPending: isPendingDeleteProject,
-  } = useMutation({
-    mutationKey: ["deleteProject"],
-    mutationFn: deleteProjectFn,
-    onMutate: () => {
-      toast.loading("Loading...", { id: "delete-project" });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAllProjects"] });
-      toast.success("Successfully delete project", { id: "delete-project" });
-    },
-    onError: () => {
-      toast.error("Failed delete project", { id: "delete-project" });
-    },
-  });
+  const featuredProjects = useMemo(() => {
+    return projects?.filter((project) => project.featured);
+  }, [projects]);
 
   const handleCreateProject = async (payload: {
-    projectId?: string;
     data: CreateProjectFormDTO;
   }) => {
-    mutateCreateProject(payload.data);
-    setShowProjectForm(false);
+    try {
+      await mutateCreateProject(payload.data);
+      setShowProjectForm(false);
+    } catch (error) {
+      // toast handled in hook
+    }
   };
 
   const handleEditProject = async (payload: {
@@ -190,54 +126,59 @@ export function ProjectsPage() {
     data: CreateProjectFormDTO;
   }) => {
     if (!editingProject) return;
-    mutateEditProject({ ...payload });
-    setEditingProject(null);
-    setShowProjectForm(false);
+    try {
+      await mutateEditProject({ ...payload });
+      setEditingProject(null);
+      setShowProjectForm(false);
+    } catch (error) {
+      // toast handled in hook
+    }
   };
 
   const handleDeleteProject = async (projectId: string) => {
     if (!deletingProject) return;
-    mutateDeleteProject(projectId);
-    setShowDeleteDialog(false);
+    try {
+      await mutateDeleteProject(projectId);
+      setShowDeleteDialog(false);
+      setDeletingProject(null);
+    } catch (error) {
+      // toast handled in hook
+    }
   };
 
   const handleToggleFeatured = async (project: Project) => {
     try {
-      mutateEditProject({
+      await mutateEditProject({
         projectId: project.id,
         data: {
-          ...project,
-          technologies:
-            project?.technologies.map((tech) => tech.technology.id) ?? [],
+          title: project.title,
+          slug: project.slug,
+          description: project.description,
+          category: project.category as CategoryProject,
+          technologies: project.technologies.map((tech) => tech.technology.id),
           projectDetail: {
             time: Date.now(),
-            blocks: project.projectDetail[0].content.blocks
-              ? project.projectDetail[0].content.blocks
-              : [
-                {
-                  id: "1",
-                  type: "paragraph",
-                  data: {
-                    text: "This is a project description",
-                  },
+            blocks: project.projectDetail?.[0]?.content?.blocks ?? [
+              {
+                id: "1",
+                type: "paragraph",
+                data: {
+                  text: project.description,
                 },
-              ],
+              },
+            ],
             version: "2.30.8",
           },
-          featured: !project?.featured,
-          startDate: project?.startDate
-            ? new Date(project?.startDate)
-            : new Date(),
-          endDate: project?.endDate ? new Date(project.endDate) : undefined,
+          featured: !project.featured,
+          startDate: project.startDate ? new Date(project.startDate) : new Date(),
+          endDate: project.endDate ? new Date(project.endDate) : undefined,
+          githubUrl: project.githubUrl,
+          liveUrl: project.liveUrl,
           thumbnail: undefined,
         },
       });
-      toast.success(
-        `Project ${project.featured ? "added to" : "removed from"} featured!`
-      );
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      toast.error(`Failed to update project status`);
+      // toast handled in hook
     }
   };
 
@@ -336,11 +277,8 @@ export function ProjectsPage() {
         </div>
         <div className="flex items-center justify-between">
           <Badge variant="secondary">
-            {categories.map((category) => {
-              if (category.value === project.category) {
-                return category.label;
-              }
-            })}
+            {categories.find((c) => c.value === project.category)?.label ||
+              project.category}
           </Badge>
           <div className="flex gap-2">
             {project.githubUrl && (

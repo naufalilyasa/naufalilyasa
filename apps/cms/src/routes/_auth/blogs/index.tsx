@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogForm } from "../../../components/dashboard/blogs/BlogForm";
 import {
@@ -30,7 +29,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@repo/ui/components/dropdown-menu";
-import { toast } from "sonner";
 import {
   Search,
   Filter,
@@ -48,16 +46,16 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { BlogResponse } from "@repo/types";
 import { BlogFormDTO } from "@repo/zod-schemas";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
-  createBlogFn,
-  deleteBlogFn,
-  editBlogFn,
   getAllBlogsFn,
 } from "../../../api/blog";
+import useCreateBlog from "../../../hooks/useCreateBlog";
+import useEditBlog from "../../../hooks/useEditBlog";
+import useDeleteBlog from "../../../hooks/useDeleteBlog";
 import { categories } from "../../../utils/dummy";
 
 export const Route = createFileRoute("/_auth/blogs/")({
@@ -65,104 +63,56 @@ export const Route = createFileRoute("/_auth/blogs/")({
 });
 
 function RouteComponent() {
-  const [blogs, setBlogs] = useState<BlogResponse[]>();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [showBlogForm, setShowBlogForm] = useState(false);
   const [editingBlog, setEditingBlog] = useState<BlogResponse | null>(null);
 
-  const queryClient = useQueryClient();
-
-  const statuses = ["all", "published", "draft"];
-
-  const { data: getAllBlogs, isLoading: loadingGetAllBlogs } = useQuery({
+  const { data: blogs, isLoading: loadingGetAllBlogs } = useQuery({
     queryKey: ["getAllBlogs"],
     queryFn: getAllBlogsFn,
   });
 
-  useEffect(() => {
-    if (!loadingGetAllBlogs) {
-      setBlogs(getAllBlogs);
-    }
-  }, [getAllBlogs, loadingGetAllBlogs]);
+  const statuses = ["all", "published", "draft"];
 
-  const filteredBlogs = blogs?.filter((blog) => {
-    const matchesSearch =
-      blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      blog.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      blog.tags.some((tag) =>
-        tag.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+  const { mutateAsync: mutateCreateBlog, isPending: loadingCreateBlog } = useCreateBlog();
+  const { mutateAsync: mutateEditBlog, isPending: loadingEditBlog } = useEditBlog();
+  const { mutateAsync: mutateDeleteBlog, isPending: loadingDeleteBlog } = useDeleteBlog();
 
-    const matchesCategory =
-      selectedCategory === "all" || blog.category?.id === selectedCategory;
-    const matchesStatus =
-      selectedStatus === "all" ||
-      (selectedStatus === "published" && blog.published) ||
-      (selectedStatus === "draft" && !blog.published);
+  const filteredBlogs = useMemo(() => {
+    return blogs?.filter((blog) => {
+      const matchesSearch =
+        blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        blog.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        blog.tags.some((tag) =>
+          tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
-    return matchesSearch && matchesCategory && matchesStatus;
-  });
+      const matchesCategory =
+        selectedCategory === "all" || blog.category?.id === selectedCategory;
+      const matchesStatus =
+        selectedStatus === "all" ||
+        (selectedStatus === "published" && blog.published) ||
+        (selectedStatus === "draft" && !blog.published);
 
-  const publishedBlogs = blogs?.filter((blog) => blog.published);
-  const draftBlogs = blogs?.filter((blog) => !blog.published);
+      return matchesSearch && matchesCategory && matchesStatus;
+    });
+  }, [blogs, searchTerm, selectedCategory, selectedStatus]);
 
-  const { mutateAsync: createBlog, isPending: loadingCreateBlog } = useMutation(
-    {
-      mutationKey: ["createBlog"],
-      mutationFn: createBlogFn,
-      onMutate: () => {
-        toast.loading("Loading...", { id: "create-blog" });
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["getAllblogs"] });
-        toast.success("Successfully create blog", { id: "create-blog" });
-      },
-      onError: () => {
-        toast.error("Failed create blog", { id: "create-blog" });
-      },
-    }
-  );
-
-  const { mutateAsync: editBlog, isPending: loadingEditBlog } = useMutation({
-    mutationKey: ["editBlog"],
-    mutationFn: editBlogFn,
-    onMutate: () => {
-      toast.loading("Loading...", { id: "edit-blog" });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAllblogs"] });
-      toast.success("Successfully edit blog", { id: "edit-blog" });
-    },
-    onError: () => {
-      toast.error("Failed edit blog", { id: "edit-blog" });
-    },
-  });
-
-  const { mutateAsync: deleteBlog, isPending: loadingDeleteBlog } = useMutation(
-    {
-      mutationKey: ["deleteBlog"],
-      mutationFn: deleteBlogFn,
-      onMutate: () => {
-        toast.loading("Loading...", { id: "delete-blog" });
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["getAllblogs"] });
-        toast.success("Successfully delete blog", { id: "delete-blog" });
-      },
-      onError: () => {
-        toast.error("Failed delete blog", { id: "delete-blog" });
-      },
-    }
-  );
+  const publishedBlogs = useMemo(() => blogs?.filter((blog) => blog.published), [blogs]);
+  const draftBlogs = useMemo(() => blogs?.filter((blog) => !blog.published), [blogs]);
 
   const handleCreateBlog = async (payload: {
     blogId?: string;
     data: BlogFormDTO;
   }) => {
-    createBlog(payload.data);
-    setShowBlogForm(false);
+    try {
+      await mutateCreateBlog(payload.data);
+      setShowBlogForm(false);
+    } catch (error) {
+      // handled in hook
+    }
   };
 
   const handleEditBlog = async (payload: {
@@ -170,18 +120,27 @@ function RouteComponent() {
     data: BlogFormDTO;
   }) => {
     if (!editingBlog) return;
-    editBlog({ ...payload });
-    setEditingBlog(null);
-    setShowBlogForm(false);
+    try {
+      await mutateEditBlog({ ...payload });
+      setEditingBlog(null);
+      setShowBlogForm(false);
+    } catch (error) {
+      // handled in hook
+    }
   };
 
   const handleDeleteBlog = async (blogId: string) => {
-    deleteBlog(blogId);
+    try {
+      await mutateDeleteBlog(blogId);
+    } catch (error) {
+      // handled in hook
+    }
   };
 
   const handleTogglePublished = async (blog: BlogResponse) => {
     try {
-      editBlog({
+      await mutateEditBlog({
+        blogId: blog.id,
         data: {
           title: blog.title,
           slug: blog.slug,
@@ -194,30 +153,26 @@ function RouteComponent() {
                   id: "1",
                   type: "paragraph",
                   data: {
-                    text: "This is a project description",
+                    text: blog.excerpt ?? "",
                   },
                 },
               ],
             version: "2.30.8",
           },
-          tags: blog.tags,
-          excerpt: blog.excerpt ? blog.excerpt : "",
+          tags: blog.tags.map(t => ({ id: t.id, name: t.name })),
+          excerpt: blog.excerpt ?? "",
           thumbnail: undefined,
           published: !blog.published,
-          publishedAt: new Date(),
+          publishedAt: blog.publishedAt ? new Date(blog.publishedAt) : new Date(),
           categorySlug: blog.category?.slug,
         },
       });
-
-      toast.success(
-        `Blog post ${blog.published ? "published" : "unpublished"}!`
-      );
     } catch (error) {
-      toast.error("Failed to update blog post status.");
+      // handled in hook
     }
   };
 
-  const handleDuplicateBlog = (blog: BlogResponse) => {
+  const handleDuplicateBlog = async (blog: BlogResponse) => {
     const duplicatedBlog: BlogFormDTO = {
       title: `${blog.title} (Copy)`,
       slug: `${blog.slug}-copy`,
@@ -231,21 +186,24 @@ function RouteComponent() {
               id: "1",
               type: "paragraph",
               data: {
-                text: "This is a project description",
+                text: blog.excerpt ?? "",
               },
             },
           ],
         version: "2.30.8",
       },
-      tags: blog.tags,
-      excerpt: blog.excerpt ? blog.excerpt : "",
+      tags: blog.tags.map(t => ({ id: t.id, name: t.name })),
+      excerpt: blog.excerpt ?? "",
       thumbnail: undefined,
       publishedAt: undefined,
       categorySlug: blog.category?.slug,
     };
 
-    createBlog(duplicatedBlog);
-    toast.success("Blog post duplicated successfully!");
+    try {
+      await mutateCreateBlog(duplicatedBlog);
+    } catch (error) {
+      // handled in hook
+    }
   };
 
   const getCategoryName = (categorySlug?: string) => {
@@ -436,7 +394,7 @@ function RouteComponent() {
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
                   <SelectContent>
-                    {statuses.map((status) => (
+                    {statuses.map((status: string) => (
                       <SelectItem key={status} value={status}>
                         {status === "all"
                           ? "All Status"

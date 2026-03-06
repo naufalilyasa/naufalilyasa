@@ -38,7 +38,6 @@ export const getProfileById = async (userId: string) => {
       id: userId,
     },
     omit: {
-      id: true,
       password: true,
       photoId: true,
     },
@@ -64,11 +63,11 @@ export const updateProfile = async (payload: ProfileRequestDTO, userId: string) 
       ...rest,
       userTechnologies: technologies
         ? {
-            deleteMany: {},
-            create: technologies.map((techId) => ({
-              technologyId: techId,
-            })),
-          }
+          deleteMany: {},
+          create: technologies.map((techId) => ({
+            technologyId: techId,
+          })),
+        }
         : undefined,
     },
     include: {

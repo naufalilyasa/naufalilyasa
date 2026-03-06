@@ -24,6 +24,7 @@ model User {
   photoId          String?
   photoUrl         String?
   website          String?
+  resume           String?
   projects         Project[]
   userTechnologies UserTechnology[]
   BlogPost         BlogPost[]

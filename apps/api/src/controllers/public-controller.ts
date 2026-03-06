@@ -95,7 +95,6 @@ export const getPublicUserProfile = async (req: Request, res: Response, next: Ne
         id: config.userId,
       },
       omit: {
-        id: true,
         password: true,
         photoId: true,
       },

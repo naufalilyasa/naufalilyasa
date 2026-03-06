@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -41,7 +41,6 @@ import {
   CommandItem,
   CommandList,
 } from "@repo/ui/components/command";
-import { toast } from "sonner";
 import {
   Mail,
   Phone,
@@ -58,12 +57,13 @@ import {
   Code,
   Loader2,
 } from "lucide-react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../../../store/auth";
-import { editProfileFn, getUserByIdFn } from "../../../api/user";
+import { getUserByIdFn } from "../../../api/user";
 import { CategoryTech, Technologies } from "@repo/types/project";
 import { getAllTechnologiesFn } from "../../../api/technology";
 import { ProfileFormDTO, profileFormSchema } from "@repo/zod-schemas";
+import useEditProfile from "../../../hooks/useEditProfile";
 
 export const Route = createFileRoute("/_auth/profile/")({
   component: ProfilePage,
@@ -75,120 +75,98 @@ export function ProfilePage() {
   const [selectedTechnologies, setSelectedTechnologies] = useState<
     Technologies[]
   >([]);
-  const [technologies, setTechnologies] = useState<Technologies[]>();
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { authUser } = useAuth();
+  const { mutateAsync: editProfile, isPending } = useEditProfile();
 
   const { data: profileData, isLoading } = useQuery({
     queryKey: ["getUserById", authUser?.id],
     queryFn: () => (authUser?.id ? getUserByIdFn(authUser?.id) : undefined),
+    enabled: !!authUser?.id,
   });
 
   const form = useForm<ProfileFormDTO>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      description: profileData?.description ? profileData.description : "",
-      email: profileData?.email ? profileData.email : "",
-      github: profileData?.github ? profileData.github : "",
-      linkedin: profileData?.linkedin ? profileData.linkedin : "",
-      name: profileData?.name ? profileData.name : "",
-      phoneNumber: profileData?.phoneNumber ? profileData.phoneNumber : "",
-      website: profileData?.website ? profileData.website : "",
-      technologies: profileData?.userTechnologies
-        ? profileData.userTechnologies.map((t) => t.technology.id)
-        : [],
+      description: "",
+      email: "",
+      github: "",
+      linkedin: "",
+      name: "",
+      phoneNumber: "",
+      website: "",
+      resume: "",
+      technologies: [],
       photo: undefined,
     },
   });
 
   useEffect(() => {
-    if (!profileData) return;
-    setSelectedTechnologies(
-      profileData.userTechnologies.map((t) => t.technology)
-    );
-    form.setValue("name", profileData.name);
-    form.setValue(
-      "description",
-      profileData.description ? profileData.description : undefined
-    );
-    form.setValue("email", profileData.email ? profileData.email : undefined);
-    form.setValue(
-      "github",
-      profileData.github ? profileData.github : undefined
-    );
-    form.setValue(
-      "linkedin",
-      profileData.linkedin ? profileData.linkedin : undefined
-    );
-    form.setValue(
-      "phoneNumber",
-      profileData.phoneNumber ? profileData.phoneNumber : undefined
-    );
-    form.setValue(
-      "website",
-      profileData.website ? profileData.website : undefined
-    );
+    if (profileData) {
+      form.reset({
+        description: profileData.description ?? "",
+        email: profileData.email ?? "",
+        github: profileData.github ?? "",
+        linkedin: profileData.linkedin ?? "",
+        name: profileData.name ?? "",
+        phoneNumber: profileData.phoneNumber ?? "",
+        website: profileData.website ?? "",
+        resume: profileData.resume ?? "",
+        technologies: profileData.userTechnologies.map((t) => t.technology.id),
+      });
+      setSelectedTechnologies(
+        profileData.userTechnologies.map((t) => t.technology)
+      );
+    }
   }, [profileData, form]);
 
   const {
     data: technologiesData,
     isLoading: isLoadingTechnologies,
-    // error: errorTechnologies,
-    // isError: isErrorTechnologies,
   } = useQuery({
     queryKey: ["getAllTechnologies"],
     queryFn: getAllTechnologiesFn,
   });
 
-  useEffect(() => {
-    if (!technologiesData) return;
-    setTechnologies(technologiesData.data);
-  }, [technologiesData]);
+  const technologies = useMemo(() => technologiesData?.data ?? [], [technologiesData]);
 
-  const categoryTechOptions = Object.values(CategoryTech).map((val) => ({
-    value: val,
-    label: val
-      .replace(/_/g, " ")
-      .toLowerCase()
-      .replace(/\b\w/g, (c) => c.toUpperCase()),
-  }));
+  const skillCategories = useMemo(() => {
+    const categoryTechOptions = Object.values(CategoryTech).map((val) => ({
+      value: val,
+      label: val
+        .replace(/_/g, " ")
+        .toLowerCase()
+        .replace(/\b\w/g, (c) => c.toUpperCase()),
+    }));
 
-  const skillCategories = categoryTechOptions.map((category) => {
-    return {
-      label: category.label,
-      value: category.value,
-      skills: technologies?.filter((technology) => {
-        return technology.category === category.value;
-      }),
-    };
-  });
-
-  const { mutateAsync, isPending } = useMutation({
-    mutationKey: ["editProfile"],
-    mutationFn: editProfileFn,
-    onMutate: () => {
-      toast.loading("Loading...", { id: "update-profile" });
-    },
-    onSuccess: () => {
-      toast.success("Profile updated successfully!", { id: "update-profile" });
-    },
-    onError: () => {
-      toast.error("Update profile failed!", { id: "update-profile" });
-    },
-  });
+    return categoryTechOptions.map((category) => {
+      return {
+        label: category.label,
+        value: category.value,
+        skills: technologies.filter((technology: Technologies) => {
+          return technology.category === category.value;
+        }),
+      };
+    });
+  }, [technologies]);
 
   const handleSave = async (data: ProfileFormDTO) => {
-    const updatedData = {
-      ...data,
-      technologies: selectedTechnologies.map(
-        (selectedTechnology) => selectedTechnology.id
-      ),
-    };
+    if (!authUser?.id) return;
 
-    if (authUser?.id) {
-      mutateAsync({ data: updatedData, userId: authUser.id });
+    try {
+      const updatedData = {
+        ...data,
+        technologies: selectedTechnologies.map(
+          (selectedTechnology: Technologies) => selectedTechnology.id
+        ),
+      };
+
+      await editProfile({ data: updatedData, userId: authUser.id });
+      setIsEditing(false);
+    } catch (error) {
+      // handled in hook
     }
-
-    setIsEditing(false);
   };
 
   const handleCancelEdit = () => {
@@ -197,7 +175,17 @@ export function ProfilePage() {
         profileData?.userTechnologies.map((t) => t.technology)
       );
     }
+    setPhotoPreview(null);
+    form.setValue("photo", undefined);
     setIsEditing(false);
+  };
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      form.setValue("photo", file);
+      setPhotoPreview(URL.createObjectURL(file));
+    }
   };
 
   const addTechnology = (techId: string) => {
@@ -286,21 +274,34 @@ export function ProfilePage() {
             <CardContent className="space-y-6">
               {/* Avatar Section */}
               <div className="flex items-center gap-6">
-                <Avatar className="h-24 w-24">
+                <Avatar className="h-24 w-24 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-none">
                   <AvatarImage
-                    src="/placeholder.svg?height=96&width=96"
+                    src={photoPreview || profileData?.photoUrl || undefined}
                     alt="Profile"
+                    className="object-cover"
                   />
-                  <AvatarFallback className="text-lg">
+                  <AvatarFallback className="text-lg rounded-none">
                     {profileData?.name
-                      .split(" ")
+                      ?.split(" ")
                       .map((n) => n[0])
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
                 {isEditing && (
                   <div className="space-y-2">
-                    <Button type="button" variant="outline" size="sm">
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handlePhotoChange}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fileInputRef.current?.click()}
+                    >
                       <Upload className="h-4 w-4 mr-2" />
                       Upload Photo
                     </Button>
@@ -413,115 +414,155 @@ export function ProfilePage() {
                 />
               </div>
 
-              {/* Social Links */}
-              <div className="grid gap-4 md:grid-cols-3">
-                <FormField
-                  control={form.control}
-                  name="website"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2">
-                        <Globe className="h-4 w-4" />
-                        Website
-                      </FormLabel>
-                      <FormControl>
-                        {isEditing ? (
-                          <Input placeholder="https://johndoe.dev" {...field} />
-                        ) : (
-                          <div className="p-2 text-sm">
-                            {profileData?.website ? (
-                              <a
-                                href={profileData?.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
-                              >
-                                {profileData?.website}
-                              </a>
-                            ) : (
-                              <span className="text-muted-foreground">
-                                Not provided
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              {/* Links & Resume */}
+              <div className="space-y-4 pt-4 border-t">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="website"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex items-center gap-2">
+                          <Globe className="h-4 w-4" />
+                          Website
+                        </FormLabel>
+                        <FormControl>
+                          {isEditing ? (
+                            <Input placeholder="https://johndoe.dev" {...field} />
+                          ) : (
+                            <div className="p-2 text-sm">
+                              {profileData?.website ? (
+                                <a
+                                  href={profileData?.website}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:underline"
+                                >
+                                  {profileData?.website}
+                                </a>
+                              ) : (
+                                <span className="text-muted-foreground">
+                                  Not provided
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                <FormField
-                  control={form.control}
-                  name="github"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2">
-                        <Github className="h-4 w-4" />
-                        GitHub
-                      </FormLabel>
-                      <FormControl>
-                        {isEditing ? (
-                          <Input placeholder="Your GitHub link" {...field} />
-                        ) : (
-                          <div className="p-2 text-sm">
-                            {profileData?.github ? (
-                              <a
-                                href={`${profileData?.github}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
-                              >
-                                {profileData?.github}
-                              </a>
-                            ) : (
-                              <span className="text-muted-foreground">
-                                Not provided
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  <FormField
+                    control={form.control}
+                    name="resume"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex items-center gap-2">
+                          <Globe className="h-4 w-4 text-muted-foreground" />
+                          Resume URL
+                        </FormLabel>
+                        <FormControl>
+                          {isEditing ? (
+                            <Input placeholder="https://drive.google.com/..." {...field} />
+                          ) : (
+                            <div className="p-2 text-sm border rounded-md min-h-10 flex items-center bg-background">
+                              {profileData?.resume ? (
+                                <a
+                                  href={profileData?.resume}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:underline"
+                                >
+                                  {profileData?.resume}
+                                </a>
+                              ) : (
+                                <span className="text-muted-foreground">
+                                  Not provided
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-                <FormField
-                  control={form.control}
-                  name="linkedin"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2">
-                        <Linkedin className="h-4 w-4" />
-                        LinkedIn
-                      </FormLabel>
-                      <FormControl>
-                        {isEditing ? (
-                          <Input placeholder="Your LinkedIn link" {...field} />
-                        ) : (
-                          <div className="p-2 text-sm">
-                            {profileData?.linkedin ? (
-                              <a
-                                href={`${profileData?.linkedin}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
-                              >
-                                {profileData?.linkedin}
-                              </a>
-                            ) : (
-                              <span className="text-muted-foreground">
-                                Not provided
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="grid gap-4 md:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="github"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex items-center gap-2">
+                          <Github className="h-4 w-4" />
+                          GitHub
+                        </FormLabel>
+                        <FormControl>
+                          {isEditing ? (
+                            <Input placeholder="Your GitHub link" {...field} />
+                          ) : (
+                            <div className="p-2 text-sm border rounded-md min-h-10 flex items-center bg-background">
+                              {profileData?.github ? (
+                                <a
+                                  href={`${profileData?.github}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:underline"
+                                >
+                                  {profileData?.github}
+                                </a>
+                              ) : (
+                                <span className="text-muted-foreground">
+                                  Not provided
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="linkedin"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex items-center gap-2">
+                          <Linkedin className="h-4 w-4" />
+                          LinkedIn
+                        </FormLabel>
+                        <FormControl>
+                          {isEditing ? (
+                            <Input placeholder="Your LinkedIn link" {...field} />
+                          ) : (
+                            <div className="p-2 text-sm border rounded-md min-h-10 flex items-center bg-background">
+                              {profileData?.linkedin ? (
+                                <a
+                                  href={`${profileData?.linkedin}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:underline"
+                                >
+                                  {profileData?.linkedin}
+                                </a>
+                              ) : (
+                                <span className="text-muted-foreground">
+                                  Not provided
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -572,20 +613,20 @@ export function ProfilePage() {
                               </div>
                             </div>
                           </CommandEmpty>
-                          {skillCategories.map((skillCategory) => (
+                          {skillCategories.map((skillCategory: { label: string; value: string; skills: Technologies[] }) => (
                             <CommandGroup
                               key={skillCategory.value}
                               heading={`${skillCategory.label} (${skillCategory.skills?.length})`}
                             >
                               {skillCategory.skills
                                 ?.filter(
-                                  (skill) =>
+                                  (skill: Technologies) =>
                                     !selectedTechnologies.some(
-                                      (selectedTechnology) =>
+                                      (selectedTechnology: Technologies) =>
                                         selectedTechnology.id === skill.id
                                     )
                                 )
-                                .map((skill) => (
+                                .map((skill: Technologies) => (
                                   <CommandItem
                                     key={skill.id}
                                     value={skill.name}
@@ -596,6 +637,13 @@ export function ProfilePage() {
                                     className="cursor-pointer flex items-center gap-2"
                                   >
                                     <Check className="mr-2 h-4 w-4 opacity-0" />
+                                    {skill.iconUrl && (
+                                      <img
+                                        src={skill.iconUrl}
+                                        alt={skill.name}
+                                        className="w-4 h-4 object-contain"
+                                      />
+                                    )}
                                     <span>{skill.name}</span>
                                     <Badge
                                       variant="outline"
@@ -623,7 +671,7 @@ export function ProfilePage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <FormLabel>Selected Technologies *</FormLabel>
-                  {isEditing && isLoadingTechnologies && (
+                  {isEditing && (
                     <Button
                       type="button"
                       variant="ghost"
@@ -641,20 +689,29 @@ export function ProfilePage() {
 
                 <div className="flex flex-wrap gap-2 min-h-[60px] p-3 border rounded-md bg-muted/20">
                   {selectedTechnologies.length > 0 ? (
-                    selectedTechnologies.map((tech) => (
+                    selectedTechnologies.map((tech: Technologies) => (
                       <Badge
                         key={tech.id}
                         variant="outline"
-                        className="flex items-center gap-1 px-3 py-1 text-sm bg-primary/5 hover:bg-primary/10 transition-colors"
+                        className="flex items-center gap-2 px-3 py-1 text-sm bg-primary/5 hover:bg-primary/10 transition-colors h-auto"
                       >
+                        {tech.iconUrl && (
+                          <img
+                            src={tech.iconUrl}
+                            alt={tech.name}
+                            className="w-4 h-4 object-contain"
+                          />
+                        )}
                         <span>{tech.name}</span>
                         {isEditing && (
-                          <div>
-                            <X
-                              className="h-3 w-3 cursor-pointer hover:text-red-500 transition-colors ml-1"
-                              onClick={() => removeTechnology(tech.id)}
-                            />
-                          </div>
+                          <X
+                            className="h-3 w-3 cursor-pointer hover:text-red-500 transition-colors ml-1"
+                            onClick={(e: React.MouseEvent) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              removeTechnology(tech.id);
+                            }}
+                          />
                         )}
                       </Badge>
                     ))
@@ -687,6 +744,6 @@ export function ProfilePage() {
           </Card>
         </form>
       </Form>
-    </div>
+    </div >
   );
 }
