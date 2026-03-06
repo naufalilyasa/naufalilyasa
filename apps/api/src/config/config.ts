@@ -30,6 +30,7 @@ export default {
   baseUrl: env.BASE_URL,
   cloudNameCloudinary: env.CLOUD_NAME_CLOUDINARY,
   cmsUrl: env.CMS_URL,
+  databaseUrl: env.DATABASE_URL,
   webUrl: env.WEB_URL,
   nodeEnv: env.NODE_ENV,
   port: env.PORT,

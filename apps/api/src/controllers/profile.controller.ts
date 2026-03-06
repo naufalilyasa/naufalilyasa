@@ -20,31 +20,17 @@ import { uploadSingleImage } from "../services/upload.services.js";
 import { AppError } from "../utils/appError.js";
 import { deleteSingleImage } from "../utils/deleteImage.js";
 
-export const getAllProfilesHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllProfilesHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user as null | {
-      id: string;
-      username: string;
-      name: string;
-      role: Role;
-      updatedAt: Date;
-      createdAt: Date;
-    };
-
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
     const profiles = await getAllProfiles();
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Succesfully get profiles",
+      message: "Successfully retrieved profiles",
       data: profiles,
     });
   } catch (error) {
@@ -52,134 +38,73 @@ export const getAllProfilesHandler = async (
   }
 };
 
-export const getProfileByIdHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getProfileByIdHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user as null | {
-      id: string;
-      username: string;
-      name: string;
-      role: Role;
-      updatedAt: Date;
-      createdAt: Date;
-    };
-
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
     const parsedParams = paramsProfileSchema.parse(req.params);
-
     const profile = await getProfileById(parsedParams.userId);
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Succesfully get profile by id",
+      message: "Successfully retrieved profile",
       data: profile,
     });
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Profile not found"));
+    }
+    next(error);
   }
 };
 
-export const createProfileHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const createProfileHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user as null | {
-      id: string;
-      username: string;
-      name: string;
-      role: Role;
-      updatedAt: Date;
-      createdAt: Date;
-    };
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    // Validate body
     const parsedBody = registerUserSchema.parse(req.body);
-
-    // Request data input from body
     const { name, password, username } = parsedBody;
-    const payload: Prisma.UserCreateInput = {
-      name,
-      password,
-      username,
-    };
 
-    // Register user to database
-    await registerUser(payload);
+    await registerUser({ name, password, username });
 
-    res.status(200).json({
-      statusCode: 200,
+    res.status(201).json({
+      statusCode: 201,
       status: "success",
       message: "Successfully created profile",
     });
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      return next(new AppError(409, "A record with this value already exists", [{ field: "username", message: "Duplicate entry" }]));
+    }
+    next(error);
   }
 };
 
-export const updateProfileHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updateProfileHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user as null | {
-      id: string;
-      username: string;
-      name: string;
-      role: Role;
-      updatedAt: Date;
-      createdAt: Date;
-    };
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    const filePhoto: Express.Multer.File | undefined = req.file;
-
-    // Parse params
+    const filePhoto = req.file as Express.Multer.File | undefined;
     const parsedParams = paramsProfileSchema.parse(req.params);
-
-    // Parse base payload
     const parsedBase = baseProfileSchema.parse(req.body);
 
-    // Upload photo if exists
-    let photo: undefined | { public_id: string; secure_url: string } = undefined;
-
+    let photo: undefined | { public_id: string; secure_url: string };
     if (filePhoto) {
-      const uploadResponse = await uploadSingleImage(filePhoto, "naufalilyasa/profiles");
-
-      photo = uploadResponse;
+      photo = await uploadSingleImage(filePhoto, "naufalilyasa/profiles");
     }
 
-    // Create payload
     const payload: ProfileRequestDTO = {
       ...parsedBase,
       technologies: req.body.technologies,
@@ -189,21 +114,13 @@ export const updateProfileHandler = async (
 
     const parsedPayload = profileRequestSchema.parse(payload);
 
-    // Delete existing thumbnail on cloudinary before update
     const existingThumbnail = await prisma.user.findFirst({
-      where: {
-        id: parsedParams.userId,
-      },
-      select: {
-        photoUrl: true,
-        photoId: true,
-      },
+      where: { id: parsedParams.userId },
+      select: { photoUrl: true, photoId: true },
     });
 
-    if (existingThumbnail) {
-      if (existingThumbnail.photoId) {
-        await deleteSingleImage(existingThumbnail.photoId);
-      }
+    if (existingThumbnail?.photoId) {
+      await deleteSingleImage(existingThumbnail.photoId);
     }
 
     await updateProfile(parsedPayload, parsedParams.userId);
@@ -215,58 +132,40 @@ export const updateProfileHandler = async (
     });
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Profile not found"));
+    }
+    next(error);
   }
 };
 
-export const deleteProfileHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const deleteProfileHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user as null | {
-      id: string;
-      username: string;
-      name: string;
-      role: Role;
-      updatedAt: Date;
-      createdAt: Date;
-    };
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    // Parse params id
     const parsedParams = paramsProfileSchema.parse(req.params);
 
     await prisma.user.delete({
-      where: {
-        id: parsedParams.userId,
-      },
+      where: { id: parsedParams.userId },
     });
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Successfully deleted project",
+      message: "Successfully deleted profile",
     });
-    return;
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Profile not found"));
+    }
+    next(error);
   }
 };

@@ -19,108 +19,71 @@ import { uploadSingleImage } from "../services/upload.services.js";
 import { AppError } from "../utils/appError.js";
 import { deleteSingleImage } from "../utils/deleteImage.js";
 
-export const getAllProjectsHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllProjectsHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user;
-
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
     const projects = await getAllProjects(user.id);
-
-    if (!projects) {
-      return next(new AppError(403, "Failed to get projects"));
-    }
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Successfully get all projects",
+      message: "Successfully retrieved all projects",
       data: projects,
     });
-    return;
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
-export const getProjectByIdHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  const user = res.locals.user;
-
-  if (!user) {
-    return next(new AppError(401, "You're not logged in"));
-  }
-
-  const parsedParams = paramsProjectSchema.parse(req.params);
-
+export const getProjectByIdHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
+
+    const parsedParams = paramsProjectSchema.parse(req.params);
     const project = await getProjectById(parsedParams.projectId, user.id);
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Succesfully get project by id",
+      message: "Successfully retrieved project",
       data: project,
     });
-    return;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      return next(new AppError(500, "Server internal error"));
+    if (error instanceof ZodError) {
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
+      return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Project not found"));
+    }
+    next(error);
   }
 };
 
-export const createProjectHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const createProjectHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user;
-
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
     const file = req.file as Express.Multer.File | undefined;
-
-    // Parse base payload
     const parsedBase = baseProjectSchema.parse(req.body);
 
-    // Upload and validate images url
-    let thumbnail: undefined | { public_id: string; secure_url: string } = undefined;
-
+    let thumbnail: undefined | { public_id: string; secure_url: string };
     if (file) {
-      const uploadResponse = await uploadSingleImage(file, "naufalilyasa/projects");
-      thumbnail = uploadResponse;
-      (req as any).uploadResponsePublicId = uploadResponse.public_id;
+      thumbnail = await uploadSingleImage(file, "naufalilyasa/projects");
+      (req as any).uploadResponsePublicId = thumbnail.public_id;
     }
 
-    // Final payload
     const payload: CreateProjectBackendDTO = {
       ...parsedBase,
       ...req.body,
-      projectDetail: req.body.projectDetail,
-      thumbnail: thumbnail
-        ? {
-          url: thumbnail.secure_url,
-          publicId: thumbnail!.public_id,
-        }
-        : undefined,
+      thumbnail: thumbnail ? { url: thumbnail.secure_url, publicId: thumbnail.public_id } : undefined,
     };
 
     const parsedPayload = projectBackendSchema.parse(payload);
-
     await createProject(parsedPayload, user.id);
 
     res.status(201).json({
@@ -129,87 +92,51 @@ export const createProjectHandler = async (
       message: "Successfully created project",
     });
   } catch (error) {
-    // Rollback uploaded image if database fails
-    if (req.file && Object.prototype.hasOwnProperty.call(req, 'uploadResponsePublicId')) {
+    if (req.file && Object.prototype.hasOwnProperty.call(req, "uploadResponsePublicId")) {
       const publicId = (req as any).uploadResponsePublicId;
       if (publicId) await deleteSingleImage(publicId).catch(console.error);
     }
-
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      return next(new AppError(409, "A record with this value already exists", [{ field: "title", message: "Duplicate entry" }]));
+    }
+    next(error);
   }
 };
 
-export const editProjectHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const editProjectHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user;
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    // Parse params id
     const parsedParams = paramsProjectSchema.parse(req.params);
-
-    // Parse base payload
-    const file: Express.Multer.File | undefined = req.file;
-
-    // Parse base payload
+    const file = req.file as Express.Multer.File | undefined;
     const parsedBase = baseProjectSchema.parse(req.body);
 
-    // Upload image
-    let thumbnail: undefined | { public_id: string; secure_url: string } = undefined;
-
+    let thumbnail: undefined | { public_id: string; secure_url: string };
     if (file) {
-      const uploadResponse = await uploadSingleImage(file, "naufalilyasa/projects");
-
-      thumbnail = uploadResponse;
-      (req as any).uploadResponsePublicId = uploadResponse.public_id;
+      thumbnail = await uploadSingleImage(file, "naufalilyasa/projects");
+      (req as any).uploadResponsePublicId = thumbnail.public_id;
     }
 
-    // Final payload
     const payload: CreateProjectBackendDTO = {
       ...parsedBase,
       ...req.body,
-      projectDetail: req.body.projectDetail,
-      thumbnail: thumbnail
-        ? {
-          url: thumbnail.secure_url,
-          publicId: thumbnail.public_id,
-        }
-        : undefined,
+      thumbnail: thumbnail ? { url: thumbnail.secure_url, publicId: thumbnail.public_id } : undefined,
     };
 
     const parsedPayload = projectBackendSchema.parse(payload);
 
-    // Delete existing thumbnail on cloudinary before update
     const existingThumbnail = await prisma.project.findFirst({
-      where: {
-        id: parsedParams.projectId,
-      },
-      select: {
-        thumbnail: {
-          select: {
-            publicId: true,
-          },
-        },
-      },
+      where: { id: parsedParams.projectId },
+      select: { thumbnail: { select: { publicId: true } } },
     });
 
-    if (existingThumbnail) {
-      if (existingThumbnail.thumbnail) {
-        await deleteSingleImage(existingThumbnail.thumbnail.publicId);
-      }
+    if (existingThumbnail?.thumbnail) {
+      await deleteSingleImage(existingThumbnail.thumbnail.publicId);
     }
 
     await updateProject(parsedParams.projectId, parsedPayload, user.id);
@@ -219,44 +146,31 @@ export const editProjectHandler = async (
       status: "success",
       message: "Successfully edited project",
     });
-    return;
   } catch (error) {
-    // Rollback uploaded image if database fails
-    if (req.file && Object.prototype.hasOwnProperty.call(req, 'uploadResponsePublicId')) {
+    if (req.file && Object.prototype.hasOwnProperty.call(req, "uploadResponsePublicId")) {
       const publicId = (req as any).uploadResponsePublicId;
       if (publicId) await deleteSingleImage(publicId).catch(console.error);
     }
-
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Project not found"));
+    }
+    next(error);
   }
 };
 
-export const deleteProjectHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const deleteProjectHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user;
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    // Parse params id
     const parsedParams = paramsProjectSchema.parse(req.params);
 
     await prisma.project.delete({
-      where: {
-        id: parsedParams.projectId,
-      },
+      where: { id: parsedParams.projectId },
     });
 
     res.status(200).json({
@@ -264,18 +178,14 @@ export const deleteProjectHandler = async (
       status: "success",
       message: "Successfully deleted project",
     });
-    return;
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      console.error(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Project not found"));
     }
-    return next(error);
+    next(error);
   }
 };

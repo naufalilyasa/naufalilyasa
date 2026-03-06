@@ -8,33 +8,25 @@ import { prisma } from "../prisma/prisma.js";
 import { AppError } from "../utils/appError.js";
 import { getAllBlogs, getBlogById } from "../services/blog.service.js";
 
-export const getAllTechnologiesHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllTechnologiesHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await prisma.technology.findMany({});
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Successfully get all technologies",
+      message: "Successfully retrieved all technologies",
       data: result,
     });
-    return;
   } catch (error) {
-    return next(error);
+    next(error);
   }
 };
 
-export const getAllPublicProjectsHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getAllPublicProjectsHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const projects = await prisma.project.findMany({
+      where: { userId: config.userId },
       orderBy: { createdAt: "desc" },
       include: {
         projectDetail: true,
@@ -50,35 +42,22 @@ export const getAllPublicProjectsHandler = async (
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Successfully get all projects",
+      message: "Successfully retrieved all public projects",
       data: projects,
     });
-    return;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        return next(new AppError(409, "Duplicate entry"));
-      }
-      return next(new AppError(400, error.message));
-    }
-    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      return next(new AppError(500, error.message));
-    }
-    return next(error);
+    next(error);
   }
 };
 
-export const getPublicProjectByIdHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  const parsedParams = paramsProjectSchema.parse(req.params);
-
+export const getPublicProjectByIdHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const parsedParams = paramsProjectSchema.parse(req.params);
+
     const project = await prisma.project.findFirstOrThrow({
       where: {
         id: parsedParams.projectId,
+        userId: config.userId,
       },
       include: {
         technologies: {
@@ -94,23 +73,22 @@ export const getPublicProjectByIdHandler = async (
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Succesfully get project by id",
+      message: "Successfully retrieved public project",
       data: project,
     });
-    return;
   } catch (error) {
-    if (Prisma.PrismaClientUnknownRequestError) {
-      return next(new AppError(500, "Server internal error"));
+    if (error instanceof ZodError) {
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
+      return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Project not found"));
+    }
+    next(error);
   }
 };
 
-export const getPublicUserProfile = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getPublicUserProfile = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const profile = await prisma.user.findFirstOrThrow({
       where: {
@@ -133,99 +111,51 @@ export const getPublicUserProfile = async (
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Succesfully get profile by id",
+      message: "Successfully retrieved public profile",
       data: profile,
     });
   } catch (error) {
-    if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
-      return next(new AppError(400, "Validation failed", formattedErrors));
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Profile not found"));
     }
-    return next(error);
+    next(error);
   }
 };
 
-export const getPublicAllBlogsHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getPublicAllBlogsHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = res.locals.user as null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    };
-
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    const blogs = await getAllBlogs(user.id);
-
-    if (!blogs) {
-      return next(new AppError(403, "Failed to get blogs"));
-    }
+    const blogs = await getAllBlogs(config.userId);
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Successfully get all blogs",
+      message: "Successfully retrieved all public blogs",
       data: blogs,
     });
-    return;
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        return next(new AppError(409, "Duplicate entry"));
-      }
-      return next(new AppError(400, error.message));
-    }
-    if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-      return next(new AppError(500, error.message));
-    }
-    return next(error);
+    next(error);
   }
 };
 
-export const getPublicBlogBySlugHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  const user = res.locals.user as null | {
-    createdAt: Date;
-    id: string;
-    name: string;
-    updatedAt: Date;
-    username: string;
-  };
-
-  if (!user) {
-    return next(new AppError(401, "You're not logged in"));
-  }
-
-  const parsedParams = paramsSlugBlogSchema.parse(req.params);
-
+export const getPublicBlogBySlugHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const blog = await getBlogById(parsedParams.slug, user.id);
+    const parsedParams = paramsSlugBlogSchema.parse(req.params);
+    const blog = await getBlogById(parsedParams.slug, config.userId);
 
     res.status(200).json({
       statusCode: 200,
       status: "success",
-      message: "Succesfully get blog by slug",
+      message: "Successfully retrieved public blog",
       data: blog,
     });
-    return;
   } catch (error) {
-    if (Prisma.PrismaClientUnknownRequestError) {
-      return next(new AppError(500, "Server internal error"));
+    if (error instanceof ZodError) {
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
+      return next(new AppError(400, "Validation failed", formattedErrors));
     }
-    return next(error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Blog not found"));
+    }
+    next(error);
   }
 };

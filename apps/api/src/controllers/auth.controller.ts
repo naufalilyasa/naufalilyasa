@@ -38,237 +38,124 @@ const refreshTokenCookieOptions: CookieOptions = {
   maxAge: config.refreshTokenExpiresIn * 60 * 1000,
 };
 
-const loginHandler = async (
-  req: Request<{}, {}, LoginUserDTO>,
-  res: Response,
-  next: NextFunction,
-) => {
+const loginHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const parsedBody = loginUserSchema.parse(req.body);
-    // Request data input from body
-    const { password, username } = parsedBody;
-    const payload = { password, username };
+    const { accessToken, refreshToken } = await loginUser(parsedBody);
 
-    // Get access token, refresh token and user public info
-    const { accessToken, refreshToken, user } = await loginUser(payload);
-
-    // Set accesss token and refresh token to cookie
-    res.cookie("access_token", accessToken, {
-      ...accessTokenCookieOptions,
-    });
-    res.cookie("refresh_token", refreshToken, {
-      ...refreshTokenCookieOptions,
-    });
+    res.cookie("access_token", accessToken, accessTokenCookieOptions);
+    res.cookie("refresh_token", refreshToken, refreshTokenCookieOptions);
 
     res.status(200).json({
-      data: {
-        id: user.id,
-        name: user.name,
-        username: user.username,
-      },
-      message: "Login successful",
-      status: "success",
       statusCode: 200,
+      status: "success",
+      message: "Login successful",
     });
-    return;
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
-
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
-    } else {
-      return next(error);
     }
+    next(error);
   }
 };
 
 const registerHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Validate body
     const parsedBody = registerUserSchema.parse(req.body);
-
-    // Request data input from body
     const { name, password, username } = parsedBody;
-    const payload: Prisma.UserCreateInput = {
-      name,
-      password,
-      username,
-    };
 
-    // Register user to database
-    const { result } = await registerUser(payload);
+    await registerUser({ name, password, username });
 
-    res.status(200).json({
-      data: {
-        id: result.id,
-        name: result.name,
-        username: result.username,
-      },
-      message: "User registered successfully",
+    res.status(201).json({
+      statusCode: 201,
       status: "success",
-      statusCode: 200,
+      message: "Successfully created profile",
     });
-    return;
   } catch (error) {
     if (error instanceof ZodError) {
-      const formattedErrors = error.issues.map((issue) => ({
-        field: issue.path.join("."),
-        message: issue.message,
-      }));
-
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
-    } else {
-      return next(error);
     }
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      return next(new AppError(409, "A record with this value already exists", [{ field: "username", message: "Duplicate entry" }]));
+    }
+    next(error);
   }
 };
 
 const logoutHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Get data user logged in that is set from middleware
     const user = res.locals.user;
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    // Clear session
     await redisClient.del(user.id);
 
-    // Clear cookie
-    res.clearCookie("access_token", {
-      ...cookiesOptions,
-    });
-    res.clearCookie("refresh_token", {
-      ...cookiesOptions,
-    });
+    res.clearCookie("access_token", cookiesOptions);
+    res.clearCookie("refresh_token", cookiesOptions);
 
     res.status(200).json({
-      message: "Logged out successfully",
-      status: "success",
       statusCode: 200,
+      status: "success",
+      message: "Logout successful",
     });
-
-    return;
   } catch (error) {
-    // Handle Redis errors or other unexpected errors
-    if (error instanceof Error) {
-      return next(new AppError(500, `Logout failed: ${error.message}`));
-    } else {
-      return next(new AppError(500, "Logout failed due to unknown error"));
-    }
+    next(error);
   }
 };
 
 const refreshHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Get refresh_token cookie
     const refreshToken = req.cookies.refresh_token as string;
+    if (!refreshToken) throw new AppError(401, "Missing refresh token");
+    if (!config.refreshTokenPublicKey) throw new AppError(500, "Server configuration error");
 
-    // Check if refresh_token exist
-    if (!refreshToken) {
-      throw new AppError(401, "Invalid token or token expires");
-    }
-
-    // Check if refresh_token public key exist
-    if (!config.refreshTokenPublicKey) {
-      throw new AppError(401, "Missing token or public key");
-    }
-
-    // Verify token or decoded token
     const payload = verifyJwt(refreshToken, config.refreshTokenPublicKey);
+    if (!payload?.sub) throw new AppError(401, "Session has expired or user doesn't exist");
 
-    // Check is not null or undefined payload from decoded jwt token
-    if (!payload?.sub) {
-      throw new AppError(401, "Invalid token or token expires");
-    }
-
-    // Get session data
     const session = await redisClient.get(payload.sub as string);
+    if (typeof session !== "string") throw new AppError(401, "Session has expired or user doesn't exist");
 
-    // Check is session data exist
-    if (typeof session !== "string") {
-      return next(new AppError(500, "Invalid session format"));
-    }
-
-    // Parse session data json
     const sessionParse = LoginResponseSchema.parse(JSON.parse(session));
+    const user = await findUniqueUser({ id: sessionParse.id }, { password: true });
 
-    // Check if user still exist in database
-    const user: null | {
-      createdAt: Date;
-      id: string;
-      name: string;
-      updatedAt: Date;
-      username: string;
-    } = await findUniqueUser({ id: sessionParse.id }, { password: true });
+    if (!user) throw new AppError(401, "Session has expired or user doesn't exist");
 
-    if (!user) {
-      throw new AppError(401, "Could not refresh access token");
-    }
-
-    // Create new access_token
     const accessToken = signJwt({ sub: user.id }, config.accessTokenPrivateKey, {
       expiresIn: config.refreshTokenExpiresIn * 60 * 1000,
     });
 
-    // Set new access_token cookie
     res.cookie("access_token", accessToken, accessTokenCookieOptions);
 
     res.status(200).json({
-      message: "Access token refreshed",
-      status: "success",
       statusCode: 200,
+      status: "success",
+      message: "Access token refreshed",
     });
-    return;
   } catch (error) {
-    // Handle known errors
-    if (error instanceof AppError) {
-      return next(error);
-    }
-
-    // Handle validation errors
-    if (error instanceof ZodError) {
-      return next(new AppError(400, "Invalid session data"));
-    }
-
-    // Handle general errors
-    return next(new AppError(500, "Could not refresh access token"));
+    if (error instanceof AppError) return next(error);
+    next(new AppError(401, "Session has expired or user doesn't exist"));
   }
 };
 
 const getMeHandler = (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Get data user logged in that is set from middleware
     const user = res.locals.user;
-
-    if (!user) {
-      return next(new AppError(401, "You're not logged in"));
-    }
-
-    // Validate required fields exist
-    if (!user.id || !user.name || !user.username) {
-      return next(new AppError(500, "User data is incomplete"));
-    }
+    if (!user) return next(new AppError(401, "You're not logged in"));
 
     res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Successfully retrieved user profile",
       data: {
         id: user.id,
         name: user.name,
         username: user.username,
+        role: user.role,
       },
-      status: "success",
-      statusCode: 200,
     });
   } catch (error) {
-    if (error instanceof Error) {
-      return next(new AppError(500, `Failed to get user data: ${error.message}`));
-    } else {
-      return next(new AppError(500, "Failed to get user data"));
-    }
+    next(error);
   }
 };
 

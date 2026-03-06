@@ -16,33 +16,20 @@ export const loginUser = async (
 ): Promise<{ accessToken: string; refreshToken: string; user: LoginResponseDTO }> => {
   const { password, username } = payload;
 
-  // Querying to get user input detail data
   const user = await prisma.user.findUnique({
-    select: {
-      id: true,
-      name: true,
-      password: true,
-      username: true,
-      role: true,
-    },
-    where: {
-      username,
-    },
+    where: { username },
   });
 
-  // Check if user exist or already register
   if (!user) {
-    throw new AppError(403, `Invalid username or password`);
+    throw new AppError(401, `Invalid username or password`);
   }
 
-  // Check user password using bcrypt compare
   const comparedPassword = await bcrypt.compare(password, user.password);
 
   if (!comparedPassword) {
-    throw new AppError(403, "Invalid username or password");
+    throw new AppError(401, "Invalid username or password");
   }
 
-  // Create access token and refresh token to get access of our application
   const { accessToken, refreshToken } = await signTokens({ ...user });
 
   return {
@@ -55,36 +42,24 @@ export const loginUser = async (
 export const registerUser = async (payload: Prisma.UserCreateInput) => {
   const { name, password, username } = payload;
 
-  try {
-    // Hash password input
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(password, salt);
+  const saltRounds = 10;
+  const salt = await bcrypt.genSalt(saltRounds);
+  const hashedPassword = await bcrypt.hash(password, salt);
 
-    const result = await prisma.user.create({
-      data: {
-        name,
-        password: hashedPassword,
-        username,
-      },
-    });
-
-    return { result };
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
-      throw new AppError(409, `Username ${username} already exist.`);
-    }
-    throw new AppError(500, "Failed to register user");
-  }
+  return await prisma.user.create({
+    data: {
+      name,
+      password: hashedPassword,
+      username,
+    },
+  });
 };
 
 export const signTokens = async (
   payload: UserType & { role: Role },
 ): Promise<{ accessToken: string; refreshToken: string }> => {
   // Create session
-  await redisClient.set(payload.id, JSON.stringify(omit(payload, ["password"])), {
-    expiration: { type: "EX", value: config.redisCacheExpiresIn * 60 },
-  });
+  await redisClient.set(payload.id, JSON.stringify(omit(payload, ["password"])), { EX: config.redisCacheExpiresIn * 60 });
 
   // Create jwt token
   const accessToken = signJwt({ sub: payload.id }, config.accessTokenPrivateKey, {
@@ -99,10 +74,10 @@ export const signTokens = async (
 
 export const findUniqueUser = async (
   where: Prisma.UserWhereUniqueInput,
-  omit: Prisma.UserOmit,
+  omitOpts?: Prisma.UserOmit,
 ) => {
   return await prisma.user.findUnique({
-    omit,
+    omit: omitOpts,
     where,
   });
 };

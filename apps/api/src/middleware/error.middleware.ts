@@ -23,22 +23,15 @@ export const errorHandler = (
     errors = err.errors ?? [];
   }
 
-  const responseData: Record<string, any> = {
-    message: err.message,
+  const response: Record<string, any> = {
+    statusCode,
+    status,
+    message: config.nodeEnv === "production" && statusCode === 500 ? "Something went wrong" : message,
   };
 
   if (errors.length > 0) {
-    responseData.errors = errors;
+    response.errors = errors;
   }
 
-  // Don't leak error details in production
-  if (config.nodeEnv === "production" && statusCode === 500) {
-    responseData.message = "Something went wrong";
-  }
-
-  res.status(statusCode).json({
-    data: responseData,
-    status,
-    statusCode,
-  });
+  res.status(statusCode).json(response);
 };
