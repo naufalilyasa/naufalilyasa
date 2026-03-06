@@ -52,7 +52,36 @@ export const getProjectById = async (id: string, userId: string) => {
       },
     });
   } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      throw new AppError(404, "Project not found");
+    }
+    throw new AppError(500, "Failed to get project");
+  }
+};
+
+export const getProjectBySlug = async (slug: string, userId: string) => {
+  try {
+    return await prisma.project.findFirstOrThrow({
+      where: {
+        slug,
+        userId,
+      },
+      include: {
+        technologies: {
+          include: {
+            technology: true,
+          },
+        },
+        projectDetail: true,
+        thumbnail: {
+          omit: {
+            publicId: true,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
       throw new AppError(404, "Project not found");
     }
     throw new AppError(500, "Failed to get project");
@@ -63,6 +92,7 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
   const {
     description,
     title,
+    slug,
     startDate,
     endDate,
     githubUrl,
@@ -79,6 +109,7 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
       userId,
       description,
       title,
+      slug,
       startDate: new Date(startDate),
       endDate: endDate ? new Date(endDate) : null,
       githubUrl,
@@ -125,9 +156,9 @@ export const createProject = async (payload: CreateProjectBackendDTO, userId: st
 export const updateProject = async (
   projectId: string,
   payload: EditProjectBackendDTO,
-  userId: string,
+  userId: string
 ) => {
-  const { technologies, thumbnail, projectDetail } = payload;
+  const { technologies, thumbnail, projectDetail, slug } = payload;
 
   return await prisma.project.update({
     where: {
@@ -138,6 +169,7 @@ export const updateProject = async (
     },
     data: {
       ...payload,
+      slug,
       thumbnail: thumbnail
         ? {
           upsert: {

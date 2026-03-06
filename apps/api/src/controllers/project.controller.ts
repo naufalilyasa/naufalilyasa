@@ -2,6 +2,7 @@ import {
   baseProjectSchema,
   CreateProjectBackendDTO,
   paramsProjectSchema,
+  paramsProjectSlugSchema,
   projectBackendSchema,
 } from "@repo/zod-schemas";
 import { NextFunction, Request, Response } from "express";
@@ -13,6 +14,7 @@ import {
   createProject,
   getAllProjects,
   getProjectById,
+  getProjectBySlug,
   updateProject,
 } from "../services/project.service.js";
 import { uploadSingleImage } from "../services/upload.services.js";
@@ -44,6 +46,32 @@ export const getProjectByIdHandler = async (req: Request, res: Response, next: N
 
     const parsedParams = paramsProjectSchema.parse(req.params);
     const project = await getProjectById(parsedParams.projectId, user.id);
+
+    res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Successfully retrieved project",
+      data: project,
+    });
+  } catch (error) {
+    if (error instanceof ZodError) {
+      const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
+      return next(new AppError(400, "Validation failed", formattedErrors));
+    }
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
+      return next(new AppError(404, "Project not found"));
+    }
+    next(error);
+  }
+};
+
+export const getProjectBySlugHandler = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = res.locals.user as { id: string } | null;
+    if (!user) return next(new AppError(401, "You're not logged in"));
+
+    const parsedParams = paramsProjectSlugSchema.parse(req.params);
+    const project = await getProjectBySlug(parsedParams.slug, user.id);
 
     res.status(200).json({
       statusCode: 200,
@@ -101,7 +129,8 @@ export const createProjectHandler = async (req: Request, res: Response, next: Ne
       return next(new AppError(400, "Validation failed", formattedErrors));
     }
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
-      return next(new AppError(409, "A record with this value already exists", [{ field: "title", message: "Duplicate entry" }]));
+      const field = (error.meta?.target as string[])?.includes("slug") ? "slug" : "title";
+      return next(new AppError(409, "A record with this value already exists", [{ field, message: "Duplicate entry" }]));
     }
     next(error);
   }
@@ -130,13 +159,13 @@ export const editProjectHandler = async (req: Request, res: Response, next: Next
 
     const parsedPayload = projectBackendSchema.parse(payload);
 
-    const existingThumbnail = await prisma.project.findFirst({
+    const existingData = await prisma.project.findFirst({
       where: { id: parsedParams.projectId },
       select: { thumbnail: { select: { publicId: true } } },
     });
 
-    if (existingThumbnail?.thumbnail) {
-      await deleteSingleImage(existingThumbnail.thumbnail.publicId);
+    if (thumbnail && existingData?.thumbnail) {
+      await deleteSingleImage(existingData.thumbnail.publicId);
     }
 
     await updateProject(parsedParams.projectId, parsedPayload, user.id);
@@ -154,6 +183,10 @@ export const editProjectHandler = async (req: Request, res: Response, next: Next
     if (error instanceof ZodError) {
       const formattedErrors = error.issues.map((i) => ({ field: i.path.join("."), message: i.message }));
       return next(new AppError(400, "Validation failed", formattedErrors));
+    }
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+      const field = (error.meta?.target as string[])?.includes("slug") ? "slug" : "title";
+      return next(new AppError(409, "A record with this value already exists", [{ field, message: "Duplicate entry" }]));
     }
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
       return next(new AppError(404, "Project not found"));

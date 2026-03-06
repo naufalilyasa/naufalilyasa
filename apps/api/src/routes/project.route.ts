@@ -6,6 +6,7 @@ import {
   editProjectHandler,
   getAllProjectsHandler,
   getProjectByIdHandler,
+  getProjectBySlugHandler,
 } from "../controllers/project.controller.js";
 import { deserializeUser, requireUser } from "../middleware/authenticated.middleware.js";
 import { authorizeRole } from "../middleware/authorizeRole.middleware.js";
@@ -18,6 +19,7 @@ const router: Router = Router();
 router.use(deserializeUser, requireUser);
 
 router.get("/", getAllProjectsHandler);
+router.get("/slug/:slug", getProjectBySlugHandler);
 router.get("/:projectId", getProjectByIdHandler);
 
 router.post(

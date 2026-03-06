@@ -6,7 +6,7 @@ export default async function AllBlogsPage() {
   const blogPosts: any[] = [];
 
   return (
-    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-[12px] border-beige max-w-[80%] mx-auto flex flex-col">
+    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-12 border-beige max-w-[80%] mx-auto flex flex-col">
       {/* Masthead (Header) */}
       <header className="max-w-full mx-auto px-4 md:px-8 pt-8 mb-10 w-full">
         <div className="border-b-[6px] border-black pb-4">
@@ -51,11 +51,11 @@ export default async function AllBlogsPage() {
         </div>
       </header>
 
-      <main className="max-w-full mx-auto px-4 md:px-8 flex-grow w-full">
+      <main className="max-w-full mx-auto px-4 md:px-8 grow w-full">
         {/* Blog Columns Section */}
         <section id="blogs" className="mb-16 max-w-4xl mx-auto">
           <div className="border-b-[6px] border-black mb-12 pb-4 text-center">
-            <span className="font-ibm text-xs font-bold uppercase tracking-widest mb-4 block inline-block border-2 border-black px-2 py-1 text-ruby">
+            <span className="font-ibm text-xs font-bold uppercase tracking-widest mb-4 block border-2 border-black px-2 py-1 text-ruby">
               The Opinion Pages
             </span>
             <h2 className="text-5xl sm:text-6xl md:text-7xl font-noto font-black uppercase tracking-tight text-black leading-none mb-4">
@@ -115,7 +115,7 @@ export default async function AllBlogsPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t-[8px] border-double border-black bg-beige pt-12 pb-6 px-4 md:px-8 mt-auto">
+      <footer className="border-t-8 border-double border-black bg-beige pt-12 pb-6 px-4 md:px-8 mt-auto">
         <div className="max-w-full mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10 border-b-4 border-black pb-12">
 

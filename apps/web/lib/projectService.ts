@@ -22,10 +22,10 @@ export async function fetchProjects(): Promise<Project[]> {
   }
 }
 
-export async function fetchProjectById(id: string): Promise<Project | null> {
+export async function fetchProjectBySlug(slug: string): Promise<Project | null> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/public/projects/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/public/projects/${slug}`,
       {
         next: { revalidate: 60 },
       }
@@ -35,7 +35,7 @@ export async function fetchProjectById(id: string): Promise<Project | null> {
       return null;
     }
 
-    const data = await response.json();
+    const data: GenericResponseType & { data: Project } = await response.json();
     return data.data;
   } catch (error) {
     console.error("Error fetching project:", error);

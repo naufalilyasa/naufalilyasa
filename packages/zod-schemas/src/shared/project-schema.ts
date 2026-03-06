@@ -26,6 +26,17 @@ export const baseProjectSchema = z.object({
       }),
     }
   ),
+  slug: z
+    .string()
+    .min(1, "Slug tidak boleh kosong")
+    .regex(
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+      "Slug hanya boleh berisi huruf kecil, angka, dan tanda hubung."
+    ),
+});
+
+export const paramsProjectSlugSchema = z.object({
+  slug: z.string().min(1, "Slug is required."),
 });
 
 export type ParamsProjectDTO = z.infer<typeof paramsProjectSchema>;

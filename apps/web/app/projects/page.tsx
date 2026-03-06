@@ -159,7 +159,7 @@ export default async function AllProjectsPage() {
 
                   <div className="flex flex-wrap gap-3 mt-auto font-ibm text-xs">
                     <Button variant="default" className="rounded-none font-bold uppercase border-2 border-black px-4 bg-black text-beige hover:bg-beige hover:text-black transition-colors" asChild>
-                      <Link href={`/projects/${project.id}`}>
+                      <Link href={`/projects/${project.slug}`}>
                         Read Story
                       </Link>
                     </Button>

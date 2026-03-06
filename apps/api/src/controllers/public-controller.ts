@@ -1,4 +1,4 @@
-import { paramsProjectSchema, paramsSlugBlogSchema } from "@repo/zod-schemas";
+import { paramsProjectSlugSchema, paramsSlugBlogSchema } from "@repo/zod-schemas";
 import config from "../config/config.js";
 import { NextFunction, Request, Response } from "express";
 import { Prisma } from "../generated/prisma/index.js";
@@ -50,13 +50,13 @@ export const getAllPublicProjectsHandler = async (req: Request, res: Response, n
   }
 };
 
-export const getPublicProjectByIdHandler = async (req: Request, res: Response, next: NextFunction) => {
+export const getPublicProjectBySlugHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const parsedParams = paramsProjectSchema.parse(req.params);
+    const parsedParams = paramsProjectSlugSchema.parse(req.params);
 
     const project = await prisma.project.findFirstOrThrow({
       where: {
-        id: parsedParams.projectId,
+        slug: parsedParams.slug,
         userId: config.userId,
       },
       include: {

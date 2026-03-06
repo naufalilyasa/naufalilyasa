@@ -14,7 +14,9 @@
 
 # Test coverage
 /coverage
-/generated/prisma
+
+/src/generated/prisma
+/src/generated
 
 # Key
 /key/*.pem

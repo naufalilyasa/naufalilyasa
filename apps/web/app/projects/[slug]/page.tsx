@@ -4,15 +4,14 @@ import edjsHTML from "editorjs-html";
 import { Button } from "@repo/ui/components/button";
 import { ExternalLink, Calendar } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import { fetchProjects, fetchProjectById } from "@/lib/projectService";
+import { fetchProjects, fetchProjectBySlug } from "@/lib/projectService";
 import { CategoryProject } from "@repo/types";
 import { format } from "date-fns";
 
 export async function generateStaticParams() {
   const projects = await fetchProjects();
-  // Use project ID instead of slug for static params
   return projects.map((project) => ({
-    slug: project.id,
+    slug: project.slug,
   }));
 }
 
@@ -21,9 +20,8 @@ type ProjectPageProps = Promise<{ slug: string }>;
 export default async function ProjectDetailPage(props: {
   params: ProjectPageProps;
 }) {
-  // Fetch project by ID instead of finding by slug
   const params = await props.params;
-  const project = await fetchProjectById(params.slug);
+  const project = await fetchProjectBySlug(params.slug);
 
   function formatCategoryName(category: string): string {
     if (category === "AIML") return "AI/ML";

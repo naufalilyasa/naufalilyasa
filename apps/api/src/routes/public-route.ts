@@ -5,7 +5,7 @@ import {
   getAllTechnologiesHandler,
   getPublicAllBlogsHandler,
   getPublicBlogBySlugHandler,
-  getPublicProjectByIdHandler,
+  getPublicProjectBySlugHandler,
   getPublicUserProfile,
 } from "../controllers/public-controller.js";
 
@@ -16,7 +16,7 @@ router.get("/technologies", getAllTechnologiesHandler);
 
 // Public route to get all projects
 router.get("/projects", getAllPublicProjectsHandler);
-router.get("/projects/:projectId", getPublicProjectByIdHandler);
+router.get("/projects/:slug", getPublicProjectBySlugHandler);
 
 // Public route to get all blogs
 router.get("/blogs", getPublicAllBlogsHandler);

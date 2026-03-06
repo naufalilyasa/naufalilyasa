@@ -9,6 +9,7 @@ export type GenericResponseType = {
 export type Project = {
   id: string;
   userId: string;
+  slug: string;
   title: string;
   description: string;
   startDate: Date;
