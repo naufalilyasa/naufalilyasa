@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@repo/ui/components/button";
 import { Card, CardContent } from "@repo/ui/components/card";
-import { Badge } from "@repo/ui/components/badge";
-import { Github, ExternalLink, Eye, Calendar } from "lucide-react";
+import { ExternalLink, Calendar } from "lucide-react";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 import { fetchProjects } from "@/lib/projectService";
 import { format } from "date-fns";
 import { CategoryProject } from "@repo/types";
@@ -25,131 +25,156 @@ export default async function AllProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-beige mt-5">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-base font-medium md:text-lg lg:text-xl 2xl:text-2xl">
-            Achmad Naufal Ilyasa
-          </h1>
-          <nav className="flex space-x-6 text-xl">
-            <Link href="/" className="hover:text-ruby hover:underline">
-              About
+    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-[12px] border-beige max-w-[80%] mx-auto">
+      {/* Masthead (Header) */}
+      <header className="max-w-full mx-auto px-4 md:px-8 pt-8 mb-10 w-full">
+        <div className="border-b-[6px] border-black pb-4">
+          {/* Top meta bar */}
+          <div className="flex justify-between items-end border-b-2 border-black pb-2 mb-6">
+            <span className="font-overpass text-xs md:text-sm font-bold uppercase tracking-widest text-ruby">
+              Vol. 1 &mdash; Issue No. 1
+            </span>
+            <span className="font-overpass text-xs md:text-sm font-bold uppercase tracking-widest hidden md:inline">
+              {format(new Date(), "MMMM dd, yyyy")}
+            </span>
+            <span className="font-overpass text-xs md:text-sm font-bold uppercase tracking-widest text-ruby">
+              Jakarta, ID
+            </span>
+          </div>
+
+          {/* Title block */}
+          <div className="text-center mb-8">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black font-noto uppercase tracking-tighter leading-none text-black">
+              Achmad Naufal Ilyasa
+            </h1>
+            <p className="text-xl md:text-3xl font-inter italic mt-4 font-light text-stone-800">
+              The Web Development Inquirer
+            </p>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex justify-center flex-wrap gap-x-8 gap-y-4 text-sm md:text-base font-ibm uppercase tracking-widest border-t-2 border-b-2 border-black py-4 font-bold">
+            <Link href="/#about" className="hover:text-ruby hover:bg-black px-2 py-1 transition-colors">
+              Editorial
             </Link>
-            <Link href="/projects" className="hover:text-ruby hover:underline">
-              Projects
+            <Link href="/projects" className="bg-black text-beige px-2 py-1 transition-colors">
+              Featured Works
             </Link>
-            <Link href="#blog" className="hover:text-ruby hover:underline">
-              Blog
+            <Link href="/#tech-stack" className="hover:text-ruby hover:bg-black px-2 py-1 transition-colors">
+              Tech Stack
             </Link>
-            <Link
-              href="mailto:naufal.ilyasa7@gmail.com"
-              className="text-ruby hover:underline"
-            >
-              naufal.ilyasa7@gmail.com
+            <Link href="/blogs" className="hover:text-ruby hover:bg-black px-2 py-1 transition-colors">
+              Columns
             </Link>
           </nav>
         </div>
       </header>
 
-      {/* All Projects Section */}
-      <section id="projects" className="bg-beige py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <h3 className="text-4xl font-medium leading-tight font-noto mb-8">
-            Projects
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8">
+      <main className="max-w-full mx-auto px-4 md:px-8">
+        {/* All Projects Section */}
+        <section id="projects" className="mb-16">
+          <div className="border-b-[6px] border-black mb-8 pb-3 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+            <div>
+              <h3 className="text-5xl md:text-6xl font-noto font-black uppercase tracking-tight text-black leading-none">
+                The Archives
+              </h3>
+              <p className="font-ibm text-xs font-bold uppercase tracking-widest mt-2 text-ruby">
+                A Comprehensive Catalog of Works
+              </p>
+            </div>
+            <div className="font-ibm text-xs font-bold uppercase tracking-widest border-2 border-black px-3 py-1 flex items-center gap-2">
+              <span className="w-2 h-2 bg-black inline-block"></span>
+              {projects.length} Entries Found
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
               <Card
                 key={project.id}
-                className="group hover:shadow-lg transition-all duration-300 bg-gray-100 border-0 border-gray-200"
+                className="rounded-none border-4 border-black bg-beige shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 group flex flex-col h-full"
               >
                 {project.thumbnail && (
-                  <div className="aspect-video overflow-hidden rounded-t-lg relative">
+                  <div className="aspect-[4/3] relative border-b-4 border-black bg-black p-1 overflow-hidden">
                     <Image
                       src={project.thumbnail.url || "/placeholder.svg"}
                       alt={`${project.title} thumbnail`}
                       fill
-                      className="h-full w-full object-cover transition-transform group-hover:scale-105 duration-500 ease-in-out"
+                      className="object-cover grayscale sm:grayscale-0 lg:grayscale lg:group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
                     />
                   </div>
                 )}
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <h4 className="text-xl font-semibold text-gray-900">
+                <CardContent className="p-6 flex flex-col flex-grow">
+                  <div className="border-b-2 border-black pb-4 mb-4">
+                    <div className="flex gap-2 font-ibm text-xs font-bold uppercase mb-3">
+                      <span className="bg-black text-beige px-2 py-1">
+                        {categories.find(c => c.value === project.category)?.label || project.category}
+                      </span>
+                      {project.featured && (
+                        <span className="border-2 border-ruby text-ruby px-2 py-1 flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 bg-ruby rounded-full animate-pulse"></span>
+                          Hot
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="text-3xl font-noto font-black uppercase leading-tight line-clamp-2 text-black">
                       {project.title}
                     </h4>
-                    <Badge variant="secondary">
-                      {categories.map((category) => {
-                        if (category.value === project.category) {
-                          return category.label;
-                        }
-                      })}
-                    </Badge>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                    <Calendar className="h-4 w-4" />
-                    {project.startDate
-                      ? "Start " +
-                        format(new Date(project.startDate), "d") +
-                        "/" +
-                        format(new Date(project.startDate), "M") +
-                        "/" +
-                        format(new Date(project?.startDate), "yyyy")
-                      : ""}
-                    {project.endDate
-                      ? " - End " +
-                        format(new Date(project.endDate), "d") +
-                        "/" +
-                        format(new Date(project.endDate), "M") +
-                        "/" +
-                        format(new Date(project?.endDate), "yyyy")
-                      : " - present"}
+
+                  <div className="flex items-center gap-2 text-xs font-ibm font-bold uppercase text-black mb-4">
+                    <Calendar className="h-4 w-4 text-ruby" />
+                    <span>
+                      {project.startDate ? format(new Date(project.startDate), "MMM yyyy") : ""}
+                      {project.endDate ? " - " + format(new Date(project.endDate), "MMM yyyy") : " - Present"}
+                    </span>
                   </div>
-                  <p className="text-gray-900 mb-4">
-                    {project.description.substring(0, 150)}...
+
+                  <p className="font-inter text-sm mb-6 text-black/90 text-justify leading-relaxed flex-grow">
+                    {project.description.length > 150 ? project.description.substring(0, 150) + "..." : project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <div
-                        key={tech.id}
-                        className="flex items-center gap-1 bg-gray-100 rounded-full px-2 py-1"
-                      >
-                        {tech.technology.iconUrl && (
-                          <Image
-                            src={tech.technology.iconUrl || "/placeholder.svg"}
-                            alt={tech.technology.name}
-                            width={16}
-                            height={16}
-                            className="rounded"
-                          />
-                        )}
-                        <span className="text-xs font-medium text-black">
-                          {tech.technology.name}
-                        </span>
-                      </div>
-                    ))}
+
+                  <div className="border-t-2 border-black pt-4 mb-6">
+                    <p className="font-ibm text-xs font-bold uppercase mb-2">Developed With:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 5).map((tech) => (
+                        <div
+                          key={tech.id}
+                          className="flex items-center gap-1 border border-black px-2 py-1 bg-white"
+                        >
+                          <span className="text-xs font-ibm font-bold text-black uppercase">
+                            {tech.technology.name}
+                          </span>
+                        </div>
+                      ))}
+                      {project.technologies.length > 5 && (
+                        <div className="flex items-center gap-1 border border-black px-2 py-1 bg-black text-beige">
+                          <span className="text-xs font-ibm font-bold uppercase">
+                            +{project.technologies.length - 5} More
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex space-x-3">
-                    <Button variant="outline" size="sm" asChild>
+
+                  <div className="flex flex-wrap gap-3 mt-auto font-ibm text-xs">
+                    <Button variant="default" className="rounded-none font-bold uppercase border-2 border-black px-4 bg-black text-beige hover:bg-beige hover:text-black transition-colors" asChild>
                       <Link href={`/projects/${project.id}`}>
-                        <Eye />
-                        View Details
+                        Read Story
                       </Link>
                     </Button>
+
                     {project.liveUrl && (
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={project.liveUrl} target="_blank">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Demo
+                      <Button variant="ghost" className="rounded-none font-bold uppercase px-2 hover:bg-transparent hover:text-ruby hover:underline underline-offset-4" asChild>
+                        <Link href={project.liveUrl} target="_blank" className="text-black">
+                          <ExternalLink className="w-4 h-4 mr-1 text-black" /> View Live
                         </Link>
                       </Button>
                     )}
                     {project.githubUrl && (
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={project.githubUrl} target="_blank">
-                          <Github className="w-4 h-4 mr-2" />
-                          Code
+                      <Button variant="ghost" className="rounded-none font-bold uppercase px-2 hover:bg-transparent hover:text-ruby hover:underline underline-offset-4" asChild>
+                        <Link href={project.githubUrl} target="_blank" className="text-black">
+                          <SiGithub className="w-4 h-4 mr-1 text-black" /> Code
                         </Link>
                       </Button>
                     )}
@@ -158,92 +183,74 @@ export default async function AllProjectsPage() {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-beige py-12 text-gray-900">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h4 className="font-semibold mb-4">Achmad Naufal Ilyasa</h4>
-              <p className="text-sm">
-                Full-stack web developer from Indonesia specializing in modern
-                web technologies.
+      <footer className="border-t-[8px] border-double border-black bg-beige pt-12 pb-6 px-4 md:px-8">
+        <div className="max-w-full mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10 border-b-4 border-black pb-12">
+
+            <div className="lg:col-span-1">
+              <h4 className="font-noto font-black text-3xl uppercase tracking-tighter mb-4">A. Naufal</h4>
+              <p className="font-inter text-sm mb-6 leading-relaxed text-black/80 font-medium">
+                Distributed worldwide. Providing cutting-edge web engineering and architectural solutions. Printed with digital ink.
+              </p>
+              <p className="font-ibm text-xs uppercase font-bold tracking-widest text-ruby">
+                EST. 2025
               </p>
             </div>
+
             <div>
-              <h5 className="font-semibold mb-4 text-ruby tracking-widest">
-                Pages
+              <h5 className="font-ibm font-black uppercase text-sm mb-6 border-b-2 border-black pb-2 tracking-widest">
+                Sections
               </h5>
-              <div className="space-y-2 text-sm">
-                <div>
-                  <Link
-                    href="#about"
-                    className="hover:text-ruby hover:underline hover:underline-offset-1"
-                  >
-                    About
-                  </Link>
-                </div>
-                <div>
-                  <Link
-                    href="#projects"
-                    className="hover:text-ruby hover:underline hover:underline-offset-1"
-                  >
-                    Projects
-                  </Link>
-                </div>
-                <div>
-                  <Link
-                    href="#blog"
-                    className="hover:text-ruby hover:underline hover:underline-offset-1"
-                  >
-                    Blogs
-                  </Link>
-                </div>
+              <div className="flex flex-col space-y-3 font-inter font-bold text-sm uppercase">
+                <Link href="/#about" className="hover:text-ruby hover:pl-2 transition-all flex items-center gap-2">
+                  <span className="w-2 h-2 bg-black inline-block"></span> Editorial
+                </Link>
+                <Link href="/projects" className="hover:text-ruby hover:pl-2 transition-all flex items-center gap-2">
+                  <span className="w-2 h-2 bg-black inline-block"></span> Features
+                </Link>
+                <Link href="/blogs" className="hover:text-ruby hover:pl-2 transition-all flex items-center gap-2">
+                  <span className="w-2 h-2 bg-black inline-block"></span> Classifieds
+                </Link>
               </div>
             </div>
+
             <div>
-              <h5 className="font-semibold mb-4 text-ruby tracking-widest">
-                Get in Touch
+              <h5 className="font-ibm font-black uppercase text-sm mb-6 border-b-2 border-black pb-2 tracking-widest">
+                Wire Services
               </h5>
-              <div className="space-y-2 text-sm">
-                <div>
-                  <Link
-                    href="mailto:naufal.ilyasa7@gmail.com"
-                    className="hover:text-ruby hover:underline hover:underline-offset-1"
-                  >
-                    Email
-                  </Link>
-                </div>
-                <div>
-                  <Link
-                    href="https://linkedin.com/in/naufalilyasa"
-                    className="hover:text-ruby hover:underline hover:underline-offset-1"
-                  >
-                    LinkedIn
-                  </Link>
-                </div>
-                <div>
-                  <Link
-                    href="https://github.com/naufalilyasa"
-                    className="hover:text-ruby hover:underline hover:underline-offset-1"
-                  >
-                    GitHub
-                  </Link>
-                </div>
+              <div className="flex flex-col space-y-3 font-inter font-bold text-sm uppercase">
+                <Link href="mailto:naufal.ilyasa7@gmail.com" className="hover:text-ruby hover:underline underline-offset-4 decoration-2">
+                  Telegraph (Email)
+                </Link>
+                <Link href="https://linkedin.com/in/naufalilyasa" className="hover:text-ruby hover:underline underline-offset-4 decoration-2">
+                  Professional Network
+                </Link>
+                <Link href="https://github.com/naufalilyasa" className="hover:text-ruby hover:underline underline-offset-4 decoration-2">
+                  Code Repository
+                </Link>
               </div>
             </div>
+
             <div>
-              <h5 className="font-semibold mb-4 text-ruby tracking-widest">
-                Location
+              <h5 className="font-ibm font-black uppercase text-sm mb-6 border-b-2 border-black pb-2 tracking-widest">
+                Publishing Office
               </h5>
-              <p className="text-sm">East Jakarta, DKI Jakarta</p>
-              <p className="text-sm">Indonesia</p>
+              <div className="font-ibm text-xs font-bold uppercase leading-relaxed text-stone-800">
+                <p>East Jakarta,</p>
+                <p>DKI Jakarta Province</p>
+                <p className="text-black font-black mt-2">Republic of Indonesia</p>
+              </div>
             </div>
+
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>© 2025 Achmad Naufal Ilyasa.</p>
+
+          <div className="mt-6 flex flex-col md:flex-row justify-between items-center gap-4 font-ibm text-xs font-bold uppercase tracking-widest">
+            <p>&copy; 2025 ACHMAD NAUFAL ILYASA.</p>
+            <p>All Rights Reserved. <span className="text-ruby ml-2 text-[10px]">■ VOL 1.</span></p>
           </div>
         </div>
       </footer>
