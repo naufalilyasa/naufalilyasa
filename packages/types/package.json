@@ -35,9 +35,9 @@
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@editorjs/editorjs": "^2.30.8"
+    "@editorjs/editorjs": "^2.31.4"
   }
 }
