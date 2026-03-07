@@ -34,5 +34,8 @@
   "packageManager": "pnpm@10.14.0",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^3.3.0"
   }
 }

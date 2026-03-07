@@ -1,0 +1,23 @@
+Enum,Label
+PROGRAMMING_LANGUAGE,Programming Languages & Core Technologies
+FRONTEND_DEV,Frontend Development (Frameworks & Libraries)
+STYLING,"Styling, CSS & UI Component Libraries"
+BACKEND_DEV,"Backend Frameworks, Libraries & Runtimes"
+DATABASE,"Databases & Storage (SQL, NoSQL & Vector)"
+ORM_ODM,ORM & ODM (Data Access Layers)
+CLOUD_PLATFORM,Cloud Platforms & Hosting (BaaS & Serverless)
+DEVOPS_TOOL,"DevOps, CI/CD & Infrastructure Tools"
+DESIGN_UI_UX,UI/UX Design & Prototyping Tools
+MULTIMEDIA_PRODUCTION,"Multimedia, Audio & Video Production"
+OPERATING_SYSTEM,Operating Systems & Environments
+DEVELOPER_TOOL,"IDE, CLI & Developer Productivity Tools"
+MOBILE_DEV,Mobile App Development (Native & Cross-platform)
+DESKTOP_DEV,Desktop App Development
+AI_MACHINE_LEARNING,"AI, Machine Learning & LLM Tools"
+DATA_SCIENCE,"Data Science, Engineering & Analytics"
+GAME_DEV,Game Engines & Development
+GRAPHICS_ART,"Computer Graphics, 3D & Applied Arts"
+COMMUNICATION_COLLABORATION,"Communication, Collaboration & Team Management"
+TESTING_QA,"Testing, QA & Test Automation"
+BLOCKCHAIN_WEB3,"Blockchain, Crypto & Web3 Technologies"
+OTHER_UNCATEGORIZED,Other / Uncategorized

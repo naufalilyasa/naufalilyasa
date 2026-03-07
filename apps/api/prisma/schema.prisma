@@ -85,6 +85,7 @@ model ProjectTechnology {
 
 model Technology {
   id       String       @id @default(cuid())
+  code     String       @unique
   name     String       @unique
   iconUrl  String
   category TechCategory
@@ -136,37 +137,28 @@ model ExperienceTechnology {
 }
 
 enum TechCategory {
-  COMMUNICATION
-  VERSION_CONTROL
-  TOOLS
-  WEB_DEV
-  UI_UX
-  JAVASCRIPT
-  JAVA
-  C_CPP
-  C_SHARP
-  LUA
-  PYTHON
-  PHP
-  RUBY
-  ZIG
-  RUST
-  FORTRAN
-  GO
-  ERLANG_ELIXIR
-  APACHE
-  MOBILE_DEV
+  PROGRAMMING_LANGUAGE
+  FRONTEND_DEV
+  STYLING
+  BACKEND_DEV
   DATABASE
-  DEVOPS
-  CLOUD
-  AI
-  ANALYTICS
-  TESTING
-  GAME_DEVELOPMENT
+  ORM_ODM
+  CLOUD_PLATFORM
+  DEVOPS_TOOL
+  DESIGN_UI_UX
+  MULTIMEDIA_PRODUCTION
   OPERATING_SYSTEM
-  MICROCONTROLLER
-  MQTT_TECHNOLOGIES
-  BLOCKCHAIN
+  DEVELOPER_TOOL
+  MOBILE_DEV
+  DESKTOP_DEV
+  AI_MACHINE_LEARNING
+  DATA_SCIENCE
+  GAME_DEV
+  GRAPHICS_ART
+  COMMUNICATION_COLLABORATION
+  TESTING_QA
+  BLOCKCHAIN_WEB3
+  OTHER_UNCATEGORIZED
 }
 
 enum Role {

@@ -1,0 +1,5774 @@
+[
+  {
+    "code": "7zip",
+    "name": "7-Zip",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=7zip",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "8th",
+    "name": "8th",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=8th",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "activitypub",
+    "name": "ActivityPub",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=activitypub",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "actix",
+    "name": "Actix",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=actix",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "adobe",
+    "name": "Adobe",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobe",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "adobeacrobat",
+    "name": "Adobe Acrobat",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobeacrobat",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "adobeaftereffects",
+    "name": "Adobe After Effects",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobeaftereffects",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "adobeaudition",
+    "name": "Adobe Audition",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobeaudition",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "adobecoldfusion",
+    "name": "Adobe ColdFusion",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobecoldfusion",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "adobedreamweaver",
+    "name": "Adobe Dreamweaver",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobedreamweaver",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "adobeexpress",
+    "name": "Adobe Express",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobeexpress",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "adobeillustrator",
+    "name": "Adobe Illustrator",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobeillustrator",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "adobeindesign",
+    "name": "Adobe InDesign",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobeindesign",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "adobelightroom",
+    "name": "Adobe Lightroom",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobelightroom",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "adobephotoshop",
+    "name": "Adobe Photoshop",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobephotoshop",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "adobepremierepro",
+    "name": "Adobe Premiere Pro",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobepremierepro",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "adobexd",
+    "name": "Adobe XD",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adobexd",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "adonisjs",
+    "name": "AdonisJS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=adonisjs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "affinity",
+    "name": "Affinity",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=affinity",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "airflow",
+    "name": "Airflow",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=airflow",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "aiscript",
+    "name": "AiScript",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=aiscript",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "aisdk",
+    "name": "AI SDK",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=aisdk",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "alacritty",
+    "name": "Alacritty",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=alacritty",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "alchemy",
+    "name": "Alchemy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=alchemy",
+    "category": "BLOCKCHAIN_WEB3"
+  },
+  {
+    "code": "algolia",
+    "name": "Algolia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=algolia",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "alibabacloud",
+    "name": "Alibaba Cloud",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=alibabacloud",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "alpinejs",
+    "name": "Alpine.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=alpinejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "alpinelinux",
+    "name": "Alpine Linux",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=alpinelinux",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "amazons3",
+    "name": "Amazon S3",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=amazons3",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "amazonwebservices",
+    "name": "Amazon Web Services",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=amazonwebservices",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "amplify",
+    "name": "Amplify",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=amplify",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "anaconda",
+    "name": "Anaconda",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=anaconda",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "android",
+    "name": "android",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=android",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "androidstudio",
+    "name": "Android Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=androidstudio",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "angularjs",
+    "name": "AngularJS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=angularjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "animejs",
+    "name": "Anime.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=animejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "ansible",
+    "name": "Ansible",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ansible",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "antdesign",
+    "name": "Ant Design",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=antdesign",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "anyrun",
+    "name": "ANY.RUN",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=anyrun",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "anyscale",
+    "name": "Anyscale",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=anyscale",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "anytype",
+    "name": "Anytype",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=anytype",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "apache",
+    "name": "Apache",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apache",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "apachebeam",
+    "name": "Apache Beam",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apachebeam",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "apachehadoop",
+    "name": "Apache Hadoop",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apachehadoop",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "apachehive",
+    "name": "Apache Hive",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apachehive",
+    "category": "DATABASE"
+  },
+  {
+    "code": "apachehop",
+    "name": "Apache Hop",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apachehop",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "apachejmeter",
+    "name": "Apache JMeter",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apachejmeter",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "apachemaven",
+    "name": "Apache Maven",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apachemaven",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "apachespark",
+    "name": "Spark",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apachespark",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "apidog",
+    "name": "ApiDog",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apidog",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "apifox",
+    "name": "ApiFox",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apifox",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "apipost",
+    "name": "Apipost",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apipost",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "apktool",
+    "name": "Apktool",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apktool",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "apollo",
+    "name": "Apollo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apollo",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "appian",
+    "name": "Appian",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=appian",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "appium",
+    "name": "Appium",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=appium",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "apple",
+    "name": "Apple",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=apple",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "appwrite",
+    "name": "Appwrite",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=appwrite",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "arcbrowser",
+    "name": "Arc Browser",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=arcbrowser",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "archlinux",
+    "name": "Arch Linux",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=archlinux",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "archunit",
+    "name": "ArchUnit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=archunit",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "arduino",
+    "name": "Arduino",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=arduino",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "argocd",
+    "name": "Argo CD",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=argocd",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "arturo",
+    "name": "Arturo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=arturo",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "asciidoctordocs",
+    "name": "Asciidoctor Docs",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=asciidoctordocs",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "aseprite",
+    "name": "Aseprite",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=aseprite",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "aspaper",
+    "name": "ASPaper",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=aspaper",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "assembly",
+    "name": "Assembly",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=assembly",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "astraluv",
+    "name": "Astral UV",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=astraluv",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "astro",
+    "name": "Astro",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=astro",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "atom",
+    "name": "Atom",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=atom",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "auth0",
+    "name": "Auth0",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=auth0",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "authjs",
+    "name": "Auth.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=authjs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "authy",
+    "name": "Authy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=authy",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "autocad",
+    "name": "AutoCAD",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=autocad",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "autodeskfusion",
+    "name": "Autodesk Fusion",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=autodeskfusion",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "autohotkey",
+    "name": "AutoHotkey",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=autohotkey",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "avaloniaui",
+    "name": "Avalonia UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=avaloniaui",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "axios",
+    "name": "Axios",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=axios",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "azul",
+    "name": "Azul",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=azul",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "azure",
+    "name": "Azure",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=azure",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "babel",
+    "name": "Babel",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=babel",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "babylonjs",
+    "name": "Babylon.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=babylonjs",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "backblaze",
+    "name": "Backblaze",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=backblaze",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "backbonejs",
+    "name": "Backbone.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=backbonejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "balenaetcher",
+    "name": "Balena Etcher",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=balenaetcher",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ballerina",
+    "name": "Ballerina",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ballerina",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "bambustudio",
+    "name": "Bambu Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bambustudio",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "baseui",
+    "name": "Base UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=baseui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "bash",
+    "name": "Bash",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bash",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "batch",
+    "name": "Batch",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=batch",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "bazarr",
+    "name": "Bazarr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bazarr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "beagleboard",
+    "name": "BeagleBoard",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=beagleboard",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "beeflang",
+    "name": "BeefLang",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=beeflang",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "beekeeperstudio",
+    "name": "Beekeeper Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=beekeeperstudio",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "bento",
+    "name": "Bento",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bento",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "betterauth",
+    "name": "BetterAuth",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=betterauth",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "bevy",
+    "name": "Bevy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bevy",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "bing",
+    "name": "Bing",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bing",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "biome",
+    "name": "Biome",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=biome",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "bitbucket",
+    "name": "Bitbucket",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bitbucket",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "blazor",
+    "name": "Blazor",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=blazor",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "blender",
+    "name": "Blender",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=blender",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "bloc",
+    "name": "Bloc",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bloc",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "bluesky",
+    "name": "Bluesky",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bluesky",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "bolt",
+    "name": "Bolt",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bolt",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "bookstack",
+    "name": "BookStack",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bookstack",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "bootstrap",
+    "name": "Bootstrap",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bootstrap",
+    "category": "STYLING"
+  },
+  {
+    "code": "boundary",
+    "name": "HashiCorp Boundary",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=boundary",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "box2d",
+    "name": "Box2D",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=box2d",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "brave",
+    "name": "Brave",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=brave",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "bruno",
+    "name": "Bruno",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bruno",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "buddiesofbudgie",
+    "name": "Buddies of Budgie",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=buddiesofbudgie",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "bugsnag",
+    "name": "Bugsnag",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bugsnag",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "builder",
+    "name": "Builder",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=builder",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "bullmq",
+    "name": "BullMQ",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bullmq",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "bulma",
+    "name": "Bulma",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bulma",
+    "category": "STYLING"
+  },
+  {
+    "code": "bun",
+    "name": "Bun",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bun",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "burncloud",
+    "name": "BurnCloud",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=burncloud",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "burpsuite",
+    "name": "Burp Suite",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=burpsuite",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "bytedance",
+    "name": "ByteDance",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=bytedance",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "c",
+    "name": "C",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=c",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "cachyos",
+    "name": "CachyOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cachyos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "caddyserver",
+    "name": "Caddy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=caddyserver",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "cairo",
+    "name": "Cairo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cairo",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "cakebuild",
+    "name": "Cake Build",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cakebuild",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "cakephp",
+    "name": "CakePHP",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cakephp",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "camtasia",
+    "name": "Camtasia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=camtasia",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "camunda",
+    "name": "Camunda",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=camunda",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "canva",
+    "name": "Canva",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=canva",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "capacitorjs",
+    "name": "Capacitor.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=capacitorjs",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "capcut",
+    "name": "CapCut",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=capcut",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "cassandra",
+    "name": "Cassandra",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cassandra",
+    "category": "DATABASE"
+  },
+  {
+    "code": "catboost",
+    "name": "CatBoost",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=catboost",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "catch2",
+    "name": "Catch2",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=catch2",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "celery",
+    "name": "Celery",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=celery",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "centos",
+    "name": "CentOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=centos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "chakraui",
+    "name": "Chakra UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=chakraui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "chartjs",
+    "name": "Chart.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=chartjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "chatgpt",
+    "name": "ChatGPT",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=chatgpt",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "chocolatey",
+    "name": "Chocolatey",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=chocolatey",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "chroma",
+    "name": "Chroma",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=chroma",
+    "category": "DATABASE"
+  },
+  {
+    "code": "chromium",
+    "name": "Chromium",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=chromium",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "circleci",
+    "name": "CircleCI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=circleci",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "cisco",
+    "name": "Cisco",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cisco",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "civitai",
+    "name": "Civitai",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=civitai",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "claudeai",
+    "name": "Claude AI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=claudeai",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "clerk",
+    "name": "Clerk",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=clerk",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "clickhouse",
+    "name": "ClickHouse",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=clickhouse",
+    "category": "DATABASE"
+  },
+  {
+    "code": "clickup",
+    "name": "Clickup",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=clickup",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "cline",
+    "name": "Cline",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cline",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "clion",
+    "name": "CLion",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=clion",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "clojure",
+    "name": "Clojure",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=clojure",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "cloudflare",
+    "name": "Cloudflare",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cloudflare",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "cloudflareworkers",
+    "name": "Cloudflare Workers",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cloudflareworkers",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "cloudinary",
+    "name": "Cloudinary",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cloudinary",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "cmake",
+    "name": "CMake",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cmake",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "cmder",
+    "name": "Cmder",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cmder",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "codeberg",
+    "name": "Codeberg",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codeberg",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "codeblocks",
+    "name": "Code::Blocks",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codeblocks",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "codechef",
+    "name": "CodeChef",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codechef",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "codecov",
+    "name": "Codecov",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codecov",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "codeforces",
+    "name": "Codeforces",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codeforces",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "codegeex",
+    "name": "CodeGeeX",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codegeex",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "codeigniter",
+    "name": "CodeIgniter",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codeigniter",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "codepen",
+    "name": "CodePen",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codepen",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "codeql",
+    "name": "CodeQL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codeql",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "coderabbit",
+    "name": "CodeRabbit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=coderabbit",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "codewars",
+    "name": "Codewars",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=codewars",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "coffeescript",
+    "name": "CoffeeScript",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=coffeescript",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "cohere",
+    "name": "Cohere",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cohere",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "comfyui",
+    "name": "ComfyUI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=comfyui",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "commitlint",
+    "name": "CommitLint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=commitlint",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "composehotreload",
+    "name": "Compose Hot Reload",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=composehotreload",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "composemultiplatform",
+    "name": "Compose Multiplatform",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=composemultiplatform",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "conar",
+    "name": "Conar",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=conar",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "confluence",
+    "name": "Confluence",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=confluence",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "consul",
+    "name": "HashiCorp Consul",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=consul",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "cookiecutter",
+    "name": "Cookiecutter",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cookiecutter",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "coolify",
+    "name": "Coolify",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=coolify",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "coze",
+    "name": "Coze",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=coze",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "cpanel",
+    "name": "cPanel",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cpanel",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "cpp",
+    "name": "C++",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cpp",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "crush",
+    "name": "Crush",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=crush",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "crusoe",
+    "name": "Crusoe",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=crusoe",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "crystal",
+    "name": "Crystal",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=crystal",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "csharp",
+    "name": "C#",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=csharp",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "css",
+    "name": "CSS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=css",
+    "category": "STYLING"
+  },
+  {
+    "code": "css3",
+    "name": "CSS 3",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=css3",
+    "category": "STYLING"
+  },
+  {
+    "code": "csv",
+    "name": "CSV",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=csv",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "cucumber",
+    "name": "Cucumber",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cucumber",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "cudacplusplus",
+    "name": "Cuda C++",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cudacplusplus",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "curl",
+    "name": "cURL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=curl",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "curseforge",
+    "name": "CurseForge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=curseforge",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "cursor",
+    "name": "Cursor",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cursor",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "cypress",
+    "name": "Cypress",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=cypress",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "d3js",
+    "name": "D3.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=d3js",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "dagshub",
+    "name": "DagsHub",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dagshub",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "dailydev",
+    "name": "Daily.dev",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dailydev",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "daisyui",
+    "name": "daisyUI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=daisyui",
+    "category": "STYLING"
+  },
+  {
+    "code": "dart",
+    "name": "Dart",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dart",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "databricks",
+    "name": "Databricks",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=databricks",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "datadog",
+    "name": "Datadog",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=datadog",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "datagrip",
+    "name": "DataGrip",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=datagrip",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "datalore",
+    "name": "Datalore",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=datalore",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "dataversioncontrol",
+    "name": "Data Version Control",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dataversioncontrol",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "datefns",
+    "name": "date-fns",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=datefns",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "davinciresolve",
+    "name": "Davinci Resolve",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=davinciresolve",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "dbeaver",
+    "name": "DBeaver",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dbeaver",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "dbt",
+    "name": "dbt",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dbt",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "debian",
+    "name": "Debian",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=debian",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "deepin",
+    "name": "Deepin",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=deepin",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "deepseek",
+    "name": "DeepSeek",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=deepseek",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "deno",
+    "name": "Deno",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=deno",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "dependabot",
+    "name": "Dependabot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dependabot",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "designali",
+    "name": "Designali",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=designali",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "devto",
+    "name": "Dev.to",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=devto",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "digitalocean",
+    "name": "DigitalOcean",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=digitalocean",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "directus",
+    "name": "Directus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=directus",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "discord",
+    "name": "Discord",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=discord",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "discordbots",
+    "name": "Discord Bots",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=discordbots",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "discordjs",
+    "name": "Discord.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=discordjs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "disqus",
+    "name": "Disqus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=disqus",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "django",
+    "name": "Django",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=django",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "djangorestframework",
+    "name": "Django REST Framework",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=djangorestframework",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "dlang",
+    "name": "D Language",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dlang",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "dlthub",
+    "name": "dltHub",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dlthub",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "dndkit",
+    "name": "DNDKit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dndkit",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "dnspy",
+    "name": "dnSpy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dnspy",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "docker",
+    "name": "Docker",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=docker",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "dockge",
+    "name": "Dockge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dockge",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "docus",
+    "name": "Docus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=docus",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "docusaurus",
+    "name": "Docusaurus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=docusaurus",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "dotnet",
+    "name": ".NET",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dotnet",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "drawio",
+    "name": "draw.io",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=drawio",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "dremio",
+    "name": "Dremio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dremio",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "drizzle",
+    "name": "Drizzle",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=drizzle",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "dropbox",
+    "name": "Dropbox",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dropbox",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "drupal",
+    "name": "Drupal",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=drupal",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "duckdb",
+    "name": "DuckDB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=duckdb",
+    "category": "DATABASE"
+  },
+  {
+    "code": "dyad",
+    "name": "Dyad",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=dyad",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "easybuild",
+    "name": "EasyBuild",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=easybuild",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "echo",
+    "name": "LabStack Echo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=echo",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "eclipseide",
+    "name": "Eclipse IDE",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=eclipseide",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "edge",
+    "name": "Edge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=edge",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "edgeimpulse",
+    "name": "Edge Impulse",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=edgeimpulse",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "effect",
+    "name": "Effect",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=effect",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ejs",
+    "name": "Ejs",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "elasticsearch",
+    "name": "Elasticsearch",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=elasticsearch",
+    "category": "DATABASE"
+  },
+  {
+    "code": "electron",
+    "name": "Electron",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=electron",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "element",
+    "name": "Element",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=element",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "elementor",
+    "name": "Elementor",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=elementor",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "elementplus",
+    "name": "Element Plus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=elementplus",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "elevenlabs",
+    "name": "ElevenLabs",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=elevenlabs",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "elixir",
+    "name": "Elixir",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=elixir",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "elysiajs",
+    "name": "ElysiaJS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=elysiajs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "emberjs",
+    "name": "Ember.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=emberjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "emby",
+    "name": "Emby",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=emby",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "endeavouros",
+    "name": "EndeavourOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=endeavouros",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "erlang",
+    "name": "Erlang",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=erlang",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "esbuild",
+    "name": "esbuild",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=esbuild",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "eslint",
+    "name": "ESLint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=eslint",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "esp32",
+    "name": "ESP32",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=esp32",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "etcd",
+    "name": "etcd",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=etcd",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "eventbridge",
+    "name": "EventBridge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=eventbridge",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "excalidraw",
+    "name": "Excalidraw",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=excalidraw",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "expo",
+    "name": "Expo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=expo",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "exposed",
+    "name": "Exposed",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=exposed",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "expressjs",
+    "name": "Express.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=expressjs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "expressvpn",
+    "name": "ExpressVPN",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=expressvpn",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "fabricjs",
+    "name": "Fabric.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fabricjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "fabricmc",
+    "name": "Fabric",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fabricmc",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "facebook",
+    "name": "Facebook",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=facebook",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "fastapi",
+    "name": "FastAPI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fastapi",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "fastify",
+    "name": "Fastify",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fastify",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "fdroid",
+    "name": "F-Droid",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fdroid",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "featuresliceddesign",
+    "name": "Feature-Sliced Design",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=featuresliceddesign",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "fedora",
+    "name": "Fedora Linux",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fedora",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "fiber",
+    "name": "Fiber",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fiber",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "figma",
+    "name": "Figma",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=figma",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "filezilla",
+    "name": "FileZilla",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=filezilla",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "filmora",
+    "name": "Filmora",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=filmora",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "firebase",
+    "name": "Firebase",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=firebase",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "firebaseailogic",
+    "name": "Firebase AI Logic",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=firebaseailogic",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "firebaseauthentication",
+    "name": "Firebase Authentication",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=firebaseauthentication",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "firebasecloudfirestore",
+    "name": "Firebase Cloud Firestore",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=firebasecloudfirestore",
+    "category": "DATABASE"
+  },
+  {
+    "code": "firebasestudio",
+    "name": "Firebase Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=firebasestudio",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "firefox",
+    "name": "Firefox",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=firefox",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "fivetran",
+    "name": "Fivetran",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fivetran",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "flask",
+    "name": "Flask",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=flask",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "flatassembler",
+    "name": "Flat Assembler",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=flatassembler",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "fleet",
+    "name": "Fleet",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fleet",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "flightcontrol",
+    "name": "Flightcontrol",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=flightcontrol",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "flowbite",
+    "name": "Flowbite",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=flowbite",
+    "category": "STYLING"
+  },
+  {
+    "code": "flutter",
+    "name": "Flutter",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=flutter",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "flutterflow",
+    "name": "FlutterFlow",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=flutterflow",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "flyio",
+    "name": "Fly.io",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=flyio",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "forem",
+    "name": "Forem",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=forem",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "forgemc",
+    "name": "Forge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=forgemc",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "fortran",
+    "name": "Fortran",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fortran",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "framer",
+    "name": "Framer",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=framer",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "freebsd",
+    "name": "FreeBSD",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=freebsd",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "freecad",
+    "name": "FreeCAD",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=freecad",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "freecodecamp",
+    "name": "freeCodeCamp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=freecodecamp",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "freelancer",
+    "name": "Freelancer",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=freelancer",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "fresh",
+    "name": "Fresh",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fresh",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "fsharp",
+    "name": "F#",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=fsharp",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "ganache",
+    "name": "Ganache",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ganache",
+    "category": "BLOCKCHAIN_WEB3"
+  },
+  {
+    "code": "gatsby",
+    "name": "Gatsby",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gatsby",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "gdevelop",
+    "name": "GDevelop",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gdevelop",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "geany",
+    "name": "Geany",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=geany",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "geminicli",
+    "name": "Gemini CLI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=geminicli",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "genkit",
+    "name": "Genkit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=genkit",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "getx",
+    "name": "GetX",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=getx",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "ghdl",
+    "name": "GHDL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ghdl",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ghidra",
+    "name": "Ghidra",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ghidra",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ghostty",
+    "name": "Ghostty",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ghostty",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "gimp",
+    "name": "GIMP",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gimp",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "gin",
+    "name": "Gin",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gin",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "git",
+    "name": "Git",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=git",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "gitbash",
+    "name": "Git Bash",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitbash",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "gitbook",
+    "name": "GitBook",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitbook",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "gitea",
+    "name": "Gitea",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitea",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "github",
+    "name": "GitHub",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=github",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "githubactions",
+    "name": "GitHub Actions",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=githubactions",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "githubcopilot",
+    "name": "GitHub Copilot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=githubcopilot",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "githubpages",
+    "name": "GitHub Pages",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=githubpages",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "gitkraken",
+    "name": "GitKraken",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitkraken",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "gitlab",
+    "name": "GitLab",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitlab",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "gitlocalize",
+    "name": "GitLocalize",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitlocalize",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "gitmind",
+    "name": "GitMind",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitmind",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "gitpod",
+    "name": "Gitpod",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gitpod",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "gleam",
+    "name": "Gleam",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gleam",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "gmail",
+    "name": "Gmail",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gmail",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "gnu",
+    "name": "GNU",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gnu",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "godot",
+    "name": "Godot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=godot",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "goland",
+    "name": "GoLand",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=goland",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "golang",
+    "name": "Go",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=golang",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "googleadk",
+    "name": "Google ADK",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googleadk",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "googleadsense",
+    "name": "Google AdSense",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googleadsense",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "googlebigquery",
+    "name": "Google BigQuery",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlebigquery",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "googlechrome",
+    "name": "Google Chrome",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlechrome",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "googlecloud",
+    "name": "Google Cloud",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlecloud",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "googlecloudcomposer",
+    "name": "Google Cloud Composer",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlecloudcomposer",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "googlecloudstorage",
+    "name": "Google Cloud Storage",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlecloudstorage",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "googlecolaboratory",
+    "name": "Google Colaboratory",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlecolaboratory",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "googlecomputeengine",
+    "name": "Google Compute Engine",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlecomputeengine",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "googledataflow",
+    "name": "Google Dataflow",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googledataflow",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "googledataproc",
+    "name": "Google Dataproc",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googledataproc",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "googledocs",
+    "name": "Google Docs",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googledocs",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "googledrive",
+    "name": "Google Drive",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googledrive",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "googleforms",
+    "name": "Google Forms",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googleforms",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "googlegemini",
+    "name": "Google Gemini",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlegemini",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "googleidx",
+    "name": "Google IDX",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googleidx",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "googlesheets",
+    "name": "Google Sheets",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googlesheets",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "googleslides",
+    "name": "Google Slides",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googleslides",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "googleworkspace",
+    "name": "Google Workspace",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=googleworkspace",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "gorm",
+    "name": "GORM",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gorm",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "gradle",
+    "name": "Gradle",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gradle",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "grafana",
+    "name": "Grafana",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=grafana",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "graphite",
+    "name": "Graphite",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=graphite",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "graphql",
+    "name": "GraphQL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=graphql",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "gridsome",
+    "name": "Gridsome",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gridsome",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "grok",
+    "name": "Grok",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=grok",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "groovy",
+    "name": "Groovy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=groovy",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "groq",
+    "name": "GROQ",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=groq",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "grpc",
+    "name": "gRPC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=grpc",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "gruntjs",
+    "name": "Grunt.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gruntjs",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "gsap",
+    "name": "Gsap",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gsap",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "gtkwave",
+    "name": "GTKWave",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=gtkwave",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "hackerrank",
+    "name": "HackerRank",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hackerrank",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "hackthebox",
+    "name": "Hack The Box",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hackthebox",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "hacs",
+    "name": "HACS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hacs",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "handycontrols",
+    "name": "Handy Controls",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=handycontrols",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "haproxy",
+    "name": "HAProxy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=haproxy",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "hashicorp",
+    "name": "HashiCorp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hashicorp",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "hashnode",
+    "name": "Hashnode",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hashnode",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "haskell",
+    "name": "Haskell",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=haskell",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "haxe",
+    "name": "Haxe",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=haxe",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "headlessui",
+    "name": "Headless UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=headlessui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "helia",
+    "name": "Helia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=helia",
+    "category": "BLOCKCHAIN_WEB3"
+  },
+  {
+    "code": "heroku",
+    "name": "Heroku",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=heroku",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "heroui",
+    "name": "Hero UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=heroui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "hexo",
+    "name": "Hexo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hexo",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "hibernate",
+    "name": "Hibernate",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hibernate",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "homeassistant",
+    "name": "Home Assistant",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=homeassistant",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "homebrew",
+    "name": "Homebrew",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=homebrew",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "hono",
+    "name": "Hono",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hono",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "hoppscotch",
+    "name": "Hoppscotch",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hoppscotch",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "hostgator",
+    "name": "HostGator",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hostgator",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "html",
+    "name": "HTML",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=html",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "httpie",
+    "name": "HTTPie",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=httpie",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "hub",
+    "name": "Hub",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hub",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "huggingface",
+    "name": "Hugging Face",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=huggingface",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "hugo",
+    "name": "Hugo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hugo",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "hyper",
+    "name": "Hyper",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=hyper",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "i18next",
+    "name": "i18next",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=i18next",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "iceberg",
+    "name": "Iceberg",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=iceberg",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "ida",
+    "name": "IDA",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ida",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ifttt",
+    "name": "IFTTT",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ifttt",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "inertiajs",
+    "name": "Inertia.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=inertiajs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "influxdb",
+    "name": "InfluxDB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=influxdb",
+    "category": "DATABASE"
+  },
+  {
+    "code": "inkscape",
+    "name": "Inkscape",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=inkscape",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "insomnia",
+    "name": "Insomnia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=insomnia",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "instagram",
+    "name": "Instagram",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=instagram",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "intellijidea",
+    "name": "IntelliJ IDEA",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=intellijidea",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ionic",
+    "name": "Ionic",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ionic",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "ios",
+    "name": "iOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ios",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "ipados",
+    "name": "iPadOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ipados",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "jakartaee",
+    "name": "JakartaEE",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jakartaee",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "jamstack",
+    "name": "Jamstack",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jamstack",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "jasmine",
+    "name": "Jasmine",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jasmine",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "jaspr",
+    "name": "Jaspr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jaspr",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "java",
+    "name": "Java",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=java",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "javascript",
+    "name": "JavaScript",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=javascript",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "javascriptregistry",
+    "name": "Javascript Registry",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=javascriptregistry",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "jekyll",
+    "name": "Jekyll",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jekyll",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "jellyfin",
+    "name": "Jellyfin",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jellyfin",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "jellyseerr",
+    "name": "Jellyseerr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jellyseerr",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "jenkins",
+    "name": "Jenkins",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jenkins",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "jest",
+    "name": "Jest",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jest",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "jetpack",
+    "name": "Jetpack",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jetpack",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "jetpackcompose",
+    "name": "Jetpack Compose",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jetpackcompose",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "jira",
+    "name": "Jira",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jira",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "jitsi",
+    "name": "Jitsi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jitsi",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "joomla",
+    "name": "Joomla",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=joomla",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "jotai",
+    "name": "Jotai",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jotai",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "jquery",
+    "name": "jQuery",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jquery",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "json",
+    "name": "JSON",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=json",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "jsonschema",
+    "name": "JSON Schema",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jsonschema",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "jujutsu",
+    "name": "Jujutsu",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jujutsu",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "julia",
+    "name": "Julia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=julia",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "junit4",
+    "name": "JUnit 4",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=junit4",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "junit5",
+    "name": "JUnit 5",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=junit5",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "jupyter",
+    "name": "Jupyter",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jupyter",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "jwt",
+    "name": "JWT",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=jwt",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "k3s",
+    "name": "K3s",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=k3s",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "kafka",
+    "name": "Kafka",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kafka",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "kaggle",
+    "name": "Kaggle",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kaggle",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "kalilinux",
+    "name": "Kali Linux",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kalilinux",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "katalon",
+    "name": "Katalon",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=katalon",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "kepware",
+    "name": "Kepware",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kepware",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "keras",
+    "name": "Keras",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=keras",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "kestra",
+    "name": "Kestra",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kestra",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "keycloak",
+    "name": "Keycloak",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=keycloak",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "kiro",
+    "name": "Kiro",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kiro",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "kitty",
+    "name": "Kitty",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kitty",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "kofi",
+    "name": "Ko-fi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kofi",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "koin",
+    "name": "Koin",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=koin",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "konva",
+    "name": "Konva",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=konva",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "kotlin",
+    "name": "Kotlin",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kotlin",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "kotlinmultiplatform",
+    "name": "Kotlin Multiplatform",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kotlinmultiplatform",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "kotlinnotebook",
+    "name": "Kotlin Notebook",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kotlinnotebook",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "koyeb",
+    "name": "Koyeb",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=koyeb",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "ktor",
+    "name": "Ktor",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ktor",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "kubernetes",
+    "name": "Kubernetes",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kubernetes",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "kubuntu",
+    "name": "Kubuntu",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=kubuntu",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "lando",
+    "name": "Lando",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lando",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "langchain",
+    "name": "LangChain",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=langchain",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "laravel",
+    "name": "Laravel",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=laravel",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "latex",
+    "name": "LaTeX",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=latex",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "lavalink",
+    "name": "Lavalink",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lavalink",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "leaflet",
+    "name": "Leaflet",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=leaflet",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "leetcode",
+    "name": "LeetCode",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=leetcode",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "lemonsqueezy",
+    "name": "LemonSqueezy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lemonsqueezy",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "less",
+    "name": "Less",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=less",
+    "category": "STYLING"
+  },
+  {
+    "code": "librepcb",
+    "name": "LibrePCB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=librepcb",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "lidarr",
+    "name": "Lidarr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lidarr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "linkedin",
+    "name": "LinkedIn",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=linkedin",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "linux",
+    "name": "Linux",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=linux",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "linuxmint",
+    "name": "Linux Mint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=linuxmint",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "litert",
+    "name": "LiteRT",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=litert",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "litestar",
+    "name": "Litestar",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=litestar",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "litmus",
+    "name": "Litmus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=litmus",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "livewire",
+    "name": "Livewire",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=livewire",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "llamaindex",
+    "name": "LlamaIndex",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=llamaindex",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "llvm",
+    "name": "LLVM",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=llvm",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "lmstudio",
+    "name": "LM Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lmstudio",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "logto",
+    "name": "Logto",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=logto",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "lokalise",
+    "name": "Lokalise",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lokalise",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "loki",
+    "name": "Loki",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=loki",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "lookerstudio",
+    "name": "Looker Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lookerstudio",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "lottiefiles",
+    "name": "Lottie Files",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lottiefiles",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "lovable",
+    "name": "Lovable",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lovable",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "lua",
+    "name": "Lua",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lua",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "lubuntu",
+    "name": "Lubuntu",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lubuntu",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "lucia",
+    "name": "Lucia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lucia",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "lucide",
+    "name": "Lucide",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lucide",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "lumo",
+    "name": "Lumo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lumo",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "lynxjs",
+    "name": "Lynx.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=lynxjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "macos",
+    "name": "macOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=macos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "magicui",
+    "name": "Magic UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=magicui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "magisk",
+    "name": "Magisk",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=magisk",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "makecode",
+    "name": "MakeCode",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=makecode",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "mambaui",
+    "name": "Mamba UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mambaui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "manifoldjs",
+    "name": "ManifoldJS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=manifoldjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "manim",
+    "name": "Manim",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=manim",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "manjaro",
+    "name": "Manjaro",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=manjaro",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "mapbox",
+    "name": "Mapbox",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mapbox",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "mariadb",
+    "name": "MariaDB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mariadb",
+    "category": "DATABASE"
+  },
+  {
+    "code": "markdown",
+    "name": "Markdown",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=markdown",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "mastodon",
+    "name": "Mastodon",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mastodon",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "materialdesign",
+    "name": "Material Design",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=materialdesign",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "materialformkdocs",
+    "name": "Material for MkDocs",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=materialformkdocs",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "materialui",
+    "name": "Material UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=materialui",
+    "category": "STYLING"
+  },
+  {
+    "code": "matlab",
+    "name": "MATLAB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=matlab",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "matplotlib",
+    "name": "Matplotlib",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=matplotlib",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "matrix",
+    "name": "Matrix",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=matrix",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "medium",
+    "name": "Medium",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=medium",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "medusa",
+    "name": "Medusa",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=medusa",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "mermaid",
+    "name": "Mermaid",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mermaid",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "meta",
+    "name": "Meta",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=meta",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "metabase",
+    "name": "Metabase",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=metabase",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "metasploit",
+    "name": "Metasploit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=metasploit",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "mgx",
+    "name": "MGX",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mgx",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "micropython",
+    "name": "MicroPython",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=micropython",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "microsoft365copilot",
+    "name": "Microsoft 365 Copilot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoft365copilot",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "microsoftaccess",
+    "name": "Microsoft Access",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftaccess",
+    "category": "DATABASE"
+  },
+  {
+    "code": "microsoftclipchamp",
+    "name": "Microsoft Clipchamp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftclipchamp",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "microsoftcopilot",
+    "name": "Microsoft Copilot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftcopilot",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "microsoftentra",
+    "name": "Microsoft Entra",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftentra",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "microsoftexcel",
+    "name": "Microsoft Excel",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftexcel",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftfabric",
+    "name": "Microsoft Fabric",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftfabric",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "microsoftforms",
+    "name": "Microsoft Forms",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftforms",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftfoundry",
+    "name": "Microsoft Foundry",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftfoundry",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftintune",
+    "name": "Microsoft Intune",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftintune",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "microsoftoffice",
+    "name": "Microsoft Office",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftoffice",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftonedrive",
+    "name": "Microsoft OneDrive",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftonedrive",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftonenote",
+    "name": "Microsoft OneNote",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftonenote",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftoutlook",
+    "name": "Microsoft Outlook",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftoutlook",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "microsoftpowerautomate",
+    "name": "Power Automate",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftpowerautomate",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftpowerpoint",
+    "name": "Microsoft PowerPoint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftpowerpoint",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "microsoftproject",
+    "name": "Microsoft Project",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftproject",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "microsoftsharepoint",
+    "name": "Microsoft SharePoint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftsharepoint",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "microsoftteams",
+    "name": "Microsoft Teams",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftteams",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "microsoftvisio",
+    "name": "Microsoft Visio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftvisio",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "microsoftword",
+    "name": "Microsoft Word",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=microsoftword",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "mikroc",
+    "name": "mikroC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mikroc",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "milligram",
+    "name": "Milligram",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=milligram",
+    "category": "STYLING"
+  },
+  {
+    "code": "mimir",
+    "name": "Mimir",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mimir",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "minimax",
+    "name": "MiniMax",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=minimax",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "minio",
+    "name": "MinIO",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=minio",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "mkdocs",
+    "name": "MkDocs",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mkdocs",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "mlflow",
+    "name": "MLflow",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mlflow",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "modelcontextprotocol",
+    "name": "Model Context Protocol",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=modelcontextprotocol",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "mohistmc",
+    "name": "MohistMC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mohistmc",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "mongodb",
+    "name": "MongoDB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mongodb",
+    "category": "DATABASE"
+  },
+  {
+    "code": "motherduck",
+    "name": "MotherDuck",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=motherduck",
+    "category": "DATABASE"
+  },
+  {
+    "code": "motion",
+    "name": "Motion",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=motion",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "mqtt",
+    "name": "MQTT",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mqtt",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "msdos",
+    "name": "MS-DOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=msdos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "msys2",
+    "name": "MSYS2",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=msys2",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "myshellai",
+    "name": "MyShell AI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=myshellai",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "mysql",
+    "name": "MySQL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=mysql",
+    "category": "DATABASE"
+  },
+  {
+    "code": "n8n",
+    "name": "n8n",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=n8n",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "navicat",
+    "name": "Navicat",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=navicat",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "neo4j",
+    "name": "Neo4j",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=neo4j",
+    "category": "DATABASE"
+  },
+  {
+    "code": "neoforge",
+    "name": "NeoForge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=neoforge",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "neon",
+    "name": "Neon",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=neon",
+    "category": "DATABASE"
+  },
+  {
+    "code": "neovim",
+    "name": "Neovim",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=neovim",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "nestjs",
+    "name": "NestJS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nestjs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "netbeans",
+    "name": "NetBeans",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=netbeans",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "netlify",
+    "name": "Netlify",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=netlify",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "newrelic",
+    "name": "New Relic",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=newrelic",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "nextdns",
+    "name": "NextDNS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nextdns",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "nextjs",
+    "name": "Next.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nextjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "nginx",
+    "name": "NGINX",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nginx",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "ngrok",
+    "name": "ngrok",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ngrok",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "ngrx",
+    "name": "NgRx",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ngrx",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "nim",
+    "name": "Nim",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nim",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "niri",
+    "name": "Niri",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=niri",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "nitro",
+    "name": "Nitro",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nitro",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "nixos",
+    "name": "NixOS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nixos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "nmap",
+    "name": "Nmap",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nmap",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "noctalia",
+    "name": "Noctalia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=noctalia",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "nodejs",
+    "name": "Node.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nodejs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "nodemon",
+    "name": "Nodemon",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nodemon",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "nodered",
+    "name": "Node-RED",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nodered",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "nomad",
+    "name": "HashiCorp Nomad",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nomad",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "notepadplusplus",
+    "name": "Notepad++",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=notepadplusplus",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "notion",
+    "name": "Notion",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=notion",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "npm",
+    "name": "npm",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=npm",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "nuget",
+    "name": "NuGet",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nuget",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "numpy",
+    "name": "NumPy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=numpy",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "nunjucks",
+    "name": "Nunjucks",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nunjucks",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "nuxthub",
+    "name": "NuxtHub",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nuxthub",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "nuxtjs",
+    "name": "Nuxt.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=nuxtjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "oauth",
+    "name": "OAuth",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=oauth",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "objectivec",
+    "name": "Objective C",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=objectivec",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "obs",
+    "name": "OBS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=obs",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "obsidian",
+    "name": "Obsidian",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=obsidian",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "obtainium",
+    "name": "Obtainium",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=obtainium",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "ocaml",
+    "name": "OCaml",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ocaml",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "ollama",
+    "name": "Ollama",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ollama",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "omarchy",
+    "name": "Omarchy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=omarchy",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "ombi",
+    "name": "Ombi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ombi",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "onyx",
+    "name": "Onyx",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=onyx",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "openapi",
+    "name": "OpenAPI Initiative",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=openapi",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "opencode",
+    "name": "OpenCode",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=opencode",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "opencv",
+    "name": "OpenCV",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=opencv",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "opengl",
+    "name": "OpenGL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=opengl",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "openlayers",
+    "name": "OpenLayers",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=openlayers",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "openondemand",
+    "name": "Open OnDemand",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=openondemand",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "openscad",
+    "name": "OpenSCAD",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=openscad",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "opensergo",
+    "name": "OpenSergo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=opensergo",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "opentelemetry",
+    "name": "OpenTelemetry",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=opentelemetry",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "openvpn",
+    "name": "OpenVPN",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=openvpn",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "openweather",
+    "name": "OpenWeather",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=openweather",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "openwebui",
+    "name": "OpenWebUI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=openwebui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "opera",
+    "name": "Opera",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=opera",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "oracle",
+    "name": "Oracle",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=oracle",
+    "category": "DATABASE"
+  },
+  {
+    "code": "oraclecloudinfrastructure",
+    "name": "Oracle Cloud Infrastructure",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=oraclecloudinfrastructure",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "orcaslicer",
+    "name": "OrcaSlicer",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=orcaslicer",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "oumi",
+    "name": "Oumi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=oumi",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "overleaf",
+    "name": "Overleaf",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=overleaf",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "overpassapi",
+    "name": "Overpass API",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=overpassapi",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "overseerr",
+    "name": "Overseerr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=overseerr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "oxc",
+    "name": "oxc",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=oxc",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "p4",
+    "name": "P4",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=p4",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "packer",
+    "name": "HashiCorp Packer",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=packer",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "pandacss",
+    "name": "Panda CSS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pandacss",
+    "category": "STYLING"
+  },
+  {
+    "code": "pandas",
+    "name": "Pandas",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pandas",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "papermc",
+    "name": "PaperMC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=papermc",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "parcel",
+    "name": "Parcel",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=parcel",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "parrotos",
+    "name": "Parrot OS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=parrotos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "passportjs",
+    "name": "Passport.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=passportjs",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "patreon",
+    "name": "Patreon",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=patreon",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "payload",
+    "name": "Payload",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=payload",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "peazip",
+    "name": "PeaZip",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=peazip",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "pennylane",
+    "name": "Pennylane",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pennylane",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "penpot",
+    "name": "Penpot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=penpot",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "pentahopdi",
+    "name": "Pentaho PDI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pentahopdi",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "perplexity",
+    "name": "Perplexity",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=perplexity",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "phoenix",
+    "name": "Phoenix",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=phoenix",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "php",
+    "name": "PHP",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=php",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "phpstorm",
+    "name": "PhpStorm",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=phpstorm",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "pinia",
+    "name": "Pinia",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pinia",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "pinterest",
+    "name": "Pinterest",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pinterest",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "pkgroll",
+    "name": "Pkgroll",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pkgroll",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "platformio",
+    "name": "PlatformIO",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=platformio",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "plausible",
+    "name": "Plausible",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=plausible",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "playwright",
+    "name": "Playwright",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=playwright",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "plex",
+    "name": "Plex",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=plex",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "plotly",
+    "name": "Plotly",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=plotly",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "pnpm",
+    "name": "pnpm",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pnpm",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "pocketbase",
+    "name": "PocketBase",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pocketbase",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "podman",
+    "name": "Podman",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=podman",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "polars",
+    "name": "Polars",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=polars",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "popos",
+    "name": "Pop OS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=popos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "portugolstudio",
+    "name": "Portugol Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=portugolstudio",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "postcss",
+    "name": "PostCSS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=postcss",
+    "category": "STYLING"
+  },
+  {
+    "code": "postgresql",
+    "name": "PostgreSQL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=postgresql",
+    "category": "DATABASE"
+  },
+  {
+    "code": "posthog",
+    "name": "PostHog",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=posthog",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "postman",
+    "name": "Postman",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=postman",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "powerbi",
+    "name": "Power BI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=powerbi",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "powershell",
+    "name": "PowerShell",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=powershell",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "preact",
+    "name": "Preact",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=preact",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "prettier",
+    "name": "Prettier",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=prettier",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "primevue",
+    "name": "PrimeVue",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=primevue",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "prisma",
+    "name": "Prisma",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=prisma",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "prismic",
+    "name": "Prismic",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=prismic",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "procure",
+    "name": "Procure",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=procure",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "prometheus",
+    "name": "Prometheus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=prometheus",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "protoncalendar",
+    "name": "Proton Calendar",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=protoncalendar",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "protondrive",
+    "name": "Proton Drive",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=protondrive",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "protonmail",
+    "name": "ProtonMail",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=protonmail",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "protonpass",
+    "name": "Proton Pass",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=protonpass",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "protonvpn",
+    "name": "ProtonVPN",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=protonvpn",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "protonwallet",
+    "name": "Proton Wallet",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=protonwallet",
+    "category": "BLOCKCHAIN_WEB3"
+  },
+  {
+    "code": "prowlarr",
+    "name": "Prowlarr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=prowlarr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "proxmox",
+    "name": "Proxmox",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=proxmox",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "psycopg",
+    "name": "Psycopg",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=psycopg",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "pug",
+    "name": "Pug",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pug",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "pull",
+    "name": "Pull",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pull",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "pulumi",
+    "name": "Pulumi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pulumi",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "puppeteer",
+    "name": "Puppeteer",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=puppeteer",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "purpur",
+    "name": "Purpur",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=purpur",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "pwa",
+    "name": "PWA",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pwa",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "pycharm",
+    "name": "PyCharm",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pycharm",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "pydantic",
+    "name": "Pydantic",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pydantic",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "pygame",
+    "name": "Pygame",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pygame",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "pymc",
+    "name": "PyMC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pymc",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "pypi",
+    "name": "PyPI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pypi",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "pyramid",
+    "name": "Pyramid",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pyramid",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "pytest",
+    "name": "Pytest",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pytest",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "python",
+    "name": "Python",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=python",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "pytorch",
+    "name": "PyTorch",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pytorch",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "pytorch3d",
+    "name": "PyTorch3D",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=pytorch3d",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "qdrant",
+    "name": "Qdrant",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=qdrant",
+    "category": "DATABASE"
+  },
+  {
+    "code": "qoder",
+    "name": "Qoder",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=qoder",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "qtwidgets",
+    "name": "Qt Widgets",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=qtwidgets",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "quarkus",
+    "name": "Quarkus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=quarkus",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "quasar",
+    "name": "Quasar",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=quasar",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "qubesos",
+    "name": "Qubes OS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=qubesos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "quiltmc",
+    "name": "QuiltMC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=quiltmc",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "qwik",
+    "name": "Qwik",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=qwik",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "r",
+    "name": "R",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=r",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "rabbitmq",
+    "name": "RabbitMQ",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rabbitmq",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "radarr",
+    "name": "Radarr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=radarr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "radixui",
+    "name": "Radix UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=radixui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "railway",
+    "name": "Railway",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=railway",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "raspberrypi",
+    "name": "Raspberry Pi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=raspberrypi",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "raygui",
+    "name": "Raygui",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=raygui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "raylib",
+    "name": "Raylib",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=raylib",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "reactdatepicker",
+    "name": "React Datepicker",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reactdatepicker",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "reacthookform",
+    "name": "React Hook Form",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reacthookform",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "reactjs",
+    "name": "React.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reactjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "reactlynx",
+    "name": "ReactLynx",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reactlynx",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "reactnative",
+    "name": "React Native",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reactnative",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "reactquery",
+    "name": "React Query",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reactquery",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "reactrouter",
+    "name": "React Router",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reactrouter",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "readarr",
+    "name": "Readarr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=readarr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "readthedocs",
+    "name": "Read the Docs",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=readthedocs",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "reddit",
+    "name": "Reddit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reddit",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "redhat",
+    "name": "Red Hat",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=redhat",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "redis",
+    "name": "Redis",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=redis",
+    "category": "DATABASE"
+  },
+  {
+    "code": "redoc",
+    "name": "Redoc",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=redoc",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "redux",
+    "name": "Redux",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=redux",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "refine",
+    "name": "Refine",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=refine",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "regex",
+    "name": "Regex",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=regex",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "reglejs",
+    "name": "Regle.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=reglejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "rekaui",
+    "name": "Reka UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rekaui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "render",
+    "name": "Render",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=render",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "renovate",
+    "name": "Renovate",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=renovate",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "replit",
+    "name": "Replit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=replit",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "resend",
+    "name": "Resend",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=resend",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "rest",
+    "name": "REST",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rest",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "revolt",
+    "name": "Revolt",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=revolt",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "rider",
+    "name": "Rider",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rider",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "riverpod",
+    "name": "Riverpod",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=riverpod",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "robotoperatingsystem",
+    "name": "Robot Operating System",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=robotoperatingsystem",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "rocketmq",
+    "name": "RocketMQ",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rocketmq",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "rolldown",
+    "name": "Rolldown",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rolldown",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "rollupjs",
+    "name": "Rollup.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rollupjs",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ruby",
+    "name": "Ruby",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ruby",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "rubymine",
+    "name": "RubyMine",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rubymine",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "rust",
+    "name": "Rust",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rust",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "rxjs",
+    "name": "RxJS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=rxjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "sanity",
+    "name": "Sanity",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sanity",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "sap",
+    "name": "SAP",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sap",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "sass",
+    "name": "Sass",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sass",
+    "category": "STYLING"
+  },
+  {
+    "code": "scala",
+    "name": "Scala",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=scala",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "scikitlearn",
+    "name": "scikit-learn",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=scikitlearn",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "scipy",
+    "name": "SciPy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=scipy",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "scratch",
+    "name": "Scratch",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=scratch",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "seaborn",
+    "name": "Seaborn",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=seaborn",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "semanticui",
+    "name": "Semantic UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=semanticui",
+    "category": "STYLING"
+  },
+  {
+    "code": "sentry",
+    "name": "Sentry",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sentry",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "sequelize",
+    "name": "Sequelize",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sequelize",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "serverless",
+    "name": "Serverless",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=serverless",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "servicenow",
+    "name": "ServiceNow",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=servicenow",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "session",
+    "name": "Session",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=session",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "setapp",
+    "name": "Setapp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=setapp",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "seyfert",
+    "name": "Seyfert",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=seyfert",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "shadcnui",
+    "name": "ShadCN UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=shadcnui",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "shiki",
+    "name": "Shiki",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=shiki",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "shopify",
+    "name": "Shopify",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=shopify",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "signal",
+    "name": "Signal",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=signal",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "simpledirectmedialayer",
+    "name": "Simple DirectMedia Layer",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=simpledirectmedialayer",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "singlespa",
+    "name": "Single SPA",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=singlespa",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "singularity",
+    "name": "Singularity",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=singularity",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "skeletonui",
+    "name": "Skeleton UI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=skeletonui",
+    "category": "STYLING"
+  },
+  {
+    "code": "sketch",
+    "name": "Sketch",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sketch",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "slack",
+    "name": "Slack",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=slack",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "slidev",
+    "name": "Slidev",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=slidev",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "slint",
+    "name": "Slint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=slint",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "slurm",
+    "name": "Slurm",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=slurm",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "snipcart",
+    "name": "Snipcart",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=snipcart",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "snowflake",
+    "name": "Snowflake",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=snowflake",
+    "category": "DATABASE"
+  },
+  {
+    "code": "snyk",
+    "name": "Snyk",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=snyk",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "soap",
+    "name": "SOAP",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=soap",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "socketio",
+    "name": "Socket.IO",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=socketio",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "solidity",
+    "name": "Solidity",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=solidity",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "solidjs",
+    "name": "SolidJS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=solidjs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "solidstart",
+    "name": "SolidStart",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=solidstart",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "solr",
+    "name": "Solr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=solr",
+    "category": "DATABASE"
+  },
+  {
+    "code": "sonarr",
+    "name": "Sonarr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sonarr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "soundbridge",
+    "name": "SoundBridge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=soundbridge",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "sphinx",
+    "name": "Sphinx",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sphinx",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "splunk",
+    "name": "Splunk",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=splunk",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "spring",
+    "name": "Spring",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=spring",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "springai",
+    "name": "Spring AI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=springai",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "springbatch",
+    "name": "Spring Batch",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=springbatch",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "springboot",
+    "name": "Spring Boot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=springboot",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "springcloud",
+    "name": "Spring Cloud",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=springcloud",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "springgraphql",
+    "name": "Spring GraphQL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=springgraphql",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "springsecurity",
+    "name": "Spring Security",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=springsecurity",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "springshell",
+    "name": "Spring Shell",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=springshell",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "spss",
+    "name": "SPSS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=spss",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "spyder",
+    "name": "Spyder",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=spyder",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "sql",
+    "name": "SQL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sql",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "sqlalchemy",
+    "name": "SQLAlchemy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sqlalchemy",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "sqlite",
+    "name": "SQLite",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sqlite",
+    "category": "DATABASE"
+  },
+  {
+    "code": "sqlserver",
+    "name": "SQL Server",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sqlserver",
+    "category": "DATABASE"
+  },
+  {
+    "code": "sst",
+    "name": "SST",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sst",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "stackblitz",
+    "name": "StackBlitz",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=stackblitz",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "stackoverflow",
+    "name": "Stack Overflow",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=stackoverflow",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "stanjs",
+    "name": "Stan.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=stanjs",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "starlight",
+    "name": "Starlight",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=starlight",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "stata",
+    "name": "Stata",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=stata",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "steam",
+    "name": "Steam",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=steam",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "stimulus",
+    "name": "Stimulus",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=stimulus",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "storyblok",
+    "name": "Storyblok",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=storyblok",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "storybook",
+    "name": "Storybook",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=storybook",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "strapi",
+    "name": "Strapi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=strapi",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "streamlit",
+    "name": "Streamlit",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=streamlit",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "stride",
+    "name": "Stride",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=stride",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "stripe",
+    "name": "Stripe",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=stripe",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "styledcomponents",
+    "name": "Styled Components",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=styledcomponents",
+    "category": "STYLING"
+  },
+  {
+    "code": "sublime",
+    "name": "Sublime",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=sublime",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "suitecrm",
+    "name": "SuiteCRM",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=suitecrm",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "supabase",
+    "name": "Supabase",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=supabase",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "surrealdb",
+    "name": "SurrealDB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=surrealdb",
+    "category": "DATABASE"
+  },
+  {
+    "code": "svelte",
+    "name": "Svelte",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=svelte",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "svg",
+    "name": "SVG",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=svg",
+    "category": "GRAPHICS_ART"
+  },
+  {
+    "code": "swagger",
+    "name": "Swagger",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=swagger",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "swc",
+    "name": "SWC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=swc",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "swift",
+    "name": "Swift",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=swift",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "swiftui",
+    "name": "SwiftUI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=swiftui",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "swiper",
+    "name": "Swiper",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=swiper",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "swr",
+    "name": "SWR",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=swr",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "symfony",
+    "name": "Symfony",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=symfony",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "systemd",
+    "name": "Systemd",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=systemd",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "t0ggles",
+    "name": "t0ggles",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=t0ggles",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "tabby",
+    "name": "Tabby",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tabby",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "tableau",
+    "name": "Tableau",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tableau",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "taiga",
+    "name": "Taiga",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=taiga",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "tailscale",
+    "name": "Tailscale",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tailscale",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "tailwindcss",
+    "name": "Tailwind CSS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tailwindcss",
+    "category": "STYLING"
+  },
+  {
+    "code": "tailwindmerge",
+    "name": "Tailwind Merge",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tailwindmerge",
+    "category": "STYLING"
+  },
+  {
+    "code": "tanstack",
+    "name": "TanStack",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tanstack",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "targon",
+    "name": "Targon",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=targon",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "tauri",
+    "name": "Tauri",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tauri",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "telegram",
+    "name": "Telegram",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=telegram",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "tempo",
+    "name": "Tempo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tempo",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "tensorflow",
+    "name": "TensorFlow",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tensorflow",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "terraform",
+    "name": "HashiCorp Terraform",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=terraform",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "testcontainers",
+    "name": "Testcontainers",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=testcontainers",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "threads",
+    "name": "Threads",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=threads",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "threejs",
+    "name": "Three.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=threejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "thunderbird",
+    "name": "Thunderbird",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=thunderbird",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "thunderclient",
+    "name": "Thunder Client",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=thunderclient",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "tidb",
+    "name": "TiDB",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tidb",
+    "category": "DATABASE"
+  },
+  {
+    "code": "tiktok",
+    "name": "TikTok",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tiktok",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "tinacms",
+    "name": "TinaCMS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tinacms",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "tinyhttp",
+    "name": "tinyhttp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=tinyhttp",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "toml",
+    "name": "Toml",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=toml",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "trae",
+    "name": "Trae",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=trae",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "traefik",
+    "name": "Traefik",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=traefik",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "treesitter",
+    "name": "Tree-sitter",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=treesitter",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "trello",
+    "name": "Trello",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=trello",
+    "category": "COMMUNICATION_COLLABORATION"
+  },
+  {
+    "code": "triage",
+    "name": "Triage",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=triage",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "trpc",
+    "name": "tRPC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=trpc",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "truenascore",
+    "name": "TrueNAS Core",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=truenascore",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "truenasenterprise",
+    "name": "TrueNAS Enterprise",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=truenasenterprise",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "truenasscale",
+    "name": "TrueNAS Scale",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=truenasscale",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "turborepo",
+    "name": "Turborepo",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=turborepo",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "turso",
+    "name": "Turso",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=turso",
+    "category": "DATABASE"
+  },
+  {
+    "code": "twilio",
+    "name": "Twilio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=twilio",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "twine",
+    "name": "Twine",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=twine",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "twitter",
+    "name": "Twitter",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=twitter",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "typeorm",
+    "name": "TypeORM",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=typeorm",
+    "category": "ORM_ODM"
+  },
+  {
+    "code": "typescript",
+    "name": "TypeScript",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=typescript",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "typescripteslint",
+    "name": "typescript-eslint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=typescripteslint",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "typst",
+    "name": "Typst",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=typst",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "ubuntu",
+    "name": "Ubuntu",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=ubuntu",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "udemy",
+    "name": "Udemy",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=udemy",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "umami",
+    "name": "Umami",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=umami",
+    "category": "DATA_SCIENCE"
+  },
+  {
+    "code": "umbraco",
+    "name": "Umbraco",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=umbraco",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "uml",
+    "name": "UML",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=uml",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "unity",
+    "name": "Unity",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=unity",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "unocss",
+    "name": "UnoCSS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=unocss",
+    "category": "STYLING"
+  },
+  {
+    "code": "unrealengine",
+    "name": "Unreal Engine",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=unrealengine",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "upstageai",
+    "name": "Upstage AI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=upstageai",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "upstash",
+    "name": "Upstash",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=upstash",
+    "category": "DATABASE"
+  },
+  {
+    "code": "uvicorn",
+    "name": "Uvicorn",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=uvicorn",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "v0",
+    "name": "v0",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=v0",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "vagrant",
+    "name": "Vagrant",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vagrant",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "vala",
+    "name": "Vala",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vala",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "valibot",
+    "name": "Valibot",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=valibot",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "valkey",
+    "name": "Valkey",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=valkey",
+    "category": "DATABASE"
+  },
+  {
+    "code": "vanillaos",
+    "name": "Vanilla OS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vanillaos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "vapor",
+    "name": "Vapor",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vapor",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "vault",
+    "name": "HashiCorp Vault",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vault",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "vaxee",
+    "name": "Vaxee",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vaxee",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "vegaspro",
+    "name": "Vegas Pro",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vegaspro",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "velocity",
+    "name": "Velocity",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=velocity",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "veracrypt",
+    "name": "VeraCrypt",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=veracrypt",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "vercel",
+    "name": "Vercel",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vercel",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "vhdl",
+    "name": "VHDL",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vhdl",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "videojs",
+    "name": "Video.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=videojs",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "vike",
+    "name": "Vike",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vike",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vim",
+    "name": "Vim",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vim",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "virtualbox",
+    "name": "VirtualBox",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=virtualbox",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "virustotal",
+    "name": "VirusTotal",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=virustotal",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "visualstudio",
+    "name": "Visual Studio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=visualstudio",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "visualstudiocode",
+    "name": "Visual Studio Code",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=visualstudiocode",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "visualstudiocodeinsiders",
+    "name": "Visual Studio Code Insiders",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=visualstudiocodeinsiders",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "vite",
+    "name": "Vite",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vite",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "vitepress",
+    "name": "VitePress",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vitepress",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vitepwa",
+    "name": "Vite PWA",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vitepwa",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vitest",
+    "name": "Vitest",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vitest",
+    "category": "TESTING_QA"
+  },
+  {
+    "code": "vivaldi",
+    "name": "Vivaldi",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vivaldi",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "vk",
+    "name": "VK",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vk",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "vlc",
+    "name": "VLC",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vlc",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "vlitejs",
+    "name": "VLite.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vlitejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vmix",
+    "name": "vMix",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vmix",
+    "category": "MULTIMEDIA_PRODUCTION"
+  },
+  {
+    "code": "vmware",
+    "name": "VMware",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vmware",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "vscodium",
+    "name": "VSCodium",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vscodium",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "vuefire",
+    "name": "VueFire",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vuefire",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vueform",
+    "name": "VueForm",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vueform",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vuejs",
+    "name": "Vue.js",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vuejs",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vuepress",
+    "name": "VuePress",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vuepress",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vuetify",
+    "name": "Vuetify",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vuetify",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vueuse",
+    "name": "VueUse",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vueuse",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "vulkan",
+    "name": "Vulkan",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=vulkan",
+    "category": "GAME_DEV"
+  },
+  {
+    "code": "warp",
+    "name": "Warp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=warp",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "waypoint",
+    "name": "HashiCorp Waypoint",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=waypoint",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "weaviate",
+    "name": "Weaviate",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=weaviate",
+    "category": "DATABASE"
+  },
+  {
+    "code": "webassembly",
+    "name": "Web Assembly",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=webassembly",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "weblate",
+    "name": "Weblate",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=weblate",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "websocket",
+    "name": "WebSocket",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=websocket",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "webstorm",
+    "name": "WebStorm",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=webstorm",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "webstudio",
+    "name": "WebStudio",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=webstudio",
+    "category": "DESIGN_UI_UX"
+  },
+  {
+    "code": "whatsapp",
+    "name": "WhatsApp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=whatsapp",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "whisparr",
+    "name": "Whisparr",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=whisparr",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "windicss",
+    "name": "Windi CSS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=windicss",
+    "category": "STYLING"
+  },
+  {
+    "code": "windows",
+    "name": "Windows",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=windows",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "windowsappsdk",
+    "name": "Windows App SDK",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=windowsappsdk",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "windsurf",
+    "name": "Windsurf",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=windsurf",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "winui",
+    "name": "WinUI",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=winui",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "wireshark",
+    "name": "Wireshark",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=wireshark",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "woocommerce",
+    "name": "WooCommerce",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=woocommerce",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "wordpress",
+    "name": "WordPress",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=wordpress",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "wxt",
+    "name": "WXT",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=wxt",
+    "category": "FRONTEND_DEV"
+  },
+  {
+    "code": "x",
+    "name": "X",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=x",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "xamarin",
+    "name": "Xamarin",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xamarin",
+    "category": "MOBILE_DEV"
+  },
+  {
+    "code": "xaml",
+    "name": "XAML",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xaml",
+    "category": "DESKTOP_DEV"
+  },
+  {
+    "code": "xampp",
+    "name": "XAMPP",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xampp",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "xcode",
+    "name": "Xcode",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xcode",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "xftp",
+    "name": "Xftp",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xftp",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "xml",
+    "name": "XML",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xml",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "xshell",
+    "name": "Xshell",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xshell",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "xubuntu",
+    "name": "Xubuntu",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=xubuntu",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "yaak",
+    "name": "Yaak",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=yaak",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "yaml",
+    "name": "YAML",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=yaml",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "yandexen",
+    "name": "Yandex En",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=yandexen",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "yandexru",
+    "name": "Yandex Ru",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=yandexru",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "yarn",
+    "name": "Yarn",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=yarn",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "yii",
+    "name": "Yii PHP Framework",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=yii",
+    "category": "BACKEND_DEV"
+  },
+  {
+    "code": "yolo",
+    "name": "YOLO",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=yolo",
+    "category": "AI_MACHINE_LEARNING"
+  },
+  {
+    "code": "youtube",
+    "name": "YouTube",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=youtube",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "zabbix",
+    "name": "Zabbix",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zabbix",
+    "category": "DEVOPS_TOOL"
+  },
+  {
+    "code": "zeabur",
+    "name": "Zeabur",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zeabur",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "zed",
+    "name": "Zed",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zed",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "zen",
+    "name": "Zen",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zen",
+    "category": "OTHER_UNCATEGORIZED"
+  },
+  {
+    "code": "zerops",
+    "name": "Zerops",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zerops",
+    "category": "CLOUD_PLATFORM"
+  },
+  {
+    "code": "zig",
+    "name": "Zig",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zig",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "zod",
+    "name": "Zod",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zod",
+    "category": "DEVELOPER_TOOL"
+  },
+  {
+    "code": "zorinos",
+    "name": "Zorin OS",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zorinos",
+    "category": "OPERATING_SYSTEM"
+  },
+  {
+    "code": "zshell",
+    "name": "ZShell",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zshell",
+    "category": "PROGRAMMING_LANGUAGE"
+  },
+  {
+    "code": "zustand",
+    "name": "Zustand",
+    "iconUrl": "https://skills.syvixor.com/api/icons?i=zustand",
+    "category": "FRONTEND_DEV"
+  }
+]
