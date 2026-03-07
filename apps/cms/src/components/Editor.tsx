@@ -10,6 +10,7 @@ import ImageTool from "@editorjs/image";
 import { uploadImagetoCloudinary } from "../api/upload";
 import { useParams } from "@tanstack/react-router";
 import { forwardRef, useImperativeHandle } from "react";
+import { normalizeEditorData } from "@repo/ui/lib/editor-utils";
 
 type EditorProps = {
   data: OutputData;
@@ -58,6 +59,8 @@ const Editor = forwardRef<EditorHandle, EditorProps>(
       // Local variable to ensure we destroy the instance created in THIS effect run
       let editorInstance: EditorJS | null = null;
 
+      const normalizedData = normalizeEditorData(data);
+
       const editor = new EditorJS({
         holder: holderRef.current,
         tools: {
@@ -76,7 +79,7 @@ const Editor = forwardRef<EditorHandle, EditorProps>(
             },
           },
         },
-        data,
+        data: normalizedData,
         onChange: async (api) => {
           const savedData = await api.saver.save();
           onChange?.(savedData);

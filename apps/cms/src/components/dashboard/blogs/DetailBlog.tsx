@@ -51,6 +51,7 @@ import { Link } from "@tanstack/react-router";
 import { EditorHandle } from "../../Editor";
 import edjsHTML from "editorjs-html";
 import EditorPreview from "@repo/ui/components/editor-preview";
+import { listParser, normalizeEditorData } from "@repo/ui/lib/editor-utils";
 import EditorBlog from "./EditorBlog";
 import { OutputData } from "@editorjs/editorjs";
 import { Skeleton } from "@repo/ui/components/skeleton";
@@ -78,9 +79,9 @@ function DetailBlog({ blog, onUpdateBlog, isLoading }: BlogDetailPageProps) {
 
   const editorRef = useRef<EditorHandle>(null);
 
-  const edjsParser = edjsHTML();
+  const edjsParser = edjsHTML({ list: listParser });
   const htmlBlocks = blog?.content
-    ? edjsParser.parse(blog?.content)
+    ? edjsParser.parse(normalizeEditorData(blog.content))
     : undefined;
 
   const form = useForm<BlogFormDTO>({

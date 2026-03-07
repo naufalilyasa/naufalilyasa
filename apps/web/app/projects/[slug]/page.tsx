@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import edjsHTML from "editorjs-html";
+import { listParser, normalizeEditorData } from "@repo/ui/lib/editor-utils";
 import { Button } from "@repo/ui/components/button";
 import { ExternalLink, Calendar } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
@@ -57,11 +58,17 @@ export default async function ProjectDetailPage(props: {
   }
 
   // Render EditorJS content if available, fallback to description
-  const edjsParser = edjsHTML();
-  const projectDetailContent =
-    project.projectDetail.length > 0 && project.projectDetail[0]?.content
-      ? edjsParser.parse(project.projectDetail[0].content)
-      : `<p class="first-letter:text-7xl first-letter:font-black first-letter:font-noto first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-ruby text-black/90 font-inter text-lg text-justify leading-relaxed mb-6">${project.description}</p>`;
+  const edjsParser = edjsHTML({ list: listParser });
+
+  const rawContent = project.projectDetail.length > 0 && project.projectDetail[0]?.content
+    ? project.projectDetail[0].content
+    : null;
+
+  const normalizedContent = rawContent ? normalizeEditorData(rawContent) : null;
+
+  const projectDetailContent = normalizedContent
+    ? edjsParser.parse(normalizedContent)
+    : `<p class="first-letter:text-7xl first-letter:font-black first-letter:font-noto first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-ruby text-black/90 font-inter text-lg text-justify leading-relaxed mb-6">${project.description}</p>`;
 
   return (
     <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-12 border-beige max-w-[80%] mx-auto">

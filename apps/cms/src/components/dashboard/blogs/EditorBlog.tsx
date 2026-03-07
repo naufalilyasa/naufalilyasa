@@ -10,6 +10,7 @@ import ImageTool from "@editorjs/image";
 import { uploadImagetoCloudinary } from "../../../api/upload";
 import { useParams } from "@tanstack/react-router";
 import { forwardRef, useImperativeHandle } from "react";
+import { normalizeEditorData } from "@repo/ui/lib/editor-utils";
 
 type EditorProps = {
   data: OutputData;
@@ -73,7 +74,7 @@ const EditorBlog = forwardRef<EditorHandle, EditorProps>(
             },
           },
         },
-        data,
+        data: normalizeEditorData(data),
         onReady: () => {
           if (!editorRef.current) {
             editorRef.current = editor;

@@ -3,6 +3,7 @@ import { useMemo, useEffect, useRef, useState } from "react";
 import Editor, { EditorHandle } from "../../../components/Editor";
 import { OutputData } from "@editorjs/editorjs";
 import edjsHTML from "editorjs-html";
+import { listParser, normalizeEditorData } from "@repo/ui/lib/editor-utils";
 import EditorPreview from "@repo/ui/components/editor-preview";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { editProjectFn, getProjectByIdFn } from "../../../api/project";
@@ -58,11 +59,12 @@ function RouteComponent() {
   const projectDetail = localDetail;
 
 
-  const edjsParser = useMemo(() => edjsHTML(), []);
+  const edjsParser = useMemo(() => edjsHTML({ list: listParser }), []);
   const htmlBlocks = useMemo(() => {
     if (!localDetail) return [];
     try {
-      const parsed = edjsParser.parse(localDetail);
+      const normalizedData = normalizeEditorData(localDetail);
+      const parsed = edjsParser.parse(normalizedData);
       return Array.isArray(parsed) ? (parsed as string[]) : [String(parsed)];
     } catch (e) {
       console.error("Failed to parse editor data:", e);
