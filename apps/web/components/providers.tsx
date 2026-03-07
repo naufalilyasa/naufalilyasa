@@ -3,10 +3,11 @@
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
+const NextThemesProviderTag = NextThemesProvider as any;
+
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    // @ts-expect-error next-themes types mismatch with React 19
-    <NextThemesProvider
+    <NextThemesProviderTag
       attribute="class"
       defaultTheme="system"
       enableSystem
@@ -14,6 +15,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableColorScheme
     >
       {children}
-    </NextThemesProvider>
+    </NextThemesProviderTag>
   );
 }

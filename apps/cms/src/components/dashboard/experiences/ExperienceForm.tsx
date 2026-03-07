@@ -122,7 +122,7 @@ export default function ExperienceForm({
     const [selectedTechnologies, setSelectedTechnologies] = useState<Technologies[]>([]);
 
     const form = useForm<ExperienceFormDTO>({
-        resolver: zodResolver(experienceFormSchema),
+        resolver: zodResolver(experienceFormSchema) as any,
         defaultValues: {
             companyName: "",
             position: "",
