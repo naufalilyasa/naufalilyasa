@@ -64,7 +64,7 @@ function RouteComponent() {
       <StatsCards data={stats} />
 
       <div className="grid gap-6 md:grid-cols-2">
-        <RecentProjects projects={projects} />
+        <RecentProjects projects={projects?.filter(p => p.featured)} />
 
         <div className="flex flex-col gap-6">
           <Card>

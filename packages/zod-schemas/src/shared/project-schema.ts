@@ -13,10 +13,22 @@ export const baseProjectSchema = z.object({
     error: "Project description is required and cannot be empty.",
   }),
 
-  githubUrl: z.url({ error: "GitHub URL must be a valid URL." }).optional(),
-
-  liveUrl: z.url({ error: "Live URL must be a valid URL." }).optional(),
-
+  githubUrl: z.preprocess(
+    (val) => {
+      if (val === null || val === undefined || val === "") return null;
+      if (typeof val === "string" && val.trim() === "") return null;
+      return val;
+    },
+    z.url({ message: "GitHub URL must be a valid URL." }).nullable().optional()
+  ),
+  liveUrl: z.preprocess(
+    (val) => {
+      if (val === null || val === undefined || val === "") return null;
+      if (typeof val === "string" && val.trim() === "") return null;
+      return val;
+    },
+    z.url({ message: "Live URL must be a valid URL." }).nullable().optional()
+  ),
   category: z.enum(
     ["FULLSTACK", "FRONTEND", "BACKEND", "MOBILE", "DESKTOP", "AIML", "DEVOPS"],
     {

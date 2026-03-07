@@ -64,7 +64,7 @@ export default async function ProjectDetailPage(props: {
       : `<p class="first-letter:text-7xl first-letter:font-black first-letter:font-noto first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-ruby text-black/90 font-inter text-lg text-justify leading-relaxed mb-6">${project.description}</p>`;
 
   return (
-    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-[12px] border-beige max-w-[80%] mx-auto">
+    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-12 border-beige max-w-[80%] mx-auto">
       {/* Masthead (Header) */}
       <header className="max-w-full mx-auto px-4 md:px-8 pt-8 mb-10 w-full">
         <div className="border-b-[6px] border-black pb-4">
@@ -158,7 +158,8 @@ export default async function ProjectDetailPage(props: {
                   src={project.thumbnail.url || "/placeholder.svg"}
                   alt={`${project.title} thumbnail`}
                   fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  className="object-cover"
+                  unoptimized
                 />
               </div>
             )}
@@ -166,7 +167,7 @@ export default async function ProjectDetailPage(props: {
             {/* Links and Actions (Mobile block, injected under photo) */}
             <div className="flex flex-wrap gap-4 mb-8 font-ibm text-xs font-bold uppercase lg:hidden border-b-2 border-black pb-6">
               {project.liveUrl && (
-                <Button variant="outline" className="border-2 border-black rounded-none tracking-wider hover:bg-black hover:text-ruby text-beige bg-black focus:ring-0 transition-none flex-grow" asChild>
+                <Button variant="outline" className="border-2 border-black rounded-none tracking-wider hover:bg-black hover:text-ruby text-beige bg-black focus:ring-0 transition-none grow" asChild>
                   <Link href={project.liveUrl} target="_blank">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Live Deployment
@@ -174,7 +175,7 @@ export default async function ProjectDetailPage(props: {
                 </Button>
               )}
               {project.githubUrl && (
-                <Button variant="outline" className="border-2 border-black rounded-none tracking-wider hover:bg-black hover:text-beige text-black focus:ring-0 transition-none flex-grow" asChild>
+                <Button variant="outline" className="border-2 border-black rounded-none tracking-wider hover:bg-black hover:text-beige text-beige bg-black focus:ring-0 transition-none grow" asChild>
                   <Link href={project.githubUrl} target="_blank">
                     <SiGithub className="w-4 h-4 mr-2" />
                     Source Code
@@ -211,7 +212,7 @@ export default async function ProjectDetailPage(props: {
                   </Button>
                 )}
                 {project.githubUrl && (
-                  <Button variant="outline" className="w-full border-2 border-black rounded-none tracking-widest hover:bg-black hover:text-beige text-black transition-none justify-start px-4 h-12" asChild>
+                  <Button variant="outline" className="w-full border-2 border-black rounded-none tracking-widest hover:bg-black hover:text-beige text-beige bg-black transition-none justify-start px-4 h-12" asChild>
                     <Link href={project.githubUrl} target="_blank">
                       <SiGithub className="w-4 h-4 mr-3" />
                       Source Code
@@ -223,7 +224,7 @@ export default async function ProjectDetailPage(props: {
 
             {/* Technologies Box */}
             <div className="border-4 border-black p-6 bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-              <h3 className="font-noto font-black text-2xl uppercase tracking-tight mb-4 border-b-[4px] border-black pb-2 text-black flex items-center justify-between">
+              <h3 className="font-noto font-black text-2xl uppercase tracking-tight mb-4 border-b-4 border-black pb-2 text-black flex items-center justify-between">
                 <span>Infrastructure</span>
                 <span className="text-sm font-ibm tracking-widest text-ruby">Tools</span>
               </h3>
@@ -232,10 +233,17 @@ export default async function ProjectDetailPage(props: {
                   <li key={index} className="flex items-center gap-3 group">
                     <div className="w-8 h-8 flex items-center justify-center border-2 border-black bg-white group-hover:bg-black transition-colors p-1">
                       {tech.technology.iconUrl && (
-                        <Image src={tech.technology.iconUrl} alt={tech.technology.name} width={20} height={20} className="group-hover:invert transition-all" />
+                        <Image
+                          src={tech.technology.iconUrl}
+                          alt={tech.technology.name}
+                          width={20}
+                          height={20}
+                          className="group-hover:invert transition-all"
+                          unoptimized
+                        />
                       )}
                     </div>
-                    <span className="font-bold border-b border-dotted border-black/30 flex-grow pb-1 group-hover:border-black transition-colors uppercase tracking-wide">
+                    <span className="font-bold border-b border-dotted border-black/30 grow pb-1 group-hover:border-black transition-colors uppercase tracking-wide">
                       {tech.technology.name}
                     </span>
                   </li>
@@ -249,7 +257,7 @@ export default async function ProjectDetailPage(props: {
       </main>
 
       {/* Footer */}
-      <footer className="border-t-[8px] border-double border-black bg-beige pt-12 pb-6 px-4 md:px-8">
+      <footer className="border-t-8 border-double border-black bg-beige pt-12 pb-6 px-4 md:px-8">
         <div className="max-w-full mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10 border-b-4 border-black pb-12">
 

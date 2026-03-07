@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { fetchBlogs } from "@/lib/blogService";
 import { format } from "date-fns";
 
 export default async function AllBlogsPage() {
-  // In the future, fetch blog posts here
-  const blogPosts: any[] = [];
+  const blogPosts = await fetchBlogs();
 
   return (
     <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-12 border-beige max-w-[80%] mx-auto flex flex-col">
@@ -69,27 +69,27 @@ export default async function AllBlogsPage() {
           <div className="space-y-12">
             {blogPosts.length > 0 ? (
               blogPosts.map((post, index) => (
-                <article key={index} className="border-b-4 border-black pb-8 group">
+                <article key={post.id} className="border-b-4 border-black pb-8 group">
                   <div className="flex flex-col md:flex-row gap-6">
                     <div className="md:w-1/4">
                       <span className="font-ibm text-[10px] md:text-xs font-bold uppercase text-ruby mb-2 block tracking-widest">
-                        Published • {format(new Date(), "MMM dd, yyyy")}
+                        Published • {post.publishedAt ? format(new Date(post.publishedAt), "MMM dd, yyyy") : format(new Date(post.createdAt), "MMM dd, yyyy")}
                       </span>
                       <span className="font-ibm text-xs font-bold uppercase border-2 border-black px-2 py-1 text-black inline-block">
-                        Engineering
+                        {post.category?.name || "Engineering"}
                       </span>
                     </div>
                     <div className="md:w-3/4">
                       <Link
-                        href={`/blogs`} // Replace with actual slug later
+                        href={`/blogs/${post.slug}`}
                         className="text-3xl md:text-4xl font-noto font-black uppercase text-black leading-none group-hover:text-ruby transition-colors group-hover:underline underline-offset-4 decoration-4 block mb-4 tracking-tighter"
                       >
-                        The Architecture of Modern Web Applications
+                        {post.title}
                       </Link>
-                      <p className="font-inter text-base md:text-lg text-stone-800 text-justify leading-relaxed">
-                        A comprehensive deep dive into the engineering principles behind this topic and why it matters to you. This is where a preview excerpt of the long-form content would be printed in the column.
+                      <p className="font-inter text-base md:text-lg text-stone-800 text-justify leading-relaxed line-clamp-3">
+                        {post.excerpt}
                       </p>
-                      <Link href="/blogs" className="font-ibm text-xs font-bold uppercase tracking-widest border-b-2 border-black pb-1 mt-6 inline-block hover:text-ruby hover:border-ruby transition-colors">
+                      <Link href={`/blogs/${post.slug}`} className="font-ibm text-xs font-bold uppercase tracking-widest border-b-2 border-black pb-1 mt-6 inline-block hover:text-ruby hover:border-ruby transition-colors">
                         Read Story &rarr;
                       </Link>
                     </div>

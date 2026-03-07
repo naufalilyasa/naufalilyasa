@@ -25,7 +25,7 @@ export default async function AllProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-[12px] border-beige max-w-[80%] mx-auto">
+    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-12 border-beige max-w-[80%] mx-auto">
       {/* Masthead (Header) */}
       <header className="max-w-full mx-auto px-4 md:px-8 pt-8 mb-10 w-full">
         <div className="border-b-[6px] border-black pb-4">
@@ -95,16 +95,17 @@ export default async function AllProjectsPage() {
                 className="rounded-none border-4 border-black bg-beige shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-200 group flex flex-col h-full"
               >
                 {project.thumbnail && (
-                  <div className="aspect-[4/3] relative border-b-4 border-black bg-black p-1 overflow-hidden">
+                  <div className="aspect-4/3 relative border-b-4 border-black bg-black p-1 overflow-hidden">
                     <Image
                       src={project.thumbnail.url || "/placeholder.svg"}
                       alt={`${project.title} thumbnail`}
                       fill
                       className="object-cover grayscale sm:grayscale-0 lg:grayscale lg:group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
+                      unoptimized
                     />
                   </div>
                 )}
-                <CardContent className="p-6 flex flex-col flex-grow">
+                <CardContent className="p-6 flex flex-col grow">
                   <div className="border-b-2 border-black pb-4 mb-4">
                     <div className="flex gap-2 font-ibm text-xs font-bold uppercase mb-3">
                       <span className="bg-black text-beige px-2 py-1">
@@ -130,7 +131,7 @@ export default async function AllProjectsPage() {
                     </span>
                   </div>
 
-                  <p className="font-inter text-sm mb-6 text-black/90 text-justify leading-relaxed flex-grow">
+                  <p className="font-inter text-sm mb-6 text-black/90 text-justify leading-relaxed grow">
                     {project.description.length > 150 ? project.description.substring(0, 150) + "..." : project.description}
                   </p>
 
@@ -187,7 +188,7 @@ export default async function AllProjectsPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t-[8px] border-double border-black bg-beige pt-12 pb-6 px-4 md:px-8">
+      <footer className="border-t-8 border-double border-black bg-beige pt-12 pb-6 px-4 md:px-8">
         <div className="max-w-full mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10 border-b-4 border-black pb-12">
 

@@ -106,8 +106,8 @@ export const createProjectHandler = async (req: Request, res: Response, next: Ne
     }
 
     const payload: CreateProjectBackendDTO = {
-      ...parsedBase,
       ...req.body,
+      ...parsedBase,
       thumbnail: thumbnail ? { url: thumbnail.secure_url, publicId: thumbnail.public_id } : undefined,
     };
 
@@ -152,8 +152,8 @@ export const editProjectHandler = async (req: Request, res: Response, next: Next
     }
 
     const payload: CreateProjectBackendDTO = {
-      ...parsedBase,
       ...req.body,
+      ...parsedBase,
       thumbnail: thumbnail ? { url: thumbnail.secure_url, publicId: thumbnail.public_id } : undefined,
     };
 

@@ -14,6 +14,7 @@ import {
 import { fetchProjects } from "@/lib/projectService";
 import { format } from "date-fns";
 import { fetchUser } from "@/lib/userService";
+import { fetchBlogs } from "@/lib/blogService";
 import React from "react";
 import { CategoryProject } from "@repo/types";
 import { ExperienceResponse } from "@repo/types/experience";
@@ -24,6 +25,7 @@ import { GraduationCap, MapPin, Code, TrendingUp, Award } from "lucide-react";
 export default async function Portfolio() {
   const allProjects = await fetchProjects();
   const user = await fetchUser();
+  const allBlogs = await fetchBlogs();
 
   const grouped = user?.userTechnologies?.reduce(
     (acc, item) => {
@@ -51,16 +53,14 @@ export default async function Portfolio() {
     })),
   ];
 
-  const allBlogPosts: string[] = [];
+  const latestBlogPosts = allBlogs.slice(0, 3);
 
   const featuredProjects = allProjects
     .filter((project) => project.featured)
     .slice(0, 3); // Changed to 3 for standard 3-column newspaper grid
-  const latestBlogPosts = allBlogPosts.slice(0, 3);
 
-  // Fallback if there aren't 3 featured projects, we just take the first 3
-  const displayProjects = featuredProjects.length >= 3 ? featuredProjects : allProjects.slice(0, 3);
-
+  // Display only featured projects as requested
+  const displayProjects = featuredProjects;
   return (
     <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-12 border-beige md:max-w-[78%] mx-auto">
       {/* Masthead (Header) */}
@@ -188,6 +188,7 @@ export default async function Portfolio() {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover"
+                  unoptimized
                 />
               </div>
               <p className="font-ibm text-xs text-center uppercase font-bold tracking-wider border-y-2 border-black py-3 mt-4 w-full">
@@ -216,7 +217,13 @@ export default async function Portfolio() {
                   <div className="flex items-start gap-4 mb-4">
                     {job.logoUrl && (
                       <div className="w-16 h-16 relative border-2 border-black shrink-0 bg-white p-2">
-                        <Image src={job.logoUrl} alt={job.companyName} fill className="object-contain" />
+                        <Image
+                          src={job.logoUrl}
+                          alt={job.companyName}
+                          fill
+                          className="object-contain"
+                          unoptimized
+                        />
                       </div>
                     )}
                     <div>
@@ -287,7 +294,7 @@ export default async function Portfolio() {
               </span>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 border-4 border-black p-6 md:p-8 bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div className="grid md:grid-cols-2 gap-8 border-4 border-black p-6 md:p-8 bg-beige shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               {/* @ts-ignore */}
               {user.educations.map((edu: EducationResponse, index: number) => (
                 <div key={edu.id} className={`flex flex-col h-full ${index !== user.educations!.length - 1 && user.educations!.length > 1 ? 'md:border-r-2 md:border-black md:pr-8 border-b-2 md:border-b-0 pb-8 md:pb-0 mb-8 md:mb-0 border-black' : ''}`}>
@@ -401,13 +408,13 @@ export default async function Portfolio() {
                   <div key={index} className="border-b-2 border-black pb-4 group cursor-pointer">
                     <span className="font-ibm text-[10px] font-bold uppercase text-ruby mb-1 block">Article No. 0{index + 1}</span>
                     <Link
-                      href="/blogs"
+                      href={`/blogs/${post.slug}`}
                       className="text-xl font-noto font-bold uppercase text-black leading-tight group-hover:text-ruby transition-colors group-hover:underline underline-offset-4 decoration-2"
                     >
-                      {post}
+                      {post.title}
                     </Link>
                     <p className="font-inter text-xs text-stone-700 mt-2 line-clamp-2">
-                      A comprehensive deep dive into the engineering principles behind this topic and why it matters to you.
+                      {post.excerpt}
                     </p>
                   </div>
                 ))
@@ -426,7 +433,7 @@ export default async function Portfolio() {
             {latestBlogPosts.length > 0 && (
               <div className="mt-8">
                 <Button className="w-full rounded-none font-ibm font-bold uppercase tracking-widest bg-black text-beige border-2 border-black hover:bg-beige hover:text-black transition-colors" asChild>
-                  <Link href="/blog">Read All Columns</Link>
+                  <Link href="/blogs">Read All Columns</Link>
                 </Button>
               </div>
             )}
@@ -456,6 +463,7 @@ export default async function Portfolio() {
                       alt={`${project.title} thumbnail`}
                       fill
                       className="object-cover grayscale sm:grayscale-0 lg:grayscale lg:group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-105"
+                      unoptimized
                     />
                   </div>
                 )}
@@ -514,7 +522,7 @@ export default async function Portfolio() {
 
                   <div className="flex flex-wrap gap-3 mt-auto font-ibm text-xs">
                     <Button variant="default" className="rounded-none font-bold uppercase border-2 border-black px-4 bg-black text-beige hover:bg-beige hover:text-black transition-colors" asChild>
-                      <Link href={`/projects/${project.id}`}>
+                      <Link href={`/projects/${project.slug}`}>
                         Read Story
                       </Link>
                     </Button>
