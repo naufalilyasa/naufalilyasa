@@ -138,6 +138,7 @@ function ProjectForm({
     resolver: zodResolver(projectFormSchema),
     defaultValues: {
       title: project?.title ?? "",
+      slug: project?.slug ?? "",
       description: project?.description ?? "",
       category: project?.category ? project!.category : "FULLSTACK",
       githubUrl: project?.githubUrl ?? "",
@@ -145,15 +146,7 @@ function ProjectForm({
       technologies: project?.technologies.map((tech) => tech.id) ?? [],
       projectDetail: {
         time: Date.now(),
-        blocks: [
-          {
-            id: "1",
-            type: "paragraph",
-            data: {
-              text: "This is example a project description",
-            },
-          },
-        ],
+        blocks: [],
         version: "2.30.8",
       },
       featured: project?.featured ?? false,
@@ -162,6 +155,19 @@ function ProjectForm({
       thumbnail: undefined,
     },
   });
+
+  const watchedTitle = form.watch("title");
+
+  useEffect(() => {
+    // Auto-generate slug from title if we are creating a new project
+    if (!project && watchedTitle) {
+      const generatedSlug = watchedTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+      form.setValue("slug", generatedSlug, { shouldValidate: true });
+    }
+  }, [watchedTitle, project, form]);
 
   const handleSubmit = ({
     projectId,
@@ -220,6 +226,7 @@ function ProjectForm({
     if (project) {
       form.reset({
         title: project.title,
+        slug: project.slug,
         description: project.description,
         category: project.category,
         githubUrl: project.githubUrl,
@@ -227,15 +234,7 @@ function ProjectForm({
         technologies: project.technologies.map((tech) => tech.id),
         projectDetail: {
           time: project.projectDetail[0]?.content?.time ?? Date.now(),
-          blocks: project.projectDetail[0]?.content?.blocks ?? [
-            {
-              id: "1",
-              type: "paragraph",
-              data: {
-                text: "This is a project description",
-              },
-            },
-          ],
+          blocks: project.projectDetail[0]?.content?.blocks ?? [],
           version: project.projectDetail[0]?.content?.version ?? "2.30.8",
         },
         featured: project.featured,
@@ -246,6 +245,7 @@ function ProjectForm({
     } else {
       form.reset({
         title: "",
+        slug: "",
         description: "",
         category: "FULLSTACK",
         githubUrl: "",
@@ -253,15 +253,7 @@ function ProjectForm({
         technologies: [],
         projectDetail: {
           time: Date.now(),
-          blocks: [
-            {
-              id: "1",
-              type: "paragraph",
-              data: {
-                text: "This is a project description",
-              },
-            },
-          ],
+          blocks: [],
           version: "2.30.8",
         },
         featured: false,
@@ -312,7 +304,7 @@ function ProjectForm({
             className="space-y-6"
             encType="multipart/form-data"
           >
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-1">
               <FormField
                 control={form.control}
                 name="title"
@@ -321,6 +313,22 @@ function ProjectForm({
                     <FormLabel>Project Title *</FormLabel>
                     <FormControl>
                       <Input placeholder="My Awesome Project" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="slug"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Slug *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="my-awesome-project" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

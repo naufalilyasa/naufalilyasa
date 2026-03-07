@@ -37,7 +37,8 @@ export type RefreshTokenResponseType = {
 };
 
 export type ErrorResponseType = {
-  data: { message: string };
+  message: string;
+  errors?: any[];
   status: string;
   statusCode: number;
 };

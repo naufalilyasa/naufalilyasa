@@ -12,7 +12,6 @@ import {
 } from "@repo/types/auth";
 import { RegisterUserDTO } from "@repo/zod-schemas";
 import { useAuth } from "../store/auth";
-import { redirect } from "@tanstack/react-router";
 
 // Request queue management
 let isRefreshing = false;
@@ -41,8 +40,7 @@ const isValidErrorResponse = (data: any): data is ErrorResponseType => {
   return (
     data &&
     typeof data === "object" &&
-    data.data &&
-    typeof data.data.message === "string"
+    typeof data.message === "string"
   );
 };
 
@@ -63,7 +61,7 @@ api.interceptors.response.use(
     }
 
     const errorData = error.response.data as ErrorResponseType;
-    const errorMessage = errorData.data.message;
+    const errorMessage = errorData.message;
 
     // Check if this is an auth error that needs token refresh
     const isAuthError =
@@ -76,7 +74,9 @@ api.interceptors.response.use(
         // if refresh endpoint itself fails, clear auth and redirect
         const { clearAuthUser } = useAuth();
         clearAuthUser();
-        redirect({ to: "/login" });
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
+        }
         return Promise.reject(error);
       }
 
@@ -114,19 +114,23 @@ api.interceptors.response.use(
         clearAuthUser();
 
         // Handle specific refresh errors
-        if (isAxiosError(refreshError)) {
-          const refreshErrorData = refreshError.response?.data;
-          if (isValidErrorResponse(refreshErrorData)) {
-            const refreshErrorMessage = refreshErrorData.data.message;
-            if (refreshErrorMessage === "Could not refresh access token") {
-              redirect({ to: "/login" });
-              return Promise.reject(
-                new Error("Session expired. Please login again.")
-              );
+        if (refreshError instanceof Error) {
+          if (
+            refreshError.message === "Could not refresh access token" ||
+            refreshError.message === "Session has expired or user doesn't exist"
+          ) {
+            if (window.location.pathname !== "/login") {
+              window.location.href = "/login";
             }
+            return Promise.reject(
+              new Error("Session expired. Please login again.")
+            );
           }
         }
 
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/login";
+        }
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
@@ -170,7 +174,7 @@ export const refreshTokenFn = async (): Promise<RefreshTokenResponseType> => {
     if (isAxiosError(error)) {
       const errorData = error.response?.data;
       if (isValidErrorResponse(errorData)) {
-        throw new Error(errorData.data.message);
+        throw new Error(errorData.message);
       }
       throw new Error(error.message || "Failed to refresh token");
     }

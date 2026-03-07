@@ -16,6 +16,7 @@ type EditorProps = {
   setData: React.Dispatch<React.SetStateAction<OutputData>>;
   isLoading: boolean;
   isEditing?: boolean;
+  onChange?: (data: OutputData) => void;
 };
 
 const tools = {
@@ -34,8 +35,9 @@ export type EditorHandle = {
 };
 
 const Editor = forwardRef<EditorHandle, EditorProps>(
-  ({ data, setData, isLoading, isEditing }, ref) => {
+  ({ data, setData, isLoading, isEditing, onChange }, ref) => {
     const editorRef = useRef<EditorJS | null>(null);
+    const holderRef = useRef<HTMLDivElement>(null);
     const isInitialized = useRef(false);
     const params = useParams({ from: "/_auth/projects/detail/$id" });
 
@@ -51,12 +53,13 @@ const Editor = forwardRef<EditorHandle, EditorProps>(
     }));
 
     useEffect(() => {
-      if (isLoading || !data || isInitialized.current) return;
-      const holder = document.getElementById("editorjs");
-      if (!holder) return;
+      if (isLoading || !data || !holderRef.current) return;
+
+      // Local variable to ensure we destroy the instance created in THIS effect run
+      let editorInstance: EditorJS | null = null;
 
       const editor = new EditorJS({
-        holder: "editorjs",
+        holder: holderRef.current,
         tools: {
           ...tools,
           image: {
@@ -74,26 +77,43 @@ const Editor = forwardRef<EditorHandle, EditorProps>(
           },
         },
         data,
-        onReady: () => {
-          if (!editorRef.current) {
-            editorRef.current = editor;
-            isInitialized.current = true;
-          }
+        onChange: async (api) => {
+          const savedData = await api.saver.save();
+          onChange?.(savedData);
         },
-        readOnly: !isEditing,
+        onReady: () => {
+          editorRef.current = editor;
+          isInitialized.current = true;
+          editor.readOnly.toggle(!isEditing);
+        },
       });
 
+      editorInstance = editor;
+
       return () => {
-        if (
-          editorRef.current &&
-          typeof editorRef.current.destroy === "function"
-        ) {
-          editorRef.current.destroy();
-          editorRef.current = null;
-          isInitialized.current = false;
+        if (editorInstance) {
+          editorInstance.isReady
+            .then(() => {
+              if (editorInstance && typeof editorInstance.destroy === "function") {
+                editorInstance.destroy();
+                // Only clear the global ref if it's still pointing to this instance
+                if (editorRef.current === editorInstance) {
+                  editorRef.current = null;
+                  isInitialized.current = false;
+                }
+              }
+            })
+            .catch((e) => console.error("Error cleaning up editor:", e));
         }
       };
-    }, [params.id, isLoading, data, setData, isEditing]);
+    }, [params.id, isLoading]);
+
+    // Handle readOnly mode changes without re-initializing
+    useEffect(() => {
+      if (editorRef.current && isInitialized.current) {
+        editorRef.current.readOnly.toggle(!isEditing);
+      }
+    }, [isEditing]);
 
     if (isLoading && !data) {
       return <div>Loading...</div>;
@@ -101,7 +121,7 @@ const Editor = forwardRef<EditorHandle, EditorProps>(
 
     return (
       <div
-        id="editorjs"
+        ref={holderRef}
         className="border w-full rounded p-4 bg-white text-sm"
       />
     );
