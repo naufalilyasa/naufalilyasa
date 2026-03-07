@@ -54,7 +54,7 @@ export default function EducationForm({
     isLoading = false,
 }: EducationFormProps) {
     const form = useForm<EducationFormDTO>({
-        resolver: zodResolver(educationFormSchema),
+        resolver: zodResolver(educationFormSchema) as any,
         defaultValues: {
             institution: "",
             location: "",
