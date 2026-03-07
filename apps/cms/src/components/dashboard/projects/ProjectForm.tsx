@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -88,6 +88,7 @@ function ProjectForm({
   isLoading = false,
 }: ProjectFormProps) {
   const [comboboxOpen, setComboboxOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
   const [project, setProject] = useState<Project | null | undefined>(null);
 
@@ -112,6 +113,25 @@ function ProjectForm({
   const [selectedTechnologies, setSelectedTechnologies] = useState<
     Technologies[] | undefined
   >([]);
+
+  const skillCategories = useMemo(() => {
+    if (!categoryTechnologies?.data) return [];
+
+    const grouped = categoryTechnologies.data.reduce((acc: any, tech: Technologies) => {
+      const catVal = tech.category;
+      if (!acc[catVal]) {
+        acc[catVal] = {
+          label: tech.categoryLabel || tech.category.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()),
+          value: catVal,
+          skills: []
+        };
+      }
+      acc[catVal].skills.push(tech);
+      return acc;
+    }, {});
+
+    return Object.values(grouped) as { label: string; value: string; skills: Technologies[] }[];
+  }, [categoryTechnologies?.data]);
 
 
   const form = useForm<CreateProjectFormDTO>({
@@ -191,6 +211,7 @@ function ProjectForm({
   const handleClose = () => {
     form.reset();
     setSelectedTechnologies([]);
+    setSearchQuery("");
     setComboboxOpen(false);
     onOpenChange(false);
   };
@@ -551,55 +572,76 @@ function ProjectForm({
                           <CommandInput
                             placeholder="Search technologies (e.g., React, Node.js, Python)..."
                             className="h-9"
+                            value={searchQuery}
+                            onValueChange={setSearchQuery}
                           />
                           <CommandList className="max-h-[300px]">
-                            <CommandEmpty>
+                            {searchQuery.length === 0 ? (
                               <div className="flex flex-col items-center justify-center py-6 text-center">
                                 <div className="text-muted-foreground mb-2">
-                                  No technology found
+                                  Start typing to search
                                 </div>
                                 <div className="text-xs text-muted-foreground">
-                                  Try searching for "React", "Node.js", or
-                                  "Python"
+                                  Enter a technology name to see results
                                 </div>
                               </div>
-                            </CommandEmpty>
+                            ) : (
+                              <CommandEmpty>
+                                <div className="flex flex-col items-center justify-center py-6 text-center">
+                                  <div className="text-muted-foreground mb-2">
+                                    No technology found
+                                  </div>
+                                  <div className="text-xs text-muted-foreground">
+                                    Try searching for "React", "Node.js", or
+                                    "Python"
+                                  </div>
+                                </div>
+                              </CommandEmpty>
+                            )}
 
                             {/* Categorized Technologies */}
                             {isLoadingTechnologies ? (
-                              <div>Loading...</div>
+                              <div className="p-4 text-center text-sm text-muted-foreground">Loading...</div>
                             ) : (
-                              categoryTechnologies?.data
-                                .filter(
-                                  (tech) =>
-                                    !selectedTechnologies?.some(
-                                      (selected) => selected.id === tech.id
+                              searchQuery.length > 0 && skillCategories.map((skillCategory) => (
+                                <CommandGroup
+                                  key={skillCategory.value}
+                                  heading={`${skillCategory.label} (${skillCategory.skills?.length})`}
+                                >
+                                  {skillCategory.skills
+                                    ?.filter(
+                                      (skill: Technologies) =>
+                                        !selectedTechnologies?.some(
+                                          (selectedTechnology: Technologies) =>
+                                            selectedTechnology.id === skill.id
+                                        )
                                     )
-                                )
-                                .map((tech) => {
-                                  return (
-                                    <CommandGroup key={tech.id}>
+                                    .map((skill: Technologies) => (
                                       <CommandItem
-                                        value={tech.name}
-                                        onSelect={() => addTechnology(tech)}
+                                        key={skill.id}
+                                        value={skill.name}
+                                        onSelect={() => addTechnology(skill)}
                                         className="cursor-pointer flex items-center gap-2"
                                       >
-                                        <Check
-                                          className={cn(
-                                            "h-4 w-4",
-                                            selectedTechnologies?.filter(
-                                              (selected) =>
-                                                !selected.id.includes(tech.id)
-                                            )
-                                              ? "opacity-0"
-                                              : "opacity-100"
-                                          )}
-                                        />
-                                        <span>{tech.name}</span>
+                                        <Check className="mr-2 h-4 w-4 opacity-0" />
+                                        {skill.iconUrl && (
+                                          <img
+                                            src={skill.iconUrl}
+                                            alt={skill.name}
+                                            className="w-4 h-4 object-contain"
+                                          />
+                                        )}
+                                        <span>{skill.name}</span>
+                                        <Badge
+                                          variant="outline"
+                                          className="ml-auto text-xs"
+                                        >
+                                          {skillCategory.label}
+                                        </Badge>
                                       </CommandItem>
-                                    </CommandGroup>
-                                  );
-                                })
+                                    ))}
+                                </CommandGroup>
+                              ))
                             )}
                           </CommandList>
                         </Command>
@@ -645,8 +687,16 @@ function ProjectForm({
                         className="flex items-center gap-1 px-2 py-1 bg-primary/10 hover:bg-primary/20 transition-colors"
                       >
                         <span className="text-xs font-medium">{tech.name}</span>
-                        <button onClick={() => removeTechnology(tech)}>
-                          <X className="h-3 w-3 cursor-pointer hover:text-red-500 transition-colors" />
+                        <button
+                          type="button"
+                          className="relative z-10 p-0.5 -mr-1 rounded-sm hover:bg-red-100 hover:text-red-500 transition-colors pointer-events-auto"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            removeTechnology(tech);
+                          }}
+                        >
+                          <X className="h-3 w-3 cursor-pointer" />
                         </button>
                       </Badge>
                     ))

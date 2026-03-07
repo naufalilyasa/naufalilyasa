@@ -8,9 +8,18 @@ import { prisma } from "../prisma/prisma.js";
 import { AppError } from "../utils/appError.js";
 import { getAllBlogs, getBlogById } from "../services/blog.service.js";
 
+import { getCategoryLabels } from "../utils/category.js";
+
 export const getAllTechnologiesHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await prisma.technology.findMany({});
+    const technologies = await prisma.technology.findMany({});
+    const categoryLabels = getCategoryLabels();
+
+    const result = technologies.map((tech) => ({
+      ...tech,
+      categoryLabel: categoryLabels[tech.category] || tech.category.replace(/_/g, " ").toLowerCase()
+        .replace(/\b\w/g, (c) => c.toUpperCase())
+    }));
 
     res.status(200).json({
       statusCode: 200,
@@ -26,7 +35,7 @@ export const getAllTechnologiesHandler = async (req: Request, res: Response, nex
 export const getAllPublicProjectsHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const projects = await prisma.project.findMany({
-      where: { userId: config.userId },
+      where: { user: { username: "admin" } },
       orderBy: { createdAt: "desc" },
       include: {
         projectDetail: true,
@@ -39,11 +48,25 @@ export const getAllPublicProjectsHandler = async (req: Request, res: Response, n
       },
     });
 
+    const categoryLabels = getCategoryLabels();
+
+    const enrichedProjects = projects.map((project) => ({
+      ...project,
+      technologies: project.technologies.map((tech) => ({
+        ...tech,
+        technology: {
+          ...tech.technology,
+          categoryLabel: categoryLabels[tech.technology.category] || tech.technology.category.replace(/_/g, " ").toLowerCase()
+            .replace(/\b\w/g, (c) => c.toUpperCase()),
+        },
+      })),
+    }));
+
     res.status(200).json({
       statusCode: 200,
       status: "success",
       message: "Successfully retrieved all public projects",
-      data: projects,
+      data: enrichedProjects,
     });
   } catch (error) {
     next(error);
@@ -57,7 +80,7 @@ export const getPublicProjectBySlugHandler = async (req: Request, res: Response,
     const project = await prisma.project.findFirstOrThrow({
       where: {
         slug: parsedParams.slug,
-        userId: config.userId,
+        user: { username: "admin" },
       },
       include: {
         technologies: {
@@ -70,11 +93,25 @@ export const getPublicProjectBySlugHandler = async (req: Request, res: Response,
       },
     });
 
+    const categoryLabels = getCategoryLabels();
+
+    const enrichedProject = {
+      ...project,
+      technologies: project.technologies.map((tech) => ({
+        ...tech,
+        technology: {
+          ...tech.technology,
+          categoryLabel: categoryLabels[tech.technology.category] || tech.technology.category.replace(/_/g, " ").toLowerCase()
+            .replace(/\b\w/g, (c) => c.toUpperCase()),
+        },
+      })),
+    };
+
     res.status(200).json({
       statusCode: 200,
       status: "success",
       message: "Successfully retrieved public project",
-      data: project,
+      data: enrichedProject,
     });
   } catch (error) {
     if (error instanceof ZodError) {
@@ -92,7 +129,7 @@ export const getPublicUserProfile = async (req: Request, res: Response, next: Ne
   try {
     const profile = await prisma.user.findFirstOrThrow({
       where: {
-        id: config.userId,
+        username: "admin",
       },
       omit: {
         password: true,
@@ -124,11 +161,36 @@ export const getPublicUserProfile = async (req: Request, res: Response, next: Ne
       },
     });
 
+    const categoryLabels = getCategoryLabels();
+
+    const enrichedProfile = {
+      ...profile,
+      userTechnologies: profile.userTechnologies.map((ut) => ({
+        ...ut,
+        technology: {
+          ...ut.technology,
+          categoryLabel: categoryLabels[ut.technology.category] || ut.technology.category.replace(/_/g, " ").toLowerCase()
+            .replace(/\b\w/g, (c) => c.toUpperCase()),
+        },
+      })),
+      workExperiences: profile.workExperiences.map((exp) => ({
+        ...exp,
+        technologies: exp.technologies.map((et) => ({
+          ...et,
+          technology: {
+            ...et.technology,
+            categoryLabel: categoryLabels[et.technology.category] || et.technology.category.replace(/_/g, " ").toLowerCase()
+              .replace(/\b\w/g, (c) => c.toUpperCase()),
+          },
+        })),
+      })),
+    };
+
     res.status(200).json({
       statusCode: 200,
       status: "success",
       message: "Successfully retrieved public profile",
-      data: profile,
+      data: enrichedProfile,
     });
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
@@ -140,7 +202,8 @@ export const getPublicUserProfile = async (req: Request, res: Response, next: Ne
 
 export const getPublicAllBlogsHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const blogs = await getAllBlogs(config.userId);
+    const admin = await prisma.user.findUniqueOrThrow({ where: { username: "admin" } });
+    const blogs = await getAllBlogs(admin.id);
 
     res.status(200).json({
       statusCode: 200,
@@ -156,7 +219,8 @@ export const getPublicAllBlogsHandler = async (req: Request, res: Response, next
 export const getPublicBlogBySlugHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const parsedParams = paramsSlugBlogSchema.parse(req.params);
-    const blog = await getBlogById(parsedParams.slug, config.userId);
+    const admin = await prisma.user.findUniqueOrThrow({ where: { username: "admin" } });
+    const blog = await getBlogById(parsedParams.slug, admin.id);
 
     res.status(200).json({
       statusCode: 200,

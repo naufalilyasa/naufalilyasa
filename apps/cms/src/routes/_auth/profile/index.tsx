@@ -72,6 +72,7 @@ export const Route = createFileRoute("/_auth/profile/")({
 export function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [skillComboboxOpen, setSkillComboboxOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedTechnologies, setSelectedTechnologies] = useState<
     Technologies[]
   >([]);
@@ -131,21 +132,15 @@ export function ProfilePage() {
   const technologies = useMemo(() => technologiesData?.data ?? [], [technologiesData]);
 
   const skillCategories = useMemo(() => {
-    const categoryTechOptions = Object.values(CategoryTech).map((val) => ({
-      value: val,
-      label: val
-        .replace(/_/g, " ")
-        .toLowerCase()
-        .replace(/\b\w/g, (c) => c.toUpperCase()),
-    }));
+    return Object.values(CategoryTech).map((categoryValue) => {
+      const skills = technologies.filter((tech: Technologies) => tech.category === categoryValue);
+      const categoryLabel = skills.find((t: Technologies) => t.categoryLabel)?.categoryLabel ||
+        categoryValue.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
-    return categoryTechOptions.map((category) => {
       return {
-        label: category.label,
-        value: category.value,
-        skills: technologies.filter((technology: Technologies) => {
-          return technology.category === category.value;
-        }),
+        label: categoryLabel,
+        value: categoryValue,
+        skills,
       };
     });
   }, [technologies]);
@@ -600,19 +595,34 @@ export function ProfilePage() {
                     </PopoverTrigger>
                     <PopoverContent className="w-[500px] p-0" align="start">
                       <Command>
-                        <CommandInput placeholder="Search technologies (e.g., React, Python, Docker)..." />
+                        <CommandInput
+                          placeholder="Search technologies (e.g., React, Python, Docker)..."
+                          value={searchQuery}
+                          onValueChange={setSearchQuery}
+                        />
                         <CommandList className="max-h-[400px]">
-                          <CommandEmpty>
+                          {searchQuery.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-6 text-center">
                               <div className="text-muted-foreground mb-2">
-                                No technology found
+                                Start typing to search
                               </div>
                               <div className="text-xs text-muted-foreground">
-                                Try searching for "React", "Python", or "Docker"
+                                Enter a technology name to see results
                               </div>
                             </div>
-                          </CommandEmpty>
-                          {skillCategories.map((skillCategory: { label: string; value: string; skills: Technologies[] }) => (
+                          ) : (
+                            <CommandEmpty>
+                              <div className="flex flex-col items-center justify-center py-6 text-center">
+                                <div className="text-muted-foreground mb-2">
+                                  No technology found
+                                </div>
+                                <div className="text-xs text-muted-foreground">
+                                  Try searching for "React", "Python", or "Docker"
+                                </div>
+                              </div>
+                            </CommandEmpty>
+                          )}
+                          {searchQuery.length > 0 && skillCategories.map((skillCategory: { label: string; value: string; skills: Technologies[] }) => (
                             <CommandGroup
                               key={skillCategory.value}
                               heading={`${skillCategory.label} (${skillCategory.skills?.length})`}
@@ -703,14 +713,17 @@ export function ProfilePage() {
                         )}
                         <span>{tech.name}</span>
                         {isEditing && (
-                          <X
-                            className="h-3 w-3 cursor-pointer hover:text-red-500 transition-colors ml-1"
-                            onClick={(e: React.MouseEvent) => {
+                          <button
+                            type="button"
+                            className="relative z-10 p-0.5 -mr-1 ml-1 rounded-sm hover:bg-red-100 hover:text-red-500 transition-colors pointer-events-auto"
+                            onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
                               removeTechnology(tech.id);
                             }}
-                          />
+                          >
+                            <X className="h-3 w-3 cursor-pointer" />
+                          </button>
                         )}
                       </Badge>
                     ))

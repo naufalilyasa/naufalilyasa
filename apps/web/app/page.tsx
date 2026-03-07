@@ -27,7 +27,8 @@ export default async function Portfolio() {
 
   const grouped = user?.userTechnologies?.reduce(
     (acc, item) => {
-      const category = item.technology.category;
+      // Use categoryLabel if mapped in the API, otherwise fallback
+      const category = item.technology.categoryLabel || item.technology.category;
       if (!acc[category]) {
         acc[category] = [];
       }
@@ -39,7 +40,7 @@ export default async function Portfolio() {
 
   function formatCategoryName(category: string): string {
     if (category === "AIML") return "AI/ML";
-    return category.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+    return category; // It's already the format from categoryLabel
   }
 
   const categories = [
@@ -61,7 +62,7 @@ export default async function Portfolio() {
   const displayProjects = featuredProjects.length >= 3 ? featuredProjects : allProjects.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-[12px] border-beige max-w-[78%] mx-auto">
+    <div className="min-h-screen bg-beige text-black selection:bg-ruby selection:text-beige border-x-12 border-beige md:max-w-[78%] mx-auto">
       {/* Masthead (Header) */}
       <header className="max-w-full mx-auto px-4 md:px-8 pt-8 mb-10 w-full">
         <div className="border-b-[6px] border-black pb-4">
@@ -180,11 +181,12 @@ export default async function Portfolio() {
 
             {/* Photo Column */}
             <div className="md:col-span-4 flex flex-col items-center border-t-[6px] md:border-t-0 md:border-l-[6px] border-black pt-8 md:pt-0 md:pl-8">
-              <div className="w-full aspect-[4/5] relative border-4 border-black p-2 bg-beige mb-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <div className="w-full aspect-4/5 relative border-4 border-black p-2 bg-beige mb-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <Image
-                  src={user?.photoUrl || "/achmad_naufal_ilyasa.jpg"}
+                  src={user!.photoUrl || "/achmad_naufal_ilyasa.jpg"}
                   alt={user?.name || "Achmad Naufal Ilyasa"}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover"
                 />
               </div>
@@ -207,10 +209,10 @@ export default async function Portfolio() {
               </span>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 border-4 border-black p-6 md:p-8 bg-beige/50">
+            <div className="grid grid-cols-1 gap-8 border-4 border-black p-6 md:p-8 bg-beige/50">
               {/* @ts-ignore */}
               {user.workExperiences.map((job: ExperienceResponse, index: number) => (
-                <div key={job.id} className={`flex flex-col h-full ${index !== user.workExperiences!.length - 1 ? 'md:border-r-2 md:border-black md:pr-8 border-b-2 md:border-b-0 pb-8 md:pb-0 mb-8 md:mb-0 border-black' : ''}`}>
+                <div key={job.id} className={`flex flex-col h-full ${index !== user.workExperiences!.length - 1 ? 'border-b-2 pb-8 mb-8 border-black' : ''}`}>
                   <div className="flex items-start gap-4 mb-4">
                     {job.logoUrl && (
                       <div className="w-16 h-16 relative border-2 border-black shrink-0 bg-white p-2">
@@ -344,6 +346,92 @@ export default async function Portfolio() {
           </section>
         )}
 
+        {/* Tech Stack & Classifieds (Blog) Section */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+
+          {/* Tech Stack Column (Left 2 cols) */}
+          <section id="tech-stack" className="lg:col-span-2 border-[6px] border-black p-6 md:p-8 bg-beige/50">
+            <div className="border-b-4 border-black mb-8 pb-3 text-center">
+              <h3 className="text-4xl md:text-5xl font-noto font-black uppercase text-black tracking-tight">
+                Arsenal <span className="text-ruby">&amp;</span> Expertise
+              </h3>
+              <p className="font-ibm text-xs font-bold uppercase mt-2 tracking-widest">Tools of the trade curated for modern web delivery</p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6">
+              {Object.entries(grouped!).map(([category, techs]) => (
+                <div key={category} className="border-t-2 border-black pt-4">
+                  <h4 className="font-ibm font-black uppercase text-xl mb-4 text-black flex items-center justify-between">
+                    <span className="w-[80%] pe-4">
+                      {category.toUpperCase()}
+                    </span>
+                    <span className="text-ruby text-sm w-[20%]">{techs.length} Tools</span>
+                  </h4>
+                  <ul className="space-y-3 font-inter text-sm">
+                    {techs.map((tech, index) => (
+                      <li key={index} className="flex items-center gap-3 group">
+                        <div className="w-8 h-8 flex items-center justify-center border-2 border-black bg-white group-hover:bg-white transition-colors p-1 scheme-light group-hover:scheme-light">
+                          <img src={tech.iconUrl} alt={tech.name} className="w-5 h-5 transition-all" />
+                        </div>
+                        <span className="font-bold border-b border-dotted border-black/30 grow pb-1 group-hover:border-black transition-colors uppercase tracking-wide">
+                          {tech.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Classifieds / Blog Column (Right col) */}
+          <section id="blog" className="border-4 border-black p-6 bg-[#EBE7D9] lg:col-span-1">
+            <div className="border-b-[6px] border-double border-black mb-6 pb-4 text-center">
+              <h3 className="text-4xl font-noto font-black uppercase tracking-tighter">
+                Classifieds
+              </h3>
+              <span className="font-ibm text-[10px] font-bold uppercase tracking-[0.2em] text-ruby">
+                Editorials &bull; Opinions &bull; Tutorials
+              </span>
+            </div>
+
+            <div className="space-y-6">
+              {latestBlogPosts.length > 0 ? (
+                latestBlogPosts.map((post, index) => (
+                  <div key={index} className="border-b-2 border-black pb-4 group cursor-pointer">
+                    <span className="font-ibm text-[10px] font-bold uppercase text-ruby mb-1 block">Article No. 0{index + 1}</span>
+                    <Link
+                      href="/blogs"
+                      className="text-xl font-noto font-bold uppercase text-black leading-tight group-hover:text-ruby transition-colors group-hover:underline underline-offset-4 decoration-2"
+                    >
+                      {post}
+                    </Link>
+                    <p className="font-inter text-xs text-stone-700 mt-2 line-clamp-2">
+                      A comprehensive deep dive into the engineering principles behind this topic and why it matters to you.
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div className="py-8 text-center border-2 border-dashed border-black">
+                  <p className="font-ibm text-sm uppercase font-bold text-stone-500">
+                    Advertising Space <br /> Currently Available
+                  </p>
+                  <p className="font-inter text-xs mt-2 italic text-stone-400">
+                    No editorials printed in this issue.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {latestBlogPosts.length > 0 && (
+              <div className="mt-8">
+                <Button className="w-full rounded-none font-ibm font-bold uppercase tracking-widest bg-black text-beige border-2 border-black hover:bg-beige hover:text-black transition-colors" asChild>
+                  <Link href="/blog">Read All Columns</Link>
+                </Button>
+              </div>
+            )}
+          </section>
+        </div>
         {/* Featured Projects Section */}
         <section id="projects" className="mb-16">
           <div className="border-b-[6px] border-black mb-8 pb-3 flex justify-between items-end">
@@ -451,92 +539,6 @@ export default async function Portfolio() {
           </div>
         </section>
 
-        {/* Tech Stack & Classifieds (Blog) Section */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
-
-          {/* Tech Stack Column (Left 2 cols) */}
-          <section id="tech-stack" className="lg:col-span-2 border-[6px] border-black p-6 md:p-8 bg-beige/50">
-            <div className="border-b-4 border-black mb-8 pb-3 text-center">
-              <h3 className="text-4xl md:text-5xl font-noto font-black uppercase text-black tracking-tight">
-                Arsenal <span className="text-ruby">&amp;</span> Expertise
-              </h3>
-              <p className="font-ibm text-xs font-bold uppercase mt-2 tracking-widest">Tools of the trade curated for modern web delivery</p>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6">
-              {Object.entries(grouped!).map(([category, techs]) => (
-                <div key={category} className="border-t-2 border-black pt-4">
-                  <h4 className="font-ibm font-black uppercase text-xl mb-4 text-black flex items-center justify-between">
-                    <span>
-                      {category.replace(/_/g, " ").toUpperCase()}
-                    </span>
-                    <span className="text-ruby text-sm">{techs.length} Tools</span>
-                  </h4>
-                  <ul className="space-y-3 font-inter text-sm">
-                    {techs.map((tech, index) => (
-                      <li key={index} className="flex items-center gap-3 group">
-                        <div className="w-8 h-8 flex items-center justify-center border-2 border-black bg-white group-hover:bg-black transition-colors p-1">
-                          <Image src={tech.iconUrl} alt={tech.name} width={20} height={20} className="group-hover:invert transition-all" />
-                        </div>
-                        <span className="font-bold border-b border-dotted border-black/30 grow pb-1 group-hover:border-black transition-colors uppercase tracking-wide">
-                          {tech.name}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Classifieds / Blog Column (Right col) */}
-          <section id="blog" className="border-4 border-black p-6 bg-[#EBE7D9]">
-            <div className="border-b-[6px] border-double border-black mb-6 pb-4 text-center">
-              <h3 className="text-4xl font-noto font-black uppercase tracking-tighter">
-                Classifieds
-              </h3>
-              <span className="font-ibm text-[10px] font-bold uppercase tracking-[0.2em] text-ruby">
-                Editorials &bull; Opinions &bull; Tutorials
-              </span>
-            </div>
-
-            <div className="space-y-6">
-              {latestBlogPosts.length > 0 ? (
-                latestBlogPosts.map((post, index) => (
-                  <div key={index} className="border-b-2 border-black pb-4 group cursor-pointer">
-                    <span className="font-ibm text-[10px] font-bold uppercase text-ruby mb-1 block">Article No. 0{index + 1}</span>
-                    <Link
-                      href="/blogs"
-                      className="text-xl font-noto font-bold uppercase text-black leading-tight group-hover:text-ruby transition-colors group-hover:underline underline-offset-4 decoration-2"
-                    >
-                      {post}
-                    </Link>
-                    <p className="font-inter text-xs text-stone-700 mt-2 line-clamp-2">
-                      A comprehensive deep dive into the engineering principles behind this topic and why it matters to you.
-                    </p>
-                  </div>
-                ))
-              ) : (
-                <div className="py-8 text-center border-2 border-dashed border-black">
-                  <p className="font-ibm text-sm uppercase font-bold text-stone-500">
-                    Advertising Space <br /> Currently Available
-                  </p>
-                  <p className="font-inter text-xs mt-2 italic text-stone-400">
-                    No editorials printed in this issue.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {latestBlogPosts.length > 0 && (
-              <div className="mt-8">
-                <Button className="w-full rounded-none font-ibm font-bold uppercase tracking-widest bg-black text-beige border-2 border-black hover:bg-beige hover:text-black transition-colors" asChild>
-                  <Link href="/blog">Read All Columns</Link>
-                </Button>
-              </div>
-            )}
-          </section>
-        </div>
       </main>
 
       {/* Footer */}

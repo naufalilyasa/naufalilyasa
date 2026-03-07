@@ -269,6 +269,7 @@ export function ProjectsPage() {
               key={tech.technology.id}
               variant="outline"
               className="text-xs"
+              title={tech.technology.categoryLabel}
             >
               <img src={tech.technology.iconUrl} alt="" className="size-5" />
               {tech.technology.name}
