@@ -19,7 +19,7 @@ function useRegister() {
 
       if (isAxiosError(error)) {
         const errMessage =
-          (error.response?.data as ErrorResponseType).data.message ||
+          (error.response?.data as ErrorResponseType).message ||
           "Registration failed";
         toast.error(errMessage);
       } else {

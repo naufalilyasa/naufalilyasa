@@ -135,7 +135,7 @@ function ProjectForm({
 
 
   const form = useForm<CreateProjectFormDTO>({
-    resolver: zodResolver(projectFormSchema),
+    resolver: zodResolver(projectFormSchema) as any,
     defaultValues: {
       title: project?.title ?? "",
       slug: project?.slug ?? "",
@@ -443,6 +443,7 @@ function ProjectForm({
                         <Input
                           placeholder="https://github.com/username/repo"
                           {...field}
+                          value={field.value ?? ""}
                         />
                         <Link className="h-4 w-4 mt-3 text-muted-foreground" />
                       </div>
@@ -460,7 +461,11 @@ function ProjectForm({
                     <FormLabel>Live Demo URL</FormLabel>
                     <FormControl>
                       <div className="flex gap-2">
-                        <Input placeholder="https://myproject.com" {...field} />
+                        <Input
+                          placeholder="https://myproject.com"
+                          {...field}
+                          value={field.value ?? ""}
+                        />
                         <Link className="h-4 w-4 mt-3 text-muted-foreground" />
                       </div>
                     </FormControl>
