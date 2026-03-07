@@ -14,6 +14,7 @@ import { uploadRoute } from "./routes/upload.route.js";
 import { blogRoute } from "./routes/blog.route.js";
 import { experienceRoute } from "./routes/experience.route.js";
 import { educationRoute } from "./routes/education.route.js";
+import { AnalyticsRoute } from "./routes/analytics.route.js";
 
 const app: Application = express();
 
@@ -41,6 +42,7 @@ app.use("/api/profiles", ProfileRoute);
 app.use("/api/blogs", blogRoute);
 app.use("/api/experiences", experienceRoute);
 app.use("/api/educations", educationRoute);
+app.use("/api/analytics", AnalyticsRoute);
 
 // Global error
 app.use(errorHandler);

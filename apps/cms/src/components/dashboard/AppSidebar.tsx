@@ -2,7 +2,6 @@ import {
   Home,
   User,
   Briefcase,
-  Mail,
   BarChart3,
   FolderOpen,
   AlertTriangle,
@@ -87,11 +86,6 @@ export function AppSidebar() {
       title: "analytics",
       url: "/analytics",
       icon: BarChart3,
-    },
-    {
-      title: "contact",
-      url: "/contact",
-      icon: Mail,
     },
   ];
 

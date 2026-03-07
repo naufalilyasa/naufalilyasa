@@ -7,6 +7,7 @@ import {
   getPublicBlogBySlugHandler,
   getPublicProjectBySlugHandler,
   getPublicUserProfile,
+  trackResumeDownloadHandler,
 } from "../controllers/public-controller.js";
 
 const router: Router = Router();
@@ -24,5 +25,6 @@ router.get("/blogs/:slug", getPublicBlogBySlugHandler);
 
 // Public route to get user
 router.get("/user", getPublicUserProfile);
+router.post("/track-resume-download", trackResumeDownloadHandler);
 
 export { router as publicRoute };

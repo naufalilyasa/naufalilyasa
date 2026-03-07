@@ -16,7 +16,6 @@ import { Route as AuthIndexRouteImport } from './routes/_auth/index'
 import { Route as AuthProjectsIndexRouteImport } from './routes/_auth/projects/index'
 import { Route as AuthProfileIndexRouteImport } from './routes/_auth/profile/index'
 import { Route as AuthExperiencesIndexRouteImport } from './routes/_auth/experiences/index'
-import { Route as AuthContactIndexRouteImport } from './routes/_auth/contact/index'
 import { Route as AuthBlogsIndexRouteImport } from './routes/_auth/blogs/index'
 import { Route as AuthAnalyticsIndexRouteImport } from './routes/_auth/analytics/index'
 import { Route as AuthProjectsDetailIdRouteImport } from './routes/_auth/projects/detail.$id'
@@ -56,11 +55,6 @@ const AuthExperiencesIndexRoute = AuthExperiencesIndexRouteImport.update({
   path: '/experiences/',
   getParentRoute: () => AuthRoute,
 } as any)
-const AuthContactIndexRoute = AuthContactIndexRouteImport.update({
-  id: '/contact/',
-  path: '/contact/',
-  getParentRoute: () => AuthRoute,
-} as any)
 const AuthBlogsIndexRoute = AuthBlogsIndexRouteImport.update({
   id: '/blogs/',
   path: '/blogs/',
@@ -88,7 +82,6 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/analytics/': typeof AuthAnalyticsIndexRoute
   '/blogs/': typeof AuthBlogsIndexRoute
-  '/contact/': typeof AuthContactIndexRoute
   '/experiences/': typeof AuthExperiencesIndexRoute
   '/profile/': typeof AuthProfileIndexRoute
   '/projects/': typeof AuthProjectsIndexRoute
@@ -101,7 +94,6 @@ export interface FileRoutesByTo {
   '/': typeof AuthIndexRoute
   '/analytics': typeof AuthAnalyticsIndexRoute
   '/blogs': typeof AuthBlogsIndexRoute
-  '/contact': typeof AuthContactIndexRoute
   '/experiences': typeof AuthExperiencesIndexRoute
   '/profile': typeof AuthProfileIndexRoute
   '/projects': typeof AuthProjectsIndexRoute
@@ -116,7 +108,6 @@ export interface FileRoutesById {
   '/_auth/': typeof AuthIndexRoute
   '/_auth/analytics/': typeof AuthAnalyticsIndexRoute
   '/_auth/blogs/': typeof AuthBlogsIndexRoute
-  '/_auth/contact/': typeof AuthContactIndexRoute
   '/_auth/experiences/': typeof AuthExperiencesIndexRoute
   '/_auth/profile/': typeof AuthProfileIndexRoute
   '/_auth/projects/': typeof AuthProjectsIndexRoute
@@ -131,7 +122,6 @@ export interface FileRouteTypes {
     | '/register'
     | '/analytics/'
     | '/blogs/'
-    | '/contact/'
     | '/experiences/'
     | '/profile/'
     | '/projects/'
@@ -144,7 +134,6 @@ export interface FileRouteTypes {
     | '/'
     | '/analytics'
     | '/blogs'
-    | '/contact'
     | '/experiences'
     | '/profile'
     | '/projects'
@@ -158,7 +147,6 @@ export interface FileRouteTypes {
     | '/_auth/'
     | '/_auth/analytics/'
     | '/_auth/blogs/'
-    | '/_auth/contact/'
     | '/_auth/experiences/'
     | '/_auth/profile/'
     | '/_auth/projects/'
@@ -223,13 +211,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthExperiencesIndexRouteImport
       parentRoute: typeof AuthRoute
     }
-    '/_auth/contact/': {
-      id: '/_auth/contact/'
-      path: '/contact'
-      fullPath: '/contact/'
-      preLoaderRoute: typeof AuthContactIndexRouteImport
-      parentRoute: typeof AuthRoute
-    }
     '/_auth/blogs/': {
       id: '/_auth/blogs/'
       path: '/blogs'
@@ -265,7 +246,6 @@ interface AuthRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
   AuthAnalyticsIndexRoute: typeof AuthAnalyticsIndexRoute
   AuthBlogsIndexRoute: typeof AuthBlogsIndexRoute
-  AuthContactIndexRoute: typeof AuthContactIndexRoute
   AuthExperiencesIndexRoute: typeof AuthExperiencesIndexRoute
   AuthProfileIndexRoute: typeof AuthProfileIndexRoute
   AuthProjectsIndexRoute: typeof AuthProjectsIndexRoute
@@ -277,7 +257,6 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   AuthAnalyticsIndexRoute: AuthAnalyticsIndexRoute,
   AuthBlogsIndexRoute: AuthBlogsIndexRoute,
-  AuthContactIndexRoute: AuthContactIndexRoute,
   AuthExperiencesIndexRoute: AuthExperiencesIndexRoute,
   AuthProfileIndexRoute: AuthProfileIndexRoute,
   AuthProjectsIndexRoute: AuthProjectsIndexRoute,

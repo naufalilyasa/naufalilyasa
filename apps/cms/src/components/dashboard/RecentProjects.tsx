@@ -9,97 +9,117 @@ import { Badge } from "@repo/ui/components/badge";
 import { Button } from "@repo/ui/components/button";
 import { ExternalLink, Github } from "lucide-react";
 
-const projects = [
-  {
-    title: "E-Commerce Platform",
-    description:
-      "Full-stack e-commerce solution with React, Node.js, and PostgreSQL",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    status: "Completed",
-    date: "Dec 2024",
-  },
-  {
-    title: "Task Management App",
-    description: "Collaborative task management tool with real-time updates",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["Next.js", "Socket.io", "MongoDB"],
-    status: "In Progress",
-    date: "Jan 2024",
-  },
-  {
-    title: "Weather Dashboard",
-    description: "Beautiful weather dashboard with data visualization",
-    image: "/placeholder.svg?height=200&width=300",
-    technologies: ["Vue.js", "Chart.js", "OpenWeather API"],
-    status: "Completed",
-    date: "Nov 2024",
-  },
-];
+import { Project } from "@repo/types/project";
+import { Link } from "@tanstack/react-router";
 
-export function RecentProjects() {
+interface RecentProjectsProps {
+  projects?: Project[];
+}
+
+export function RecentProjects({ projects = [] }: RecentProjectsProps) {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Recent Projects</CardTitle>
-        <CardDescription>Your latest portfolio projects</CardDescription>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <div>
+          <CardTitle>Recent Projects</CardTitle>
+          <CardDescription>Your latest portfolio projects</CardDescription>
+        </div>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/projects">View All</Link>
+        </Button>
       </CardHeader>
       <CardContent>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+          {projects.slice(0, 3).map((project) => (
             <div
-              key={project.title}
+              key={project.id}
               className="group relative overflow-hidden rounded-lg border"
             >
               <div className="aspect-video overflow-hidden">
                 <img
-                  src={project.image || "/placeholder.svg"}
+                  src={project.thumbnail?.url || "/placeholder.svg"}
                   alt={project.title}
                   className="h-full w-full object-cover transition-transform group-hover:scale-105"
                 />
               </div>
               <div className="p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-semibold text-sm">{project.title}</h3>
-                  <Badge
-                    variant={
-                      project.status === "Completed" ? "default" : "secondary"
-                    }
-                  >
-                    {project.status}
+                  <h3 className="font-semibold text-sm truncate mr-2">
+                    {project.title}
+                  </h3>
+                  <Badge variant="outline" className="capitalize text-[10px]">
+                    {project.category.toLowerCase()}
                   </Badge>
                 </div>
-                <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+                <p className="text-xs text-muted-foreground mb-3 line-clamp-2 h-8">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-1 mb-3">
+                <div className="flex flex-wrap gap-1 mb-3 h-10 overflow-hidden">
                   {project.technologies.slice(0, 3).map((tech) => (
-                    <Badge key={tech} variant="outline" className="text-xs">
-                      {tech}
+                    <Badge
+                      key={tech.technology.id}
+                      variant="secondary"
+                      className="text-[10px]"
+                    >
+                      {tech.technology.name}
                     </Badge>
                   ))}
                   {project.technologies.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-[10px]">
                       +{project.technologies.length - 3}
                     </Badge>
                   )}
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
-                    {project.date}
+                <div className="flex items-center justify-between border-t pt-3 mt-1">
+                  <span className="text-[10px] text-muted-foreground">
+                    {new Date(project.createdAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      year: "numeric",
+                    })}
                   </span>
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-                      <Github className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
+                  <div className="flex gap-1">
+                    {project.githubUrl && (
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-7 w-7 p-0"
+                        asChild
+                      >
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Github className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    )}
+                    {project.liveUrl && (
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-7 w-7 p-0"
+                        asChild
+                      >
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           ))}
+          {projects.length === 0 && (
+            <div className="col-span-full py-10 text-center text-muted-foreground italic border rounded-lg border-dashed">
+              No projects found.
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

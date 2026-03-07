@@ -107,6 +107,15 @@ export const getPublicProjectBySlugHandler = async (req: Request, res: Response,
       })),
     };
 
+    // Background tracking (no await to avoid slowing down response)
+    prisma.projectView.create({
+      data: {
+        projectId: project.id,
+        ip: req.ip || "unknown",
+        userAgent: req.headers["user-agent"] as string,
+      }
+    }).catch(err => console.error("Failed to track project view:", err));
+
     res.status(200).json({
       statusCode: 200,
       status: "success",
@@ -186,6 +195,15 @@ export const getPublicUserProfile = async (req: Request, res: Response, next: Ne
       })),
     };
 
+    // Background tracking (no await to avoid slowing down response)
+    prisma.profileView.create({
+      data: {
+        userId: profile.id,
+        ip: req.ip || "unknown",
+        userAgent: req.headers["user-agent"] as string,
+      }
+    }).catch(err => console.error("Failed to track profile view:", err));
+
     res.status(200).json({
       statusCode: 200,
       status: "success",
@@ -236,6 +254,28 @@ export const getPublicBlogBySlugHandler = async (req: Request, res: Response, ne
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
       return next(new AppError(404, "Blog not found"));
     }
+    next(error);
+  }
+};
+
+export const trackResumeDownloadHandler = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const admin = await prisma.user.findFirstOrThrow({ where: { username: "admin" } });
+
+    await prisma.resumeDownload.create({
+      data: {
+        userId: admin.id,
+        ip: req.ip || "unknown",
+        userAgent: req.headers["user-agent"] as string,
+      }
+    });
+
+    res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Successfully tracked resume download",
+    });
+  } catch (error) {
     next(error);
   }
 };

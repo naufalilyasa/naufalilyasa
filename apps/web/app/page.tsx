@@ -169,7 +169,7 @@ export default async function Portfolio() {
                 )}
                 <Button variant="outline" className="text-ruby border-2 border-ruby rounded-none uppercase tracking-wider hover:bg-ruby hover:text-beige focus:ring-0 transition-none shadow-[2px_2px_0px_0px_rgba(164,57,57,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]" asChild>
                   <Link
-                    href={user?.resume || "https://drive.google.com/file/d/1W77M9c5HOfwUD4q3BCk_PcXex6lEnU8K/view?usp=sharing"}
+                    href="/api/resume"
                     target="_blank"
                   >
                     <File className="w-4 h-4 mr-2" />

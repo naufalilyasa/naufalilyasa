@@ -30,6 +30,44 @@ model User {
   userTechnologies UserTechnology[]
   BlogPost         BlogPost[]
   educations       Education[]
+  resumeDownloads  ResumeDownload[]
+  profileViews     ProfileView[]
+}
+
+model ProfileView {
+  id        String   @id @default(cuid())
+  userId    String
+  ip        String
+  userAgent String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model ProjectView {
+  id        String   @id @default(cuid())
+  projectId String
+  ip        String
+  userAgent String?
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([createdAt])
+}
+
+model ResumeDownload {
+  id        String   @id @default(cuid())
+  userId    String
+  ip        String
+  userAgent String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
 }
 
 model UserTechnology {
@@ -61,6 +99,7 @@ model Project {
   projectDetail ProjectDetail[]
   technologies  ProjectTechnology[]
   thumbnail     ProjectThumbnail?
+  views         ProjectView[]
 }
 
 model ProjectThumbnail {
