@@ -10,6 +10,10 @@ Project ini dibuat supaya seluruh konten portofolio tidak hardcoded di frontend.
 
 This project is designed so the portfolio content is not hardcoded in the frontend. Content is managed through the CMS, processed by the API, stored in PostgreSQL, and then rendered on the public website.
 
+Live demo / hasil deploy production:
+
+- `https://naufalilyasa-web.vercel.app`
+
 Arsitektur utamanya terdiri dari:
 
 The core architecture consists of:
